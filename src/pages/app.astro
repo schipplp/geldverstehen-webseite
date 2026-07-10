@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+import { img } from '../lib/images';
+---
+<Base
+  title="OnePeek — Deine Finanzen auf einen Blick"
+  description="OnePeek von GELD VERSTEHEN: Einnahmen, Ausgaben und Ziele an einem Ort. Der Überblick, der wirklich hängen bleibt — ohne Excel-Wüste."
+  active="app"
+>
+  <!-- HERO -->
+  <div style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:64px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:center;">
+        <div>
+          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">DIE APP · ONEPEEK</div>
+          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,78px);">Deine Finanzen auf <span style="color:var(--gv-yellow);">einen Blick</span>.</h1>
+          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Einnahmen, Ausgaben und Ziele an einem Ort. OnePeek gibt dir den Überblick, der wirklich hängen bleibt — ohne Excel-Wüste.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <!-- TODO(Per): App-Store-Links für OnePeek ergänzen -->
+            <a class="gv-store" href="#">App Store</a>
+            <a class="gv-store" href="#">Google Play</a>
+          </div>
+        </div>
+        <img src={img.perAppHero} alt="Per Schippl nutzt die OnePeek App auf dem Smartphone" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);" />
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">WAS ONEPEEK KANN</p>
+      <h2 class="gv-h2" style="max-width:760px;">Alles, was du für den Überblick brauchst</h2>
+      <div class="gv-split" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:48px;">
+        <div style="display:flex; justify-content:center;"><img src={img.onepeekApp} alt="OnePeek App — Mein Haushaltsbuch mit Monatsübersicht" style="width:100%; max-width:320px; height:auto; display:block;" /></div>
+        <div style="display:grid; gap:22px;">
+          <div style="display:flex; gap:16px;">
+            <div class="gv-feat-num">1</div>
+            <div><h3 class="gv-feat-h">Live-Überblick</h3><p class="gv-feat-p">Sieh auf einen Blick, wie viel diesen Monat noch frei ist.</p></div>
+          </div>
+          <div style="display:flex; gap:16px;">
+            <div class="gv-feat-num">2</div>
+            <div><h3 class="gv-feat-h">Kategorien &amp; Fixkosten</h3><p class="gv-feat-p">Wiederkehrende Kosten automatisch erkannt und sauber sortiert.</p></div>
+          </div>
+          <div style="display:flex; gap:16px;">
+            <div class="gv-feat-num">3</div>
+            <div><h3 class="gv-feat-h">Ziele setzen</h3><p class="gv-feat-p">Rücklage, Urlaub, Notgroschen — leg Ziele an und bleib dran.</p></div>
+          </div>
+          <div style="display:flex; gap:16px;">
+            <div class="gv-feat-num">4</div>
+            <div><h3 class="gv-feat-h">Klar &amp; aufgeräumt</h3><p class="gv-feat-p">Eine ruhige Oberfläche, die dich nicht erschlägt — sondern führt.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background:var(--gv-surface);">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">SO STARTEST DU</p>
+      <h2 class="gv-h2" style="max-width:720px;">In drei Minuten eingerichtet</h2>
+      <div class="gv-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;">
+        <div class="gv-step">
+          <div class="gv-step-num">01</div>
+          <h3 class="gv-step-h">Herunterladen</h3>
+          <p class="gv-step-p">App laden und in wenigen Schritten dein Profil anlegen.</p>
+        </div>
+        <div class="gv-step">
+          <div class="gv-step-num">02</div>
+          <h3 class="gv-step-h">Einnahmen &amp; Kosten</h3>
+          <p class="gv-step-p">Trag deine Fixkosten ein — den Rest macht OnePeek übersichtlich.</p>
+        </div>
+        <div class="gv-step">
+          <div class="gv-step-num">03</div>
+          <h3 class="gv-step-h">Überblick genießen</h3>
+          <p class="gv-step-p">Ab jetzt weißt du jederzeit, wo du stehst — ganz entspannt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px; text-align:center;">
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Hol dir OnePeek</h2>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:460px;">Lade die App und bring in wenigen Minuten Ordnung in deine Finanzen.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <!-- TODO(Per): App-Store-Links für OnePeek ergänzen -->
+        <a class="gv-store" href="#">App Store</a>
+        <a class="gv-store" href="#">Google Play</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .gv-feat-num { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--gv-blue-050); color: var(--gv-blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; }
+  .gv-feat-h { font-family: var(--font-display); font-weight: 400; font-size: 22px; color: var(--gv-ink); margin: 0 0 4px; }
+  .gv-feat-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+
+  .gv-step { background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; padding: 30px; }
+  .gv-step-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }
+  .gv-step-h { font-family: var(--font-display); font-weight: 400; font-size: 24px; color: var(--gv-ink); margin: 12px 0 8px; }
+  .gv-step-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+
+  @media (max-width: 860px) {
+    .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .gv-3 { grid-template-columns: 1fr !important; }
+  }
+</style>

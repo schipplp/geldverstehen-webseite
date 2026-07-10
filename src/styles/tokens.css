@@ -1,0 +1,119 @@
+/* GELD VERSTEHEN — Design-Tokens
+   Übernommen aus design/_ds/tokens.css (Corporate Identity V03).
+   Farben: confident blue + glowing yellow CTA. */
+:root {
+  /* ---- Brand: Blue ---- */
+  --gv-blue-050: #EAF2FA;
+  --gv-blue-100: #CFE2F4;
+  --gv-blue: #1E73BE;        /* primary brand blue (hero, links, secondary action) */
+  --gv-blue-600: #1A66A8;    /* hover */
+  --gv-blue-700: #155A96;    /* pressed */
+  --gv-blue-900: #0F3F69;    /* deep / headings on light */
+
+  /* ---- Brand: Yellow ---- */
+  --gv-yellow-050: #FFF7CC;
+  --gv-yellow: #FFD000;      /* primary action (CTA), logo accent */
+  --gv-yellow-600: #E6BC00;  /* hover */
+  --gv-yellow-700: #C9A300;  /* pressed */
+
+  /* ---- Neutrals ---- */
+  --gv-white: #FFFFFF;
+  --gv-ink: #15233A;         /* near-black navy — strong text */
+  --gv-ink-soft: #3A4658;    /* body text */
+  --gv-muted: #6B7585;       /* secondary / captions */
+  --gv-border: #D9DEE5;      /* strokes, dividers */
+  --gv-surface: #F4F7FA;     /* subtle section background */
+  --gv-surface-2: #EBEFF4;   /* tags, inactive surfaces */
+  --gv-black: #000000;
+
+  /* ---- Semantic states ---- */
+  --gv-success: #1E9E6A;
+  --gv-success-bg: #E6F5EE;
+  --gv-error: #D64545;
+  --gv-error-bg: #FBEAEA;
+  --gv-warning: #E6A700;
+  --gv-warning-bg: #FFF6E0;
+  --gv-info: #1E73BE;
+  --gv-info-bg: #EAF2FA;
+
+  /* ---- Semantic aliases ---- */
+  --text-strong: var(--gv-ink);
+  --text-body: var(--gv-ink-soft);
+  --text-muted: var(--gv-muted);
+  --text-on-blue: #FFFFFF;
+  --text-on-yellow: #15233A;
+
+  --surface-page: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-subtle: var(--gv-surface);
+  --surface-hero: var(--gv-blue);
+
+  --border-default: var(--gv-border);
+
+  --action-primary: var(--gv-yellow);
+  --action-primary-hover: var(--gv-yellow-600);
+  --action-primary-text: var(--gv-ink);
+  --action-secondary: var(--gv-blue);
+  --action-secondary-hover: var(--gv-blue-600);
+
+  --link: var(--gv-blue);
+
+  /* ---- Fonts ---- */
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif; /* wordmark + headlines */
+  --font-heading: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "PT Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale */
+  --fs-display: 88px;
+  --fs-h1: 60px;
+  --fs-h2: 42px;
+  --fs-h3: 30px;
+  --fs-h4: 24px;
+  --fs-lead: 20px;
+  --fs-body: 17px;
+  --fs-small: 14px;
+  --fs-label: 14px;
+
+  /* Line height */
+  --lh-display: 0.95;
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-normal: 1.6;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  /* Letter spacing */
+  --ls-display: 0.01em;
+  --ls-caps: 0.08em;
+  --ls-tight: 0;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Radii */
+  --radius-sm: 4px;   /* tags, chips */
+  --radius-md: 8px;   /* inputs, buttons */
+  --radius-lg: 14px;  /* cards, modals */
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation — soft, navy-tinted */
+  --shadow-sm: 0 1px 2px rgba(21, 35, 58, 0.06);
+  --shadow-md: 0 6px 20px rgba(21, 35, 58, 0.10);
+  --shadow-lg: 0 18px 48px rgba(21, 35, 58, 0.14);
+  /* Signatur-Glow unter dem gelben CTA */
+  --shadow-cta: 0 12px 34px rgba(255, 208, 0, 0.45);
+
+  --container: 1200px;
+  --border-width: 1px;
+}

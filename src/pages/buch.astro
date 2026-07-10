@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import EmailOptIn from '../components/EmailOptIn.astro';
+import { u } from '../lib/url';
+import { img } from '../lib/images';
+---
+<Base
+  title="Das Buch — Ordnung in deinen Finanzen"
+  description="Das GELD VERSTEHEN Buch: der komplette Ansatz zum Nachlesen — verstehen statt verzichten. Erscheint bald in überarbeiteter Neuauflage."
+  active="buch"
+>
+  <!-- HERO -->
+  <div style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:64px; padding-bottom:72px;">
+      <div style="max-width:760px;">
+        <div style="font-family:var(--font-display); font-size:16px; letter-spacing:.18em; color:rgba(255,255,255,.7); margin-bottom:18px;">DAS BUCH</div>
+        <h1 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:#fff; line-height:1.0; margin:0; font-size:clamp(44px,5.2vw,74px);">Das GELD VERSTEHEN Buch</h1>
+        <p style="font-size:19px; line-height:1.65; color:#EAF2FA; max-width:520px; margin:22px 0 0;">Der komplette Ansatz zwischen zwei Buchdeckeln — verstehen statt verzichten.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <section class="gv-sec">
+    <div class="gv-wrap">
+      <div class="gv-split" style="display:grid; grid-template-columns:.85fr 1.15fr; gap:64px; align-items:center;">
+        <div class="gv-book-media" style="display:flex; justify-content:center;">
+          <img src={img.buchCover} alt="Per Schippl mit dem GELD VERSTEHEN Buch" style="width:92%; max-width:360px; aspect-ratio:359/466; object-fit:cover; border-radius:18px; box-shadow:0 24px 60px rgba(15,35,58,.2); display:block;" />
+        </div>
+        <div>
+          <p class="gv-eyebrow"><span class="gv-rule"></span>WORUM ES GEHT</p>
+          <div style="display:inline-block; margin-bottom:16px; background:var(--gv-blue); color:#fff; font-family:var(--font-display); font-size:14px; letter-spacing:.1em; padding:6px 14px; border-radius:999px;">ERSCHEINT BALD</div>
+          <h2 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:var(--gv-ink); line-height:1.05; margin:0; font-size:clamp(30px,3.4vw,44px);">Ordnung in deinen Finanzen — Schritt für Schritt.</h2>
+          <p class="gv-lead">Wie du Schritt für Schritt Ordnung in deine Finanzen bringst und dein Geld endlich verstehst — statt auf etwas zu verzichten. Das Buch erscheint bald in überarbeiteter Neuauflage.</p>
+
+          <div style="margin-top:36px; padding:28px; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:14px; max-width:480px;">
+            <div style="font-family:var(--font-display); font-size:22px; color:var(--gv-ink); margin-bottom:8px;">Erfahre als Erste:r vom Erscheinen</div>
+            <EmailOptIn
+              source="buch"
+              cta="Benachrichtige mich"
+              theme="on-surface"
+              successStyle="inline"
+              successText="Notiert! Du hörst von uns, sobald das Buch erscheint."
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  @media (max-width: 860px) {
+    .gv-split { grid-template-columns: 1fr !important; gap: 36px !important; }
+    .gv-split .gv-book-media { order: -1; }
+  }
+</style>
