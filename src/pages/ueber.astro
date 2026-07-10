@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+import { img } from '../lib/images';
+
+const testimonials = [
+  { embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg', title: 'Erfahrungsbericht 1' },
+  { embed: 'https://www.youtube-nocookie.com/embed/3Z6KL3H_uNM', title: 'Erfahrungsbericht 2' },
+  { embed: 'https://www.youtube-nocookie.com/embed/wXwpsAVkH3M', title: 'Erfahrungsbericht 3' },
+  { embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ', title: 'Erfahrungsbericht 4' },
+];
+---
+<Base
+  title="Über Per Schippl"
+  description="Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch."
+  active="ueber"
+  playfair
+>
+  <!-- HERO -->
+  <div style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:64px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:center;">
+        <div>
+          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">ÜBER PER SCHIPPL</div>
+          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(42px,5vw,72px);">Hi, ich bin Per.<br>Ich räume mit dem <span style="color:var(--gv-yellow);">Geld-Chaos</span> auf.</h1>
+          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Seit 2016 widme ich mich einem einzigen Thema: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch.</p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="gv-btn" href={u('/podcast')}>In den Podcast hören</a>
+            <a class="gv-btn-ghost" href={u('/crashkurs')}>Kostenloser Crashkurs</a>
+          </div>
+        </div>
+        <img src={img.perUeberHero} alt="Per Schippl im Porträt" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);" />
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.15fr .85fr; gap:52px; align-items:center;">
+        <div>
+          <div class="gv-bar"></div>
+          <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">MEIN ANTRIEB</p>
+          <h2 class="gv-h2">Es geht nie ums Geld. Es geht um dein Leben.</h2>
+          <p style="font-size:17px; line-height:1.7; color:var(--gv-ink-soft); margin:20px 0 14px;">Ich habe erlebt, wie sehr ungeordnete Finanzen den Kopf belasten — und wie viel leichter das Leben wird, wenn Struktur reinkommt. Genau das möchte ich weitergeben.</p>
+          <p style="font-size:17px; line-height:1.7; color:var(--gv-ink-soft); margin:0;">Ich war im TV zu Gast, habe ein Buch geschrieben und veröffentliche jede Woche eine neue Podcast-Folge. Immer mit demselben Ziel: dass du dich nie wieder von deinen Finanzen überfordert fühlst.</p>
+        </div>
+        <img src={img.perStory} alt="Per Schippl im Gespräch" style="width:100%; height:380px; object-fit:cover; border-radius:18px; display:block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- STERN TV -->
+  <section style="background:#0b1f38;">
+    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:.9fr 1.1fr; gap:52px; align-items:center;">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:20px;"><span style="display:inline-flex; align-items:center; gap:5px; background:#e3000f; border-radius:3px; padding:4px 9px;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,1 14.4,7.84 21.53,6.5 16.8,12 21.53,17.5 14.4,16.16 12,23 9.6,16.16 2.47,17.5 7.2,12 2.47,6.5 9.6,7.84" fill="#fff"></polygon></svg><span style="color:#fff; font-weight:800; font-size:20px; letter-spacing:-.02em;">stern</span></span><span style="font-weight:700; font-size:20px; color:#fff; letter-spacing:-.01em;">TV</span></div>
+          <h2 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:#fff; line-height:1.04; margin:0; font-size:clamp(32px,4vw,48px);">Zu Gast bei stern TV</h2>
+          <p style="font-size:17px; line-height:1.7; color:#C7D6E6; max-width:440px; margin:20px 0 0;">Über strukturierte Finanzen im Alltag &mdash; und warum es nie ums Geld allein geht. Der komplette Beitrag zum Ansehen.</p>
+        </div>
+        <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.4); background:#000;">
+          <iframe src="https://www.youtube-nocookie.com/embed/Awvgf0Dth5Q" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="stern TV Beitrag mit Per Schippl" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section style="background:var(--gv-surface);">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">WOFÜR ICH STEHE</p>
+      <h2 class="gv-h2" style="max-width:780px;">Drei Überzeugungen, die alles bestimmen</h2>
+      <div class="gv-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;">
+        <div class="gv-value">
+          <div class="gv-value-num">01</div>
+          <h3 class="gv-value-h">Klarheit statt Fachchinesisch</h3>
+          <p class="gv-value-p">Geld muss man nicht kompliziert machen. Ich erkläre so, wie man mit einem guten Freund redet.</p>
+        </div>
+        <div class="gv-value">
+          <div class="gv-value-num">02</div>
+          <h3 class="gv-value-h">Struktur vor Verzicht</h3>
+          <p class="gv-value-p">Es geht nicht ums Sparen um jeden Preis, sondern um ein System, das zu deinem Leben passt.</p>
+        </div>
+        <div class="gv-value">
+          <div class="gv-value-num">03</div>
+          <h3 class="gv-value-h">Ehrlich &amp; auf Augenhöhe</h3>
+          <p class="gv-value-p">Keine Versprechen vom schnellen Reichtum. Nur ehrliche Wege zu mehr Ruhe und Überblick.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">STIMMEN</p>
+      <h2 class="gv-h2" style="max-width:780px;">Was Menschen über den Weg mit GELD VERSTEHEN sagen</h2>
+      <div class="gv-2" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:44px;">
+        {testimonials.map((t) => (
+          <div style="border:1px solid var(--gv-border); border-radius:16px; overflow:hidden; background:var(--gv-surface);">
+            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
+              <iframe src={t.embed} style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={t.title} loading="lazy"></iframe>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <div style="border-top:1px solid var(--gv-border); border-bottom:1px solid var(--gv-border);">
+    <div class="gv-wrap" style="padding-top:36px; padding-bottom:36px;">
+      <div style="font-family:var(--font-display); font-size:13px; letter-spacing:.2em; color:var(--gv-muted); text-align:center; margin-bottom:22px;">BEKANNT AUS</div>
+      <div class="gv-press">
+        <span>Handelsblatt</span>
+        <span>Kölner Stadt-Anzeiger</span>
+        <span>Augsburger Allgemeine</span>
+        <span>NWZ</span>
+        <span>Express</span>
+        <span>stern TV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px; text-align:center;">
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Lust, dein Geld zu verstehen?</h2>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:480px;">Starte mit dem kostenlosen Crashkurs oder hör dich durch den Podcast — in deinem Tempo.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="gv-btn" href={u('/crashkurs')}>Kostenlosen Crashkurs sichern</a>
+        <a class="gv-btn-ghost" href={u('/podcast')}>Zum Podcast</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .gv-press { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; }
+  .gv-press span { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 21px; color: #7c8794; }
+
+  .gv-value { background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; padding: 30px; }
+  .gv-value-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }
+  .gv-value-h { font-family: var(--font-display); font-weight: 400; font-size: 26px; color: var(--gv-ink); margin: 14px 0 8px; }
+  .gv-value-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+
+  @media (max-width: 860px) {
+    .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .gv-3 { grid-template-columns: 1fr !important; }
+    .gv-2 { grid-template-columns: 1fr !important; }
+  }
+</style>

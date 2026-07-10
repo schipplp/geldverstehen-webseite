@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+---
+<Base
+  title="Seite nicht gefunden"
+  description="Diese Seite gibt es leider nicht."
+  active=""
+>
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:96px; padding-bottom:96px; text-align:center;">
+      <div style="font-family:var(--font-display); font-size:clamp(80px,14vw,160px); line-height:1; color:var(--gv-yellow);">404</div>
+      <h1 style="font-family:var(--font-display); font-weight:400; font-size:clamp(32px,4.6vw,52px); line-height:1.05; color:#fff; margin:8px 0 14px;">Diese Seite gibt es nicht.</h1>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 30px; max-width:460px;">Vielleicht hat sich ein Tippfehler eingeschlichen. Zurück zur Startseite geht’s hier:</p>
+      <a class="gv-btn" href={u('/')}>Zur Startseite</a>
+    </div>
+  </section>
+</Base>

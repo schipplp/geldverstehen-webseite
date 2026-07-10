@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Impressum"
+  description="Impressum von GELD VERSTEHEN."
+  active=""
+>
+  <main>
+    <div class="gv-wrap" style="padding-top:64px; padding-bottom:72px;">
+      <div style="max-width:760px;">
+        <div class="gv-bar"></div>
+        <h1 class="lp-h1">Impressum</h1>
+
+        <!-- TODO(Per): Platzhalter — mit echten Anbieterangaben füllen und vor dem Livegang anwaltlich prüfen lassen. -->
+        <div class="lp-note">
+          <strong>Platzhalter.</strong> Diese Seite ist ein Entwurf. Bitte mit echten Angaben füllen und vor dem Livegang anwaltlich prüfen lassen.
+        </div>
+
+        <h2 class="lp-h2">Angaben gemäß § 5 DDG</h2>
+        <p class="lp-p"><span class="lp-ph">[Vorname Nachname / Firmenname]<br />[Straße und Hausnummer]<br />[PLZ Ort]<br />Deutschland]</span></p>
+
+        <h2 class="lp-h2">Kontakt</h2>
+        <p class="lp-p"><span class="lp-ph">Telefon: [Telefonnummer]<br />E-Mail: [E-Mailadresse]</span></p>
+
+        <h2 class="lp-h2">Umsatzsteuer-ID</h2>
+        <p class="lp-p">Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br /><span class="lp-ph">[USt-IdNr.]</span></p>
+
+        <h2 class="lp-h2">Redaktionell verantwortlich</h2>
+        <p class="lp-p"><span class="lp-ph">[Vorname Nachname]<br />[Anschrift wie oben]</span></p>
+
+        <h2 class="lp-h2">Verbraucherstreitbeilegung</h2>
+        <p class="lp-p">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .lp-h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; color: var(--gv-ink); line-height: 1.0; margin: 18px 0 0; font-size: clamp(40px, 6vw, 64px); }
+  .lp-h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; color: var(--gv-ink); line-height: 1.05; margin: 36px 0 10px; font-size: 26px; }
+  .lp-p { font-size: 17px; line-height: 1.7; color: var(--gv-ink-soft); margin: 0 0 12px; }
+  .lp-ph { color: var(--gv-muted); }
+  .lp-note { background: var(--gv-yellow); color: var(--gv-ink); border-radius: 12px; padding: 16px 20px; margin: 28px 0 8px; font-size: 15px; line-height: 1.55; }
+</style>
