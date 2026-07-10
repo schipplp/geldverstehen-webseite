@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/styles.css">
+<script src="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background:#fff; }
+  a { color: var(--gv-blue); text-decoration: none; }
+  a:hover { color: #1a63a5; }
+  .gv-wrap { max-width:1120px; margin:0 auto; padding:0 40px; }
+  .gv-eyebrow { display:flex; align-items:center; gap:14px; font-family:var(--font-display); font-size:15px; letter-spacing:.16em; color:var(--gv-muted); margin:0 0 18px; }
+  .gv-eyebrow .gv-rule { flex:none; width:34px; height:2px; background:var(--gv-border); }
+  .gv-h1 { font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:#fff; line-height:1.0; margin:0; font-size:clamp(44px,5.2vw,74px); }
+  .gv-lead { font-size:18px; line-height:1.7; color:var(--gv-ink-soft); margin:20px 0 0; }
+  .gv-btn-y { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body); font-weight:700; font-size:16px; background:var(--gv-yellow); color:var(--gv-ink); border-radius:8px; padding:13px 24px; text-decoration:none; box-shadow:0 12px 34px rgba(255,208,0,.4); transition:background .18s ease; }
+  .gv-btn-y:hover { background:var(--gv-yellow-600, #e6bd00); color:var(--gv-ink); }
+  @media (max-width:860px){
+    .gv-wrap{ padding:0 22px !important; }
+    .gv-split{ grid-template-columns:1fr !important; gap:36px !important; }
+    .gv-split .gv-book-media{ order:-1; }
+  }
+</style>
+</helmet>
+
+<div style="font-family:var(--font-body); color:var(--gv-ink);">
+
+  <!-- HEADER + HERO -->
+  <div style="background:var(--gv-blue);">
+    <dc-import name="SiteNav" active="buch" hint-size="100%,72px"></dc-import>
+    <div class="gv-wrap" style="padding-top:64px; padding-bottom:72px;">
+      <div style="max-width:760px;">
+        <div style="font-family:var(--font-display); font-size:16px; letter-spacing:.18em; color:rgba(255,255,255,.7); margin-bottom:18px;">DAS BUCH</div>
+        <h1 class="gv-h1">Das GELD VERSTEHEN Buch</h1>
+        <p style="font-size:19px; line-height:1.65; color:#EAF2FA; max-width:520px; margin:22px 0 0;">Der komplette Ansatz zwischen zwei Buchdeckeln — verstehen statt verzichten.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <section class="gv-sec" style="padding-top:96px; padding-bottom:96px;">
+    <div class="gv-wrap">
+      <div class="gv-split" style="display:grid; grid-template-columns:.85fr 1.15fr; gap:64px; align-items:center;">
+        <div class="gv-book-media" style="display:flex; justify-content:center;">
+          <img src="uploads/md.jpeg" alt="Per Schippl mit dem GELD VERSTEHEN Buch" style="width:92%; max-width:360px; aspect-ratio:359/466; object-fit:cover; border-radius:18px; box-shadow:0 24px 60px rgba(15,35,58,.2); display:block;">
+        </div>
+        <div>
+          <p class="gv-eyebrow"><span class="gv-rule"></span>WORUM ES GEHT</p>
+          <div style="display:inline-block; margin-bottom:16px; background:var(--gv-blue); color:#fff; font-family:var(--font-display); font-size:14px; letter-spacing:.1em; padding:6px 14px; border-radius:999px;">ERSCHEINT BALD</div>
+          <h2 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:var(--gv-ink); line-height:1.05; margin:0; font-size:clamp(30px,3.4vw,44px);">Ordnung in deinen Finanzen — Schritt für Schritt.</h2>
+          <p class="gv-lead">Wie du Schritt für Schritt Ordnung in deine Finanzen bringst und dein Geld endlich verstehst — statt auf etwas zu verzichten. Das Buch erscheint bald in überarbeiteter Neuauflage.</p>
+
+          <div style="margin-top:36px; padding:28px; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:14px; max-width:480px;">
+            <div style="font-family:var(--font-display); font-size:22px; color:var(--gv-ink); margin-bottom:8px;">Erfahre als Erste:r vom Erscheinen</div>
+            <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-direction:column; gap:12px; margin-top:14px;">
+                <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Input" type="email" placeholder="Deine E-Mailadresse *" value="{{ email }}" on-change="{{ onEmail }}" error="{{ error }}" disabled="{{ submitting }}" hint-size="100%,52px"></x-import>
+                <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Button" variant="primary" size="lg" block="{{ true }}" on-click="{{ subscribe }}" disabled="{{ submitting }}" hint-size="100%,56px">{{ ctaLabel }}</x-import>
+              </div>
+              <div style="font-size:13px; line-height:1.5; color:var(--gv-muted); margin-top:12px;">100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.</div>
+            </sc-if>
+            <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; gap:12px; align-items:flex-start; margin-top:8px;">
+                <div style="flex:none; width:38px; height:38px; border-radius:999px; background:var(--gv-success-bg); color:var(--gv-success); display:flex; align-items:center; justify-content:center; font-size:20px;">✓</div>
+                <div style="font-size:15px; line-height:1.5; color:var(--gv-ink-soft);">Notiert! Du hörst von uns, sobald das Buch erscheint.</div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { email: '', error: '', subscribed: false, submitting: false };
+  onEmail = (e) => this.setState({ email: e.target.value, error: '' });
+  subscribe = async () => {
+    if (this.state.submitting) return;
+    this.setState({ submitting: true, error: '' });
+    const { subscribeToBrevo } = await import(new URL('brevo.js', document.baseURI).href);
+    const res = await subscribeToBrevo({ email: this.state.email, source: 'buch' });
+    if (!res.ok) { this.setState({ error: res.error, submitting: false }); return; }
+    this.setState({ subscribed: true, error: '', submitting: false });
+  };
+  renderVals() {
+    return {
+      email: this.state.email,
+      error: this.state.error,
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+      onEmail: this.onEmail,
+      subscribe: this.subscribe,
+      submitting: this.state.submitting,
+      ctaLabel: this.state.submitting ? 'Wird gesendet…' : 'Benachrichtige mich',
+    };
+  }
+}
+</script>
+</body>
+</html>

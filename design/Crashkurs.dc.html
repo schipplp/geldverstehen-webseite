@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/styles.css">
+<script src="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/_ds_bundle.js"></script>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fff; }
+  .gv-wrap { max-width:1120px; margin:0 auto; padding:0 40px; }
+  .gv-eyebrow { font-family:var(--font-display); font-size:17px; letter-spacing:.12em; }
+  .gv-bar { width:44px; height:5px; background:var(--gv-yellow); border-radius:3px; }
+  .gv-h2 { font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:var(--gv-ink); line-height:1.04; margin:0; font-size:clamp(34px,4.2vw,52px); }
+  @media (max-width:860px){
+    .gv-wrap{ padding:0 22px; }
+    .gv-split{ grid-template-columns:1fr !important; gap:32px !important; }
+    .gv-2{ grid-template-columns:1fr !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family:var(--font-body); color:var(--gv-ink);">
+
+  <!-- HEADER + HERO with opt-in -->
+  <div style="background:var(--gv-blue);">
+    <dc-import name="SiteNav" active="" hint-size="100%,72px"></dc-import>
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:64px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.08fr .92fr; gap:52px; align-items:center;">
+        <div>
+          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">KOSTENLOSER CRASHKURS</div>
+          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,76px);">Vom Geld-Chaos zur <span style="color:var(--gv-yellow);">Klarheit</span> — in wenigen Tagen.</h1>
+          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 26px;">Die wichtigsten Schritte zu mehr Überblick — gratis per E-Mail, Tag für Tag verständlich erklärt. Ein paar Minuten täglich genügen.</p>
+          <div style="max-width:440px;">
+            <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Input" type="email" placeholder="Deine E-Mailadresse *" value="{{ email }}" on-change="{{ onEmail }}" error="{{ error }}" disabled="{{ submitting }}" hint-size="100%,52px"></x-import>
+                <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Button" variant="primary" size="lg" block="{{ true }}" on-click="{{ subscribe }}" disabled="{{ submitting }}" hint-size="100%,56px">{{ ctaLabelStart }}</x-import>
+              </div>
+              <div style="font-size:13px; line-height:1.5; color:rgba(255,255,255,.7); margin-top:12px;">100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.</div>
+            </sc-if>
+            <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#fff; border-radius:16px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+                <div style="flex:none; width:40px; height:40px; border-radius:999px; background:var(--gv-success-bg); color:var(--gv-success); display:flex; align-items:center; justify-content:center; font-size:22px; line-height:1;">✓</div>
+                <div>
+                  <div style="font-family:var(--font-display); font-size:22px; color:var(--gv-ink); margin-bottom:4px;">Fast geschafft!</div>
+                  <div style="font-size:15px; line-height:1.5; color:var(--gv-ink-soft);">Bitte bestätige deine Anmeldung in der E-Mail, die wir dir gerade geschickt haben.</div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <img src="uploads/DSC00163.JPG" alt="Per Schippl" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);">
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INSIDE -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow" style="color:var(--gv-blue); margin:16px 0 8px;">WAS DICH ERWARTET</p>
+      <h2 class="gv-h2" style="max-width:760px;">Dein Weg in vier kurzen Lektionen</h2>
+      <div style="display:grid; gap:18px; margin-top:44px; max-width:860px;">
+        <div style="display:flex; gap:22px; align-items:flex-start; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="font-family:var(--font-display); font-size:34px; line-height:1; color:var(--gv-yellow); min-width:64px;">Tag 1</div>
+          <div><h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 6px;">Der ehrliche Kassensturz</h3><p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Wo stehst du wirklich? In 20 Minuten zum ersten klaren Überblick.</p></div>
+        </div>
+        <div style="display:flex; gap:22px; align-items:flex-start; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="font-family:var(--font-display); font-size:34px; line-height:1; color:var(--gv-yellow); min-width:64px;">Tag 2</div>
+          <div><h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 6px;">Fixkosten entlarven</h3><p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Welche Kosten dich jeden Monat unbemerkt Geld kosten — und was du tust.</p></div>
+        </div>
+        <div style="display:flex; gap:22px; align-items:flex-start; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="font-family:var(--font-display); font-size:34px; line-height:1; color:var(--gv-yellow); min-width:64px;">Tag 3</div>
+          <div><h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 6px;">Dein einfaches System</h3><p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Ein Aufteilungs-System, das zu dir passt — ohne Verzicht-Marathon.</p></div>
+        </div>
+        <div style="display:flex; gap:22px; align-items:flex-start; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="font-family:var(--font-display); font-size:34px; line-height:1; color:var(--gv-yellow); min-width:64px;">Tag 4</div>
+          <div><h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 6px;">Dranbleiben leicht gemacht</h3><p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Wie du dein neues System mit Podcast und App locker beibehältst.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="background:var(--gv-surface);">
+    <div class="gv-wrap" style="padding-top:72px; padding-bottom:72px;">
+      <h2 class="gv-h2" style="text-align:center; margin-bottom:36px;">Was Teilnehmer:innen sagen</h2>
+      <div class="gv-2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <div style="background:#fff; border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="color:var(--gv-yellow); font-size:16px; margin-bottom:10px;">★★★★★</div>
+          <p style="font-size:16px; line-height:1.6; color:var(--gv-ink); margin:0 0 14px;">„Zum ersten Mal habe ich keine Angst mehr vor meinem Kontostand. Der Crashkurs hat alles verändert."</p>
+          <div style="font-size:14px; color:var(--gv-muted);">— Sandra K.</div>
+        </div>
+        <div style="background:#fff; border:1px solid var(--gv-border); border-radius:16px; padding:26px;">
+          <div style="color:var(--gv-yellow); font-size:16px; margin-bottom:10px;">★★★★★</div>
+          <p style="font-size:16px; line-height:1.6; color:var(--gv-ink); margin:0 0 14px;">„Endlich Klartext statt Fachchinesisch. Vier Tage — und ich hatte ein System, das hält."</p>
+          <div style="font-size:14px; color:var(--gv-muted);">— Markus T.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL OPT-IN -->
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px;">
+      <div style="max-width:560px; margin:0 auto; text-align:center;">
+        <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Starte heute. Kostenlos.</h2>
+        <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 0 26px;">Trag dich ein und erhalte die erste Lektion sofort per E-Mail.</p>
+        <div style="max-width:440px; margin:0 auto;">
+          <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Input" type="email" placeholder="Deine E-Mailadresse *" value="{{ email }}" on-change="{{ onEmail }}" error="{{ error }}" disabled="{{ submitting }}" hint-size="100%,52px"></x-import>
+              <x-import component-from-global-scope="GELDVERSTEHEN_cb9890.Button" variant="primary" size="lg" block="{{ true }}" on-click="{{ subscribe }}" disabled="{{ submitting }}" hint-size="100%,56px">{{ ctaLabelSignup }}</x-import>
+            </div>
+            <div style="font-size:13px; color:rgba(255,255,255,.7); margin-top:12px;">100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.</div>
+          </sc-if>
+          <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#fff; border-radius:16px; padding:22px; display:flex; gap:14px; align-items:flex-start; text-align:left;">
+              <div style="flex:none; width:40px; height:40px; border-radius:999px; background:var(--gv-success-bg); color:var(--gv-success); display:flex; align-items:center; justify-content:center; font-size:22px;">✓</div>
+              <div><div style="font-family:var(--font-display); font-size:22px; color:var(--gv-ink); margin-bottom:4px;">Fast geschafft!</div><div style="font-size:15px; line-height:1.5; color:var(--gv-ink-soft);">Bitte bestätige deine Anmeldung in deiner E-Mail.</div></div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { email: '', error: '', subscribed: false, submitting: false };
+
+  onEmail = (e) => this.setState({ email: e.target.value, error: '' });
+
+  subscribe = async () => {
+    if (this.state.submitting) return;
+    this.setState({ submitting: true, error: '' });
+    const { subscribeToBrevo } = await import(new URL('brevo.js', document.baseURI).href);
+    const res = await subscribeToBrevo({ email: this.state.email, source: 'crashkurs' });
+    if (!res.ok) { this.setState({ error: res.error, submitting: false }); return; }
+    this.setState({ subscribed: true, error: '', submitting: false });
+  };
+
+  renderVals() {
+    return {
+      email: this.state.email,
+      error: this.state.error,
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+      onEmail: this.onEmail,
+      subscribe: this.subscribe,
+      submitting: this.state.submitting,
+      ctaLabelStart: this.state.submitting ? 'Wird gesendet…' : 'Jetzt kostenlos starten',
+      ctaLabelSignup: this.state.submitting ? 'Wird gesendet…' : 'Jetzt kostenlos eintragen',
+    };
+  }
+}
+</script>
+</body>
+</html>

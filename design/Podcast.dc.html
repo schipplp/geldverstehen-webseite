@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/styles.css">
+<script src="_ds/geld-verstehen-cb9890e3-c9d6-46fe-bfb7-737cb9ea462c/_ds_bundle.js"></script>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fff; }
+  .gv-wrap { max-width:1120px; margin:0 auto; padding:0 40px; }
+  .gv-eyebrow { font-family:var(--font-display); font-size:17px; letter-spacing:.12em; }
+  .gv-bar { width:44px; height:5px; background:var(--gv-yellow); border-radius:3px; }
+  .gv-h2 { font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:var(--gv-ink); line-height:1.04; margin:0; font-size:clamp(34px,4.2vw,52px); }
+  .gv-btn { display:inline-block; font-family:var(--font-body); font-weight:700; font-size:16px; text-decoration:none; background:var(--gv-yellow); color:var(--gv-ink); border-radius:8px; padding:13px 22px; transition:background .15s ease; }
+  .gv-btn:hover { background:var(--gv-yellow-600); }
+  .gv-plat { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body); font-weight:700; font-size:15px; text-decoration:none; background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:8px; padding:11px 18px; transition:background .15s ease; }
+  .gv-plat:hover { background:rgba(255,255,255,.22); }
+  .gv-ep { display:flex; align-items:center; gap:22px; padding:22px 0; border-bottom:1px solid var(--gv-border); }
+  @media (max-width:860px){
+    .gv-wrap{ padding:0 22px; }
+    .gv-split{ grid-template-columns:1fr !important; gap:32px !important; }
+    .gv-3{ grid-template-columns:1fr !important; }
+    .gv-ep{ flex-wrap:wrap; gap:10px 18px; }
+  }
+</style>
+</helmet>
+
+<div style="font-family:var(--font-body); color:var(--gv-ink);">
+
+  <!-- HEADER + HERO -->
+  <div style="background:var(--gv-blue);">
+    <dc-import name="SiteNav" active="podcast" hint-size="100%,72px"></dc-import>
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:64px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.02fr .98fr; gap:52px; align-items:center;">
+        <div>
+          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">DER PODCAST</div>
+          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,78px);">Jede Woche ein Stück mehr <span style="color:var(--gv-yellow);">Klarheit</span>.</h1>
+          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Konkrete Impulse und praktische Tipps rund um Geld — zum Mitnehmen für unterwegs. Jede Woche eine neue Folge.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="gv-plat" href="https://open.spotify.com/show/geldverstehen" target="_blank" rel="noopener">Spotify</a>
+            <a class="gv-plat" href="https://podcasts.apple.com/de/podcast/geld-verstehen" target="_blank" rel="noopener">Apple Podcasts</a>
+            <a class="gv-plat" href="https://geldverstehen.letscast.fm" target="_blank" rel="noopener">Alle Plattformen</a>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:center;">
+          <img src="uploads/new%20podcast%20cover_v5.jpg" alt="GELD VERSTEHEN — Der Podcast" style="width:100%; max-width:420px; aspect-ratio:1/1; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.34);">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOPICS -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:40px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow" style="color:var(--gv-blue); margin:16px 0 8px;">WORUM ES GEHT</p>
+      <h2 class="gv-h2" style="max-width:760px;">Themen, die wirklich etwas verändern</h2>
+      <div class="gv-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;">
+        <div style="background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:28px;">
+          <h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 8px;">Der erste Überblick</h3>
+          <p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Wo dein Geld wirklich hingeht — und wie du in den Griff bekommst, was dir wichtig ist.</p>
+        </div>
+        <div style="background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:28px;">
+          <h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 8px;">Sparen ohne Verzicht</h3>
+          <p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Systeme, die im Alltag funktionieren — statt strenger Regeln, die niemand durchhält.</p>
+        </div>
+        <div style="background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:28px;">
+          <h3 style="font-family:var(--font-display); font-weight:400; font-size:24px; color:var(--gv-ink); margin:0 0 8px;">Ruhe statt Geldstress</h3>
+          <p style="font-size:15px; line-height:1.6; color:var(--gv-ink-soft); margin:0;">Warum Geld oft mehr mit Kopf und Gewohnheiten zu tun hat als mit Zahlen — und wie du gelassener wirst.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPISODES -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:84px;">
+      <h2 class="gv-h2" style="margin-bottom:8px;">Neueste Folgen</h2>
+      <p style="font-size:16px; color:var(--gv-muted); margin:6px 0 28px;">Direkt hier reinhören &mdash; jede Woche eine neue Folge.</p>
+
+      <!-- PLAYER -->
+      <div style="display:flex; align-items:center; gap:20px; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:20px 24px; margin-bottom:20px; flex-wrap:wrap;">
+        <img src="uploads/new%20podcast%20cover_v5.jpg" alt="" style="width:74px; height:74px; border-radius:10px; object-fit:cover; flex-shrink:0;">
+        <div style="flex:1; min-width:220px;">
+          <div style="font-family:var(--font-display); font-size:15px; letter-spacing:.08em; color:var(--gv-blue);">{{ current.no }} &middot; JETZT SPIELEN</div>
+          <div style="font-family:var(--font-body); font-weight:700; font-size:17px; color:var(--gv-ink); line-height:1.3; margin-top:2px;">{{ current.title }}</div>
+        </div>
+        <audio controls src="{{ current.mp3 }}" style="height:44px; width:100%; max-width:340px;"></audio>
+      </div>
+
+      <div>
+        <sc-for list="{{ episodes }}" as="ep" hint-placeholder-count="6">
+          <div class="gv-ep" style="cursor:pointer;" onClick="{{ ep.play }}">
+            <div style="font-family:var(--font-display); font-size:40px; line-height:1; color:var(--gv-blue); min-width:74px;">{{ ep.no }}</div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display); font-size:24px; color:var(--gv-ink); line-height:1.1;">{{ ep.title }}</div>
+              <div style="font-size:14px; color:var(--gv-muted); margin-top:4px;">{{ ep.dur }} &middot; {{ ep.date }}</div>
+            </div>
+            <a class="gv-btn" href="{{ ep.link }}" target="_blank" rel="noopener" style="white-space:nowrap;">Details</a>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:32px;">
+        <a href="https://geldverstehen.letscast.fm" target="_blank" rel="noopener" style="font-family:var(--font-body); font-weight:700; font-size:16px; color:var(--gv-blue); text-decoration:none;">Alle Folgen ansehen &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px; text-align:center;">
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Keine Folge mehr verpassen</h2>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:460px;">Abonniere den Podcast auf deiner Lieblingsplattform und verpasse keine neue Folge mehr.</p>
+      <a class="gv-btn" href="https://geldverstehen.letscast.fm" target="_blank" rel="noopener">Jetzt abonnieren</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { current: 0 };
+  renderVals() {
+    const episodes = [
+      { no:'#74', title:'Warum Geld in Beziehungen so oft für Streit sorgt – und wie ihr das löst', sub:'Diesen einen Fehler machen fast alle Paare', dur:'11 Min', date:'9. Juli 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/e0cf9878.mp3', link:'https://geldverstehen.letscast.fm/episode/warum-geld-in-beziehungen-so-oft-fuer-streit-sorgt-und-wie-ihr-das-loest' },
+      { no:'#73', title:'5 Finanzregeln, die du nie brechen solltest', sub:'Für dauerhafte Kontrolle über dein Geld', dur:'12 Min', date:'2. Juli 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/741915e4.mp3', link:'https://geldverstehen.letscast.fm/episode/5-finanzregeln-die-du-nie-brechen-solltest' },
+      { no:'#72', title:'Warum ich keine Budgetplanung empfehle', sub:'Die bessere Alternative zu Budgets', dur:'8 Min', date:'25. Juni 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/b57e030b.mp3', link:'https://geldverstehen.letscast.fm/episode/warum-ich-keine-budgetplanung-empfehle' },
+      { no:'#71', title:'Was finanziell erfolgreiche Menschen anders machen', sub:'3 kleine Stellschrauben', dur:'9 Min', date:'18. Juni 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/8d3113f0.mp3', link:'https://geldverstehen.letscast.fm/episode/was-finanziell-erfolgreiche-menschen-anders-machen-3-kleine-stellschrauben' },
+      { no:'#70', title:'Du machst vieles richtig – und gibst trotzdem immer wieder auf?', sub:'Der Grund, warum so viele zu früh aufgeben', dur:'9 Min', date:'11. Juni 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/2cfa6c19.mp3', link:'https://geldverstehen.letscast.fm/episode/du-machst-vieles-richtig-und-gibst-trotzdem-immer-wieder-auf' },
+      { no:'#69', title:'Du kennst deine Geldfresser – und änderst trotzdem nichts. Warum?', sub:'Dein größter Geldfresser ist nicht der, den du im Kopf hast', dur:'6 Min', date:'4. Juni 2026', mp3:'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/d546b58f.mp3', link:'https://geldverstehen.letscast.fm/episode/du-kennst-deine-geldfresser-und-aenderst-trotzdem-nichts-warum' },
+    ];
+    const cur = episodes[this.state.current] || episodes[0];
+    return {
+      episodes: episodes.map((e, i) => ({ ...e, isActive: i === this.state.current, play: () => this.setState({ current: i }) })),
+      current: cur,
+    };
+  }
+}
+</script>
+</body>
+</html>
