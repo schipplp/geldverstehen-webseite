@@ -1,0 +1,1 @@
+Hinweis: Diese Struktur wurde gegenüber dem Original-Export abgeflacht. Die vier Token-Dateien (colors/fonts/spacing/typography) sind zu tokens.css zusammengefasst. Pfadangaben in HANDOFF.md, die auf _ds/geld-verstehen-.../tokens/*.css verweisen, meinen jetzt _ds/tokens.css.
