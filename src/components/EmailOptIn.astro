@@ -1,7 +1,11 @@
 ---
 // Wiederverwendbares E-Mail-Opt-in (Crashkurs / Buch / Newsletter).
-// Läuft über src/lib/brevo.js → subscribeToBrevo({ email, source }).
-// Bis Brevo scharfgeschaltet ist: Prototyp-Modus (Erfolg wird simuliert).
+// Sendet als klassisches HTML-Formular-POST an das Brevo-Formular, Ziel ist ein
+// verstecktes Iframe — dadurch bleibt die Seite stehen und es gibt kein CORS-
+// Problem. Die Quelle wird als Attribut (QUELLE) mitgeschickt. Bei leerer
+// BREVO_CONFIG.formUrl läuft alles im Prototyp-Modus (nur Erfolg anzeigen).
+import { BREVO_CONFIG } from '../lib/brevo.js';
+
 export interface Props {
   source: 'crashkurs' | 'buch' | 'newsletter';
   cta: string;
@@ -21,16 +25,25 @@ const {
   theme = 'on-blue',
 } = Astro.props;
 const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.';
+const frame = `brevo-sink-${crypto.randomUUID()}`;
+const action = BREVO_CONFIG.formUrl || undefined;
 ---
-<div class="gv-optin-wrap" data-theme={theme}>
-  <form class="gv-optin" data-source={source} novalidate>
+<div class="gv-optin-wrap" data-theme={theme} data-prototype={action ? undefined : 'true'}>
+  <form class="gv-optin" method="POST" action={action} target={frame} novalidate>
     <div class="gv-field">
       <input class="gv-input" type="email" name="EMAIL" placeholder="Deine E-Mailadresse *" autocomplete="email" required aria-label="Deine E-Mailadresse" />
       <p class="gv-input-error" role="alert" hidden></p>
     </div>
+    <!-- Brevo-Pflichtfelder -->
+    <input type="hidden" name="email_address_check" value="" />
+    <input type="hidden" name="locale" value={BREVO_CONFIG.locale} />
+    {BREVO_CONFIG.sourceField && <input type="hidden" name={BREVO_CONFIG.sourceField} value={source} />}
     <button class="gv-btn gv-btn-block gv-optin-btn" type="submit" data-label={cta}>{cta}</button>
     <p class="gv-optin-hint">{hint}</p>
   </form>
+
+  <!-- Verstecktes Ziel für das Formular-POST (kein Seitenwechsel) -->
+  <iframe name={frame} class="gv-optin-sink" title="Anmeldung" aria-hidden="true" tabindex="-1"></iframe>
 
   {successStyle === 'card' ? (
     <div class="gv-optin-success gv-optin-card" hidden>
@@ -51,6 +64,7 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
 <style>
   .gv-optin { display: flex; flex-direction: column; gap: 12px; }
   .gv-field { display: flex; flex-direction: column; gap: 6px; }
+  .gv-optin-sink { display: none; }
 
   .gv-input {
     width: 100%; height: 52px; padding: 0 16px;
@@ -61,7 +75,7 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
   .gv-input::placeholder { color: var(--gv-muted); }
   .gv-input:focus { border-color: var(--gv-blue); box-shadow: 0 0 0 3px rgba(30,115,190,.18); }
   .gv-input--error { border-color: var(--gv-error); box-shadow: 0 0 0 3px rgba(214,69,69,.15); }
-  .gv-input:disabled { opacity: .7; }
+  .gv-input[readonly] { opacity: .7; }
 
   .gv-input-error {
     margin: 0; font-size: 13px; line-height: 1.4;
@@ -71,7 +85,7 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
 
   /* Block-Variante des gelben CTA */
   .gv-btn-block { width: 100%; justify-content: center; height: 56px; font-size: 17px; }
-  .gv-btn:disabled { opacity: .8; cursor: default; }
+  .gv-btn[aria-disabled="true"] { opacity: .8; cursor: default; }
 
   .gv-optin-hint { font-size: 13px; line-height: 1.5; margin: 2px 0 0; }
   .gv-optin-wrap[data-theme="on-blue"] .gv-optin-hint { color: rgba(255,255,255,.65); }
@@ -98,7 +112,7 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
 </style>
 
 <script>
-  import { subscribeToBrevo } from '../lib/brevo.js';
+  import { EMAIL_RE, BREVO_CONFIG } from '../lib/brevo.js';
 
   document.querySelectorAll<HTMLFormElement>('.gv-optin').forEach((form) => {
     const input = form.querySelector<HTMLInputElement>('.gv-input');
@@ -107,32 +121,42 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
     const wrap = form.closest<HTMLElement>('.gv-optin-wrap');
     const success = wrap?.querySelector<HTMLElement>('.gv-optin-success');
     if (!input || !errEl || !btn || !success) return;
-    const label = btn.dataset.label || btn.textContent || '';
-    let submitting = false;
+    const isPrototype = wrap?.dataset.prototype === 'true';
+    let done = false;
 
-    const clearError = () => { errEl.hidden = true; errEl.textContent = ''; input.classList.remove('gv-input--error'); };
+    const clearError = () => {
+      errEl.hidden = true;
+      errEl.textContent = '';
+      input.classList.remove('gv-input--error');
+    };
     input.addEventListener('input', clearError);
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (submitting) return;
-      submitting = true;
-      clearError();
-      btn.disabled = true; input.disabled = true; btn.textContent = 'Wird gesendet…';
-
-      const res = await subscribeToBrevo({ email: input.value, source: form.dataset.source });
-
-      if (!res.ok) {
-        errEl.textContent = res.error || 'Es hat leider nicht geklappt. Bitte versuche es später erneut.';
+    form.addEventListener('submit', (e) => {
+      if (done) return;
+      const email = (input.value || '').trim();
+      if (!EMAIL_RE.test(email)) {
+        e.preventDefault();
+        errEl.textContent = 'Bitte gib eine gültige E-Mailadresse ein.';
         errEl.hidden = false;
         input.classList.add('gv-input--error');
-        btn.disabled = false; input.disabled = false; btn.textContent = label;
-        submitting = false;
         return;
       }
 
-      form.hidden = true;
-      success.hidden = false;
+      // Prototyp-Modus (keine Formular-URL): nur Erfolg simulieren.
+      if (isPrototype || !BREVO_CONFIG.formUrl) {
+        e.preventDefault();
+      }
+
+      // Gültig: das native POST läuft (ins versteckte Iframe) weiter.
+      done = true;
+      btn.textContent = 'Wird gesendet…';
+      btn.setAttribute('aria-disabled', 'true');
+      input.readOnly = true; // readOnly (nicht disabled!), damit EMAIL im POST bleibt
+
+      window.setTimeout(() => {
+        form.hidden = true;
+        success.hidden = false;
+      }, 700);
     });
   });
 </script>
