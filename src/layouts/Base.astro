@@ -6,6 +6,11 @@ import '@fontsource/bebas-neue/400.css';
 import '@fontsource/pt-sans/400.css';
 import '@fontsource/pt-sans/700.css';
 import '@fontsource/pt-sans/400-italic.css';
+// Kritische Schriftdateien vorab laden, damit sie beim ersten Rendern schon da
+// sind (verhindert das sichtbare Nachladen/„Ruckeln" der Schrift).
+import bebas400 from '@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2?url';
+import ptsans400 from '@fontsource/pt-sans/files/pt-sans-latin-400-normal.woff2?url';
+import ptsans700 from '@fontsource/pt-sans/files/pt-sans-latin-700-normal.woff2?url';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav.astro';
@@ -43,6 +48,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="de_DE" />
   <meta name="twitter:card" content="summary" />
+
+  <!-- Kritische Fonts vorladen (verhindert Font-Flackern beim Laden) -->
+  <link rel="preload" as="font" type="font/woff2" href={bebas400} crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href={ptsans400} crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href={ptsans700} crossorigin />
 </head>
 <body>
   <SiteNav active={active} />
