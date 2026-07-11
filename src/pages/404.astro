@@ -1,18 +1,25 @@
 ---
+// 404-Seite. Astro erzeugt daraus dist/404.html — genau die Datei, die
+// GitHub Pages bei nicht gefundenen Pfaden ausliefert. Übernimmt Header,
+// Footer, Fonts und Farben der Seite (via Base-Layout).
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 ---
 <Base
-  title="Seite nicht gefunden"
-  description="Diese Seite gibt es leider nicht."
+  title="Diese Seite gibt es nicht mehr"
+  description="Diese Seite gibt es nicht mehr — hier findest du alles Aktuelle von GELD VERSTEHEN."
   active=""
 >
   <section style="background:var(--gv-blue);">
     <div class="gv-wrap" style="padding-top:96px; padding-bottom:96px; text-align:center;">
-      <div style="font-family:var(--font-display); font-size:clamp(80px,14vw,160px); line-height:1; color:var(--gv-yellow);">404</div>
-      <h1 style="font-family:var(--font-display); font-weight:400; font-size:clamp(32px,4.6vw,52px); line-height:1.05; color:#fff; margin:8px 0 14px;">Diese Seite gibt es nicht.</h1>
-      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 30px; max-width:460px;">Vielleicht hat sich ein Tippfehler eingeschlichen. Zurück zur Startseite geht’s hier:</p>
-      <a class="gv-btn" href={u('/')}>Zur Startseite</a>
+      <div style="font-family:var(--font-display); font-size:clamp(72px,12vw,140px); line-height:1; color:var(--gv-yellow);">404</div>
+      <h1 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; font-size:clamp(34px,4.8vw,56px); line-height:1.05; color:#fff; margin:8px 0 14px;">Diese Seite gibt es nicht mehr</h1>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 32px; max-width:480px;">Kein Problem — hier findest du alles Aktuelle von GELD VERSTEHEN:</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="gv-btn" href={u('/')}>Startseite</a>
+        <a class="gv-btn-ghost" href={u('/podcast')}>Podcast</a>
+        <a class="gv-btn-ghost" href={u('/app')}>OnePeek App</a>
+      </div>
     </div>
   </section>
 </Base>

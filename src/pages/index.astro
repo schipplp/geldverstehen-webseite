@@ -53,13 +53,21 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
     <!-- ============ WORUM ES GEHT ============ -->
     <section id="worum" class="gv-sec" style="background:#fff;">
       <div class="gv-wrap">
-        <div style="max-width:760px;">
+        <div class="gv-worum">
           <p class="gv-eyebrow"><span class="gv-rule"></span>WORUM ES HIER GEHT</p>
-          <h2 class="gv-h2">Am Ende des Geldes ist noch so viel Monat übrig.</h2>
-          <p class="gv-lead">Du verdienst eigentlich ganz gut – und trotzdem fährt der Kontostand Achterbahn. Am Monatsende bleibt weniger übrig, als du dachtest. Das Thema Finanzen fühlt sich schwer an, und im Hinterkopf sitzt dieses leise Dauerrauschen: <em>Ich müsste mich mal drum kümmern.</em></p>
-          <p class="gv-lead">Dieses Gefühl kenne ich gut. Und ich weiß: Es liegt nicht daran, dass du zu wenig verdienst oder dir die Disziplin fehlt. Dir fehlt kein Verzicht – dir fehlt Überblick.</p>
-          <p class="gv-lead">Genau da setzt GELD VERSTEHEN an. Es geht nicht ums Sparen um jeden Preis, nicht um Geiz, nicht darum, jeden Kaffee dreimal umzudrehen – sondern ums Gegenteil: Sobald du die einfachen Prinzipien hinter deinem Geld verstehst, kommt die Ordnung fast von allein. Und mit ihr die Ruhe.</p>
-          <p class="gv-lead">Der Weg dahin ist leichter, als du denkst – und du musst ihn nicht allein gehen.</p>
+          <h2 class="gv-h2" style="max-width:760px;">Am Ende des Geldes ist noch so viel Monat übrig.</h2>
+          <div class="gv-worum-grid">
+            <div class="gv-worum-text">
+              <p class="gv-lead" style="margin-top:0;">Du verdienst eigentlich ganz gut – und trotzdem fährt der Kontostand Achterbahn. Am Monatsende bleibt weniger übrig, als du dachtest. Das Thema Finanzen fühlt sich schwer an, und im Hinterkopf sitzt dieses leise Dauerrauschen: <em>Ich müsste mich mal drum kümmern.</em></p>
+              <p class="gv-lead">Dieses Gefühl kenne ich gut. Und ich weiß: Es liegt nicht daran, dass du zu wenig verdienst oder dir die Disziplin fehlt.</p>
+              <p class="gv-lead">Genau da setzt GELD VERSTEHEN an. Es geht nicht ums Sparen um jeden Preis, nicht um Geiz, nicht darum, jeden Kaffee dreimal umzudrehen – sondern ums Gegenteil: Sobald du die einfachen Prinzipien hinter deinem Geld verstehst, kommt die Ordnung fast von allein. Und mit ihr die Ruhe.</p>
+              <p class="gv-lead"><strong>Der Weg dahin ist leichter, als du denkst – und du musst ihn nicht allein gehen.</strong></p>
+            </div>
+            <aside class="gv-worum-quote">
+              <span class="gv-worum-qmark" aria-hidden="true">„</span>
+              <p>Dir fehlt kein Verzicht — dir fehlt Überblick.</p>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -95,7 +103,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
             <div class="gv-tile-media"><img src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 12px 30px rgba(15,35,58,.14);" /></div>
             <div class="gv-tile-body">
               <div class="gv-tile-label"><span style="color:var(--gv-blue);">01</span>&nbsp;&nbsp;PODCAST</div>
-              <h3 class="gv-tile-title">Der Podcast</h3>
+              <h3 class="gv-tile-title">GELD VERSTEHEN – Der Podcast</h3>
               <p class="gv-tile-text">Kurze Folgen, ein klarer Impuls — im Alltag sofort spürbar. Jede Woche neu.</p>
               <span class="gv-mehr">Mehr erfahren &rarr;</span>
             </div>
@@ -142,6 +150,18 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 <style>
   .gv-press { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; }
   .gv-press span { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 21px; color: #7c8794; }
+
+  /* „Worum es geht" — Text + hervorgehobenes Zitat als visueller Anker */
+  .gv-worum { max-width: 1000px; }
+  .gv-worum-grid { display: grid; grid-template-columns: 1.45fr .85fr; gap: 44px; align-items: center; margin-top: 20px; }
+  .gv-worum-text .gv-lead { margin: 0 0 16px; }
+  .gv-worum-text .gv-lead:last-child { margin-bottom: 0; }
+  .gv-worum-quote { position: relative; background: var(--gv-blue); color: #fff; border-radius: 18px; padding: 30px 30px 34px; box-shadow: var(--shadow-md); }
+  .gv-worum-qmark { display: block; font-family: var(--font-display); font-size: 72px; line-height: .5; color: var(--gv-yellow); margin-bottom: 6px; }
+  .gv-worum-quote p { margin: 0; font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; font-size: clamp(30px, 3.2vw, 40px); line-height: 1.04; }
+  @media (max-width: 860px) {
+    .gv-worum-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
 
   .gv-3tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .gv-tile { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; overflow: hidden; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
