@@ -30,9 +30,12 @@ export const BREVO_CONFIG = {
     'https://b59a5efd.sibforms.com/serve/MUIFABxhux1ZvmEyIcFi7f8xKDEe4IPXjLs3rMKWtrnheIg2cL9nEp4Yl58JdV7s0IpfX6D6GrRGrQ52dh0Wy6HL1KP2peKB58kYK1fBO3OiUXb9if8HDz62FTSf9NsFvahAC1WxymSi1EpSR6zmmPQRVGpUmOXwnE-DkG--JPb8P_pJgu5OIkgRPIeJkelUH1vKJ7L6jda5goui',
 
   // Brevo-Kontakt-Attribut, in das die Opt-in-Quelle geschrieben wird.
-  // In Brevo als TEXT-Attribut anlegen und dem Formular als Feld hinzufügen.
-  // Leer lassen ('') = keine Quelle mitsenden.
-  sourceField: 'QUELLE',
+  // WICHTIG: Ein Feld mitzusenden, das im Brevo-Formular NICHT existiert, kann
+  // dazu führen, dass Brevo die ganze Anmeldung verwirft. Deshalb ist das
+  // Quelle-Feld vorerst DEAKTIVIERT ('').
+  // ▶ Zum Aktivieren: in Brevo ein TEXT-Attribut „QUELLE" anlegen UND dem
+  //   Formular als (verstecktes) Feld hinzufügen, dann hier auf 'QUELLE' setzen.
+  sourceField: '',
 
   locale: 'de',
 };
