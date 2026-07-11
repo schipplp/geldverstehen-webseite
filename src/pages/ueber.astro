@@ -7,10 +7,10 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 const testimonials = [
   {
     embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg',
-    name: 'Lena',
-    role: 'Coaching-Teilnehmerin',
-    headline: 'Die beste Investition, die ich machen konnte.',
-    quote: 'Es hat mir geholfen, eine ganz klare Struktur in meine Finanzen zu bringen. Es hat mir geholfen, eine Übersicht zu bekommen. Es hat mir geholfen, erfolgreich ein Haushaltsbuch zu führen, was ich davor einige Male probiert habe, aber immer wieder gescheitert bin. Das Ganze ist wirklich sehr einfach gehalten.',
+    name: 'Salih',
+    role: 'Coaching-Teilnehmer',
+    headline: 'Ich bin überglücklich.',
+    quote: 'Ich hab immer schon ganz gut Geld verdient, aber ich konnte nie mit Geld umgehen. Nach dem Coaching hat sich alles total verändert. Ich weiß ganz genau, wo mein Geld hingeht, und wie ich mit meinem Geld umgehen muss. Zum ersten Mal in meinem Leben machen mir Ausgaben wie eine Autoreparatur gar nichts aus — ich kann sie locker bezahlen, mit meinem eigenen Geld, ohne einen Kredit aufzunehmen.',
   },
   {
     embed: 'https://www.youtube-nocookie.com/embed/3Z6KL3H_uNM',
@@ -21,17 +21,17 @@ const testimonials = [
   },
   {
     embed: 'https://www.youtube-nocookie.com/embed/wXwpsAVkH3M',
+    name: 'Lena',
+    role: 'Coaching-Teilnehmerin',
+    headline: 'Die beste Investition, die ich machen konnte.',
+    quote: 'Es hat mir geholfen, eine ganz klare Struktur in meine Finanzen zu bringen. Es hat mir geholfen, eine Übersicht zu bekommen. Es hat mir geholfen, erfolgreich ein Haushaltsbuch zu führen, was ich davor einige Male probiert habe, aber immer wieder gescheitert bin. Das Ganze ist wirklich sehr einfach gehalten.',
+  },
+  {
+    embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ',
     name: 'Miracle',
     role: 'Coaching-Teilnehmerin',
     headline: 'Es hat mir sehr, sehr geholfen.',
     quote: 'Ich hatte anfangs große Schwierigkeiten mit Geld. Seit dem Kurs hat sich so vieles geändert, auch bei meinem Kontostand. Ich habe verstanden, dass das Geld auf dem Konto nicht das Problem ist, sondern mein Verhalten, mein Denken. Mittlerweile habe ich eine neue Routine, ich habe Geld auf dem Konto, ich kann Rücklagen bilden, ich kann sogar Vermögen aufbauen.',
-  },
-  {
-    embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ',
-    name: 'Salih',
-    role: 'Coaching-Teilnehmer',
-    headline: 'Ich bin überglücklich.',
-    quote: 'Ich hab immer schon ganz gut Geld verdient, aber ich konnte nie mit Geld umgehen. Nach dem Coaching hat sich alles total verändert. Ich weiß ganz genau, wo mein Geld hingeht, und wie ich mit meinem Geld umgehen muss. Zum ersten Mal in meinem Leben machen mir Ausgaben wie eine Autoreparatur gar nichts aus — ich kann sie locker bezahlen, mit meinem eigenen Geld, ohne einen Kredit aufzunehmen.',
   },
 ];
 ---
@@ -129,7 +129,6 @@ const testimonials = [
               <iframe src={t.embed} allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={`Erfahrungsbericht von ${t.name}`} loading="lazy"></iframe>
             </div>
             <figcaption class="gv-tbody">
-              <div class="gv-tstars">★★★★★</div>
               <p class="gv-thead">„{t.headline}"</p>
               <blockquote class="gv-tquote">„{t.quote}"</blockquote>
               <div class="gv-tname">{t.name}<span class="gv-trole"> · {t.role}</span></div>
@@ -183,7 +182,6 @@ const testimonials = [
   .gv-tvideo { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
   .gv-tvideo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .gv-tbody { padding: 24px 26px 26px; display: flex; flex-direction: column; }
-  .gv-tstars { color: var(--gv-yellow); font-size: 15px; letter-spacing: 2px; margin-bottom: 10px; }
   .gv-thead { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.1; color: var(--gv-ink); margin: 0 0 12px; }
   .gv-tquote { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); }
   .gv-tname { margin-top: 16px; font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--gv-ink); }
