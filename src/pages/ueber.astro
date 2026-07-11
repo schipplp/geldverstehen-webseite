@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
 const testimonials = [
   { embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg', title: 'Erfahrungsbericht 1' },
@@ -14,7 +15,6 @@ const testimonials = [
   title="Über Per Schippl"
   description="Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch."
   active="ueber"
-  playfair
 >
   <!-- HERO -->
   <div style="background:var(--gv-blue);">

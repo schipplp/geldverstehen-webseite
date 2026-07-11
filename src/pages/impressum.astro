@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="Impressum"
-  description="Impressum von GELD VERSTEHEN."
+  description="Impressum von GELD VERSTEHEN — Per Schippl, Oldenburg."
   active=""
 >
   <main>
@@ -12,25 +12,38 @@ import Base from '../layouts/Base.astro';
         <div class="gv-bar"></div>
         <h1 class="lp-h1">Impressum</h1>
 
-        <!-- TODO(Per): Platzhalter — mit echten Anbieterangaben füllen und vor dem Livegang anwaltlich prüfen lassen. -->
-        <div class="lp-note">
-          <strong>Platzhalter.</strong> Diese Seite ist ein Entwurf. Bitte mit echten Angaben füllen und vor dem Livegang anwaltlich prüfen lassen.
-        </div>
-
         <h2 class="lp-h2">Angaben gemäß § 5 DDG</h2>
-        <p class="lp-p"><span class="lp-ph">[Vorname Nachname / Firmenname]<br />[Straße und Hausnummer]<br />[PLZ Ort]<br />Deutschland]</span></p>
+        <p class="lp-p">
+          Per Schippl<br />
+          geldverstehen.de<br />
+          Mutzenbecherstraße 9<br />
+          26131 Oldenburg
+        </p>
+        <p class="lp-p">E-Mail: <a href="mailto:per@geldverstehen.de">per@geldverstehen.de</a></p>
 
-        <h2 class="lp-h2">Kontakt</h2>
-        <p class="lp-p"><span class="lp-ph">Telefon: [Telefonnummer]<br />E-Mail: [E-Mailadresse]</span></p>
-
-        <h2 class="lp-h2">Umsatzsteuer-ID</h2>
-        <p class="lp-p">Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br /><span class="lp-ph">[USt-IdNr.]</span></p>
-
-        <h2 class="lp-h2">Redaktionell verantwortlich</h2>
-        <p class="lp-p"><span class="lp-ph">[Vorname Nachname]<br />[Anschrift wie oben]</span></p>
+        <h2 class="lp-h2">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <p class="lp-p">
+          Per Schippl<br />
+          Mutzenbecherstraße 9<br />
+          26131 Oldenburg
+        </p>
 
         <h2 class="lp-h2">Verbraucherstreitbeilegung</h2>
         <p class="lp-p">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+        <h2 class="lp-h2">Haftung für Inhalte</h2>
+        <p class="lp-p">Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+        <p class="lp-p">Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+
+        <h2 class="lp-h2">Haftung für Links</h2>
+        <p class="lp-p">Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+        <p class="lp-p">Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+
+        <h2 class="lp-h2">Urheberrecht</h2>
+        <p class="lp-p">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+        <p class="lp-p">Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+
+        <p class="lp-copy">© 2026 geldverstehen.de. Alle Rechte vorbehalten.</p>
       </div>
     </div>
   </main>
@@ -40,6 +53,5 @@ import Base from '../layouts/Base.astro';
   .lp-h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; color: var(--gv-ink); line-height: 1.0; margin: 18px 0 0; font-size: clamp(40px, 6vw, 64px); }
   .lp-h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; color: var(--gv-ink); line-height: 1.05; margin: 36px 0 10px; font-size: 26px; }
   .lp-p { font-size: 17px; line-height: 1.7; color: var(--gv-ink-soft); margin: 0 0 12px; }
-  .lp-ph { color: var(--gv-muted); }
-  .lp-note { background: var(--gv-yellow); color: var(--gv-ink); border-radius: 12px; padding: 16px 20px; margin: 28px 0 8px; font-size: 15px; line-height: 1.55; }
+  .lp-copy { font-size: 14px; color: var(--gv-muted); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--gv-border); }
 </style>
