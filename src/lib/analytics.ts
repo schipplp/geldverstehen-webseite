@@ -10,4 +10,4 @@
 //
 // Sobald hier eine ID steht, erscheint automatisch das Consent-Banner und GA
 // wird ausschließlich NACH aktiver Einwilligung geladen (mit IP-Kürzung).
-export const GA_MEASUREMENT_ID = '';
+export const GA_MEASUREMENT_ID = 'G-34VTD24M2D';
