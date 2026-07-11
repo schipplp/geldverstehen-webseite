@@ -1,28 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="GELD VERSTEHEN">
   <defs>
     <linearGradient id="stem" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#82BB3A"/>
-      <stop offset="1" stop-color="#F4C41E"/>
+      <stop offset="0" stop-color="#7FC241"/>
+      <stop offset="1" stop-color="#F2C21C"/>
     </linearGradient>
   </defs>
 
   <!-- Hintergrund (Marken-Blau) -->
   <rect width="512" height="512" fill="#1E73BE"/>
 
-  <!-- Münze: Seite (3D-Tiefe) -->
-  <path d="M110 348 a146 46 0 0 0 292 0 v34 a146 46 0 0 1 -292 0 z" fill="#E0A20E"/>
+  <!-- Münze: 3D-Seite -->
+  <path d="M78 338 a178 58 0 0 0 356 0 l0 62 a178 58 0 0 1 -356 0 z" fill="#EFA81C"/>
   <!-- Münze: Oberseite -->
-  <ellipse cx="256" cy="348" rx="146" ry="46" fill="#F4C41E"/>
-  <ellipse cx="256" cy="348" rx="106" ry="30" fill="none" stroke="#E0A20E" stroke-width="10"/>
+  <ellipse cx="256" cy="338" rx="178" ry="58" fill="#F5C525"/>
+  <!-- Münze: innerer Ring -->
+  <ellipse cx="256" cy="333" rx="134" ry="41" fill="none" stroke="#E0A012" stroke-width="11"/>
 
   <!-- Stängel -->
-  <path d="M247 350 C244 300 247 262 258 232 h16 C266 264 263 302 265 350 Z" fill="url(#stem)"/>
+  <path d="M248 336 C243 268 249 214 261 168 C263 160 272 160 275 169 C265 216 261 270 266 336 Z" fill="url(#stem)"/>
 
   <!-- Blatt rechts (groß) -->
-  <path d="M264 244 C298 168 360 132 414 132 C410 200 366 256 296 262 C284 258 273 252 264 244 Z" fill="#7CB342"/>
-  <path d="M296 262 C330 214 366 180 402 154" fill="none" stroke="#5F9B2E" stroke-width="9" stroke-linecap="round"/>
+  <path d="M268 196 C300 108 366 62 418 60 C420 140 376 214 300 226 C286 219 276 208 268 196 Z" fill="#7CBE3E"/>
+  <path d="M300 222 C338 168 378 118 408 74" fill="none" stroke="#1E73BE" stroke-width="8" stroke-linecap="round"/>
 
   <!-- Blatt links (klein) -->
-  <path d="M250 260 C212 214 156 206 112 218 C126 274 178 306 236 288 C242 279 247 270 250 260 Z" fill="#93C955"/>
-  <path d="M236 288 C198 264 162 246 122 240" fill="none" stroke="#5F9B2E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M252 214 C212 166 146 150 102 162 C116 222 176 258 236 240 C243 232 249 223 252 214 Z" fill="#6FB338"/>
+  <path d="M236 238 C196 210 154 190 116 184" fill="none" stroke="#1E73BE" stroke-width="7" stroke-linecap="round"/>
 </svg>

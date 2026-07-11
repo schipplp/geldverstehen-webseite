@@ -5,9 +5,9 @@ interface Props { active?: string }
 const { active = '' } = Astro.props;
 const links = [
   { key: 'ueber', label: 'ÜBER', href: u('/ueber') },
-  { key: 'podcast', label: 'PODCAST', href: u('/podcast') },
   { key: 'app', label: 'APP', href: u('/app') },
   { key: 'buch', label: 'BUCH', href: u('/buch') },
+  { key: 'podcast', label: 'PODCAST', href: u('/podcast') },
 ];
 ---
 <div class="gv-nv-bar">
@@ -15,6 +15,7 @@ const links = [
     <a class="gv-nv-word" href={u('/')} aria-label="GELD VERSTEHEN — Startseite"><span class="gv-nv-w1">GELD</span><span class="gv-nv-w2">VERSTEHEN</span></a>
     <button class="gv-nv-burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="gv-nv-links"><span></span><span></span><span></span></button>
     <div class="gv-nv-links" id="gv-nv-links">
+      <a class="gv-nv-a gv-nv-mobileonly" href={u('/')}>STARTSEITE</a>
       {links.map((l) => (
         <a class:list={["gv-nv-a", { "gv-nv-active": active === l.key }]} href={l.href}>{l.label}</a>
       ))}
@@ -24,7 +25,7 @@ const links = [
 
 <style>
   .gv-nv-bar { background: var(--gv-blue); }
-  .gv-nv { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 30px; padding-bottom: 22px; }
+  .gv-nv { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 22px; padding-bottom: 18px; }
   .gv-nv-wrap { max-width: 1120px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
   .gv-nv-word { text-decoration: none; font-family: var(--font-display); font-size: 24px; line-height: 1; letter-spacing: .5px; }
   .gv-nv-w1 { color: #fff; }
@@ -33,6 +34,7 @@ const links = [
   .gv-nv-a { font-family: var(--font-display); font-size: 16px; letter-spacing: .05em; color: rgba(255,255,255,.82); text-decoration: none; cursor: pointer; transition: color .15s ease; white-space: nowrap; }
   .gv-nv-a:hover { color: #fff; }
   .gv-nv-active { color: var(--gv-yellow); }
+  .gv-nv-mobileonly { display: none; }
   .gv-nv-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 42px; height: 42px; padding: 9px; background: rgba(255,255,255,.10); border: none; border-radius: 8px; cursor: pointer; }
   .gv-nv-burger span { display: block; width: 100%; height: 2px; background: #fff; border-radius: 2px; }
   @media (max-width: 860px) {
@@ -41,6 +43,7 @@ const links = [
     .gv-nv-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 0; background: var(--gv-blue); padding: 6px 0 16px; box-shadow: 0 24px 48px rgba(0,0,0,.32); z-index: 60; }
     .gv-nv-links.open { display: flex; }
     .gv-nv-links .gv-nv-a { font-size: 18px; padding: 15px 22px; border-top: 1px solid rgba(255,255,255,.12); }
+    .gv-nv-mobileonly { display: block; }
   }
 </style>
 
