@@ -1,9 +1,10 @@
 ---
 // Wiederverwendbares E-Mail-Opt-in (Crashkurs / Buch / Newsletter).
-// Sendet als klassisches HTML-Formular-POST an das Brevo-Formular, Ziel ist ein
-// verstecktes Iframe — dadurch bleibt die Seite stehen und es gibt kein CORS-
-// Problem. Die Quelle wird als Attribut (QUELLE) mitgeschickt. Bei leerer
-// BREVO_CONFIG.formUrl läuft alles im Prototyp-Modus (nur Erfolg anzeigen).
+// Sendet per fetch an das Brevo-Formular — mit Header X-Requested-With, genau
+// wie Brevos eigenes main.js. Das ist der einzige Weg, der vom serve-Endpunkt
+// tatsächlich als Anmeldung verarbeitet wird (ein normales Formular-POST bzw.
+// ein no-cors-fetch wird von Brevo ignoriert). Die Quelle geht als Attribut
+// QUELLE mit. Bei leerer BREVO_CONFIG.formUrl: Prototyp-Modus (nur Erfolg).
 import { BREVO_CONFIG } from '../lib/brevo.js';
 
 export interface Props {
@@ -25,25 +26,16 @@ const {
   theme = 'on-blue',
 } = Astro.props;
 const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.';
-const frame = `brevo-sink-${crypto.randomUUID()}`;
-const action = BREVO_CONFIG.formUrl || undefined;
 ---
-<div class="gv-optin-wrap" data-theme={theme} data-prototype={action ? undefined : 'true'}>
-  <form class="gv-optin" method="POST" action={action} target={frame} novalidate>
+<div class="gv-optin-wrap" data-theme={theme} data-source={source}>
+  <form class="gv-optin" novalidate>
     <div class="gv-field">
       <input class="gv-input" type="email" name="EMAIL" placeholder="Deine E-Mailadresse *" autocomplete="email" required aria-label="Deine E-Mailadresse" />
       <p class="gv-input-error" role="alert" hidden></p>
     </div>
-    <!-- Brevo-Pflichtfelder -->
-    <input type="hidden" name="email_address_check" value="" />
-    <input type="hidden" name="locale" value={BREVO_CONFIG.locale} />
-    {BREVO_CONFIG.sourceField && <input type="hidden" name={BREVO_CONFIG.sourceField} value={source} />}
     <button class="gv-btn gv-btn-block gv-optin-btn" type="submit" data-label={cta}>{cta}</button>
     <p class="gv-optin-hint">{hint}</p>
   </form>
-
-  <!-- Verstecktes Ziel für das Formular-POST (kein Seitenwechsel) -->
-  <iframe name={frame} class="gv-optin-sink" title="Anmeldung" aria-hidden="true" tabindex="-1"></iframe>
 
   {successStyle === 'card' ? (
     <div class="gv-optin-success gv-optin-card" hidden>
@@ -64,7 +56,6 @@ const action = BREVO_CONFIG.formUrl || undefined;
 <style>
   .gv-optin { display: flex; flex-direction: column; gap: 12px; }
   .gv-field { display: flex; flex-direction: column; gap: 6px; }
-  .gv-optin-sink { display: none; }
 
   .gv-input {
     width: 100%; height: 52px; padding: 0 16px;
@@ -75,7 +66,7 @@ const action = BREVO_CONFIG.formUrl || undefined;
   .gv-input::placeholder { color: var(--gv-muted); }
   .gv-input:focus { border-color: var(--gv-blue); box-shadow: 0 0 0 3px rgba(30,115,190,.18); }
   .gv-input--error { border-color: var(--gv-error); box-shadow: 0 0 0 3px rgba(214,69,69,.15); }
-  .gv-input[readonly] { opacity: .7; }
+  .gv-input:disabled { opacity: .7; }
 
   .gv-input-error {
     margin: 0; font-size: 13px; line-height: 1.4;
@@ -85,7 +76,7 @@ const action = BREVO_CONFIG.formUrl || undefined;
 
   /* Block-Variante des gelben CTA */
   .gv-btn-block { width: 100%; justify-content: center; height: 56px; font-size: 17px; }
-  .gv-btn[aria-disabled="true"] { opacity: .8; cursor: default; }
+  .gv-btn:disabled { opacity: .8; cursor: default; }
 
   .gv-optin-hint { font-size: 13px; line-height: 1.5; margin: 2px 0 0; }
   .gv-optin-wrap[data-theme="on-blue"] .gv-optin-hint { color: rgba(255,255,255,.65); }
@@ -112,7 +103,7 @@ const action = BREVO_CONFIG.formUrl || undefined;
 </style>
 
 <script>
-  import { EMAIL_RE, BREVO_CONFIG } from '../lib/brevo.js';
+  import { BREVO_CONFIG, EMAIL_RE } from '../lib/brevo.js';
 
   document.querySelectorAll<HTMLFormElement>('.gv-optin').forEach((form) => {
     const input = form.querySelector<HTMLInputElement>('.gv-input');
@@ -121,8 +112,9 @@ const action = BREVO_CONFIG.formUrl || undefined;
     const wrap = form.closest<HTMLElement>('.gv-optin-wrap');
     const success = wrap?.querySelector<HTMLElement>('.gv-optin-success');
     if (!input || !errEl || !btn || !success) return;
-    const isPrototype = wrap?.dataset.prototype === 'true';
-    let done = false;
+    const label = btn.dataset.label || btn.textContent || '';
+    const source = wrap?.dataset.source || 'newsletter';
+    let submitting = false;
 
     const clearError = () => {
       errEl.hidden = true;
@@ -131,32 +123,59 @@ const action = BREVO_CONFIG.formUrl || undefined;
     };
     input.addEventListener('input', clearError);
 
-    form.addEventListener('submit', (e) => {
-      if (done) return;
+    const showError = (msg: string) => {
+      errEl.textContent = msg;
+      errEl.hidden = false;
+      input.classList.add('gv-input--error');
+      btn.disabled = false;
+      input.disabled = false;
+      btn.textContent = label;
+      submitting = false;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitting) return;
+
       const email = (input.value || '').trim();
       if (!EMAIL_RE.test(email)) {
-        e.preventDefault();
-        errEl.textContent = 'Bitte gib eine gültige E-Mailadresse ein.';
-        errEl.hidden = false;
-        input.classList.add('gv-input--error');
+        showError('Bitte gib eine gültige E-Mailadresse ein.');
         return;
       }
 
-      // Prototyp-Modus (keine Formular-URL): nur Erfolg simulieren.
-      if (isPrototype || !BREVO_CONFIG.formUrl) {
-        e.preventDefault();
+      submitting = true;
+      clearError();
+      btn.disabled = true;
+      input.disabled = true;
+      btn.textContent = 'Wird gesendet…';
+
+      // Prototyp-Modus (keine Formular-URL): Erfolg simulieren.
+      if (!BREVO_CONFIG.formUrl) {
+        window.setTimeout(() => { form.hidden = true; success.hidden = false; }, 300);
+        return;
       }
 
-      // Gültig: das native POST läuft (ins versteckte Iframe) weiter.
-      done = true;
-      btn.textContent = 'Wird gesendet…';
-      btn.setAttribute('aria-disabled', 'true');
-      input.readOnly = true; // readOnly (nicht disabled!), damit EMAIL im POST bleibt
+      try {
+        const fd = new FormData();
+        fd.append('EMAIL', email);
+        fd.append('email_address_check', ''); // Honeypot (muss leer sein)
+        fd.append('locale', BREVO_CONFIG.locale);
+        if (BREVO_CONFIG.sourceField) fd.append(BREVO_CONFIG.sourceField, source);
 
-      window.setTimeout(() => {
+        const res = await fetch(BREVO_CONFIG.formUrl, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }, // wie Brevos main.js
+          body: fd,
+        });
+
+        if (!res.ok) throw new Error('Brevo HTTP ' + res.status);
+
         form.hidden = true;
         success.hidden = false;
-      }, 700);
+      } catch (err) {
+        console.error('Brevo-Anmeldung fehlgeschlagen:', err);
+        showError('Es hat leider nicht geklappt. Bitte versuche es später erneut.');
+      }
     });
   });
 </script>
