@@ -84,5 +84,19 @@ Schritte funktioniert die Anmeldung trotzdem — nur die Quelle wird ignoriert.
 Im Code mit `TODO(Per)` markiert:
 
 - Brevo: einmalig Attribut **`QUELLE`** anlegen + dem Formular hinzufügen (siehe oben)
-- Impressum: vollständige Anbieterangaben
-- Datenschutz: finaler, geprüfter Text (inkl. Brevo-Passus)
+- Impressum: vollständige Anbieterangaben ✅ (eingepflegt)
+- Datenschutz: finaler, geprüfter Text (inkl. Brevo-Passus) ✅ (eingepflegt)
+
+### Google Analytics (geplant)
+
+Soll noch eingebunden werden. **Was ich dafür brauche:**
+- Die **GA4-Mess-ID** (Format `G-XXXXXXXXXX`) aus dem Google-Analytics-Konto.
+
+**Wichtig – rechtliche Folgen (DSGVO):** Google Analytics setzt Cookies und
+überträgt Daten an Google. Das erfordert:
+1. Ein **Consent-Banner** (Cookie-Einwilligung) — GA darf erst nach aktiver
+   Zustimmung laden. (Bitte sagen, ob ich ein einfaches, eigenes Consent-Banner
+   bauen soll oder ein Tool wie Usercentrics/Cookiebot genutzt wird.)
+2. **Anpassung der Datenschutzerklärung**: Der aktuelle Satz „Diese Website
+   verwendet keine Analyse- oder Tracking-Tools" sowie der Font-Hinweis müssen
+   dann angepasst werden (GA-Abschnitt + Google-Verbindung ergänzen).

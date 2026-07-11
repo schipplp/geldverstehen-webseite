@@ -74,7 +74,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
             <h2 class="gv-h2">Hi, ich bin Per.</h2>
             <p style="font-size:18px; line-height:1.75; color:var(--gv-ink-soft); margin:20px 0 14px;">Struktur und Ordnung waren für mich schon immer wichtig — und Geld hat mich schon immer fasziniert. 2016 habe ich <strong>geldverstehen.de</strong> gestartet, um das weiterzugeben, was für mich intuitiv funktioniert: einen Umgang mit Geld, der auf Verstehen basiert statt auf Verzicht.</p>
             <p style="font-size:18px; line-height:1.75; color:var(--gv-ink-soft); margin:0;">Daraus sind über die Jahre ein Buch, ein Podcast und meine App OnePeek geworden. Der Kern ist immer derselbe geblieben: <strong>Wer chaotische Finanzen hat, dem fehlt keine Disziplin — dem fehlt ein System, das zu seinem Leben passt.</strong> Genau das findest du hier.</p>
-            <div style="margin-top:30px;"><a class="gv-btn-ghost-b" href={u('/ueber')}>Mehr erfahren</a></div>
+            <div style="margin-top:30px;"><a class="gv-btn-ghost-b" href={u('/ueber')}>Mehr über mich</a></div>
           </div>
         </div>
       </div>
@@ -154,8 +154,9 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
   @media (max-width: 860px) {
     .gv-grid-hero { grid-template-columns: 1fr !important; }
-    .gv-hero-portrait { order: -1; min-height: 300px !important; }
-    .gv-hero-img { height: 300px !important; }
+    /* Mobil: Slogan + Formular zuerst (above the fold), Porträt darunter */
+    .gv-hero-portrait { min-height: 320px !important; margin-top: 8px; }
+    .gv-hero-img { height: 320px !important; position: relative !important; }
     .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
     .gv-3tiles { grid-template-columns: 1fr !important; }
     .gv-ueber-img { height: 320px !important; }
