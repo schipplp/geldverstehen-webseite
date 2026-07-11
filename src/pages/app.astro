@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 ---
@@ -16,10 +17,7 @@ import { img } from '../lib/images';
           <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">DIE APP · ONEPEEK</div>
           <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,78px);">Deine Finanzen auf <span style="color:var(--gv-yellow);">einen Blick</span>.</h1>
           <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Einnahmen, Ausgaben und Ziele an einem Ort. OnePeek gibt dir den Überblick, der wirklich hängen bleibt — ohne Excel-Wüste.</p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="gv-store" href="https://apps.apple.com/de/app/budget-app-onepeek/id1571656912" target="_blank" rel="noopener">App Store</a>
-            <a class="gv-store" href="https://play.google.com/store/apps/details?id=app.onepeek&gl=DE" target="_blank" rel="noopener">Google Play</a>
-          </div>
+          <StoreButtons />
         </div>
         <img src={img.perAppHero} alt="Per Schippl nutzt die OnePeek App auf dem Smartphone" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);" />
       </div>
@@ -87,9 +85,8 @@ import { img } from '../lib/images';
     <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px; text-align:center;">
       <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Hol dir OnePeek</h2>
       <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:460px;">Lade die App und bring in wenigen Minuten Ordnung in deine Finanzen.</p>
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a class="gv-store" href="https://apps.apple.com/de/app/budget-app-onepeek/id1571656912" target="_blank" rel="noopener">App Store</a>
-        <a class="gv-store" href="https://play.google.com/store/apps/details?id=app.onepeek&gl=DE" target="_blank" rel="noopener">Google Play</a>
+      <div style="display:flex; justify-content:center;">
+        <StoreButtons />
       </div>
     </div>
   </section>
