@@ -1,0 +1,88 @@
+---
+// Cookie-Consent-Banner + Google-Analytics-Anbindung (opt-in / DSGVO).
+// Banner und GA erscheinen nur, wenn in src/lib/analytics.ts eine GA4-ID
+// gesetzt ist. GA wird ausschließlich NACH aktiver Einwilligung geladen.
+import { GA_MEASUREMENT_ID } from '../lib/analytics';
+import { u } from '../lib/url';
+const gaId = GA_MEASUREMENT_ID;
+---
+{gaId ? (
+  <div id="gv-consent" class="gv-consent" data-ga-id={gaId} role="dialog" aria-label="Cookie-Einwilligung" aria-live="polite" hidden>
+    <div class="gv-consent-inner">
+      <p class="gv-consent-text">
+        Wir verwenden Cookies für eine anonyme Reichweitenmessung (Google Analytics), um die Website zu verbessern — aber nur mit deiner Einwilligung. Mehr dazu in der <a href={u('/datenschutz')}>Datenschutzerklärung</a>.
+      </p>
+      <div class="gv-consent-actions">
+        <button type="button" class="gv-consent-btn gv-consent-decline" data-consent="denied">Ablehnen</button>
+        <button type="button" class="gv-consent-btn gv-consent-accept" data-consent="granted">Akzeptieren</button>
+      </div>
+    </div>
+  </div>
+) : null}
+
+<style>
+  .gv-consent {
+    position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 200;
+    background: #fff; color: var(--gv-ink);
+    border: 1px solid var(--gv-border); border-radius: 14px;
+    box-shadow: 0 18px 48px rgba(21,35,58,.22);
+    padding: 18px 20px; max-width: 720px; margin: 0 auto;
+    font-family: var(--font-body);
+  }
+  .gv-consent-inner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .gv-consent-text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--gv-ink-soft); flex: 1; min-width: 240px; }
+  .gv-consent-text a { color: var(--gv-blue); }
+  .gv-consent-actions { display: flex; gap: 10px; flex-shrink: 0; }
+  .gv-consent-btn { font-family: var(--font-body); font-weight: 700; font-size: 15px; border-radius: 8px; padding: 11px 20px; cursor: pointer; border: 1px solid transparent; transition: background .15s ease, border-color .15s ease; }
+  .gv-consent-decline { background: transparent; color: var(--gv-ink-soft); border-color: var(--gv-border); }
+  .gv-consent-decline:hover { background: var(--gv-surface); }
+  .gv-consent-accept { background: var(--gv-yellow); color: var(--gv-ink); box-shadow: var(--shadow-cta); }
+  .gv-consent-accept:hover { background: var(--gv-yellow-600); }
+  @media (max-width: 560px) {
+    .gv-consent-actions { width: 100%; }
+    .gv-consent-btn { flex: 1; }
+  }
+</style>
+
+<script>
+  const el = document.getElementById('gv-consent');
+  if (el) {
+    const gaId = el.dataset.gaId || '';
+    const KEY = 'gv-consent';
+
+    const loadGA = () => {
+      if (!gaId || (window as any).__gvGaLoaded) return;
+      (window as any).__gvGaLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+      document.head.appendChild(s);
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      function gtag(){ (window as any).dataLayer.push(arguments); }
+      (window as any).gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId, { anonymize_ip: true });
+    };
+
+    const hide = () => { el.hidden = true; };
+    const show = () => { el.hidden = false; };
+
+    const choice = localStorage.getItem(KEY);
+    if (choice === 'granted') loadGA();
+    else if (choice !== 'denied') show();
+
+    el.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.consent === 'granted' ? 'granted' : 'denied';
+        localStorage.setItem(KEY, v);
+        hide();
+        if (v === 'granted') loadGA();
+      });
+    });
+
+    // „Cookie-Einstellungen"-Link (Footer) öffnet das Banner erneut
+    document.querySelectorAll('[data-gv-consent-open]').forEach((elm) => {
+      elm.addEventListener('click', (e) => { e.preventDefault(); show(); });
+    });
+  }
+</script>
