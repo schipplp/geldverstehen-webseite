@@ -1,33 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
 const testimonials = [
   {
-    embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg',
+    id: '1ZS8FXuURDg',
     name: 'Salih',
     role: 'Coaching-Teilnehmer',
     headline: 'Ich bin überglücklich.',
     quote: 'Ich hab immer schon ganz gut Geld verdient, aber ich konnte nie mit Geld umgehen. Nach dem Coaching hat sich alles total verändert. Ich weiß ganz genau, wo mein Geld hingeht, und wie ich mit meinem Geld umgehen muss. Zum ersten Mal in meinem Leben machen mir Ausgaben wie eine Autoreparatur gar nichts aus — ich kann sie locker bezahlen, mit meinem eigenen Geld, ohne einen Kredit aufzunehmen.',
   },
   {
-    embed: 'https://www.youtube-nocookie.com/embed/3Z6KL3H_uNM',
+    id: '3Z6KL3H_uNM',
     name: 'Andrea',
     role: 'Coaching-Teilnehmerin',
     headline: 'Es macht mir richtig Spaß.',
     quote: 'Bei meinen eigenen Zahlen wurde mir immer Angst und Bange. Ich hatte überhaupt keinen Überblick und ständig das Gefühl, irgendwann bricht alles über mir zusammen. Per hat ein System geliefert, das hat meine Finanzen auf echt solide Füße gestellt.',
   },
   {
-    embed: 'https://www.youtube-nocookie.com/embed/wXwpsAVkH3M',
+    id: 'wXwpsAVkH3M',
     name: 'Lena',
     role: 'Coaching-Teilnehmerin',
     headline: 'Die beste Investition, die ich machen konnte.',
     quote: 'Es hat mir geholfen, eine ganz klare Struktur in meine Finanzen zu bringen. Es hat mir geholfen, eine Übersicht zu bekommen. Es hat mir geholfen, erfolgreich ein Haushaltsbuch zu führen, was ich davor einige Male probiert habe, aber immer wieder gescheitert bin. Das Ganze ist wirklich sehr einfach gehalten.',
   },
   {
-    embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ',
+    id: '_odyMvW5ghQ',
     name: 'Miracle',
     role: 'Coaching-Teilnehmerin',
     headline: 'Es hat mir sehr, sehr geholfen.',
@@ -84,7 +85,7 @@ const testimonials = [
           <p style="font-size:17px; line-height:1.7; color:#C7D6E6; max-width:440px; margin:20px 0 0;">Im Rahmen der stern TV Sondersendung „So teuer ist Deutschland" hat Per über das Thema Haushaltsbuch sowie die Entstehung und die Hintergründe seiner Haushaltsbuch-App OnePeek gesprochen.</p>
         </div>
         <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.4); background:#000;">
-          <iframe src="https://www.youtube-nocookie.com/embed/Awvgf0Dth5Q" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="stern TV Beitrag mit Per Schippl" loading="lazy"></iframe>
+          <YouTubeEmbed id="Awvgf0Dth5Q" title="stern TV Beitrag mit Per Schippl" />
         </div>
       </div>
     </div>
@@ -126,7 +127,7 @@ const testimonials = [
         {testimonials.map((t) => (
           <figure class="gv-tcard">
             <div class="gv-tvideo">
-              <iframe src={t.embed} allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={`Erfahrungsbericht von ${t.name}`} loading="lazy"></iframe>
+              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} />
             </div>
             <figcaption class="gv-tbody">
               <p class="gv-thead">„{t.headline}"</p>

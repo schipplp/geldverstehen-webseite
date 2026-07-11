@@ -19,7 +19,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
           <div style="padding-bottom:76px; padding-top:32px;">
             <h1 style="font-family:var(--font-display); font-weight:400; line-height:.98; letter-spacing:.01em; color:#fff; margin:0; padding-bottom:0.32em; font-size:clamp(52px,6vw,92px);">Deine Finanzen<br>im Griff. <span style="color:var(--gv-yellow);">Für immer!</span></h1>
-            <p style="font-size:19px; line-height:1.65; color:#EAF2FA; max-width:500px; margin:8px 0 0;">Ich bin Per, und ich zeige dir, wie du Struktur und Ordnung in deine Finanzen bringst — ohne Verzicht, ohne strenge Regeln. Denn es geht nicht darum, weniger zu leben. Es geht darum, dein Geld zu verstehen.</p>
+            <p style="font-size:19px; line-height:1.65; color:#EAF2FA; max-width:500px; margin:8px 0 0;">Hier lernst du, wie du Struktur und Ordnung in deine Finanzen bringst — ohne Verzicht, ohne strenge Regeln. Denn es geht nicht darum, weniger zu leben. Es geht darum, dein Geld zu verstehen.</p>
 
             <div style="max-width:460px; margin-top:30px;">
               <div style="font-family:var(--font-display); font-size:14px; letter-spacing:.14em; color:rgba(255,255,255,.6); margin-bottom:12px;">KOSTENLOSER CRASHKURS PER MAIL</div>
@@ -176,9 +176,8 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
   @media (max-width: 860px) {
     .gv-grid-hero { grid-template-columns: 1fr !important; }
-    /* Mobil: Slogan + Formular zuerst (above the fold), Porträt darunter */
-    .gv-hero-portrait { min-height: 320px !important; margin-top: 8px; }
-    .gv-hero-img { height: 320px !important; position: relative !important; }
+    /* Mobil: nur Slogan + Formular, Porträt ausblenden */
+    .gv-hero-portrait { display: none !important; }
     .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
     .gv-3tiles { grid-template-columns: 1fr !important; }
     .gv-ueber-img { height: 320px !important; }
