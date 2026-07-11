@@ -5,10 +5,34 @@ import { img } from '../lib/images';
 import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
 const testimonials = [
-  { embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg', title: 'Erfahrungsbericht 1' },
-  { embed: 'https://www.youtube-nocookie.com/embed/3Z6KL3H_uNM', title: 'Erfahrungsbericht 2' },
-  { embed: 'https://www.youtube-nocookie.com/embed/wXwpsAVkH3M', title: 'Erfahrungsbericht 3' },
-  { embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ', title: 'Erfahrungsbericht 4' },
+  {
+    embed: 'https://www.youtube-nocookie.com/embed/1ZS8FXuURDg',
+    name: 'Lena',
+    role: 'Coaching-Teilnehmerin',
+    headline: 'Die beste Investition, die ich machen konnte.',
+    quote: 'Es hat mir geholfen, eine ganz klare Struktur in meine Finanzen zu bringen. Es hat mir geholfen, eine Übersicht zu bekommen. Es hat mir geholfen, erfolgreich ein Haushaltsbuch zu führen, was ich davor einige Male probiert habe, aber immer wieder gescheitert bin. Das Ganze ist wirklich sehr einfach gehalten.',
+  },
+  {
+    embed: 'https://www.youtube-nocookie.com/embed/3Z6KL3H_uNM',
+    name: 'Andrea',
+    role: 'Coaching-Teilnehmerin',
+    headline: 'Es macht mir richtig Spaß.',
+    quote: 'Bei meinen eigenen Zahlen wurde mir immer Angst und Bange. Ich hatte überhaupt keinen Überblick und ständig das Gefühl, irgendwann bricht alles über mir zusammen. Per hat ein System geliefert, das hat meine Finanzen auf echt solide Füße gestellt.',
+  },
+  {
+    embed: 'https://www.youtube-nocookie.com/embed/wXwpsAVkH3M',
+    name: 'Miracle',
+    role: 'Coaching-Teilnehmerin',
+    headline: 'Es hat mir sehr, sehr geholfen.',
+    quote: 'Ich hatte anfangs große Schwierigkeiten mit Geld. Seit dem Kurs hat sich so vieles geändert, auch bei meinem Kontostand. Ich habe verstanden, dass das Geld auf dem Konto nicht das Problem ist, sondern mein Verhalten, mein Denken. Mittlerweile habe ich eine neue Routine, ich habe Geld auf dem Konto, ich kann Rücklagen bilden, ich kann sogar Vermögen aufbauen.',
+  },
+  {
+    embed: 'https://www.youtube-nocookie.com/embed/_odyMvW5ghQ',
+    name: 'Salih',
+    role: 'Coaching-Teilnehmer',
+    headline: 'Ich bin überglücklich.',
+    quote: 'Ich hab immer schon ganz gut Geld verdient, aber ich konnte nie mit Geld umgehen. Nach dem Coaching hat sich alles total verändert. Ich weiß ganz genau, wo mein Geld hingeht, und wie ich mit meinem Geld umgehen muss. Zum ersten Mal in meinem Leben machen mir Ausgaben wie eine Autoreparatur gar nichts aus — ich kann sie locker bezahlen, mit meinem eigenen Geld, ohne einen Kredit aufzunehmen.',
+  },
 ];
 ---
 <Base
@@ -98,13 +122,19 @@ const testimonials = [
       <div class="gv-bar"></div>
       <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">STIMMEN</p>
       <h2 class="gv-h2" style="max-width:780px;">Was Menschen über den Weg mit GELD VERSTEHEN sagen</h2>
-      <div class="gv-2" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:44px;">
+      <div class="gv-2 gv-tgrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:44px;">
         {testimonials.map((t) => (
-          <div style="border:1px solid var(--gv-border); border-radius:16px; overflow:hidden; background:var(--gv-surface);">
-            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
-              <iframe src={t.embed} style="position:absolute; inset:0; width:100%; height:100%; border:0;" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={t.title} loading="lazy"></iframe>
+          <figure class="gv-tcard">
+            <div class="gv-tvideo">
+              <iframe src={t.embed} allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={`Erfahrungsbericht von ${t.name}`} loading="lazy"></iframe>
             </div>
-          </div>
+            <figcaption class="gv-tbody">
+              <div class="gv-tstars">★★★★★</div>
+              <p class="gv-thead">„{t.headline}"</p>
+              <blockquote class="gv-tquote">„{t.quote}"</blockquote>
+              <div class="gv-tname">{t.name}<span class="gv-trole"> · {t.role}</span></div>
+            </figcaption>
+          </figure>
         ))}
       </div>
     </div>
@@ -146,6 +176,18 @@ const testimonials = [
   .gv-value-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }
   .gv-value-h { font-family: var(--font-display); font-weight: 400; font-size: 26px; color: var(--gv-ink); margin: 14px 0 8px; }
   .gv-value-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+
+  /* Testimonial-Karten (Video + Text) */
+  .gv-tgrid { align-items: start; }
+  .gv-tcard { display: flex; flex-direction: column; margin: 0; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 16px; overflow: hidden; }
+  .gv-tvideo { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+  .gv-tvideo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .gv-tbody { padding: 24px 26px 26px; display: flex; flex-direction: column; }
+  .gv-tstars { color: var(--gv-yellow); font-size: 15px; letter-spacing: 2px; margin-bottom: 10px; }
+  .gv-thead { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.1; color: var(--gv-ink); margin: 0 0 12px; }
+  .gv-tquote { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); }
+  .gv-tname { margin-top: 16px; font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--gv-ink); }
+  .gv-trole { font-weight: 400; color: var(--gv-muted); text-transform: uppercase; letter-spacing: .04em; font-size: 13px; }
 
   @media (max-width: 860px) {
     .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
