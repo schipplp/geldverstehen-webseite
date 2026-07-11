@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import BrevoForm from '../components/BrevoForm.astro';
+import BrevoEmbed from '../components/BrevoEmbed.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 ---
@@ -18,7 +18,7 @@ import { img } from '../lib/images';
           <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,76px);">Vom Geld-Chaos zur <span style="color:var(--gv-yellow);">Klarheit</span> — in wenigen Tagen.</h1>
           <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 26px;">Die wichtigsten Schritte zu mehr Überblick — gratis per E-Mail, Tag für Tag verständlich erklärt. Ein paar Minuten täglich genügen.</p>
           <div style="max-width:440px;">
-            <BrevoForm cta="Jetzt kostenlos starten" theme="on-blue" anchorId="crashkurs-form" />
+            <BrevoEmbed anchorId="crashkurs-form" />
           </div>
         </div>
         <img src={img.perCrashkurs} alt="Per Schippl im Porträt" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);" />
