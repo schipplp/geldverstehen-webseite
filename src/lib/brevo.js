@@ -1,9 +1,10 @@
 // ============================================================================
 // brevo.js — Konfiguration der Brevo-Anbindung (ehem. Sendinblue)
 // ----------------------------------------------------------------------------
-// Alle E-Mail-Opt-in-Formulare nutzen Brevos offizielles Formular-Snippet mit
-// deren main.js (siehe components/BrevoForm.astro). formUrl ist die von Brevo
-// generierte serve-URL. Kein eigener Server, kein API-Key im Frontend nötig.
+// Alle E-Mail-Opt-in-Formulare betten Brevos gehostete Formularseite als
+// iframe ein (siehe components/BrevoEmbed.astro). formUrl ist die von Brevo
+// generierte serve-URL, die bei GET das Formular rendert. Kein eigener Server,
+// kein API-Key im Frontend nötig.
 //
 // Damit du erkennst, über welches Opt-in jemand kam, wird die Quelle als
 // Kontakt-Attribut „QUELLE" (crashkurs / buch) mitgeschickt.
