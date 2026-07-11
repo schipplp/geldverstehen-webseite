@@ -1,0 +1,183 @@
+---
+// Wiederverwendbares E-Mail-Opt-in (Crashkurs / Buch / Newsletter) im
+// Marken-Design. Sendet per fetch (mode:'no-cors', multipart-FormData) an die
+// Brevo-Formular-URL; die Antwort ist „opaque", daher wird der Erfolg
+// optimistisch angezeigt. Quelle optional als Attribut QUELLE (via
+// BREVO_CONFIG.sourceField). Bei leerer formUrl: Prototyp-Modus.
+import { BREVO_CONFIG } from '../lib/brevo.js';
+
+export interface Props {
+  source: 'crashkurs' | 'buch' | 'newsletter';
+  cta: string;
+  /** 'card' = weiße „Fast geschafft!"-Karte · 'inline' = Häkchen + Text */
+  successStyle?: 'card' | 'inline';
+  successTitle?: string;
+  successText?: string;
+  /** Farbkontext: 'on-blue' (helle Hinweiszeile) | 'on-surface' (dunkle) */
+  theme?: 'on-blue' | 'on-surface';
+}
+const {
+  source,
+  cta,
+  successStyle = 'card',
+  successTitle = 'Fast geschafft!',
+  successText = 'Bitte bestätige deine Anmeldung in der E-Mail, die wir dir gerade geschickt haben.',
+  theme = 'on-blue',
+} = Astro.props;
+const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.';
+---
+<div class="gv-optin-wrap" data-theme={theme} data-source={source}>
+  <form class="gv-optin" novalidate>
+    <div class="gv-field">
+      <input class="gv-input" type="email" name="EMAIL" placeholder="Deine E-Mailadresse *" autocomplete="email" required aria-label="Deine E-Mailadresse" />
+      <p class="gv-input-error" role="alert" hidden></p>
+    </div>
+    <button class="gv-btn gv-btn-block gv-optin-btn" type="submit" data-label={cta}>{cta}</button>
+    <p class="gv-optin-hint">{hint}</p>
+  </form>
+
+  {successStyle === 'card' ? (
+    <div class="gv-optin-success gv-optin-card" hidden>
+      <div class="gv-optin-check">✓</div>
+      <div>
+        <div class="gv-optin-card-title">{successTitle}</div>
+        <div class="gv-optin-card-text">{successText}</div>
+      </div>
+    </div>
+  ) : (
+    <div class="gv-optin-success gv-optin-inline" hidden>
+      <div class="gv-optin-check gv-optin-check--sm">✓</div>
+      <div class="gv-optin-inline-text">{successText}</div>
+    </div>
+  )}
+</div>
+
+<style>
+  .gv-optin { display: flex; flex-direction: column; gap: 12px; }
+  .gv-field { display: flex; flex-direction: column; gap: 6px; }
+
+  .gv-input {
+    width: 100%; height: 52px; padding: 0 16px;
+    font-family: var(--font-body); font-size: 16px; color: var(--gv-ink);
+    background: #fff; border: 1px solid var(--gv-border); border-radius: 8px;
+    outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .gv-input::placeholder { color: var(--gv-muted); }
+  .gv-input:focus { border-color: var(--gv-blue); box-shadow: 0 0 0 3px rgba(30,115,190,.18); }
+  .gv-input--error { border-color: var(--gv-error); box-shadow: 0 0 0 3px rgba(214,69,69,.15); }
+  .gv-input:disabled { opacity: .7; }
+
+  .gv-input-error {
+    margin: 0; font-size: 13px; line-height: 1.4;
+    color: var(--gv-error);
+    background: rgba(255,255,255,.92); border-radius: 6px; padding: 6px 10px;
+  }
+
+  /* Block-Variante des gelben CTA */
+  .gv-btn-block { width: 100%; justify-content: center; height: 56px; font-size: 17px; }
+  .gv-btn:disabled { opacity: .8; cursor: default; }
+
+  .gv-optin-hint { font-size: 13px; line-height: 1.5; margin: 2px 0 0; }
+  .gv-optin-wrap[data-theme="on-blue"] .gv-optin-hint { color: rgba(255,255,255,.65); }
+  .gv-optin-wrap[data-theme="on-surface"] .gv-optin-hint { color: var(--gv-muted); }
+
+  /* Erfolgs-Karte (weiß) */
+  .gv-optin-card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    display: flex; gap: 14px; align-items: flex-start; text-align: left;
+  }
+  .gv-optin-check {
+    flex: none; width: 40px; height: 40px; border-radius: 999px;
+    background: var(--gv-success-bg); color: var(--gv-success);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; line-height: 1;
+  }
+  .gv-optin-check--sm { width: 38px; height: 38px; font-size: 20px; }
+  .gv-optin-card-title { font-family: var(--font-display); font-size: 22px; color: var(--gv-ink); margin-bottom: 4px; }
+  .gv-optin-card-text { font-size: 15px; line-height: 1.5; color: var(--gv-ink-soft); }
+
+  /* Erfolg inline (Häkchen + Text) */
+  .gv-optin-inline { display: flex; gap: 12px; align-items: flex-start; margin-top: 8px; }
+  .gv-optin-inline-text { font-size: 15px; line-height: 1.5; color: var(--gv-ink-soft); }
+</style>
+
+<script>
+  import { BREVO_CONFIG, EMAIL_RE } from '../lib/brevo.js';
+
+  document.querySelectorAll<HTMLFormElement>('.gv-optin').forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('.gv-input');
+    const errEl = form.querySelector<HTMLElement>('.gv-input-error');
+    const btn = form.querySelector<HTMLButtonElement>('.gv-optin-btn');
+    const wrap = form.closest<HTMLElement>('.gv-optin-wrap');
+    const success = wrap?.querySelector<HTMLElement>('.gv-optin-success');
+    if (!input || !errEl || !btn || !success) return;
+    const label = btn.dataset.label || btn.textContent || '';
+    const source = wrap?.dataset.source || 'newsletter';
+    let submitting = false;
+
+    const clearError = () => {
+      errEl.hidden = true;
+      errEl.textContent = '';
+      input.classList.remove('gv-input--error');
+    };
+    input.addEventListener('input', clearError);
+
+    const showError = (msg: string) => {
+      errEl.textContent = msg;
+      errEl.hidden = false;
+      input.classList.add('gv-input--error');
+      btn.disabled = false;
+      input.disabled = false;
+      btn.textContent = label;
+      submitting = false;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitting) return;
+
+      const email = (input.value || '').trim();
+      if (!EMAIL_RE.test(email)) {
+        showError('Bitte gib eine gültige E-Mailadresse ein.');
+        return;
+      }
+
+      submitting = true;
+      clearError();
+      btn.disabled = true;
+      input.disabled = true;
+      btn.textContent = 'Wird gesendet…';
+
+      // Prototyp-Modus (keine Formular-URL): Erfolg simulieren.
+      if (!BREVO_CONFIG.formUrl) {
+        window.setTimeout(() => { form.hidden = true; success.hidden = false; }, 300);
+        return;
+      }
+
+      try {
+        // Multipart-FormData wie Brevos eigenes Formular. mode:'no-cors', damit
+        // der Cross-Origin-POST nicht an CORS scheitert — die Anfrage erreicht
+        // Brevo, die Antwort ist „opaque" (nicht auslesbar). Die eigentliche
+        // Bestätigung übernimmt Brevos Double-Opt-in-Mail.
+        const fd = new FormData();
+        fd.append('EMAIL', email);
+        fd.append('email_address_check', ''); // Honeypot (muss leer sein)
+        fd.append('locale', BREVO_CONFIG.locale);
+        if (BREVO_CONFIG.sourceField) fd.append(BREVO_CONFIG.sourceField, source);
+
+        await fetch(BREVO_CONFIG.formUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: fd,
+        });
+
+        form.hidden = true;
+        success.hidden = false;
+      } catch (err) {
+        // no-cors wirft nur bei echtem Netzwerkfehler.
+        console.error('Brevo-Anmeldung fehlgeschlagen:', err);
+        showError('Es hat leider nicht geklappt. Bitte versuche es später erneut.');
+      }
+    });
+  });
+</script>
