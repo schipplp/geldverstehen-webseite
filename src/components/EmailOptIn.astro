@@ -156,23 +156,26 @@ const hint = '100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein S
       }
 
       try {
+        // Multipart-FormData wie Brevos eigenes Formular. mode:'no-cors', damit
+        // der Cross-Origin-POST nicht an CORS scheitert — die Anfrage erreicht
+        // Brevo, die Antwort ist „opaque" (nicht auslesbar). Die eigentliche
+        // Bestätigung übernimmt Brevos Double-Opt-in-Mail.
         const fd = new FormData();
         fd.append('EMAIL', email);
         fd.append('email_address_check', ''); // Honeypot (muss leer sein)
         fd.append('locale', BREVO_CONFIG.locale);
         if (BREVO_CONFIG.sourceField) fd.append(BREVO_CONFIG.sourceField, source);
 
-        const res = await fetch(BREVO_CONFIG.formUrl, {
+        await fetch(BREVO_CONFIG.formUrl, {
           method: 'POST',
-          headers: { 'X-Requested-With': 'XMLHttpRequest' }, // wie Brevos main.js
+          mode: 'no-cors',
           body: fd,
         });
-
-        if (!res.ok) throw new Error('Brevo HTTP ' + res.status);
 
         form.hidden = true;
         success.hidden = false;
       } catch (err) {
+        // no-cors wirft nur bei echtem Netzwerkfehler.
         console.error('Brevo-Anmeldung fehlgeschlagen:', err);
         showError('Es hat leider nicht geklappt. Bitte versuche es später erneut.');
       }
