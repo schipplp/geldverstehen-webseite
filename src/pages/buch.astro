@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import EmailOptIn from '../components/EmailOptIn.astro';
+import BrevoForm from '../components/BrevoForm.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 ---
@@ -35,12 +35,10 @@ import { img } from '../lib/images';
 
           <div style="margin-top:36px; padding:28px; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:14px; max-width:480px;">
             <div style="font-family:var(--font-display); font-size:22px; color:var(--gv-ink); margin-bottom:8px;">Erfahre als Erste:r vom Erscheinen</div>
-            <EmailOptIn
-              source="buch"
+            <BrevoForm
               cta="Benachrichtige mich"
               theme="on-surface"
-              successStyle="inline"
-              successText="Notiert! Du hörst von uns, sobald das Buch erscheint."
+              successText="Bitte bestätige deine Anmeldung in der E-Mail — dann hörst du von uns, sobald das Buch erscheint."
             />
           </div>
         </div>

@@ -1,0 +1,156 @@
+---
+// Offizielles Brevo-Formular (deren serve-Endpunkt + main.js), gestylt auf das
+// GELD-VERSTEHEN-Design. main.js übernimmt Validierung, Absenden und die
+// Erfolg/Fehler-Anzeige — das ist der zuverlässige, von Brevo unterstützte Weg.
+//
+// ⚠ Brevos main.js nutzt feste IDs (#sib-form, #EMAIL, …) → nur EIN Formular
+//   pro Seite verwenden.
+//
+// Später (sobald in Brevo ein TEXT-Attribut „QUELLE" existiert und dem Formular
+// als Feld hinzugefügt wurde): unten ein <input type="hidden" name="QUELLE"
+// value="…"> ergänzen, um die Opt-in-Quelle mitzuschicken.
+import { BREVO_CONFIG } from '../lib/brevo.js';
+
+export interface Props {
+  cta: string;
+  successTitle?: string;
+  successText?: string;
+  theme?: 'on-blue' | 'on-surface';
+  anchorId?: string;
+}
+const {
+  cta,
+  successTitle = 'Fast geschafft!',
+  successText = 'Bitte bestätige deine Anmeldung in der E-Mail, die wir dir gerade geschickt haben.',
+  theme = 'on-blue',
+  anchorId,
+} = Astro.props;
+---
+<div class="gv-brevo" data-theme={theme} id={anchorId}>
+  <div class="sib-form">
+    <div id="sib-form-container" class="sib-form-container">
+
+      <div id="error-message" class="sib-form-message-panel gv-brevo-error">
+        <span class="sib-form-message-panel__inner-text">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuche es erneut.</span>
+      </div>
+
+      <div id="success-message" class="sib-form-message-panel gv-brevo-success">
+        <div class="gv-brevo-check">✓</div>
+        <div>
+          <div class="gv-brevo-succ-title">{successTitle}</div>
+          <div class="gv-brevo-succ-text">{successText}</div>
+        </div>
+      </div>
+
+      <div id="sib-container" class="sib-container--large sib-container--vertical">
+        <form id="sib-form" method="POST" action={BREVO_CONFIG.formUrl} data-type="subscription">
+          <div class="sib-input sib-form-block">
+            <div class="form__entry entry_block">
+              <div class="form__label-row">
+                <div class="entry__field">
+                  <input class="input gv-input" type="text" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" placeholder="Deine E-Mailadresse *" data-required="true" required />
+                </div>
+              </div>
+              <label class="entry__error entry__error--primary gv-entry-error"></label>
+            </div>
+          </div>
+
+          <div class="sib-form-block">
+            <button class="sib-form-block__button sib-form-block__button-with-loader gv-btn gv-btn-block" form="sib-form" type="submit">
+              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" aria-hidden="true"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" /></svg>
+              <span class="gv-btn-label">{cta}</span>
+            </button>
+          </div>
+
+          <input type="text" name="email_address_check" value="" class="input--hidden" />
+          <input type="hidden" name="locale" value="de" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <p class="gv-brevo-hint">100% kostenlos. Deine Daten sind sicher und bleiben anonym. Kein Spam und mit einem Klick einfach zu beenden.</p>
+</div>
+
+<style>
+  .gv-brevo { width: 100%; }
+  .gv-brevo .sib-form,
+  .gv-brevo .sib-form-container,
+  .gv-brevo #sib-container { background: transparent; border: 0; padding: 0; margin: 0; max-width: none; }
+  .gv-brevo form { display: flex; flex-direction: column; gap: 12px; margin: 0; }
+  .gv-brevo .sib-form-block { padding: 0; margin: 0; }
+  .gv-brevo .form__entry,
+  .gv-brevo .form__label-row,
+  .gv-brevo .entry__field { margin: 0; }
+  .gv-brevo .input--hidden { display: none !important; }
+
+  .gv-brevo .gv-input {
+    width: 100%; height: 52px; padding: 0 16px;
+    font-family: var(--font-body); font-size: 16px; color: var(--gv-ink);
+    background: #fff; border: 1px solid var(--gv-border); border-radius: 8px;
+    outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .gv-brevo .gv-input::placeholder { color: var(--gv-muted); }
+  .gv-brevo .gv-input:focus { border-color: var(--gv-blue); box-shadow: 0 0 0 3px rgba(30,115,190,.18); }
+  .gv-brevo .entry_block.has-error .gv-input { border-color: var(--gv-error); box-shadow: 0 0 0 3px rgba(214,69,69,.15); }
+
+  /* Fehlermeldung am Feld (von main.js befüllt) */
+  .gv-brevo .gv-entry-error {
+    display: none; margin: 6px 0 0; font-size: 13px; line-height: 1.4;
+    color: var(--gv-error); background: rgba(255,255,255,.92);
+    border-radius: 6px; padding: 6px 10px;
+  }
+  .gv-brevo .gv-entry-error:not(:empty) { display: block; }
+
+  /* Button: gelber CTA (block) inkl. Lade-Spinner */
+  .gv-brevo .gv-btn-block { width: 100%; justify-content: center; height: 56px; font-size: 17px; border: 0; cursor: pointer; }
+  .gv-brevo .sib-form-block__button .icon { width: 18px; height: 18px; fill: var(--gv-ink); margin-right: 8px; animation: gv-spin 1s linear infinite; }
+  .gv-brevo .sib-hide-loader-icon { display: none; }
+  @keyframes gv-spin { to { transform: rotate(360deg); } }
+
+  .gv-brevo-hint { font-size: 13px; line-height: 1.5; margin: 12px 0 0; }
+  .gv-brevo[data-theme="on-blue"] .gv-brevo-hint { color: rgba(255,255,255,.65); }
+  .gv-brevo[data-theme="on-surface"] .gv-brevo-hint { color: var(--gv-muted); }
+
+  /* Meldungs-Panels — standardmäßig aus (Brevos main.js blendet sie ein) */
+  .gv-brevo .sib-form-message-panel { display: none; }
+
+  .gv-brevo-success {
+    background: #fff; border-radius: 14px; padding: 20px;
+    gap: 14px; align-items: flex-start; text-align: left;
+  }
+  .gv-brevo .sib-form-message-panel.gv-brevo-success[style*="display"] { display: flex !important; }
+  .gv-brevo-check {
+    flex: none; width: 40px; height: 40px; border-radius: 999px;
+    background: var(--gv-success-bg); color: var(--gv-success);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; line-height: 1;
+  }
+  .gv-brevo-succ-title { font-family: var(--font-display); font-size: 22px; color: var(--gv-ink); margin-bottom: 4px; }
+  .gv-brevo-succ-text { font-size: 15px; line-height: 1.5; color: var(--gv-ink-soft); }
+
+  .gv-brevo-error {
+    background: var(--gv-error-bg); color: #661d1d; border: 1px solid var(--gv-error);
+    border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.5;
+  }
+</style>
+
+<!-- Brevo-Konfiguration (muss vor main.js laufen) -->
+<script is:inline>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
+  window.LOCALE = 'de';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE =
+    'Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.';
+  window.REQUIRED_ERROR_MESSAGE = 'Dieses Feld darf nicht leer sein. ';
+  window.GENERIC_INVALID_MESSAGE =
+    'Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.';
+  window.translation = {
+    common: {
+      selectedList: '{quantity} Liste ausgewählt',
+      selectedLists: '{quantity} Listen ausgewählt',
+      selectedOption: '{quantity} ausgewählt',
+      selectedOptions: '{quantity} ausgewählt',
+    },
+  };
+  window.AUTOHIDE = Boolean(0);
+</script>
+<script is:inline defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
