@@ -2,9 +2,10 @@
 // brevo.js — Konfiguration der Brevo-Anbindung (ehem. Sendinblue)
 // ----------------------------------------------------------------------------
 // Alle E-Mail-Opt-in-Formulare posten direkt an DAS Brevo-Formular (eine Liste).
-// Das Absenden läuft über ein klassisches HTML-Formular-POST in ein verstecktes
-// Iframe (siehe components/EmailOptIn.astro) — das ist der zuverlässigste Weg
-// ohne eigenen Server und ohne CORS-Probleme.
+// Das Absenden läuft per fetch mit dem Header X-Requested-With: XMLHttpRequest
+// (siehe components/EmailOptIn.astro) — genau wie Brevos eigenes main.js. Nur so
+// verarbeitet der serve-Endpunkt die Anmeldung; ein normales Formular-POST oder
+// ein no-cors-fetch wird von Brevo ignoriert. Kein eigener Server nötig.
 //
 // Damit du erkennst, über welches Opt-in jemand kam, wird die Quelle als
 // Kontakt-Attribut „QUELLE" (crashkurs / buch) mitgeschickt.
