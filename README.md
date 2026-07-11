@@ -67,23 +67,22 @@ Alle Opt-in-Formulare laufen über `src/lib/brevo.js` → `subscribeToBrevo()`.
 Aktuell **Prototyp-Modus**: Eingaben werden validiert und die Erfolgsmeldung
 erscheint, es wird aber noch nichts verschickt.
 
-**Scharfschalten** (sobald Per die Daten liefert), Details in
-`design/BREVO-SETUP.md`:
-- Ohne eigenen Server: pro Quelle ein Brevo-Formular anlegen und dessen POST-URL
-  in `BREVO_CONFIG.formActions` eintragen (Double-Opt-in in Brevo aktivieren).
-- Mit eigenem Backend: `BREVO_CONFIG.endpoint` auf eine serverseitige Route setzen,
-  die den API-Key **geheim** hält.
+**Status: scharfgeschaltet.** In `src/lib/brevo.js` ist die Brevo-Formular-URL
+eingetragen; jedes Opt-in postet direkt an dieses eine Formular. Kein API-Key
+im Frontend nötig. Double-Opt-in wird in Brevo eingestellt.
 
-Der Brevo-API-Key gehört **nie** ins Frontend.
+**Quelle je Anmeldung („Tag"):** Die Opt-in-Quelle (`crashkurs` / `buch`) wird
+im Kontakt-Attribut **`QUELLE`** mitgeschickt. Damit Brevo das speichert, einmalig:
+1. In Brevo ein **Text-Attribut `QUELLE`** anlegen (Kontakte → Einstellungen → Kontakt-Attribute).
+2. Dieses Attribut dem Formular als (verstecktes) Feld hinzufügen.
+
+Danach lässt sich in Brevo nach `QUELLE` filtern/segmentieren. Ohne diese zwei
+Schritte funktioniert die Anmeldung trotzdem — nur die Quelle wird ignoriert.
 
 ## Offene Punkte (bei Per erfragen)
 
 Im Code mit `TODO(Per)` markiert:
 
-- Podcast-Plattform-Links (Spotify, Apple Podcasts) — aktuell auf die
-  letscast-Übersicht verlinkt
-- App-Store-Links für OnePeek (iOS/Android)
-- Brevo-Formular-URLs + Listen-IDs (crashkurs / buch / newsletter)
+- Brevo: einmalig Attribut **`QUELLE`** anlegen + dem Formular hinzufügen (siehe oben)
 - Impressum: vollständige Anbieterangaben
 - Datenschutz: finaler, geprüfter Text (inkl. Brevo-Passus)
-- Crashkurs-Seite: echte Testimonials (aktuell Platzhalter)

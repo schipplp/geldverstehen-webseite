@@ -4,10 +4,10 @@ import { u } from '../lib/url';
 interface Props { active?: string }
 const { active = '' } = Astro.props;
 const links = [
+  { key: 'ueber', label: 'ÜBER', href: u('/ueber') },
   { key: 'podcast', label: 'PODCAST', href: u('/podcast') },
   { key: 'app', label: 'APP', href: u('/app') },
   { key: 'buch', label: 'BUCH', href: u('/buch') },
-  { key: 'ueber', label: 'ÜBER', href: u('/ueber') },
 ];
 ---
 <div class="gv-nv-bar">
@@ -24,7 +24,7 @@ const links = [
 
 <style>
   .gv-nv-bar { background: var(--gv-blue); }
-  .gv-nv { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 15px; padding-bottom: 15px; }
+  .gv-nv { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 26px; padding-bottom: 20px; }
   .gv-nv-wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
   .gv-nv-word { text-decoration: none; font-family: var(--font-display); font-size: 24px; line-height: 1; letter-spacing: .5px; }
   .gv-nv-w1 { color: #fff; }
