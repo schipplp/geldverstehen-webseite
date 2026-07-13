@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import EmailOptIn from '../components/EmailOptIn.astro';
 import { u } from '../lib/url';
+import { img } from '../lib/images';
 ---
 <Base
   title="Haushaltsbuch führen: Anleitung, die wirklich funktioniert"
@@ -113,20 +115,44 @@ import { u } from '../lib/url';
         <p>Ich selbst durfte an der Entwicklung der App <a href={u('/app')}>OnePeek</a> mitwirken, in die genau die Prinzipien aus diesem Artikel eingeflossen sind – von den drei Geldfluss-Kategorien bis zur Monatsbilanz. Aber unabhängig vom Werkzeug gilt: Je einfacher dein System, desto höher deine Erfolgsrate.</p>
 
         <h2>Häufige Fragen zum Haushaltsbuch führen</h2>
-        <p><strong>Wie lange sollte man ein Haushaltsbuch führen?</strong><br />Mindestens einen vollen Monat, bevor du erste Schlüsse ziehst – besser mehrere. Ein Haushaltsbuch ist keine einmalige Aktion, sondern ein Prozess. Die gute Nachricht: Mit der Zeit wird es immer weniger Aufwand, weil sich deine Gewohnheiten verändern und deine Zahlen sich einpendeln.</p>
-        <p><strong>Muss ich jede Ausgabe centgenau erfassen?</strong><br />Nein – im Gegenteil. Tendenzen sind wichtiger als Centgenauigkeit. Grobe Kategorien und gerundete Beträge reichen völlig und sorgen dafür, dass du dranbleibst.</p>
-        <p><strong>Lohnt sich ein Haushaltsbuch auch bei gutem Einkommen?</strong><br />Gerade dann. Die häufigste Situation in meinen Coachings ist nicht zu wenig Einkommen – sondern gutes Einkommen, bei dem trotzdem nichts übrig bleibt. Ohne hinzuschauen bleibt unsichtbar, wohin das Geld verschwindet.</p>
-        <p><strong>Was ist der Unterschied zwischen Haushaltsbuch und Monatsbilanz?</strong><br />Das Haushaltsbuch erfasst deine Geldflüsse. Die Monatsbilanz bringt sie auf einen gemeinsamen Nenner – den Monat – und zeigt dir dein echtes Monatsergebnis inklusive aller unregelmäßigen Ausgaben. Erst die Monatsbilanz macht aus gesammelten Daten echte Klarheit.</p>
+        <div class="gv-faq">
+          <details class="gv-faq-item">
+            <summary>Wie lange sollte man ein Haushaltsbuch führen?</summary>
+            <div class="gv-faq-body"><p>Mindestens einen vollen Monat, bevor du erste Schlüsse ziehst – besser mehrere. Ein Haushaltsbuch ist keine einmalige Aktion, sondern ein Prozess. Die gute Nachricht: Mit der Zeit wird es immer weniger Aufwand, weil sich deine Gewohnheiten verändern und deine Zahlen sich einpendeln.</p></div>
+          </details>
+          <details class="gv-faq-item">
+            <summary>Muss ich jede Ausgabe centgenau erfassen?</summary>
+            <div class="gv-faq-body"><p>Nein – im Gegenteil. Tendenzen sind wichtiger als Centgenauigkeit. Grobe Kategorien und gerundete Beträge reichen völlig und sorgen dafür, dass du dranbleibst.</p></div>
+          </details>
+          <details class="gv-faq-item">
+            <summary>Lohnt sich ein Haushaltsbuch auch bei gutem Einkommen?</summary>
+            <div class="gv-faq-body"><p>Gerade dann. Die häufigste Situation in meinen Coachings ist nicht zu wenig Einkommen – sondern gutes Einkommen, bei dem trotzdem nichts übrig bleibt. Ohne hinzuschauen bleibt unsichtbar, wohin das Geld verschwindet.</p></div>
+          </details>
+          <details class="gv-faq-item">
+            <summary>Was ist der Unterschied zwischen Haushaltsbuch und Monatsbilanz?</summary>
+            <div class="gv-faq-body"><p>Das Haushaltsbuch erfasst deine Geldflüsse. Die Monatsbilanz bringt sie auf einen gemeinsamen Nenner – den Monat – und zeigt dir dein echtes Monatsergebnis inklusive aller unregelmäßigen Ausgaben. Erst die Monatsbilanz macht aus gesammelten Daten echte Klarheit.</p></div>
+          </details>
+        </div>
 
-        <!-- CTA -->
+        <!-- CTA mit integriertem Opt-in -->
         <div class="gv-article-cta">
           <h2 style="margin-top:0;">Der nächste Schritt: Bring Struktur in deine Finanzen</h2>
           <p>Ein Haushaltsbuch ist der Anfang – der Schritt, mit dem du Klarheit gewinnst. Der zweite Schritt ist eine Struktur, mit der dein Geld automatisch dorthin fließt, wo du es haben willst, sodass du den Überblick nie wieder verlierst.</p>
           <p>Genau dafür habe ich einen <strong>kostenlosen Crashkurs</strong> erstellt: Schritt für Schritt, direkt in dein Postfach, ohne Fachchinesisch – und ohne Verzichtspredigten.</p>
-          <a class="gv-btn" href={u('/crashkurs')}>Zum kostenlosen Crashkurs</a>
+          <div class="gv-article-optin">
+            <EmailOptIn
+              source="crashkurs"
+              cta="Jetzt kostenlos eintragen"
+              theme="on-surface"
+              successText="Bitte bestätige deine Anmeldung in der E-Mail, die wir dir gerade geschickt haben."
+            />
+          </div>
         </div>
 
-        <p class="gv-article-author">Per Schippl ist Finanzcoach, Podcaster und Gründer von GELD VERSTEHEN. Er hat in unzähligen 1:1- und Gruppen-Coachings Menschen dabei begleitet, Struktur und Ordnung in ihre Finanzen zu bringen. Seine Philosophie: Verstehen statt Verzichten.</p>
+        <div class="gv-article-author">
+          <img class="gv-article-author-img" src={img.perHero} alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN" width="72" height="72" loading="lazy" />
+          <p>Per Schippl ist Finanzcoach, Podcaster und Gründer von GELD VERSTEHEN. Er hat in unzähligen 1:1- und Gruppen-Coachings Menschen dabei begleitet, Struktur und Ordnung in ihre Finanzen zu bringen. Seine Philosophie: Verstehen statt Verzichten.</p>
+        </div>
       </article>
     </div>
   </section>
@@ -152,14 +178,48 @@ import { u } from '../lib/url';
   }
   .gv-formula-result { color: var(--gv-blue); }
 
+  /* FAQ-Akkordeon */
+  .gv-faq { display: grid; gap: 12px; margin: 8px 0 24px; }
+  .gv-faq-item {
+    border: 1px solid var(--gv-border); border-radius: 12px; background: #fff;
+    overflow: hidden; transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .gv-faq-item[open] { border-color: var(--gv-blue); box-shadow: 0 6px 20px rgba(30,115,190,.08); }
+  .gv-faq-item summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px;
+    padding: 18px 22px; font-family: var(--font-body); font-weight: 700;
+    font-size: 18px; line-height: 1.35; color: var(--gv-ink);
+  }
+  .gv-faq-item summary::-webkit-details-marker { display: none; }
+  .gv-faq-item summary::after {
+    content: ""; flex: none; margin-left: auto; width: 12px; height: 12px;
+    border-right: 2px solid var(--gv-blue); border-bottom: 2px solid var(--gv-blue);
+    transform: rotate(45deg); transition: transform .2s ease;
+  }
+  .gv-faq-item[open] summary::after { transform: rotate(-135deg); }
+  .gv-faq-item summary:hover { color: var(--gv-blue); }
+  .gv-faq-body { padding: 0 22px 20px; }
+  .gv-faq-body p { margin: 0; }
+
   /* CTA-Box */
   .gv-article-cta { margin: 56px 0 32px; padding: 32px 34px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 16px; }
   .gv-article-cta h2 { margin: 0 0 12px; font-size: clamp(26px, 3vw, 34px); }
-  .gv-article-cta .gv-btn { margin-top: 10px; }
+  .gv-article-optin { margin-top: 20px; max-width: 440px; }
 
-  .gv-article-author { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--gv-border); font-size: 15px; line-height: 1.7; color: var(--gv-muted); font-style: italic; }
+  /* Autoren-Box mit kleinem Portrait */
+  .gv-article-author {
+    margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--gv-border);
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .gv-article-author-img {
+    flex: none; width: 72px; height: 72px; border-radius: 999px;
+    object-fit: cover; object-position: center top;
+  }
+  .gv-article-author p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--gv-muted); font-style: italic; }
 
   @media (max-width: 860px) {
     .gv-article p, .gv-article ul, .gv-article ol { font-size: 17px; }
+    .gv-faq-item summary { font-size: 17px; padding: 16px 18px; }
+    .gv-faq-body { padding: 0 18px 18px; }
   }
 </style>
