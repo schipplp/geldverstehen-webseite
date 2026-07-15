@@ -23,13 +23,7 @@ _Stand: 2026-07-15_
      die Website (URL + Feldnamen in `src/lib/brevo.js`).
   → Ohne funktionierende Zustellung läuft die zentrale Anmelde-Funktion ins Leere.
 
-- [ ] **Datenschutzerklärung final prüfen (lassen)** (Per)
-  Text ist eingebaut inkl. Google Analytics, YouTube (2-Klick) und Brevo.
-  Vor Live idealerweise anwaltlich / final freigeben.
-
-- [ ] **Impressum bestätigen** (Per)
-  Aktuell hinterlegt: Per Schippl · Mutzenbecherstraße 9 · 26131 Oldenburg · mail@geldverstehen.de.
-  Bitte bestätigen, dass vollständig & korrekt (z. B. USt-IdNr./Telefon nötig?).
+  _Aktuell der einzige echte Blocker vor dem Go-live._
 
 ## 🟡 Entscheidung / Bestätigung
 
@@ -37,13 +31,13 @@ _Stand: 2026-07-15_
   Aktuell live unter der Projekt-URL `schipplp.github.io/geldverstehen-webseite`.
   Für **geldverstehen.de** brauche ich dein „Los": dann CNAME + DNS +
   Pages-Einstellung + Umstellung `site`/`base` in der Astro-Config.
-
-- [ ] **Google-Analytics-Property bestätigen** (Per)
-  Eingebaut ist `G-34VTD24M2D` (lädt erst nach Cookie-Einwilligung).
-  Bitte bestätigen, dass das die richtige GA4-Property ist.
+  (Unabhängig von Brevo – die Domain kann jederzeit dazukommen.)
 
 ## 🟢 Nice-to-have (auch nach Live möglich)
 
+- [ ] **Datenschutz: formaler Rechts-Check** (optional) — inhaltlich vollständig
+  (alle genutzten Dienste sind erklärt, siehe unten); ein anwaltlicher Blick ist
+  reine Absicherung, kein Blocker.
 - [ ] **Offizielle App-Store-/Play-Store-Badges** (Per liefert nach)
 - [ ] **Offizielle Spotify-/Apple-Podcasts-Badges** (Icons sind bereits gesetzt)
 - [ ] **Exaktes Favicon** als PNG (aktuell sauberer SVG-Nachbau des Sprout-Coin-Logos)
@@ -63,3 +57,6 @@ _Stand: 2026-07-15_
 - ✅ Social-Icons in Footer (Instagram, YouTube, TikTok)
 - ✅ Haushaltsbuch-Artikel mit Autoren-Foto, aufklappbaren FAQ und integriertem Opt-in
 - ✅ Haushaltsbuch-Artikel mit 5 Grafiken illustriert (Spiralen, 3 Kategorien, Monatsbilanz-Formel, Happy-Balance-Kacheln, Kreislauf)
+- ✅ **GA4-Property bestätigt** (`G-34VTD24M2D`, Daten kommen an — Per, 15.07.2026)
+- ✅ **Impressum bestätigt** (Angaben vollständig — Per, 15.07.2026)
+- ✅ **Datenschutz-Vollständigkeit geprüft**: alle genutzten Dienste (GitHub Pages, Brevo, GA4, YouTube, Fonts, Links) sind erklärt
