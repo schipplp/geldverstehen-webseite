@@ -3,20 +3,24 @@
 Diese Liste zeigt, was vor dem endgültigen Go-live noch offen ist.
 Legende: 🔴 Blocker · 🟡 Entscheidung/Bestätigung nötig · 🟢 nice-to-have (kann auch nach Live) · ✅ erledigt
 
-_Stand: 2026-07-13_
+_Stand: 2026-07-15_
 
 ---
 
 ## 🔴 Muss vor Live erledigt sein
 
-- [ ] **Brevo-Zustellung testen & sicherstellen** (Per)
-  Alle Opt-in-Formulare (Startseite, Crashkurs-Seite, Buch-Seite, Haushaltsbuch-Artikel)
-  sind technisch angebunden, aber in bisherigen Tests kam nichts in Brevo an.
-  Bitte prüfen:
-  1. Die Brevo-Formular-URL direkt im Browser testen (trägt sich ein Kontakt ein?).
-  2. Double-Opt-in im Brevo-Formular aktiviert?
-  3. In Brevo unter *Kontakte* nachsehen — auch bei Status **„nicht bestätigt"**.
-  4. Ist die richtige Liste dem Formular zugeordnet?
+- [ ] **Brevo komplett neu aufsetzen** (Per) — _neuer, leerer Account, Neustart_
+  Reihenfolge:
+  1. **Absender/Domain in Brevo verifizieren** (Einstellungen → Absender & Domains):
+     mail@geldverstehen.de bestätigen oder – besser – Domain per SPF/DKIM authentifizieren.
+     _Das war höchstwahrscheinlich der Grund, warum vorher nichts ankam._
+  2. Kontakt-**Liste** anlegen (z. B. „Crashkurs").
+  3. **Anmeldeformular** erstellen (nur Feld E-Mail), der Liste zuordnen,
+     **Double-Opt-in** aktivieren (Bestätigungsmail + Bestätigungsseite).
+  4. **In Brevo selbst testen** (die Teilen-URL im Browser) — kommt die Mail an,
+     erscheint der Kontakt als bestätigt?
+  5. Dann mir den **HTML-Einbettungscode** des Formulars schicken → ich verkable
+     die Website (URL + Feldnamen in `src/lib/brevo.js`).
   → Ohne funktionierende Zustellung läuft die zentrale Anmelde-Funktion ins Leere.
 
 - [ ] **Datenschutzerklärung final prüfen (lassen)** (Per)
@@ -43,7 +47,6 @@ _Stand: 2026-07-13_
 - [ ] **Offizielle App-Store-/Play-Store-Badges** (Per liefert nach)
 - [ ] **Offizielle Spotify-/Apple-Podcasts-Badges** (Icons sind bereits gesetzt)
 - [ ] **Exaktes Favicon** als PNG (aktuell sauberer SVG-Nachbau des Sprout-Coin-Logos)
-- [ ] **Grafiken für den Haushaltsbuch-Artikel** (Per liefert nach)
 - [ ] **Podcast-RSS-Feed-Link** — falls zusätzlich zu Spotify/Apple gewünscht
 
 ---
@@ -59,3 +62,4 @@ _Stand: 2026-07-13_
 - ✅ Impressum & Datenschutz mit echten Angaben (Freigabe siehe oben)
 - ✅ Social-Icons in Footer (Instagram, YouTube, TikTok)
 - ✅ Haushaltsbuch-Artikel mit Autoren-Foto, aufklappbaren FAQ und integriertem Opt-in
+- ✅ Haushaltsbuch-Artikel mit 5 Grafiken illustriert (Spiralen, 3 Kategorien, Monatsbilanz-Formel, Happy-Balance-Kacheln, Kreislauf)

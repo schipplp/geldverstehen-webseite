@@ -3,6 +3,12 @@ import Base from '../layouts/Base.astro';
 import EmailOptIn from '../components/EmailOptIn.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+// Artikel-Grafiken (aus design/uploads, weboptimiert) — über die Vite-Pipeline.
+import spiraleImg from '../../design/uploads/spiralen.png?url';
+import monatsbilanzImg from '../../design/uploads/info_monatsbilanz.png?url';
+import happyBalanceImg from '../../design/uploads/happy-balance_v3.png?url';
+import kreislaufImg from '../../design/uploads/kreislauf_v2.png?url';
+import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
 ---
 <Base
   title="Haushaltsbuch führen: Anleitung, die wirklich funktioniert"
@@ -39,6 +45,11 @@ import { img } from '../lib/images';
         <p><strong>3. Es schafft Messbarkeit.</strong><br />Und Messbarkeit ist der entscheidende Schlüssel zu dauerhaftem Fortschritt. Wer keinen Maßstab hat, weiß nie, ob er sich überhaupt verbessert – und gibt früher oder später auf. Wer dagegen erste kleine Fortschritte schwarz auf weiß sieht, will dranbleiben. Man gewinnt regelrecht Spaß an der Sache.</p>
         <p>Wichtig dabei: Erfolgreich ein Haushaltsbuch zu führen heißt vor allem, <strong>beobachten zu lernen</strong>. Über einen längeren Zeitraum. Nicht sofort urteilen, nicht sofort Konsequenzen ziehen – sondern erst einmal ehrlich hinschauen.</p>
 
+        <figure class="gv-figure">
+          <img src={spiraleImg} alt="Zwei Spiralen im Vergleich: die rote Abwärtsspirale (wegschauen, böse Überraschungen, das Geld wird eng, schlechtes Gewissen) und die grüne Aufwärtsspirale (hinschauen & notieren, verstehen, andere Prioritäten, mehr Erfolg mit den Finanzen, mehr Spaß)." loading="lazy" />
+          <figcaption>Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale.</figcaption>
+        </figure>
+
         <h2>Die 4 häufigsten Fehler beim Haushaltsbuch führen</h2>
         <p>Bevor wir zur konkreten Anleitung kommen, das Wichtigste zuerst: Warum scheitern so viele Haushaltsbuch-Vorhaben? Aus meiner Coaching-Erfahrung kann ich sagen – es sind immer wieder dieselben vier Fehler.</p>
         <h3>Fehler 1: Zu viele Kategorien</h3>
@@ -59,6 +70,10 @@ import { img } from '../lib/images';
           <li><strong>Flexkosten</strong> – alles, was flexibel rausgeht</li>
         </ol>
         <p>Jeder Geldfluss in deinem Leben lässt sich einer dieser drei Kategorien zuordnen. Diese Einteilung bringt Ordnung ins Chaos, ohne dass du dich in Details verlierst. Und sie spiegelt den entscheidenden Unterschied wider: Einkommen und Fixkosten sind planbar – das ist deine stabile Basis. Flexkosten schwanken – hier passiert die meiste Bewegung.</p>
+        <figure class="gv-figure">
+          <img src={dreiKategorienImg} alt="Die drei Geldfluss-Kategorien als Kacheln: Einkommen, Fixkosten und Flexkosten." loading="lazy" />
+          <figcaption>Jeder Geldfluss gehört in genau eine dieser drei Kategorien.</figcaption>
+        </figure>
         <h3>Schritt 1: Dein Einkommen ermitteln</h3>
         <p>Der einfachste Geldfluss: alles, was regelmäßig als Plus auf deinem Konto landet. Gehalt, Nebeneinkommen, Kindergeld, Unterhalt, Mieteinnahmen. Wichtig: Nur Einnahmen, mit denen du sicher rechnen kannst. Einmalige Geldgeschenke gehören nicht dazu.</p>
         <p>Rechne alles auf den Monat um. Am Ende steht eine Zahl: der Betrag, der dir monatlich zur Verfügung steht.</p>
@@ -83,12 +98,9 @@ import { img } from '../lib/images';
         <p>Warum? <strong>Weil ihre Zahlen keinen gemeinsamen Nenner haben.</strong></p>
         <p>Die meisten Haushaltsbücher erfassen nur die Ausgaben, die in diesem Monat passieren. Was im Januar abgebucht wird, steht im Januar. Und was nur einmal im Jahr kommt – die KFZ-Versicherung, der Rundfunkbeitrag, die neuen Winterreifen – fehlt in elf von zwölf Monaten komplett. Es ist schlicht nicht da. Bis es plötzlich da ist. Und dann wirkt es wie eine Überraschung, obwohl es vollkommen absehbar war.</p>
         <p>Die Lösung ist die <strong>Monatsbilanz</strong>: Du rechnest <em>alle</em> Geldflüsse auf den Monat um – auch die unregelmäßigen. Die Formel ist denkbar einfach:</p>
-        <div class="gv-formula">
-          <span>Einkommen (monatlich)</span>
-          <span>– Fixkosten (monatlich umgerechnet)</span>
-          <span>– Flexkosten (monatlicher Durchschnitt)</span>
-          <span class="gv-formula-result">= Dein Monatsergebnis</span>
-        </div>
+        <figure class="gv-figure">
+          <img src={monatsbilanzImg} alt="Formel der Monatsbilanz: Einnahmen minus Fixkosten minus Flexkosten ergibt die Monatsbilanz." loading="lazy" />
+        </figure>
         <p>Warum ausgerechnet der Monat? Weil er die natürliche Einheit unseres Finanzlebens ist. Das Gehalt kommt monatlich, die meisten Rechnungen sind monatlich, und auch unser Denken über Geld – „Was kann ich mir leisten? Was bleibt übrig?" – findet im Monatsrhythmus statt.</p>
         <p>Für planbare unregelmäßige Ausgaben bedeutet das: Du bildest monatlich eine kleine Rücklage. Jahresbetrag geteilt durch zwölf – jeden Monat, konsequent. So ist das Geld da, wenn die Ausgabe kommt, ohne dass sie deinen Monat sprengt. Und warum monatlich? Weil du diese Dinge ja auch monatlich nutzt: Das Auto, der Urlaub, die Waschmaschine sind Teil deines Lebens – nicht nur im Monat des Kaufs.</p>
         <p>Erst wenn diese Rücklagen in deiner Monatsbilanz stehen, zeigt sie dir deinen <strong>wirklich wahren monatlichen Spielraum</strong>. Das ist die Zahl, die alles verändert – weil du zum ersten Mal weißt, was du dir tatsächlich leisten kannst.</p>
@@ -96,6 +108,9 @@ import { img } from '../lib/images';
         <h2>Auswerten ohne Verzichts-Falle: die Happy-Balance-Analyse</h2>
         <p>Nach einem vollen Monat mit sauberen Daten stellt sich die Frage: Und jetzt? Hier scheitern viele ein zweites Mal – weil sie zu schnell zu kritisch mit sich werden und die Achterbahn aus Sparen und Rückfall starten.</p>
         <p>Mein Ansatz heißt <strong>Happy-Balance-Analyse</strong>. Sie ist kein Sparwerkzeug, sondern ein Klarheitswerkzeug. Ihr Ziel: herauszufinden, welche Ausgaben wirklich zu dir passen – und welche nicht. Dafür sortierst du deine Ausgaben in vier Kategorien:</p>
+        <figure class="gv-figure">
+          <img src={happyBalanceImg} alt="Die vier Kategorien der Happy-Balance-Analyse: Notwendigkeiten, Gönn-ich-mir, Wackelkandidaten und Geldfresser." loading="lazy" />
+        </figure>
         <ol>
           <li><strong>Notwendigkeiten</strong> – Miete, Strom, Versicherungen. Behalten – aber regelmäßig prüfen, ob der Preis noch stimmt. Denn die Kategorie schützt die Ausgabe, nicht den Preis.</li>
           <li><strong>Gönn-ich-mir</strong> – Ausgaben, die dir echte Freude bereiten. Behalten, ohne schlechtes Gewissen. Diese Ausgaben sind der Sinn von Geld.</li>
@@ -104,6 +119,11 @@ import { img } from '../lib/images';
         </ol>
         <p>Und dann kommt die goldene Regel, die wichtigste der ganzen Analyse: <strong>Geh immer nur die Geldfresser an. Alles andere lässt du in Ruhe.</strong></p>
         <p>Warum? Weil du bei Geldfressern auf nichts verzichtest. Es fällt nichts weg, das dir etwas bedeutet – es hört nur etwas auf zu verschwinden. Genau das ist der Kern meiner Philosophie: <strong>Verstehen statt Verzichten.</strong> Wer versteht, wohin sein Geld fließt, muss nicht verzichten – er sortiert nur aus, was ihm ohnehin nichts gibt.</p>
+
+        <figure class="gv-figure">
+          <img src={kreislaufImg} alt="Positiver Kreislauf: hinschauen & notieren, verstehen, andere Prioritäten, weniger sinnlose Käufe, mehr Erfolg mit den Finanzen, mehr Spaß – ohne Zwang, ohne schlechtes Gewissen." loading="lazy" />
+          <figcaption>Verstehen statt Verzichten – ein Kreislauf, der sich selbst trägt.</figcaption>
+        </figure>
 
         <h2>App, Excel oder Papier – womit führt man ein Haushaltsbuch am besten?</h2>
         <p>Die ehrliche Antwort: Das Werkzeug ist zweitrangig. Entscheidend ist, dass du es einfach hältst und dranbleibst.</p>
@@ -170,13 +190,13 @@ import { img } from '../lib/images';
   .gv-article a { color: var(--gv-blue); text-decoration: underline; }
   .gv-article a:hover { color: var(--gv-blue-600); }
 
-  /* Monatsbilanz-Formel als Callout */
-  .gv-formula {
-    display: grid; gap: 6px; margin: 8px 0 24px; padding: 24px 26px;
-    background: var(--gv-surface); border-left: 4px solid var(--gv-yellow); border-radius: 0 14px 14px 0;
-    font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); letter-spacing: .02em; color: var(--gv-ink); line-height: 1.2;
+  /* Artikel-Grafiken */
+  .gv-figure {
+    margin: 34px 0; padding: 28px; background: var(--gv-surface);
+    border: 1px solid var(--gv-border); border-radius: 16px;
   }
-  .gv-formula-result { color: var(--gv-blue); }
+  .gv-figure img { display: block; width: 100%; height: auto; max-width: 540px; margin: 0 auto; }
+  .gv-figure figcaption { margin: 16px auto 0; max-width: 520px; text-align: center; font-size: 14px; line-height: 1.5; color: var(--gv-muted); font-style: italic; }
 
   /* FAQ-Akkordeon */
   .gv-faq { display: grid; gap: 12px; margin: 8px 0 24px; }
@@ -221,5 +241,6 @@ import { img } from '../lib/images';
     .gv-article p, .gv-article ul, .gv-article ol { font-size: 17px; }
     .gv-faq-item summary { font-size: 17px; padding: 16px 18px; }
     .gv-faq-body { padding: 0 18px 18px; }
+    .gv-figure { padding: 18px; }
   }
 </style>
