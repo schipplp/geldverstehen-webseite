@@ -23,8 +23,10 @@
 
 export const BREVO_CONFIG = {
   // Von Brevo generierte Formular-POST-URL (eine Liste für alle Opt-ins).
+  // Stand: neues Brevo-Konto, Formular „Newsletter" (Felder: EMAIL, locale,
+  // Honeypot email_address_check). Alle Opt-ins der Website posten hierauf.
   formUrl:
-    'https://b59a5efd.sibforms.com/serve/MUIFABxhux1ZvmEyIcFi7f8xKDEe4IPXjLs3rMKWtrnheIg2cL9nEp4Yl58JdV7s0IpfX6D6GrRGrQ52dh0Wy6HL1KP2peKB58kYK1fBO3OiUXb9if8HDz62FTSf9NsFvahAC1WxymSi1EpSR6zmmPQRVGpUmOXwnE-DkG--JPb8P_pJgu5OIkgRPIeJkelUH1vKJ7L6jda5goui',
+    'https://d05bc432.sibforms.com/serve/MUIFAOmqaZ-fM2uxa36TeP0JFSj9ZCaPLdQDC7N0oBBA6InXYR7qRLnD-19UihClc_iX2Wj0lm4vSwgDdAjBnw_yRVBGxkbNqz39tLk-MXA3AOvMpGOW-PgjhEeYHnfPCZJ0KSUE2NOfRo5P3r3QlynW14iI1zczxBORCXoyEgvMw7QTvPVxOMXD2qWRhU3nLgL90fFI0MBn-rjBEw==',
 
   // Brevo-Kontakt-Attribut, in das die Opt-in-Quelle geschrieben wird.
   // WICHTIG: Ein Feld mitzusenden, das im Brevo-Formular NICHT existiert, kann
