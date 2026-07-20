@@ -3,23 +3,19 @@
 Diese Liste zeigt, was vor dem endgültigen Go-live noch offen ist.
 Legende: 🔴 Blocker · 🟡 Entscheidung/Bestätigung nötig · 🟢 nice-to-have (kann auch nach Live) · ✅ erledigt
 
-_Stand: 2026-07-19_
+_Stand: 2026-07-20_
 
 ---
 
 ## 🔴 Muss vor Live erledigt sein
 
-**Keine offenen Blocker mehr — die Seite ist technisch startklar.** 🎉
-Es fehlt nur noch die bewusst zurückgestellte Domain-Entscheidung (siehe unten).
+**Keine offenen Blocker mehr — die Seite ist live unter https://geldverstehen.de.** 🎉
 
-## 🟡 Entscheidung / Bestätigung
+## 🟡 Offen / kleiner Rest
 
-- [ ] **Domain-Entscheidung** (Per) — _zurückgestellt_
-  Aktuell live unter der Projekt-URL `schipplp.github.io/geldverstehen-webseite`.
-  Domain liegt bei DomainFactory; Provider-Wechsel noch offen, daher nach hinten gestellt.
-  Für **geldverstehen.de** brauche ich dein „Los": dann CNAME + DNS +
-  Pages-Einstellung + Umstellung `site`/`base` in der Astro-Config.
-  (Unabhängig vom Rest – blockiert nichts, kann jederzeit dazukommen.)
+- [ ] **„Enforce HTTPS" in GitHub aktivieren** (Per) — Domain ist verifiziert
+  (DNS-Check erfolgreich). Sobald GitHub das Zertifikat ausgestellt hat, in
+  Settings → Pages die Checkbox „Enforce HTTPS" anhaken.
 
 ## 🟢 Nice-to-have (auch nach Live möglich)
 
@@ -49,3 +45,4 @@ Es fehlt nur noch die bewusst zurückgestellte Domain-Entscheidung (siehe unten)
 - ✅ **Impressum bestätigt** (Angaben vollständig — Per, 15.07.2026)
 - ✅ **Datenschutz-Vollständigkeit geprüft**: alle genutzten Dienste (GitHub Pages, Brevo, GA4, YouTube, Fonts, Links) sind erklärt
 - ✅ **Brevo E-Mail-Anmeldung angebunden & live getestet** (neues Konto, Formular `d05bc432`, Double-Opt-in kommt an, Kontakt landet in der Liste — Per, 19.07.2026). Alle vier Opt-in-Stellen (Startseite, Crashkurs, Buch, Artikel) laufen darüber.
+- ✅ **Custom-Domain geldverstehen.de eingerichtet & DNS-verifiziert** (CNAME im Build, `site`/`base` umgestellt, GitHub-DNS-Check erfolgreich — Per, 20.07.2026). Nur noch „Enforce HTTPS" anhaken (siehe oben).
