@@ -1,14 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// GitHub-Pages-Deployment.
-// Projektseite läuft unter https://<user>.github.io/geldverstehen-webseite/
-// -> deshalb `base`. Sobald die Custom-Domain geldverstehen.de aktiv ist
-//    (CNAME + Pages-Setting), auf `site: 'https://geldverstehen.de'` und
-//    `base: '/'` umstellen (siehe README.md).
+// GitHub-Pages-Deployment mit Custom-Domain.
+// Die Seite läuft unter https://geldverstehen.de (Apex-Domain).
+// Die Datei public/CNAME sorgt dafür, dass die Custom-Domain bei jedem
+// Deploy erhalten bleibt. base ist '/', weil die Seite direkt auf der
+// Domain-Wurzel liegt (nicht mehr in einem Projekt-Unterpfad).
 export default defineConfig({
-  site: 'https://schipplp.github.io',
-  base: '/geldverstehen-webseite',
+  site: 'https://geldverstehen.de',
+  base: '/',
   trailingSlash: 'ignore',
   build: {
     format: 'directory',
