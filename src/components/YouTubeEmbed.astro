@@ -4,17 +4,20 @@
 // Die Vorschau ist gebrandet (kein Thumbnail von Google), damit auch beim
 // bloßen Seitenaufruf keine Daten an YouTube fließen.
 // Füllt das nächste position:relative-Elternelement (z. B. ein 16:9-Container).
+// Optionales `label` (z. B. ein Name) macht mehrere Videos unterscheidbar.
 export interface Props {
   id: string;
   title: string;
+  label?: string;
 }
-const { id, title } = Astro.props;
+const { id, title, label } = Astro.props;
 ---
 <div class="gv-yt" data-id={id} data-title={title}>
   <button class="gv-yt-btn" type="button" aria-label={`Video abspielen: ${title}`}>
     <span class="gv-yt-play" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="var(--gv-ink)"><path d="M8 5.5v13l11-6.5z"/></svg>
     </span>
+    {label && <span class="gv-yt-name">{label}</span>}
     <span class="gv-yt-label">Video abspielen</span>
     <span class="gv-yt-note">Mit Klick wird das Video von YouTube (Google) geladen und dabei eine Verbindung zu Google hergestellt.</span>
   </button>
@@ -25,7 +28,7 @@ const { id, title } = Astro.props;
   .gv-yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .gv-yt-btn {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
     padding: 24px; text-align: center; cursor: pointer; border: 0;
     background: radial-gradient(120% 120% at 50% 0%, #12385f 0%, #0b1f38 100%);
     color: #fff; font-family: var(--font-body);
@@ -37,8 +40,9 @@ const { id, title } = Astro.props;
   }
   .gv-yt-play svg { margin-left: 3px; }
   .gv-yt-btn:hover .gv-yt-play { transform: scale(1.06); background: var(--gv-yellow-600); }
-  .gv-yt-label { font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; }
-  .gv-yt-note { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,.7); max-width: 320px; }
+  .gv-yt-name { font-family: var(--font-display); font-size: 28px; line-height: 1; letter-spacing: .02em; color: #fff; margin-top: 2px; }
+  .gv-yt-label { font-family: var(--font-body); font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--gv-yellow); }
+  .gv-yt-note { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,.6); max-width: 320px; }
 </style>
 
 <script>
@@ -53,6 +57,9 @@ const { id, title } = Astro.props;
       iframe.title = el.dataset.title || 'YouTube-Video';
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
+      // Füll-Styles inline setzen: Das dynamisch erzeugte iframe trägt kein
+      // Astro-Scope-Attribut, daher würde die gescopte CSS-Regel nicht greifen.
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
       el.replaceChildren(iframe);
     });
   });

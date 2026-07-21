@@ -162,7 +162,7 @@ const testimonials = [
         {testimonials.map((t) => (
           <figure class="gv-tcard">
             <div class="gv-tvideo">
-              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} />
+              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} label={t.name} />
             </div>
             <figcaption class="gv-tbody">
               <p class="gv-thead">„{t.headline}"</p>
