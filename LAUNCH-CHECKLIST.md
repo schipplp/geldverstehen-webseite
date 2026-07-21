@@ -3,19 +3,14 @@
 Diese Liste zeigt, was vor dem endgültigen Go-live noch offen ist.
 Legende: 🔴 Blocker · 🟡 Entscheidung/Bestätigung nötig · 🟢 nice-to-have (kann auch nach Live) · ✅ erledigt
 
-_Stand: 2026-07-20_
+_Stand: 2026-07-21 — Seite vollständig live_
 
 ---
 
-## 🔴 Muss vor Live erledigt sein
+## 🔴 / 🟡 Offene Punkte
 
-**Keine offenen Blocker mehr — die Seite ist live unter https://geldverstehen.de.** 🎉
-
-## 🟡 Offen / kleiner Rest
-
-- [ ] **„Enforce HTTPS" in GitHub aktivieren** (Per) — Domain ist verifiziert
-  (DNS-Check erfolgreich). Sobald GitHub das Zertifikat ausgestellt hat, in
-  Settings → Pages die Checkbox „Enforce HTTPS" anhaken.
+**Keine offenen Blocker mehr — die Seite ist vollständig live unter
+https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
 
 ## 🟢 Nice-to-have (auch nach Live möglich)
 
@@ -45,4 +40,5 @@ _Stand: 2026-07-20_
 - ✅ **Impressum bestätigt** (Angaben vollständig — Per, 15.07.2026)
 - ✅ **Datenschutz-Vollständigkeit geprüft**: alle genutzten Dienste (GitHub Pages, Brevo, GA4, YouTube, Fonts, Links) sind erklärt
 - ✅ **Brevo E-Mail-Anmeldung angebunden & live getestet** (neues Konto, Formular `d05bc432`, Double-Opt-in kommt an, Kontakt landet in der Liste — Per, 19.07.2026). Alle vier Opt-in-Stellen (Startseite, Crashkurs, Buch, Artikel) laufen darüber.
-- ✅ **Custom-Domain geldverstehen.de eingerichtet & DNS-verifiziert** (CNAME im Build, `site`/`base` umgestellt, GitHub-DNS-Check erfolgreich — Per, 20.07.2026). Nur noch „Enforce HTTPS" anhaken (siehe oben).
+- ✅ **Custom-Domain geldverstehen.de live mit erzwungenem HTTPS** (CNAME im Build, `site`/`base` umgestellt, DNS-Check erfolgreich, „Enforce HTTPS" aktiv — Per, 21.07.2026).
+- ✅ **Über-Seite inhaltlich ausgebaut (v7)**: neuer Abschnitt „Kennst du das?", zwei Story-Blöcke (WER DAHINTER STECKT / DER WEG), vier Überzeugungen im 2×2-Grid.
