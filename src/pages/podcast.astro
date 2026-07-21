@@ -3,8 +3,15 @@ import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 
-// Folgendaten stammen aus dem Designpaket (letscast.fm-Host des Podcasts).
-const episodes = [
+// Podcast-Host: letscast.fm. Die Folgen werden beim Build direkt aus dem
+// RSS-Feed geladen, damit die Seite automatisch aktuell bleibt. Ein geplanter
+// Rebuild (siehe .github/workflows/deploy.yml, cron) sorgt dafür, dass neue
+// Folgen auch ohne Code-Änderung erscheinen. Ist der Feed beim Build nicht
+// erreichbar, greift die Fallback-Liste (keine leere Seite).
+const RSS_URL = 'https://letscast.fm/podcasts/geld-verstehen-struktur-und-ordnung-in-deinen-finanzen-4d31713a/feed';
+const allEpisodes = 'https://geldverstehen.letscast.fm';
+
+const fallbackEpisodes = [
   { no: '#74', title: 'Warum Geld in Beziehungen so oft für Streit sorgt – und wie ihr das löst', dur: '11 Min', date: '9. Juli 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/e0cf9878.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-geld-in-beziehungen-so-oft-fuer-streit-sorgt-und-wie-ihr-das-loest' },
   { no: '#73', title: '5 Finanzregeln, die du nie brechen solltest', dur: '12 Min', date: '2. Juli 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/741915e4.mp3', link: 'https://geldverstehen.letscast.fm/episode/5-finanzregeln-die-du-nie-brechen-solltest' },
   { no: '#72', title: 'Warum ich keine Budgetplanung empfehle', dur: '8 Min', date: '25. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/b57e030b.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-ich-keine-budgetplanung-empfehle' },
@@ -12,8 +19,70 @@ const episodes = [
   { no: '#70', title: 'Du machst vieles richtig – und gibst trotzdem immer wieder auf?', dur: '9 Min', date: '11. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/2cfa6c19.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-machst-vieles-richtig-und-gibst-trotzdem-immer-wieder-auf' },
   { no: '#69', title: 'Du kennst deine Geldfresser – und änderst trotzdem nichts. Warum?', dur: '6 Min', date: '4. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/d546b58f.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-kennst-deine-geldfresser-und-aenderst-trotzdem-nichts-warum' },
 ];
+
+function decodeEntities(s = '') {
+  return s
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#0*39;/g, "'").replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&')
+    .trim();
+}
+function pickTag(block, name) {
+  const m = block.match(new RegExp('<' + name + '[^>]*>([\\s\\S]*?)</' + name + '>', 'i'));
+  return m ? decodeEntities(m[1]) : '';
+}
+function pickAttr(block, tagName, attrName) {
+  const m = block.match(new RegExp('<' + tagName + '\\b[^>]*\\b' + attrName + '="([^"]*)"', 'i'));
+  return m ? m[1] : '';
+}
+function fmtDate(pub) {
+  const d = new Date(pub);
+  if (isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function fmtDur(raw) {
+  if (!raw) return '';
+  const secs = /^\d+$/.test(raw)
+    ? parseInt(raw, 10)
+    : raw.split(':').map(Number).reduce((a, b) => a * 60 + b, 0);
+  if (!secs || isNaN(secs)) return '';
+  return Math.max(1, Math.round(secs / 60)) + ' Min';
+}
+function parseFeed(xml) {
+  const blocks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
+  const out = [];
+  for (const b of blocks) {
+    const title = pickTag(b, 'title');
+    const mp3 = pickAttr(b, 'enclosure', 'url');
+    if (!title || !mp3) continue;
+    const num = pickTag(b, 'itunes:episode');
+    out.push({
+      no: num ? '#' + num : '',
+      title,
+      dur: fmtDur(pickTag(b, 'itunes:duration')),
+      date: fmtDate(pickTag(b, 'pubDate')),
+      mp3,
+      link: pickTag(b, 'link') || mp3,
+    });
+  }
+  return out;
+}
+async function loadEpisodes() {
+  try {
+    const res = await fetch(RSS_URL, { signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const parsed = parseFeed(await res.text());
+    if (parsed.length) return parsed;
+    throw new Error('Feed enthielt keine Folgen');
+  } catch (err) {
+    console.warn('[podcast] RSS-Feed nicht ladbar – nutze Fallback-Liste:', err instanceof Error ? err.message : err);
+    return fallbackEpisodes;
+  }
+}
+
+const episodes = (await loadEpisodes()).slice(0, 6);
 const current = episodes[0];
-const allEpisodes = 'https://geldverstehen.letscast.fm';
 ---
 <Base
   title="Der Podcast — Jede Woche ein Stück mehr Klarheit"
@@ -41,6 +110,10 @@ const allEpisodes = 'https://geldverstehen.letscast.fm';
                 <path d="M9.7 20.1c.25-2.4.7-3.6 2.3-3.6s2.05 1.2 2.3 3.6c.13 1.3-1 2.2-2.3 2.2s-2.43-.9-2.3-2.2z" fill="#C24BE6"/>
               </svg>
               <span>Apple Podcasts</span>
+            </a>
+            <a class="gv-store" href={RSS_URL} target="_blank" rel="noopener" aria-label="GELD VERSTEHEN Podcast als RSS-Feed abonnieren">
+              <svg viewBox="0 0 24 24" width="18" height="18" style="flex:none" aria-hidden="true"><path fill="#F58220" d="M4 4a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4zm0 6a10 10 0 0 1 10 10h-3A7 7 0 0 0 4 13v-3zm1.5 6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg>
+              <span>RSS</span>
             </a>
             <a class="gv-store" href={allEpisodes} target="_blank" rel="noopener">Alle Plattformen</a>
           </div>

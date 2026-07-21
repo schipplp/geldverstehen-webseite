@@ -4,6 +4,10 @@ on:
   # Bei jedem Push auf main bauen und veröffentlichen
   push:
     branches: [main]
+  # Täglicher Rebuild, damit neue Podcast-Folgen aus dem RSS-Feed
+  # automatisch auf der Seite erscheinen (Build lädt den Feed neu).
+  schedule:
+    - cron: '0 5 * * *'
   # Manuelles Auslösen im Actions-Tab erlauben
   workflow_dispatch:
 
