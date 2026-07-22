@@ -1,0 +1,28 @@
+---
+// Bestätigungs-Seite nach dem Double-Opt-in: Brevo leitet den Nutzer nach
+// dem Klick auf den Bestätigungslink hierher weiter. Aufbau wie die 404-Seite
+// (Base-Layout mit Header/Footer, blauer Block), inhaltlich als Erfolgs-/
+// Willkommensseite für den Crashkurs. Nirgends verlinkt — nur per Brevo-Redirect.
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+---
+<Base
+  title="Geschafft — du bist dabei!"
+  description="Deine Anmeldung ist bestätigt. Willkommen beim kostenlosen Crashkurs von GELD VERSTEHEN."
+  active=""
+>
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:96px; padding-bottom:96px; text-align:center;">
+      <div style="display:inline-flex; align-items:center; justify-content:center; width:96px; height:96px; border-radius:999px; background:var(--gv-yellow); box-shadow:var(--shadow-cta);">
+        <svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="var(--gv-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h1 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; font-size:clamp(38px,5vw,64px); line-height:1.04; color:#fff; margin:20px 0 14px;">Geschafft — du bist dabei!</h1>
+      <p style="font-size:19px; line-height:1.65; color:#EAF2FA; margin:0 auto 10px; max-width:520px;">Deine E-Mail-Adresse ist bestätigt. Willkommen beim kostenlosen Crashkurs von GELD VERSTEHEN — schön, dass du dabei bist!</p>
+      <p style="font-size:17px; line-height:1.65; color:#C7D6E6; margin:0 auto 32px; max-width:520px;">Der Crashkurs kommt jetzt direkt per E-Mail zu dir. Schau gleich in dein Postfach — und zur Sicherheit einmal in den Spam-Ordner, falls die erste Nachricht dort gelandet ist.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="gv-btn" href={u('/')}>Zur Startseite</a>
+        <a class="gv-btn-ghost" href={u('/podcast')}>In den Podcast hören</a>
+      </div>
+    </div>
+  </section>
+</Base>
