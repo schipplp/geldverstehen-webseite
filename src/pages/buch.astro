@@ -215,7 +215,7 @@ const voices = [
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
       <p class="gv-eyebrow"><span class="gv-rule"></span>LESERSTIMMEN</p>
       <h2 class="gv-h2">Das sagen Leser</h2>
-      <div class="bk-voices" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px; align-items:start;">
+      <div class="bk-voices">
         {voices.map((v) => (
           <figure class="bk-voice">
             <blockquote class="bk-voice-q">{v.text}</blockquote>
@@ -255,8 +255,12 @@ const voices = [
   .bk-ico-check { background: var(--gv-blue-050); color: var(--gv-blue); }
   .bk-ico-cross { background: var(--gv-error-bg); color: var(--gv-error); }
 
-  /* Leserstimmen */
-  .bk-voice { margin: 0; background: #fff; border: 1px solid var(--gv-border); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; }
+  /* Leserstimmen — Masonry über CSS-Columns: Kacheln fließen dicht
+     untereinander (spaltenweise), statt an der höchsten Kachel der Zeile
+     auszurichten. column-width sorgt für automatisch responsive Spaltenzahl
+     (breit ~3, Tablet ~2, mobil 1) ohne feste Breakpoints. */
+  .bk-voices { columns: 320px; column-gap: 24px; margin-top: 44px; }
+  .bk-voice { margin: 0 0 24px; background: #fff; border: 1px solid var(--gv-border); border-radius: 14px; padding: 26px; break-inside: avoid; -webkit-column-break-inside: avoid; }
   .bk-voice-q { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); }
   .bk-voice-name { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; font-size: 22px; color: var(--gv-blue); margin-top: 16px; }
 
@@ -264,7 +268,6 @@ const voices = [
     .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
     .bk-3 { grid-template-columns: 1fr !important; }
     .bk-2 { grid-template-columns: 1fr !important; }
-    .bk-voices { grid-template-columns: 1fr !important; }
     .gv-split img { order: -1; }
   }
 </style>
