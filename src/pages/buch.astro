@@ -3,10 +3,9 @@ import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 
-// TODO(Per): Amazon-Links kommen erst nach der Veröffentlichung bei KDP.
-// Bis dahin Platzhalter — die Buttons zeigen vorerst auf die Startseite.
-const amazonTaschenbuch = u('/'); // TODO(Per): echten Amazon-Link (Taschenbuch) eintragen
-const amazonKindle = u('/');      // TODO(Per): echten Amazon-Link (Kindle-Ausgabe) eintragen
+// Amazon-Links zur veröffentlichten Ausgabe (saubere Kurzform amazon.de/dp/<ASIN>).
+const amazonTaschenbuch = 'https://www.amazon.de/dp/B0HFXP5X8B'; // Taschenbuch
+const amazonKindle = 'https://www.amazon.de/dp/B0HF82CS8J';      // Kindle-Ausgabe
 
 // TODO(Per): finales Cover einsetzen — vorerst das bestehende Buch-Cover.
 const coverImg = img.buchCover;
@@ -81,8 +80,8 @@ const voices = [
           <div style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:var(--gv-yellow); line-height:1.05; margin:10px 0 0; font-size:clamp(24px,3vw,38px);">Struktur und Ordnung in deinen Finanzen</div>
           <p style="font-size:19px; line-height:1.65; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Du verdienst eigentlich ganz gut – aber am Ende des Monats fragst du dich trotzdem: Wo ist das Geld geblieben?</p>
           <div style="display:flex; gap:14px; flex-wrap:wrap;">
-            <a class="gv-btn" href={amazonTaschenbuch}>Taschenbuch bei Amazon</a>
-            <a class="gv-btn-ghost" href={amazonKindle}>Kindle-Ausgabe</a>
+            <a class="gv-btn" href={amazonTaschenbuch} target="_blank" rel="noopener">Taschenbuch bei Amazon</a>
+            <a class="gv-btn-ghost" href={amazonKindle} target="_blank" rel="noopener">Kindle-Ausgabe</a>
           </div>
         </div>
         <div style="display:flex; justify-content:center;">
@@ -240,8 +239,8 @@ const voices = [
       <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Hol dir das Buch</h2>
       <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:520px;">GELD VERSTEHEN – Struktur und Ordnung in deinen Finanzen. Als Taschenbuch und Kindle-Ausgabe bei Amazon.</p>
       <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-        <a class="gv-btn" href={amazonTaschenbuch}>Taschenbuch bei Amazon</a>
-        <a class="gv-btn-ghost" href={amazonKindle}>Kindle-Ausgabe</a>
+        <a class="gv-btn" href={amazonTaschenbuch} target="_blank" rel="noopener">Taschenbuch bei Amazon</a>
+        <a class="gv-btn-ghost" href={amazonKindle} target="_blank" rel="noopener">Kindle-Ausgabe</a>
       </div>
     </div>
   </section>
