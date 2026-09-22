@@ -5,7 +5,7 @@ interface Props { active?: string }
 const { active = '' } = Astro.props;
 const links = [
   { key: 'ueber', label: 'ÜBER', href: u('/ueber') },
-  { key: 'app', label: 'APP', href: u('/app') },
+  { key: 'app', label: 'APP', href: `${u('/app')}?k=startseite` },
   { key: 'buch', label: 'BUCH', href: u('/buch') },
   { key: 'podcast', label: 'PODCAST', href: u('/podcast') },
 ];
