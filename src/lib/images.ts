@@ -5,7 +5,7 @@
 // `?url` liefert die fertige, basis-korrekte URL als String.
 import perHero from '../../design/uploads/DSC00023.jpg?url';
 import podcastCover from '../../design/uploads/new podcast cover_v5.jpg?url';
-import onepeekApp from '../../design/uploads/1de.webp?url';
+import appScreenshot from '../../design/uploads/1de.webp?url';
 import buchCover from '../../design/uploads/md.jpeg?url';
 import perUeberSplit from '../../design/uploads/DSC00065.JPG?url';
 import perUeberHero from '../../design/uploads/DSC00117.JPG?url';
@@ -27,7 +27,7 @@ import sternTvCover from '../../design/uploads/stern-tv-cover.webp?url';
 export const img = {
   perHero,
   podcastCover,
-  onepeekApp,
+  appScreenshot,
   buchCover,
   perUeberSplit,
   perUeberHero,
