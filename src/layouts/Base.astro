@@ -39,6 +39,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <link rel="canonical" href={canonical} />
   <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
   <meta name="theme-color" content="#1E73BE" />
+  <!-- Smart App Banner: blendet iOS-Safari-Besuchern oben einen App-Store-Hinweis
+       ein. Unterstützt keine Kampagnenparameter — bekannt und so gewollt. -->
+  <meta name="apple-itunes-app" content="app-id=1571656912" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />

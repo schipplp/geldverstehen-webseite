@@ -4,7 +4,8 @@ import StoreButtons from '../components/StoreButtons.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { img } from '../lib/images';
 
-const APP_STORE = 'https://apps.apple.com/de/app/budget-app-onepeek/id1571656912';
+// Fallback ohne Kanal-Kennung — das Skript am Seitenende hängt sie an.
+const APP_STORE = 'https://apps.apple.com/de/app/id1571656912';
 const BILD_ARTIKEL =
   'https://www.bild.de/bild-plus/ratgeber/2023/ratgeber/digitales-haushaltsbuch-bild-testet-apps-im-vergleich-83484730.bild.html';
 // Derselbe stern-TV-Beitrag, der auch auf der Über-Seite eingebettet ist.
@@ -317,7 +318,7 @@ const faq = [
         ))}
       </div>
       <div style="display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:56px;">
-        <a class="ap-premium-cta" href={APP_STORE} target="_blank" rel="noopener">Hol dir Premium <span aria-hidden="true" style="font-size:19px;">→</span></a>
+        <a class="ap-premium-cta" data-store="apple" href={APP_STORE} target="_blank" rel="noopener">Hol dir Premium <span aria-hidden="true" style="font-size:19px;">→</span></a>
         <span style="font-size:15px; color:#9FB3C8;">Jederzeit kündbar. Der kostenlose Kern bleibt dir erhalten.</span>
       </div>
     </div>
@@ -385,6 +386,38 @@ const faq = [
       </div>
     </div>
   </section>
+
+  <!--
+    Kanal-Kennung für die Store-Links.
+
+    Liest ausschließlich den Parameter `k` aus der Adresse und hängt ihn an die
+    Store-Links an: bei Apple als `ct`, bei Google Play als `referrer`. Alle
+    anderen Parameter (u. a. utm_*) bleiben unangetastet — die UTM-Messung für
+    Google Analytics läuft getrennt davon.
+
+    Ohne JavaScript bleiben die im HTML hinterlegten Store-Links stehen, sie
+    führen dann ohne Kennung in den Store. Es wird nichts gespeichert und nicht
+    weitergeleitet.
+  -->
+  <script is:inline>
+    (function () {
+      var ERLAUBT = ['podcast', 'newsletter', 'social', 'buch', 'startseite', 'direkt'];
+      var roh = new URLSearchParams(window.location.search).get('k') || '';
+      var kanal = ERLAUBT.indexOf(roh.trim().toLowerCase()) !== -1 ? roh.trim().toLowerCase() : 'direkt';
+
+      var ziel = {
+        apple: 'https://apps.apple.com/de/app/id1571656912?pt=89869204&mt=8&ct=' + encodeURIComponent(kanal),
+        play:
+          'https://play.google.com/store/apps/details?id=app.onepeek&referrer=' +
+          encodeURIComponent('utm_source=' + kanal + '&utm_medium=link'),
+      };
+
+      document.querySelectorAll('[data-store]').forEach(function (a) {
+        var url = ziel[a.dataset.store];
+        if (url) a.href = url;
+      });
+    })();
+  </script>
 </Base>
 
 <style>
