@@ -1,109 +1,486 @@
 ---
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
-import { u } from '../lib/url';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { img } from '../lib/images';
+
+const APP_STORE = 'https://apps.apple.com/de/app/budget-app-onepeek/id1571656912';
+const BILD_ARTIKEL =
+  'https://www.bild.de/bild-plus/ratgeber/2023/ratgeber/digitales-haushaltsbuch-bild-testet-apps-im-vergleich-83484730.bild.html';
+// Derselbe stern-TV-Beitrag, der auch auf der Über-Seite eingebettet ist.
+const STERN_TV_VIDEO = 'https://www.youtube.com/watch?v=Awvgf0Dth5Q';
+
+const vorteile = [
+  {
+    bild: img.appHaushaltsbuecher,
+    alt: 'Mehrere Haushaltsbücher in der App: „Persönlich“, „Familie“ und „Haushalt“ nebeneinander',
+    titel: 'Mehrere Haushaltsbücher',
+    punkte: [
+      'Trenne „Persönlich“, „Familie“ und „Haushalt“ sauber voneinander.',
+      'Jedes Buch hat seine eigene Bilanz — nichts vermischt sich.',
+      'Mit einem Tipp wechselst du zwischen ihnen.',
+    ],
+  },
+  {
+    bild: img.appTeilen,
+    alt: 'Haushaltsbuch per QR-Code teilen',
+    titel: 'Haushaltsbücher teilen',
+    punkte: [
+      'Teile ein Buch per QR-Code — in Sekunden, ohne Konto.',
+      'Ihr seht beide dieselben Zahlen, jederzeit aktuell.',
+      'Persönliche Bücher bleiben trotzdem privat.',
+    ],
+  },
+];
+
+// TODO(Per): Die Kurzbeschreibungen der Premium-Funktionen stammen aus dem
+// Designentwurf, nicht von dir — bitte fachlich gegenlesen.
+const premium = [
+  { titel: 'Zukunft planen', text: 'Sieh voraus, wie sich dein Geld in den kommenden Monaten entwickelt.' },
+  { titel: 'PDF-Download', text: 'Deine Übersicht als PDF sichern oder weitergeben.' },
+  { titel: 'Werbefreie App', text: 'Keine Werbung, nur deine Zahlen.' },
+  { titel: 'Belege hinterlegen', text: 'Kassenzettel und Dokumente direkt an die Ausgabe hängen.' },
+  { titel: 'Notizen an Ausgaben', text: 'Halt fest, worum es bei einer Buchung ging.' },
+  { titel: 'App-Sperre', text: 'Deine Finanzen bleiben hinter Code oder Face ID.' },
+];
+
+// Bewertungen wörtlich aus den App-Store-Rezensionen (siehe Designpaket).
+// ton: 'hell' | 'blau' | 'gelb' — setzt den Farbrhythmus im Masonry-Raster.
+const bewertungen = [
+  {
+    ton: 'hell',
+    titel: 'Endlich mal simpel',
+    text: 'Endlich mal simpel ist und banal in der Funktion dass diese ohne viel Aufwand genau das tut was sie soll.',
+  },
+  {
+    ton: 'blau',
+    titel: 'Danke für diese coole App!',
+    text: 'Einfach, selbsterklärend und selbst für Buchhaltungsmuffel zu leisten. Danke für diese coole App!',
+  },
+  {
+    ton: 'hell',
+    titel: 'Einfach eine super App',
+    text: 'Habe die App seit diesem Monat und bin sehr zufrieden. Die App ist super verständlich und man kommt gut zurecht. Jetzt kann ich endlich mal nachvollziehen wo das ganze Geld hingeht, super, danke. Einfach eine super App. Danke',
+  },
+  {
+    ton: 'gelb',
+    titel: 'Genau das habe ich gebraucht!',
+    text: 'Wow - genau das habe ich gebraucht! SternTV sei Dank … supergeniale, grundsolide und einfach gehaltene App, welche genau das tut, was Sie soll!',
+  },
+  {
+    ton: 'hell',
+    titel: 'Beste App für die Finanzübersicht.',
+    text: 'Beste App für die Finanzübersicht. Ohne komplizierte Elemente. Ganz klar und simpel für eine perfekte Übersicht. Simple App, die alles schnell eingeben lässt und man sofort den Rest noch einsehen kann.',
+  },
+  {
+    ton: 'hell',
+    titel: 'Einfach nur weiter zu empfehlen!',
+    text: 'Diese App sollte jeder haben der eine Übersicht über seine Finanzen benötigt. Einfach nur weiter zu empfehlen!',
+  },
+  {
+    ton: 'blau',
+    titel: 'Sehr einfache Handhabung',
+    text: 'Dank Stern-TV auf diese App aufmerksam geworden. Die sehr einfache Handhabung und die überschaubaren Funktionen machen sie im Gegensatz zu vielen anderen Apps zu einem angenehmen täglichen Begleiter.',
+  },
+  {
+    ton: 'hell',
+    titel: 'Mehr braucht man nicht',
+    text: 'Ich hatte die App auch bei Stern Tv gesehen und habe sie gleich ausprobiert. Ich bin begeistert wie einfach und übersichtlich die App aufgebaut ist! Mehr braucht man nicht.',
+  },
+  {
+    ton: 'hell',
+    titel: 'Von mir ganz klar 5 Sterne',
+    text: 'Total übersichtlich und im Schlaf zu bedienen. Noch nie hatte ich meine Finanzen schneller im Blick als mit dieser App. Kann ich jedem wärmsten empfehlen, der sein Geld gerne im Blick behält und/oder in Zukunft behalten möchte.',
+  },
+  {
+    ton: 'gelb',
+    titel: 'Minimalistisch und deshalb sehr effektiv',
+    text: 'Es ist super übersichtlich und sehr einfach gehalten und somit genau das was ich brauche. Minimalistisch und deshalb sehr effektiv und mittlerweile nicht mehr wegzudenken aus meinem Alltag. Ich habe meine Finanzen durch die App fest im Griff.',
+  },
+  {
+    ton: 'hell',
+    titel: 'Handhabung erklärt sich von allein',
+    text: 'Tolle App für den Überblick aller Finanzen. Die Handhabung erklärt sich von allein.',
+  },
+  {
+    ton: 'hell',
+    titel: 'Beste App für die private Buchführung',
+    text: 'Ich find die App genial. Ohne Schnick Schnack. Intuitive Funktionsweise. Beste App für die private Buchführung.',
+  },
+];
+
+const faq = [
+  {
+    frage: 'Wie funktioniert die echte Monatsbilanz?',
+    antwort:
+      'Kosten, die nicht monatlich abgehen — etwa jährliche Versicherungen oder Quartalsbeiträge — trägst du einmal mit ihrem Zeitraum ein. Die App rechnet sie automatisch auf den Monat um, sodass deine Bilanz jeden Monat stimmt.',
+  },
+  {
+    frage: 'Hieß die App nicht mal „OnePeek“?',
+    antwort:
+      'Ja. Die App heißt jetzt GELD VERSTEHEN. Es ist dieselbe App mit denselben Funktionen und deinen bestehenden Daten — nur unter dem Namen der Marke, zu der sie gehört. Wenn du OnePeek bereits installiert hast, bekommst du die Umbenennung einfach als Update.',
+  },
+  {
+    frage: 'Muss ich mich registrieren?',
+    antwort:
+      'Nein. Du kannst ohne Registrierung sofort starten, bleibst komplett anonym und musst keine Daten hinterlegen.',
+  },
+  {
+    frage: 'Wie sicher sind meine Daten?',
+    antwort:
+      'Wir setzen auf Datenverschlüsselung nach neustem Standard. Niemand kann deine Daten auslesen — auch wir als Entwickler nicht.',
+  },
+  {
+    frage: 'Was kostet die App?',
+    antwort:
+      'Der Kern und die Hauptfunktionen sind und bleiben kostenlos. Zusätzlich gibt es Premium-Funktionen für alle, die mehr wollen.',
+  },
+  {
+    frage: 'Kann ich die App mit meiner Familie oder meinem Partner teilen?',
+    antwort:
+      'Ja. Du kannst ein Haushaltsbuch per QR-Code teilen, sodass ihr eure gemeinsamen Finanzen zusammen verwaltet — parallel zu eigenen, persönlichen Haushaltsbüchern.',
+  },
+  {
+    frage: 'Wie bekomme ich meine Daten aus der App heraus?',
+    antwort: 'Über den PDF-Export kannst du deine Bilanz jederzeit sichern oder weitergeben.',
+  },
+];
 ---
 <Base
-  title="OnePeek — Deine Finanzen auf einen Blick"
-  description="OnePeek von GELD VERSTEHEN: Einnahmen, Ausgaben und Ziele an einem Ort. Der Überblick, der wirklich hängen bleibt — ohne Excel-Wüste."
+  title="Die App — das Haushaltsbuch, das du wirklich führst"
+  description="Die App von GELD VERSTEHEN (früher OnePeek): Einkommen und Fixkosten einmal eintragen, Flexkosten in zwei Sekunden — und du siehst, was übrig bleibt. BILD-Testsieger, ohne Registrierung."
   active="app"
 >
   <!-- HERO -->
   <div style="background:var(--gv-blue);">
-    <div class="gv-wrap" style="padding-top:56px; padding-bottom:64px;">
-      <div class="gv-split" style="display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:center;">
+    <div class="gv-wrap" style="padding-top:64px; padding-bottom:72px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;">
         <div>
-          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:16px;">DIE APP · ONEPEEK</div>
-          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,78px);">Deine Finanzen auf <span style="color:var(--gv-yellow);">einen Blick</span>.</h1>
-          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Einnahmen, Ausgaben und Ziele an einem Ort. OnePeek gibt dir den Überblick, der wirklich hängen bleibt — ohne Excel-Wüste.</p>
+          <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.12em; color:var(--gv-yellow); margin-bottom:18px;">DIE APP VON GELD VERSTEHEN</div>
+          <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(40px,5.4vw,72px);">Das Haushaltsbuch, das du <span style="color:var(--gv-yellow);">wirklich</span> führst.</h1>
+          <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:24px 0 32px;">Trag ein, was reinkommt und rausgeht — den Rest übernimmt die App. Kein Excel, keine Buchhaltung, kein Kopfzerbrechen. Einfach ein gutes Gefühl bei Geld.</p>
           <StoreButtons />
         </div>
-        <img src={img.perAppHero} alt="Per Schippl nutzt die OnePeek App auf dem Smartphone" style="width:100%; height:460px; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.3);" />
+        <img
+          src={img.appHeroPhones}
+          alt="Die App von GELD VERSTEHEN auf zwei Smartphones"
+          width="640"
+          height="840"
+          style="width:100%; max-width:480px; height:auto; display:block; margin:0 auto;"
+        />
       </div>
     </div>
   </div>
 
-  <!-- FEATURES -->
-  <section style="background:#fff;">
-    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
-      <div class="gv-bar"></div>
-      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">WAS ONEPEEK KANN</p>
-      <h2 class="gv-h2" style="max-width:760px;">Alles, was du für den Überblick brauchst</h2>
-      <div class="gv-split" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:48px;">
-        <div style="display:flex; justify-content:center;"><img src={img.onepeekApp} alt="OnePeek App — Mein Haushaltsbuch mit Monatsübersicht" style="width:100%; max-width:320px; height:auto; display:block;" /></div>
-        <div style="display:grid; gap:22px;">
-          <div style="display:flex; gap:16px;">
-            <div class="gv-feat-num">1</div>
-            <div><h3 class="gv-feat-h">Live-Überblick</h3><p class="gv-feat-p">Sieh auf einen Blick, wie viel diesen Monat noch frei ist.</p></div>
+  <!-- BILD-TESTSIEGER -->
+  <section style="background:var(--gv-surface); border-top:1px solid var(--gv-border); border-bottom:1px solid var(--gv-border);">
+    <div class="gv-wrap" style="padding-top:104px; padding-bottom:104px;">
+      <div style="background:#fff; border:1px solid var(--gv-border); border-radius:14px; padding:56px; box-shadow:0 18px 44px rgba(16,32,56,.08);">
+        <div class="gv-split ap-bild" style="display:grid; grid-template-columns:.42fr 1fr; gap:56px; align-items:center;">
+          <div style="display:flex; justify-content:center;">
+            <img src={img.bildLogo} alt="BILD" style="width:100%; max-width:200px; height:auto; display:block; border-radius:18px;" />
           </div>
-          <div style="display:flex; gap:16px;">
-            <div class="gv-feat-num">2</div>
-            <div><h3 class="gv-feat-h">Kategorien &amp; Fixkosten</h3><p class="gv-feat-p">Wiederkehrende Kosten automatisch erkannt und sauber sortiert.</p></div>
-          </div>
-          <div style="display:flex; gap:16px;">
-            <div class="gv-feat-num">3</div>
-            <div><h3 class="gv-feat-h">Ziele setzen</h3><p class="gv-feat-p">Rücklage, Urlaub, Notgroschen — leg Ziele an und bleib dran.</p></div>
-          </div>
-          <div style="display:flex; gap:16px;">
-            <div class="gv-feat-num">4</div>
-            <div><h3 class="gv-feat-h">Klar &amp; aufgeräumt</h3><p class="gv-feat-p">Eine ruhige Oberfläche, die dich nicht erschlägt — sondern führt.</p></div>
+          <div>
+            <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(40px,5.4vw,66px); line-height:.98; color:var(--gv-ink); margin:0 0 10px;">BILD-TESTSIEGER</h2>
+            <p style="font-family:var(--font-display); font-size:clamp(17px,2vw,21px); letter-spacing:.06em; color:#E3000F; margin:0 0 28px;">BESTE HAUSHALTSBUCH-APP · <a href={BILD_ARTIKEL} target="_blank" rel="noopener" style="color:#E3000F; text-decoration:underline; text-underline-offset:3px;">05/2023</a></p>
+            <div style="display:grid; gap:14px; max-width:580px;">
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <span aria-hidden="true" style="flex:none; font-family:var(--font-display); font-size:26px; line-height:.8; color:#E3000F;">„</span>
+                <p style="font-size:17px; line-height:1.55; color:var(--gv-ink); margin:0;">Sehr aufgeräumt und durchdacht.</p>
+              </div>
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <span aria-hidden="true" style="flex:none; font-family:var(--font-display); font-size:26px; line-height:.8; color:#E3000F;">„</span>
+                <p style="font-size:17px; line-height:1.55; color:var(--gv-ink); margin:0;">Die schlichteste und nützlichste Haushaltsbuch App, die wir im BILD-Test für iPhones gefunden haben, ist OnePeek.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section style="background:var(--gv-surface);">
-    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+  <!-- SO FUNKTIONIERT'S -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:112px; padding-bottom:56px;">
       <div class="gv-bar"></div>
-      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">SO STARTEST DU</p>
-      <h2 class="gv-h2" style="max-width:720px;">In drei Minuten eingerichtet</h2>
-      <div class="gv-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;">
-        <div class="gv-step">
-          <div class="gv-step-num">01</div>
-          <h3 class="gv-step-h">Herunterladen</h3>
-          <p class="gv-step-p">App laden und in wenigen Schritten dein Profil anlegen.</p>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:18px 0 8px;">SO FUNKTIONIERT'S</p>
+      <h2 class="gv-h2 ap-h2" style="max-width:620px;">App auf — und los. Ohne Registrierung.</h2>
+      <p style="font-size:17px; line-height:1.6; color:var(--gv-ink-soft); margin:20px 0 0; max-width:520px;">Zwei Dinge eintragen. Den Rest macht die App.</p>
+    </div>
+
+    <div class="gv-wrap" style="padding-bottom:72px; display:grid; gap:96px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+        <div>
+          <div class="ap-num">1</div>
+          <h3 class="ap-step-h">Einkommen und Fixkosten</h3>
+          <p class="ap-step-p">Einmal eintragen — Gehalt, Miete, Handy, Versicherung. Die App übernimmt sie jeden Monat.</p>
         </div>
-        <div class="gv-step">
-          <div class="gv-step-num">02</div>
-          <h3 class="gv-step-h">Einnahmen &amp; Kosten</h3>
-          <p class="gv-step-p">Trag deine Fixkosten ein — den Rest macht OnePeek übersichtlich.</p>
+        <div class="ap-shots">
+          <img src={img.appEinkommen} alt="Einkommen in der App eintragen" style="width:230px;" />
+          <img src={img.appFixkosten} alt="Fixkosten in der App eintragen" style="width:230px;" />
         </div>
-        <div class="gv-step">
-          <div class="gv-step-num">03</div>
-          <h3 class="gv-step-h">Überblick genießen</h3>
-          <p class="gv-step-p">Ab jetzt weißt du jederzeit, wo du stehst — ganz entspannt.</p>
+      </div>
+
+      <div class="gv-split" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+        <div style="display:flex; justify-content:center;">
+          <img src={img.appFlexkosten} alt="Flexkosten eintragen: Betrag eingeben" style="width:100%; max-width:330px; height:auto; display:block;" />
         </div>
+        <div>
+          <div class="ap-num">2</div>
+          <h3 class="ap-step-h">Deine Flexkosten</h3>
+          <p class="ap-step-p">Kaffee, Einkauf, Tanken — in zwei Sekunden getippt.</p>
+          <div class="ap-sticker">
+            <div style="font-family:var(--font-body); font-size:12px; letter-spacing:.14em; font-weight:700; color:var(--gv-yellow);">EIN WORT VON UNS ERFUNDEN</div>
+            <div style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,5vw,56px); line-height:.92; color:var(--gv-yellow); margin:8px 0 14px;">FLEXKOSTEN</div>
+            <p style="font-size:17px; line-height:1.55; color:#fff; margin:0;">Alles, was jeden Monat anders ausfällt und in deiner Hand liegt. Fixkosten stehen fest. Flexkosten entscheidest du — jeden Tag neu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gv-wrap" style="padding-bottom:112px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+        <div>
+          <div class="ap-num">3</div>
+          <h3 class="ap-step-h">Und du siehst, was übrig bleibt</h3>
+          <p class="ap-step-p">Jeden Tag aktuell. Jährliche Kosten sind schon eingerechnet.</p>
+        </div>
+        <div class="ap-shots ap-shots-tall">
+          <img src={img.appDashboard} alt="Dashboard der App mit dem Überblick über den laufenden Monat" />
+          <img src={img.appBilanz} alt="Monatsübersicht als Bilanz" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STERN TV -->
+  <section style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:104px; padding-bottom:104px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;">
+        <div>
+          <div class="gv-bar"></div>
+          <p class="gv-eyebrow-plain" style="color:var(--gv-yellow); margin:18px 0 8px;">BEKANNT AUS STERN TV</p>
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(30px,4.2vw,48px); line-height:1.04; color:#fff; margin:0; max-width:420px;">„So teuer ist Deutschland“</h2>
+          <p style="font-size:17px; line-height:1.6; color:#EAF2FA; max-width:440px; margin:20px 0 20px;">In der stern-TV-Sondersendung durfte Per Schippl über die Entstehung und die Hintergründe der App sprechen.</p>
+          <a href={STERN_TV_VIDEO} target="_blank" rel="noopener" style="font-family:var(--font-display); font-size:16px; letter-spacing:.08em; color:var(--gv-yellow); text-decoration:underline; text-underline-offset:4px;">BEITRAG ANSEHEN</a>
+        </div>
+        <div style="position:relative; width:100%; height:340px; border-radius:16px; overflow:hidden; background:#000;">
+          <YouTubeEmbed id="Awvgf0Dth5Q" title="stern TV Beitrag mit Per Schippl" poster={img.sternTvCover} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEITERE VORTEILE -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:112px; padding-bottom:40px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:18px 0 8px;">WEITERE VORTEILE</p>
+      <h2 class="gv-h2 ap-h2" style="max-width:600px;">Ein Haushaltsbuch für jeden Teil deines Lebens</h2>
+    </div>
+    <div class="gv-wrap" style="padding-top:44px; padding-bottom:88px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px;">
+        {vorteile.map((v) => (
+          <div class="ap-vorteil">
+            <img src={v.bild} alt={v.alt} style="width:150px; height:auto; display:block;" />
+            <div>
+              <h3 style="font-family:var(--font-display); font-weight:400; font-size:26px; line-height:1.05; color:var(--gv-ink); margin:0 0 16px;">{v.titel}</h3>
+              <div style="display:grid; gap:12px;">
+                {v.punkte.map((p) => (
+                  <div class="ap-check">
+                    <span class="tick" aria-hidden="true">✓</span>
+                    <span style="font-size:15px; line-height:1.5; color:var(--gv-ink);">{p}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM -->
+  <section style="background:#0C2138;">
+    <div class="gv-wrap" style="padding-top:104px; padding-bottom:104px;">
+      <div style="display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(232,199,122,.45); border-radius:999px; padding:7px 16px;">
+        <span style="width:6px; height:6px; border-radius:50%; background:#E7C46E;"></span>
+        <span class="gv-eyebrow-plain" style="color:#E7C46E;">PREMIUM</span>
+      </div>
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(32px,4.6vw,54px); line-height:1.02; color:#fff; margin:26px 0 0; max-width:660px;">Für alle, die noch mehr aus ihrem Geld holen wollen</h2>
+      <p style="font-size:17px; line-height:1.6; color:#C9D6E4; max-width:520px; margin:20px 0 0;">Der Kern der App bleibt kostenlos. Premium legt obendrauf:</p>
+      <div class="ap-premium">
+        {premium.map((p) => (
+          <div class="ap-premium-card">
+            <div class="ap-premium-rule"></div>
+            <h3 style="font-family:var(--font-display); font-weight:400; font-size:23px; letter-spacing:.01em; color:#F2DFA8; margin:0 0 10px;">{p.titel}</h3>
+            <p style="font-size:15px; line-height:1.65; color:#C9D6E4; margin:0;">{p.text}</p>
+          </div>
+        ))}
+      </div>
+      <div style="display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:56px;">
+        <a class="ap-premium-cta" href={APP_STORE} target="_blank" rel="noopener">Hol dir Premium <span aria-hidden="true" style="font-size:19px;">→</span></a>
+        <span style="font-size:15px; color:#9FB3C8;">Jederzeit kündbar. Der kostenlose Kern bleibt dir erhalten.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section style="background:var(--gv-surface);">
+    <div class="gv-wrap" style="padding-top:104px; padding-bottom:112px;">
+      <div class="gv-split" style="display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:end;">
+        <div>
+          <div class="gv-bar"></div>
+          <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:18px 0 8px;">DAS SAGEN NUTZER</p>
+          {/* TODO(Per): „Tausende“ stammt aus dem Designentwurf — sag uns die echte
+              Nutzerzahl, dann wird eine konkrete Zahl daraus. */}
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(36px,5.4vw,66px); line-height:.98; color:var(--gv-ink); margin:0; max-width:560px;">Tausende führen damit schon ihr Haushaltsbuch</h2>
+        </div>
+        <div style="display:flex; gap:18px;">
+          <div class="ap-rating">
+            <div class="ap-rating-num">4,7</div>
+            <div class="ap-stars" aria-hidden="true">★★★★★</div>
+            <div class="ap-rating-store">APP STORE</div>
+          </div>
+          <div class="ap-rating">
+            <div class="ap-rating-num">4,7</div>
+            <div class="ap-stars" aria-hidden="true">★★★★★</div>
+            <div class="ap-rating-store">GOOGLE PLAY</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:15px; color:var(--gv-ink-soft); margin:40px 0 0;">Ein Auszug einiger App-Store-Bewertungen unserer Nutzer</p>
+      <div class="ap-voices">
+        {bewertungen.map((b) => (
+          <figure class:list={['ap-voice', `ap-voice-${b.ton}`]}>
+            <div class="ap-voice-stars" aria-hidden="true">★★★★★</div>
+            <h3 class="ap-voice-h">{b.titel}</h3>
+            <blockquote class="ap-voice-q">{b.text}</blockquote>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section style="background:var(--gv-blue);">
-    <div class="gv-wrap" style="padding-top:80px; padding-bottom:80px; text-align:center;">
-      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Hol dir OnePeek</h2>
-      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 28px; max-width:460px;">Lade die App und bring in wenigen Minuten Ordnung in deine Finanzen.</p>
+    <div class="gv-wrap" style="padding-top:88px; padding-bottom:88px; text-align:center;">
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(34px,4.6vw,52px); line-height:1; color:#fff; margin:0 0 16px;">Jetzt herunterladen</h2>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:0 auto 32px; max-width:460px;">Lade die App von GELD VERSTEHEN und sieh, was am Monatsende wirklich übrig bleibt.</p>
       <div style="display:flex; justify-content:center;">
         <StoreButtons />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:96px; padding-bottom:112px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:18px 0 8px;">HÄUFIGE FRAGEN</p>
+      <h2 class="gv-h2 ap-h2" style="max-width:600px; margin-bottom:36px;">Fragen zur App von GELD VERSTEHEN</h2>
+      <div class="ap-faq">
+        {faq.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.frage}</summary>
+            <p>{f.antwort}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .gv-feat-num { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--gv-blue-050); color: var(--gv-blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; }
-  .gv-feat-h { font-family: var(--font-display); font-weight: 400; font-size: 22px; color: var(--gv-ink); margin: 0 0 4px; }
-  .gv-feat-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+  /* Sektionsüberschrift dieser Seite eine Spur kleiner als die globale .gv-h2 */
+  .ap-h2 { font-size: clamp(30px, 4.2vw, 48px); }
 
-  .gv-step { background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; padding: 30px; }
-  .gv-step-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }
-  .gv-step-h { font-family: var(--font-display); font-weight: 400; font-size: 24px; color: var(--gv-ink); margin: 12px 0 8px; }
-  .gv-step-p { font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); margin: 0; }
+  /* Schritt 1–3 */
+  .ap-num { font-family: var(--font-display); font-size: clamp(90px, 12vw, 170px); line-height: .8; color: var(--gv-yellow); }
+  .ap-step-h { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.02; color: var(--gv-ink); margin: 22px 0 12px; max-width: 420px; }
+  .ap-step-p { font-size: 18px; line-height: 1.55; color: var(--gv-ink-soft); margin: 0; max-width: 400px; }
+
+  .ap-shots { display: flex; justify-content: center; gap: 20px; }
+  .ap-shots img { flex: none; height: auto; display: block; }
+  .ap-shots-tall { align-items: flex-end; }
+  .ap-shots-tall img { height: 486px; width: auto; }
+
+  /* „FLEXKOSTEN“-Sticker */
+  .ap-sticker {
+    margin: 34px 0 0; max-width: 440px; background: #000; border-radius: 14px;
+    padding: 28px 30px 30px; transform: rotate(-1.8deg); box-shadow: 0 18px 44px rgba(0,0,0,.18);
+  }
+
+  /* Weitere Vorteile */
+  .ap-vorteil { display: grid; grid-template-columns: 150px 1fr; gap: 28px; align-items: start; }
+  .ap-check { display: flex; gap: 12px; align-items: flex-start; }
+  .ap-check .tick {
+    flex: none; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--gv-blue); color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; margin-top: 1px;
+  }
+
+  /* Premium */
+  .ap-premium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+  .ap-premium-card { background: rgba(255,255,255,.04); border: 1px solid rgba(232,199,122,.28); border-radius: 16px; padding: 28px 26px 30px; }
+  .ap-premium-rule { width: 30px; height: 2px; background: linear-gradient(90deg, #E7C46E, #F6E6B4); margin-bottom: 18px; }
+  .ap-premium-cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: linear-gradient(135deg, #E7C46E 0%, #F6E6B4 55%, #E9CA7C 100%);
+    color: #4A3714; font-family: var(--font-body); font-weight: 700; font-size: 17px;
+    padding: 17px 28px; border-radius: 14px; text-decoration: none;
+    box-shadow: 0 14px 34px rgba(231,196,110,.26);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .ap-premium-cta:hover { color: #4A3714; box-shadow: 0 18px 40px rgba(231,196,110,.34); }
+  .ap-premium-cta:active { transform: scale(.98); }
+
+  /* Bewertungen */
+  .ap-rating { flex: 1; background: #fff; border: 1px solid var(--gv-border); border-radius: 18px; padding: 26px 24px; }
+  .ap-rating-num { font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, 6vw, 76px); line-height: .8; color: var(--gv-blue); }
+  .ap-stars { letter-spacing: .14em; font-size: 14px; color: #F5B301; margin: 14px 0 8px; }
+  .ap-rating-store { font-family: var(--font-body); font-size: 13px; letter-spacing: .1em; font-weight: 700; color: var(--gv-ink-soft); }
+
+  .ap-voices { columns: 300px 3; column-gap: 20px; margin-top: 24px; }
+  .ap-voice {
+    break-inside: avoid; -webkit-column-break-inside: avoid;
+    margin: 0 0 20px; background: #fff; border: 1px solid var(--gv-border);
+    border-radius: 18px; padding: 28px 26px 30px;
+  }
+  .ap-voice-stars { letter-spacing: .14em; font-size: 13px; color: #F5B301; }
+  .ap-voice-h { font-family: var(--font-display); font-weight: 400; font-size: 23px; line-height: 1.05; color: var(--gv-ink); margin: 12px 0 10px; }
+  .ap-voice-q { font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); margin: 0; }
+  .ap-voice-blau { background: var(--gv-blue); border-color: var(--gv-blue); }
+  .ap-voice-blau .ap-voice-stars { color: var(--gv-yellow); }
+  .ap-voice-blau .ap-voice-h { color: #fff; }
+  .ap-voice-blau .ap-voice-q { color: #EAF2FA; }
+  .ap-voice-gelb { background: var(--gv-yellow); border-color: var(--gv-yellow); }
+  .ap-voice-gelb .ap-voice-stars { color: #101820; }
+  .ap-voice-gelb .ap-voice-h { color: #101820; }
+  .ap-voice-gelb .ap-voice-q { color: #3A3320; }
+
+  /* FAQ */
+  .ap-faq details { border-bottom: 1px solid var(--gv-border); }
+  .ap-faq summary {
+    cursor: pointer; font-family: var(--font-display); font-weight: 400; font-size: 19px;
+    color: var(--gv-ink); padding: 22px 0; list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .ap-faq summary::-webkit-details-marker { display: none; }
+  .ap-faq summary::after { content: "+"; flex: none; font-size: 24px; color: var(--gv-blue); transition: transform .15s ease; }
+  .ap-faq details[open] summary::after { transform: rotate(45deg); }
+  .ap-faq p { margin: 0 0 26px; font-size: 15px; line-height: 1.6; color: var(--gv-ink-soft); max-width: 760px; }
 
   @media (max-width: 860px) {
-    .gv-split { grid-template-columns: 1fr !important; gap: 32px !important; }
-    .gv-3 { grid-template-columns: 1fr !important; }
+    .gv-split { grid-template-columns: 1fr !important; gap: 36px !important; }
+    /* Grid-Kinder dürfen unter ihre Inhaltsbreite schrumpfen */
+    .gv-split > * { min-width: 0; }
+    .ap-premium { grid-template-columns: 1fr; }
+    .ap-vorteil { grid-template-columns: 110px 1fr; gap: 20px; }
+    .ap-vorteil img { width: 110px !important; }
+    /* Screenshot-Paare passen sich der Bildschirmbreite an, statt zu überlaufen */
+    .ap-shots img { flex: 1 1 0; min-width: 0; width: auto !important; max-width: 230px; }
+    .ap-shots-tall img { height: auto; }
+    .ap-sticker { max-width: none; }
   }
 </style>

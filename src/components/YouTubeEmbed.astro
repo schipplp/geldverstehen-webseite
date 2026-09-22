@@ -5,20 +5,28 @@
 // bloßen Seitenaufruf keine Daten an YouTube fließen.
 // Füllt das nächste position:relative-Elternelement (z. B. ein 16:9-Container).
 // Optionales `label` (z. B. ein Name) macht mehrere Videos unterscheidbar.
+// Optionales `poster`: ein eigenes Standbild (lokal ausgeliefert, kein
+// Thumbnail von Google) als Vorschaubild statt der gebrandeten Fläche.
 export interface Props {
   id: string;
   title: string;
   label?: string;
+  poster?: string;
 }
-const { id, title, label } = Astro.props;
+const { id, title, label, poster } = Astro.props;
 ---
 <div class="gv-yt" data-id={id} data-title={title}>
-  <button class="gv-yt-btn" type="button" aria-label={`Video abspielen: ${title}`}>
+  <button
+    class:list={['gv-yt-btn', { 'gv-yt-poster': poster }]}
+    style={poster ? `background-image:url("${poster}")` : undefined}
+    type="button"
+    aria-label={`Video abspielen: ${title}`}
+  >
     <span class="gv-yt-play" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="var(--gv-ink)"><path d="M8 5.5v13l11-6.5z"/></svg>
     </span>
     {label && <span class="gv-yt-name">{label}</span>}
-    <span class="gv-yt-label">Video abspielen</span>
+    {!poster && <span class="gv-yt-label">Video abspielen</span>}
     <span class="gv-yt-note">Mit Klick wird das Video von YouTube (Google) geladen und dabei eine Verbindung zu Google hergestellt.</span>
   </button>
 </div>
@@ -43,6 +51,20 @@ const { id, title, label } = Astro.props;
   .gv-yt-name { font-family: var(--font-display); font-size: 28px; line-height: 1; letter-spacing: .02em; color: #fff; margin-top: 2px; }
   .gv-yt-label { font-family: var(--font-body); font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--gv-yellow); }
   .gv-yt-note { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,.6); max-width: 320px; }
+
+  /* Variante mit eigenem Standbild: Play-Knopf unten rechts, Hinweis unten links */
+  .gv-yt-poster {
+    background-color: #0b1f38; background-size: cover; background-position: center;
+    flex-direction: row-reverse; align-items: flex-end; justify-content: space-between;
+    gap: 16px; padding: 20px; text-align: left;
+  }
+  .gv-yt-poster::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,20,36,0) 45%, rgba(8,20,36,.78) 100%);
+  }
+  .gv-yt-poster > * { position: relative; }
+  .gv-yt-poster .gv-yt-play { width: 64px; height: 64px; flex: none; }
+  .gv-yt-poster .gv-yt-note { color: rgba(255,255,255,.82); max-width: 300px; }
 </style>
 
 <script>
