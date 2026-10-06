@@ -3,7 +3,9 @@
 // beim Build fingerprinted in dist/_astro/ — es müssen keine Kopien im Repo
 // gehalten werden ("Keine unoptimierten Originale einchecken").
 // `?url` liefert die fertige, basis-korrekte URL als String.
-import perHero from '../../design/uploads/DSC00023.jpg?url';
+// Freigestellt mit echter Transparenz: Das Original hatte einen weißen
+// Aufkleber-Rand und einen eigenen Blauton, der neben dem Marken-Blau stand.
+import perHero from '../../design/uploads/per-hero-freisteller.webp?url';
 import podcastCover from '../../design/uploads/new podcast cover_v5.jpg?url';
 import appScreenshot from '../../design/uploads/1de.webp?url';
 import buchCover from '../../design/uploads/md.jpeg?url';

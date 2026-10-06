@@ -61,7 +61,7 @@
   /* ---- Fonts ---- */
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif; /* wordmark + headlines */
   --font-heading: "Bebas Neue", "Arial Narrow", sans-serif;
-  --font-body: "PT Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Type scale */
   --fs-display: 88px;
