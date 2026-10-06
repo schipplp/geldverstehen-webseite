@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
 ---
 <Base
   title="Impressum"
@@ -49,6 +50,12 @@ import Base from '../layouts/Base.astro';
           Per Schippl<br />
           Markt 22 (Lambertihof)<br />
           26122 Oldenburg
+        </p>
+
+        <h2 class="lp-h2">Datenschutz</h2>
+        <p class="lp-p">
+          <a href={u('/datenschutz')}>Datenschutzerklärung der Website</a><br />
+          <a href={u('/privacy-policy-app')}>Datenschutzerklärung der App</a>
         </p>
 
         <h2 class="lp-h2">Verbraucherstreitbeilegung</h2>

@@ -1,213 +1,330 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// Datenschutzerklärung der App — wörtlich übernommen von
-// onepeek.app/privacy-policy-app (Stand dort: 10. Oktober 2020). Der Dateiname
-// ist bewusst derselbe wie auf der alten Domain, damit bestehende Verweise
-// (u. a. aus den Store-Einträgen) auf dieselbe Adresse zeigen können.
+// Datenschutzerklärung der App. Die URL bleibt /privacy-policy-app, weil
+// App Store Connect und die Google Play Console genau diese Adresse
+// verlinken und onepeek.app später hierher umgeleitet wird.
 //
-// TODO(Per): Der Text ist von 2020 und weicht inhaltlich von der neueren
-// englischen App-Erklärung (onepeek.app/de/privacy-policy) ab. Vor dem
-// Livegang klären, welche Fassung gilt — siehe Hinweise im Pull Request.
-
-const inhalt = [
-  ['einleitung', 'Einleitung'],
-  ['verantwortlicher', 'Verantwortlicher'],
-  ['uebersicht', 'Übersicht der Verarbeitungen'],
-  ['rechtsgrundlagen', 'Maßgebliche Rechtsgrundlagen'],
-  ['sicherheit', 'Sicherheitsmaßnahmen'],
-  ['uebermittlung', 'Übermittlung und Offenbarung von personenbezogenen Daten'],
-  ['drittlaender', 'Datenverarbeitung in Drittländern'],
-  ['cookies', 'Einsatz von Cookies'],
-  ['hosting', 'Bereitstellung des Onlineangebotes und Webhosting'],
-  ['apps', 'Besondere Hinweise zu Applikationen (Apps)'],
-  ['appstores', 'Bezug von Applikationen über Appstores'],
-  ['kontakt', 'Kontaktaufnahme'],
-  ['push', 'Push-Nachrichten'],
-  ['loeschung', 'Löschung von Daten'],
-  ['aenderung', 'Änderung und Aktualisierung der Datenschutzerklärung'],
-  ['rechte', 'Rechte der betroffenen Personen'],
-  ['begriffe', 'Begriffsdefinitionen'],
-];
+// Aufbau: deutsche Fassung (Übertragung aus dem englischen Original),
+// darunter das englische Original 1:1.
+//
+// TODO(Per/Christoph): Zwei Punkte aus der Vorlage sind offen, siehe
+// Pull Request — der Zweck des Kamerazugriffs fehlt schon im englischen
+// Original, und die Adresse des Datenschutzbeauftragten liegt auf
+// onepeek.app, also auf der Domain, die abgelöst wird.
 ---
 <Base
   title="Datenschutzerklärung der App"
-  description="Datenschutzerklärung für die App von GELD VERSTEHEN — welche Daten bei der Bereitstellung der Applikation verarbeitet werden."
+  description="Datenschutzerklärung für die App GELD VERSTEHEN (früher OnePeek) — Art, Zweck und Umfang der Datenverarbeitung bei der Nutzung der App."
   active=""
 >
   <main>
     <div class="gv-wrap" style="padding-top:64px; padding-bottom:72px;">
       <div style="max-width:760px;">
         <div class="gv-bar"></div>
-        <h1 class="lp-h1">Datenschutz&shy;erklärung</h1>
+        <h1 class="lp-h1">Datenschutz&shy;erklärung für die App</h1>
+        <p class="lp-lang"><a href="#english">English version ↓</a></p>
 
-        <h2 class="lp-h2" id="einleitung">Einleitung</h2>
-        <p class="lp-p">Mit der folgenden Datenschutzerklärung möchten wir Sie darüber aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als „Daten" bezeichnet) wir zu welchen Zwecken und in welchem Umfang im Rahmen der Bereitstellung unserer Applikation verarbeiten.</p>
-        <p class="lp-p">Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
-        <p class="lp-p">Stand: 10. Oktober 2020</p>
+        <p class="lp-p">Diese Erklärung gilt für die App „GELD VERSTEHEN" (früher „OnePeek").</p>
 
-        <h2 class="lp-h2">Inhaltsübersicht</h2>
-        <ul class="lp-ul">
-          {inhalt.map(([id, titel]) => (
-            <li><a href={`#${id}`}>{titel}</a></li>
-          ))}
-        </ul>
+        <h2 class="lp-h2">1. Geltungsbereich der Datenschutzerklärung</h2>
+        <p class="lp-p">Diese Datenschutzerklärung gilt für unsere Apps für mobile Betriebssysteme und Endgeräte (nachfolgend „App"). Sie erläutert Art, Zweck und Umfang der Datenerhebung bei der Nutzung der App.</p>
+        <p class="lp-p">Beim Herunterladen dieser App werden bestimmte erforderliche personenbezogene Daten an den jeweiligen App Store übermittelt (z. B. Apple App Store oder Google Play). Insbesondere werden beim Herunterladen die E-Mail-Adresse, der Nutzername, die Kundennummer des herunterladenden Kontos, die individuelle Gerätekennziffer, Zahlungsinformationen sowie der Zeitpunkt des Downloads an den App Store übermittelt. Auf diese Erhebung und Verarbeitung haben wir keinen Einfluss; sie erfolgt ausschließlich durch den von Ihnen gewählten App Store. Wir sind daher für diese Erhebung und Verarbeitung nicht verantwortlich; die Verantwortung liegt allein beim App Store.</p>
+        <p class="lp-p">Wir behalten uns vor, diese Datenschutzerklärung unter Beachtung der gesetzlichen Vorgaben jederzeit zu ändern.</p>
 
-        <h2 class="lp-h2" id="verantwortlicher">Verantwortlicher</h2>
+        <h2 class="lp-h2">2. Verantwortliche Stelle</h2>
+        <p class="lp-p">Verantwortliche Stelle für die in dieser Datenschutzerklärung beschriebene Datenverarbeitung ist:</p>
         <p class="lp-p">
           Schippl Weise-Onnen Oldenburg GmbH &amp; Co. KG<br />
-          Markt 22<br />
-          26122 Oldenburg
+          Christoph Weise-Onnen<br />
+          <a href="mailto:cwo@swoo-digital.de">cwo@swoo-digital.de</a><br />
+          <a href="tel:+4944192206202">+49 441 922 06 202</a>
         </p>
-        <p class="lp-p">Vertretungsberechtigte Personen: Per Schippl, Christoph Weise-Onnen</p>
-        <p class="lp-p">E-Mail-Adresse: <a href="mailto:info@swoo-digital.de">info@swoo-digital.de</a></p>
 
-        <h2 class="lp-h2" id="uebersicht">Übersicht der Verarbeitungen</h2>
-        <p class="lp-p">Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwecke ihrer Verarbeitung zusammen und verweist auf die betroffenen Personen.</p>
-        <h3 class="lp-h3">Arten der verarbeiteten Daten</h3>
+        <h2 class="lp-h2">3. Datenschutzbeauftragter</h2>
+        <p class="lp-p">Unseren Datenschutzbeauftragten erreichen Sie unter folgenden Kontaktdaten:</p>
+        <p class="lp-p">
+          Per Schippl<br />
+          Markt 22<br />
+          26122 Oldenburg<br />
+          <a href="mailto:ps@onepeek.app">ps@onepeek.app</a><br />
+          <a href="tel:+4944192206202">+49 441 922 06 202</a>
+        </p>
+
+        <h2 class="lp-h2">4. Art, Umfang, Zweck und Rechtsgrundlage der Datenverarbeitung</h2>
+
+        <h3 class="lp-h3">Zweck und Rechtsgrundlage der Datenverarbeitung</h3>
+        <p class="lp-p">Sofern in dieser Datenschutzerklärung keine spezielleren Regelungen getroffen werden, verarbeiten wir Ihre personenbezogenen Daten im Rahmen der Nutzung der App, um die Funktionen der App bereitzustellen, die Sicherheit der App zu gewährleisten oder – soweit erforderlich und rechtlich zulässig – mit Ihnen in Kontakt zu treten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie unser berechtigtes Interesse an der Bereitstellung einer funktionsfähigen App (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, soweit die Einwilligung die Speicherung von Informationen auf dem Endgerät oder den Zugriff auf solche Informationen (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit widerrufbar. Einzelheiten ergeben sich aus den folgenden Ausführungen.</p>
+
+        <h3 class="lp-h3">Verarbeitete Datenkategorien</h3>
+        <p class="lp-p">Wenn Sie diese App nutzen, werden folgende personenbezogene Daten verarbeitet:</p>
         <ul class="lp-ul">
-          <li>Bestandsdaten (z.B. Namen, Adressen).</li>
-          <li>Inhaltsdaten (z.B. Eingaben in Onlineformularen).</li>
-          <li>Kontaktdaten (z.B. E-Mail, Telefonnummern).</li>
-          <li>Meta-/Kommunikationsdaten (z.B. Geräte-Informationen, IP-Adressen).</li>
-          <li>Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten).</li>
-          <li>Bild- und/ oder Videoaufnahmen (z. B. Fotografien oder Videoaufnahmen einer Person).</li>
-          <li>Tonaufnahmen.</li>
-          <li>Standortdaten (Angaben zur geografischen Position eines Gerätes oder einer Person).</li>
-          <li>Vertragsdaten (z.B. Vertragsgegenstand, Laufzeit, Kundenkategorie).</li>
-          <li>Zahlungsdaten (z.B. Bankverbindungen, Rechnungen, Zahlungshistorie).</li>
+          <li>Vor- und Nachname</li>
+          <li>Adresse</li>
+          <li>Nutzername</li>
+          <li>E-Mail-Adresse</li>
+          <li>Telefon- und Mobilfunknummer</li>
+          <li>Profilbild</li>
+          <li>Bestelldaten (welche Produkte bei welchem Verkäufer bestellt wurden)</li>
+          <li>Rechnungs- und Vertragsdaten</li>
+          <li>Vertreter und Ansprechpartner</li>
+          <li>Daten, die Sie im Chat oder in Kontaktformularen eingeben</li>
+          <li>Gerätekennungen / Geräte-IDs</li>
+          <li>Gerätenummer und Gerätetyp des Smartphones/Endgeräts</li>
+          <li>Bilder</li>
+          <li>IBAN</li>
+          <li>BIC</li>
+          <li>ggf. Umsätze und Text</li>
+          <li>Geräteinformationen wie IP-Adresse, Gerätetyp, gerätespezifische Einstellungen und App-Einstellungen sowie App-Eigenschaften, Datum und Uhrzeit des Zugriffs, Zeitzone, übertragene Datenmenge und die Meldung, ob der Datenaustausch vollständig war, Absturz der App, Browsertyp und Betriebssystem; diese Zugriffsdaten werden verarbeitet, um den technischen Betrieb der App zu ermöglichen</li>
+          <li>Daten, die Sie uns mitteilen: Für die Nutzung der App müssen Sie ein Nutzerkonto anlegen. Dazu müssen Sie mindestens Ihren Login-Namen angeben.</li>
         </ul>
-        <h3 class="lp-h3">Kategorien betroffener Personen</h3>
+        <p class="lp-p">Sofern die Verarbeitung der Daten die Speicherung von Informationen auf Ihrem Endgerät oder den Zugriff auf Informationen erfordert, die bereits auf dem Endgerät gespeichert sind, ist § 25 Abs. 1, 2 TDDDG die Rechtsgrundlage.</p>
+        <p class="lp-p">Diese Daten werden zur Durchführung des Nutzungsvertrags zwischen uns und den App-Nutzern erhoben (Art. 6 Abs. 1 S. 1 lit. b DSGVO). Hinsichtlich freiwilliger Angaben erfolgt die Datenverarbeitung zudem auf Grundlage von Art. 6 Abs. 1 S. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an der Erhebung freiwillig angegebener Daten unserer Nutzer. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar.</p>
+
+        <h3 class="lp-h3">Registrierung</h3>
+        <p class="lp-p">Sie können sich in der App registrieren, um zusätzliche Funktionen der App zu nutzen. Die dabei eingegebenen Daten verwenden wir nur zum Zwecke der Nutzung des jeweiligen Angebots oder Dienstes, für den Sie sich registriert haben. Die bei der Registrierung abgefragten Pflichtangaben müssen vollständig angegeben werden. Anderenfalls werden wir die Registrierung ablehnen. Für wichtige Änderungen, etwa beim Angebotsumfang oder bei technisch notwendigen Änderungen, nutzen wir die bei der Registrierung angegebene E-Mail-Adresse, um Sie auf diesem Wege zu informieren. Die Verarbeitung der bei der Registrierung eingegebenen Daten erfolgt zum Zwecke der Durchführung des durch die Registrierung begründeten Nutzungsverhältnisses und ggf. zur Anbahnung weiterer Verträge (Art. 6 Abs. 1 lit. b DSGVO). Die bei der Registrierung erfassten Daten werden von uns gespeichert, solange Sie in dieser App registriert sind, und anschließend gelöscht. Gesetzliche Aufbewahrungsfristen bleiben unberührt.</p>
+        <p class="lp-p">Für die Registrierung mit einem Google-Konto ist Anbieter die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. Wenn Sie sich mit Ihrem Konto registrieren, müssen Sie lediglich Ihren jeweiligen Kontonamen und das zugehörige Passwort eingeben. Ihr Konto in unserer App wird dann automatisch mit den beim jeweiligen Anbieter hinterlegten Daten vervollständigt. Die Nutzung dieser Funktion erfolgt in unserem berechtigten Interesse, unseren Nutzern einen möglichst einfachen Registrierungsprozess zu ermöglichen (Art. 6 Abs. 1 lit. f DSGVO). Da die Nutzung der Registrierungsfunktion freiwillig ist und die Nutzer selbst über die jeweiligen Zugangsmöglichkeiten entscheiden können, stehen keine überwiegenden Rechte der Betroffenen entgegen.</p>
+        <p class="lp-p">Für die Registrierung mit einem Apple-Konto ist Anbieter die Apple Inc., Infinite Loop, Cupertino, CA 95014, USA, <a href="https://www.apple.com/de/ios/app-store/" target="_blank" rel="noopener">apple.com/de/ios/app-store</a>. Wenn Sie sich mit Ihrem Konto registrieren, müssen Sie lediglich Ihren jeweiligen Kontonamen und das zugehörige Passwort eingeben. Ihr Konto in unserer App wird dann automatisch mit den beim jeweiligen Anbieter hinterlegten Daten vervollständigt. Die Nutzung dieser Funktion erfolgt in unserem berechtigten Interesse, unseren Nutzern einen möglichst einfachen Registrierungsprozess zu ermöglichen (Art. 6 Abs. 1 lit. f DSGVO). Da die Nutzung der Registrierungsfunktion freiwillig ist und die Nutzer selbst über die jeweiligen Zugangsmöglichkeiten entscheiden können, stehen keine überwiegenden Rechte der Betroffenen entgegen.</p>
+        <p class="lp-p">Für die Registrierung per Magic Link ist Anbieter die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. Wenn Sie sich mit Ihrem Konto registrieren, müssen Sie lediglich Ihren jeweiligen Kontonamen und das zugehörige Passwort eingeben. Ihr Konto in unserer App wird dann automatisch mit den beim jeweiligen Anbieter hinterlegten Daten vervollständigt. Die Nutzung dieser Funktion erfolgt in unserem berechtigten Interesse, unseren Nutzern einen möglichst einfachen Registrierungsprozess zu ermöglichen (Art. 6 Abs. 1 lit. f DSGVO). Da die Nutzung der Registrierungsfunktion freiwillig ist und die Nutzer selbst über die jeweiligen Zugangsmöglichkeiten entscheiden können, stehen keine überwiegenden Rechte der Betroffenen entgegen.</p>
+
+        <h3 class="lp-h3">Zugriffsrechte der App</h3>
+        <p class="lp-p">Zur Erbringung unserer Leistungen fordert die App die nachfolgend aufgeführten Zugriffsrechte an, die uns den Zugriff auf bestimmte Funktionen Ihres Endgeräts ermöglichen.</p>
         <ul class="lp-ul">
-          <li>Kommunikationspartner.</li>
-          <li>Kunden.</li>
-          <li>Nutzer (z.B. Webseitenbesucher, Nutzer von Onlinediensten).</li>
+          <li>Kamera. Der Zugriff erfolgt zu folgendem Zweck:</li>
         </ul>
-        <h3 class="lp-h3">Zwecke der Verarbeitung</h3>
+        <p class="lp-p">Die erteilten Zugriffsrechte werden ausschließlich zur Bereitstellung der jeweiligen App-Funktionen genutzt. Die Daten können unter Umständen von den Anbietern der App Stores verarbeitet werden.</p>
+        <p class="lp-p">Rechtsgrundlage für den Zugriff ist Ihre bei der Installation erteilte Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können die Zugriffsrechte der App jederzeit ändern. In diesem Fall funktionieren die App oder einzelne App-Funktionen jedoch möglicherweise nicht mehr ordnungsgemäß.</p>
+
+        <h3 class="lp-h3">In-App-Käufe</h3>
+        <p class="lp-p">Innerhalb der App haben Sie die Möglichkeit, zusätzliche Leistungen zu erwerben (In-App-Käufe). Der Kauf erfolgt daher über den App Store, der auch für den Datenschutz verantwortlich ist. Einzelheiten entnehmen Sie den jeweiligen Datenschutzerklärungen des App Stores. Bei In-App-Käufen werden Sie zu Ihrem App-Store-Anbieter weitergeleitet. Dies können folgende App Stores sein:</p>
         <ul class="lp-ul">
-          <li>Kontaktanfragen und Kommunikation.</li>
-          <li>Erbringung vertragliche Leistungen und Kundenservice.</li>
-        </ul>
-
-        <h2 class="lp-h2" id="rechtsgrundlagen">Maßgebliche Rechtsgrundlagen</h2>
-        <p class="lp-p">Im Folgenden teilen wir die Rechtsgrundlagen der Datenschutzgrundverordnung (DSGVO), auf deren Basis wir die personenbezogenen Daten verarbeiten, mit. Bitte beachten Sie, dass zusätzlich zu den Regelungen der DSGVO die nationalen Datenschutzvorgaben in Ihrem bzw. unserem Wohn- und Sitzland gelten können. Sollten ferner im Einzelfall speziellere Rechtsgrundlagen maßgeblich sein, teilen wir Ihnen diese in der Datenschutzerklärung mit.</p>
-        <ul class="lp-ul">
-          <li><strong>Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO)</strong> - Die betroffene Person hat ihre Einwilligung in die Verarbeitung der sie betreffenden personenbezogenen Daten für einen spezifischen Zweck oder mehrere bestimmte Zwecke gegeben.</li>
-          <li><strong>Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b. DSGVO)</strong> - Die Verarbeitung ist für die Erfüllung eines Vertrags, dessen Vertragspartei die betroffene Person ist, oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, die auf Anfrage der betroffenen Person erfolgen.</li>
-          <li><strong>Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO)</strong> - Die Verarbeitung ist zur Wahrung der berechtigten Interessen des Verantwortlichen oder eines Dritten erforderlich, sofern nicht die Interessen oder Grundrechte und Grundfreiheiten der betroffenen Person, die den Schutz personenbezogener Daten erfordern, überwiegen.</li>
-        </ul>
-        <p class="lp-p"><strong>Nationale Datenschutzregelungen in Deutschland:</strong> Zusätzlich zu den Datenschutzregelungen der Datenschutz-Grundverordnung gelten nationale Regelungen zum Datenschutz in Deutschland. Hierzu gehört insbesondere das Gesetz zum Schutz vor Missbrauch personenbezogener Daten bei der Datenverarbeitung (Bundesdatenschutzgesetz – BDSG). Das BDSG enthält insbesondere Spezialregelungen zum Recht auf Auskunft, zum Recht auf Löschung, zum Widerspruchsrecht, zur Verarbeitung besonderer Kategorien personenbezogener Daten, zur Verarbeitung für andere Zwecke und zur Übermittlung sowie automatisierten Entscheidungsfindung im Einzelfall einschließlich Profiling. Des Weiteren regelt es die Datenverarbeitung für Zwecke des Beschäftigungsverhältnisses (§ 26 BDSG), insbesondere im Hinblick auf die Begründung, Durchführung oder Beendigung von Beschäftigungsverhältnissen sowie die Einwilligung von Beschäftigten. Ferner können Landesdatenschutzgesetze der einzelnen Bundesländer zur Anwendung gelangen.</p>
-
-        <h2 class="lp-h2" id="sicherheit">Sicherheitsmaßnahmen</h2>
-        <p class="lp-p">Wir treffen nach Maßgabe der gesetzlichen Vorgaben unter Berücksichtigung des Stands der Technik, der Implementierungskosten und der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie der unterschiedlichen Eintrittswahrscheinlichkeiten und des Ausmaßes der Bedrohung der Rechte und Freiheiten natürlicher Personen geeignete technische und organisatorische Maßnahmen, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten.</p>
-        <p class="lp-p">Zu den Maßnahmen gehören insbesondere die Sicherung der Vertraulichkeit, Integrität und Verfügbarkeit von Daten durch Kontrolle des physischen und elektronischen Zugangs zu den Daten als auch des sie betreffenden Zugriffs, der Eingabe, der Weitergabe, der Sicherung der Verfügbarkeit und ihrer Trennung. Des Weiteren haben wir Verfahren eingerichtet, die eine Wahrnehmung von Betroffenenrechten, die Löschung von Daten und Reaktionen auf die Gefährdung der Daten gewährleisten. Ferner berücksichtigen wir den Schutz personenbezogener Daten bereits bei der Entwicklung bzw. Auswahl von Hardware, Software sowie Verfahren entsprechend dem Prinzip des Datenschutzes, durch Technikgestaltung und durch datenschutzfreundliche Voreinstellungen.</p>
-
-        <h2 class="lp-h2" id="uebermittlung">Übermittlung und Offenbarung von personenbezogenen Daten</h2>
-        <p class="lp-p">Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor, dass die Daten an andere Stellen, Unternehmen, rechtlich selbstständige Organisationseinheiten oder Personen übermittelt oder sie ihnen gegenüber offengelegt werden. Zu den Empfängern dieser Daten können z.B. Zahlungsinstitute im Rahmen von Zahlungsvorgängen, mit IT-Aufgaben beauftragte Dienstleister oder Anbieter von Diensten und Inhalten, die in eine Webseite eingebunden werden, gehören. In solchen Fall beachten wir die gesetzlichen Vorgaben und schließen insbesondere entsprechende Verträge bzw. Vereinbarungen, die dem Schutz Ihrer Daten dienen, mit den Empfängern Ihrer Daten ab.</p>
-        <p class="lp-p"><strong>Datenübermittlung innerhalb der Unternehmensgruppe:</strong> Wir können personenbezogene Daten an andere Unternehmen innerhalb unserer Unternehmensgruppe übermitteln oder ihnen den Zugriff auf diese Daten gewähren. Sofern diese Weitergabe zu administrativen Zwecken erfolgt, beruht die Weitergabe der Daten auf unseren berechtigten unternehmerischen und betriebswirtschaftlichen Interessen oder erfolgt, sofern sie zur Erfüllung unserer vertragsbezogenen Verpflichtungen erforderlich ist oder wenn eine Einwilligung der Betroffenen oder eine gesetzliche Erlaubnis vorliegt.</p>
-
-        <h2 class="lp-h2" id="drittlaender">Datenverarbeitung in Drittländern</h2>
-        <p class="lp-p">Sofern wir Daten in einem Drittland (d.h., außerhalb der Europäischen Union (EU), des Europäischen Wirtschaftsraums (EWR)) verarbeiten oder die Verarbeitung im Rahmen der Inanspruchnahme von Diensten Dritter oder der Offenlegung bzw. Übermittlung von Daten an andere Personen, Stellen oder Unternehmen stattfindet, erfolgt dies nur im Einklang mit den gesetzlichen Vorgaben.</p>
-        <p class="lp-p">Vorbehaltlich ausdrücklicher Einwilligung oder vertraglich oder gesetzlich erforderlicher Übermittlung verarbeiten oder lassen wir die Daten nur in Drittländern mit einem anerkannten Datenschutzniveau, vertraglichen Verpflichtung durch sogenannte Standardschutzklauseln der EU-Kommission, beim Vorliegen von Zertifizierungen oder verbindlicher internen Datenschutzvorschriften verarbeiten (Art. 44 bis 49 DSGVO, Informationsseite der EU-Kommission: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de" target="_blank" rel="noopener">ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de</a>).</p>
-
-        <h2 class="lp-h2" id="cookies">Einsatz von Cookies</h2>
-        <p class="lp-p">Cookies sind Textdateien, die Daten von besuchten Websites oder Domains enthalten und von einem Browser auf dem Computer des Benutzers gespeichert werden. Ein Cookie dient in erster Linie dazu, die Informationen über einen Benutzer während oder nach seinem Besuch innerhalb eines Onlineangebotes zu speichern. Zu den gespeicherten Angaben können z.B. die Spracheinstellungen auf einer Webseite, der Loginstatus, ein Warenkorb oder die Stelle, an der ein Video geschaut wurde, gehören. Zu dem Begriff der Cookies zählen wir ferner andere Technologien, die die gleichen Funktionen wie Cookies erfüllen (z.B., wenn Angaben der Nutzer anhand pseudonymer Onlinekennzeichnungen gespeichert werden, auch als „Nutzer-IDs" bezeichnet</p>
-        <p class="lp-p">Die folgenden Cookie-Typen und Funktionen werden unterschieden:</p>
-        <ul class="lp-ul">
-          <li><strong>Temporäre Cookies (auch: Session- oder Sitzungs-Cookies):</strong> Temporäre Cookies werden spätestens gelöscht, nachdem ein Nutzer ein Online-Angebot verlassen und seinen Browser geschlossen hat.</li>
-          <li><strong>Permanente Cookies:</strong> Permanente Cookies bleiben auch nach dem Schließen des Browsers gespeichert. So kann beispielsweise der Login-Status gespeichert oder bevorzugte Inhalte direkt angezeigt werden, wenn der Nutzer eine Website erneut besucht. Ebenso können die Interessen von Nutzern, die zur Reichweitenmessung oder zu Marketingzwecken verwendet werden, in einem solchen Cookie gespeichert werden.</li>
-          <li><strong>First-Party-Cookies:</strong> First-Party-Cookies werden von uns selbst gesetzt.</li>
-          <li><strong>Third-Party-Cookies (auch: Drittanbieter-Cookies):</strong> Drittanbieter-Cookies werden hauptsächlich von Werbetreibenden (sog. Dritten) verwendet, um Benutzerinformationen zu verarbeiten.</li>
-          <li><strong>Notwendige (auch: essentielle oder unbedingt erforderliche) Cookies:</strong> Cookies können zum einen für den Betrieb einer Webseite unbedingt erforderlich sein (z.B. um Logins oder andere Nutzereingaben zu speichern oder aus Gründen der Sicherheit).</li>
-          <li><strong>Statistik-, Marketing- und Personalisierungs-Cookies:</strong> Ferner werden Cookies im Regelfall auch im Rahmen der Reichweitenmessung eingesetzt sowie dann, wenn die Interessen eines Nutzers oder sein Verhalten (z.B. Betrachten bestimmter Inhalte, Nutzen von Funktionen etc.) auf einzelnen Webseiten in einem Nutzerprofil gespeichert werden. Solche Profile dienen dazu, den Nutzern z.B. Inhalte anzuzeigen, die ihren potentiellen Interessen entsprechen. Dieses Verfahren wird auch als „Tracking", d.h., Nachverfolgung der potentiellen Interessen der Nutzer bezeichnet. Soweit wir Cookies oder „Tracking"-Technologien einsetzen, informieren wir Sie gesondert in unserer Datenschutzerklärung oder im Rahmen der Einholung einer Einwilligung.</li>
-        </ul>
-        <p class="lp-p"><strong>Hinweise zu Rechtsgrundlagen:</strong> Auf welcher Rechtsgrundlage wir Ihre personenbezogenen Daten mit Hilfe von Cookies verarbeiten, hängt davon ab, ob wir Sie um eine Einwilligung bitten. Falls dies zutrifft und Sie in die Nutzung von Cookies einwilligen, ist die Rechtsgrundlage der Verarbeitung Ihrer Daten die erklärte Einwilligung. Andernfalls werden die mithilfe von Cookies verarbeiteten Daten auf Grundlage unserer berechtigten Interessen (z.B. an einem betriebswirtschaftlichen Betrieb unseres Onlineangebotes und dessen Verbesserung) verarbeitet oder, wenn der Einsatz von Cookies erforderlich ist, um unsere vertraglichen Verpflichtungen zu erfüllen.</p>
-        <p class="lp-p"><strong>Speicherdauer:</strong> Sofern wir Ihnen keine expliziten Angaben zur Speicherdauer von permanenten Cookies mitteilen (z. B. im Rahmen eines sog. Cookie-Opt-Ins), gehen Sie bitte davon aus, dass die Speicherdauer bis zu zwei Jahre betragen kann.</p>
-        <p class="lp-p"><strong>Allgemeine Hinweise zum Widerruf und Widerspruch (Opt-Out):</strong> Abhängig davon, ob die Verarbeitung auf Grundlage einer Einwilligung oder gesetzlichen Erlaubnis erfolgt, haben Sie jederzeit die Möglichkeit, eine erteilte Einwilligung zu widerrufen oder der Verarbeitung Ihrer Daten durch Cookie-Technologien zu widersprechen (zusammenfassend als „Opt-Out" bezeichnet). Sie können Ihren Widerspruch zunächst mittels der Einstellungen Ihres Browsers erklären, z.B., indem Sie die Nutzung von Cookies deaktivieren (wobei hierdurch auch die Funktionsfähigkeit unseres Onlineangebotes eingeschränkt werden kann). Ein Widerspruch gegen den Einsatz von Cookies zu Zwecken des Onlinemarketings kann auch mittels einer Vielzahl von Diensten, vor allem im Fall des Trackings, über die Webseiten <a href="https://optout.aboutads.info" target="_blank" rel="noopener">optout.aboutads.info</a> und <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener">youronlinechoices.com</a> erklärt werden. Daneben können Sie weitere Widerspruchshinweise im Rahmen der Angaben zu den eingesetzten Dienstleistern und Cookies erhalten.</p>
-        <p class="lp-p"><strong>Verarbeitung von Cookie-Daten auf Grundlage einer Einwilligung:</strong> Bevor wir Daten im Rahmen der Nutzung von Cookies verarbeiten oder verarbeiten lassen, bitten wir die Nutzer um eine jederzeit widerrufbare Einwilligung. Bevor die Einwilligung nicht ausgesprochen wurde, werden allenfalls Cookies eingesetzt, die für den Betrieb unseres Onlineangebotes unbedingt erforderlich sind.</p>
-        <p class="lp-p"><strong>Verarbeitete Datenarten:</strong> Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten), Meta-/Kommunikationsdaten (z.B. Geräte-Informationen, IP-Adressen).</p>
-        <p class="lp-p"><strong>Betroffene Personen:</strong> Nutzer (z.B. Webseitenbesucher, Nutzer von Onlinediensten).</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO), Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).</p>
-
-        <h2 class="lp-h2" id="hosting">Bereitstellung des Onlineangebotes und Webhosting</h2>
-        <p class="lp-p">Um unser Onlineangebot sicher und effizient bereitstellen zu können, nehmen wir die Leistungen von einem oder mehreren Webhosting-Anbietern in Anspruch, von deren Servern (bzw. von ihnen verwalteten Servern) das Onlineangebot abgerufen werden kann. Zu diesen Zwecken können wir Infrastruktur- und Plattformdienstleistungen, Rechenkapazität, Speicherplatz und Datenbankdienste sowie Sicherheitsleistungen und technische Wartungsleistungen in Anspruch nehmen.</p>
-        <p class="lp-p">Zu den im Rahmen der Bereitstellung des Hostingangebotes verarbeiteten Daten können alle die Nutzer unseres Onlineangebotes betreffenden Angaben gehören, die im Rahmen der Nutzung und der Kommunikation anfallen. Hierzu gehören regelmäßig die IP-Adresse, die notwendig ist, um die Inhalte von Onlineangeboten an Browser ausliefern zu können, und alle innerhalb unseres Onlineangebotes oder von Webseiten getätigten Eingaben.</p>
-        <p class="lp-p"><strong>Erhebung von Zugriffsdaten und Logfiles:</strong> Wir selbst (bzw. unser Webhostinganbieter) erheben Daten zu jedem Zugriff auf den Server (sogenannte Serverlogfiles). Zu den Serverlogfiles können die Adresse und Name der abgerufenen Webseiten und Dateien, Datum und Uhrzeit des Abrufs, übertragene Datenmengen, Meldung über erfolgreichen Abruf, Browsertyp nebst Version, das Betriebssystem des Nutzers, Referrer URL (die zuvor besuchte Seite) und im Regelfall IP-Adressen und der anfragende Provider gehören.</p>
-        <p class="lp-p">Die Serverlogfiles können zum einen zu Zwecken der Sicherheit eingesetzt werden, z.B., um eine Überlastung der Server zu vermeiden (insbesondere im Fall von missbräuchlichen Angriffen, sogenannten DDoS-Attacken) und zum anderen, um die Auslastung der Server und ihre Stabilität sicherzustellen.</p>
-        <p class="lp-p"><strong>Verarbeitete Datenarten:</strong> Inhaltsdaten (z.B. Eingaben in Onlineformularen), Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten), Meta-/Kommunikationsdaten (z.B. Geräte-Informationen, IP-Adressen).</p>
-        <p class="lp-p"><strong>Betroffene Personen:</strong> Nutzer (z.B. Webseitenbesucher, Nutzer von Onlinediensten).</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).</p>
-
-        <h2 class="lp-h2" id="apps">Besondere Hinweise zu Applikationen (Apps)</h2>
-        <p class="lp-p">Wir verarbeiten die Daten der Nutzer unserer Applikation, soweit diese erforderlich sind, um den Nutzern die Applikation sowie deren Funktionalitäten bereitstellen, deren Sicherheit überwachen und sie weiterentwickeln zu können. Wir können ferner Nutzer unter Beachtung der gesetzlichen Vorgaben kontaktieren, sofern die Kommunikation zu Zwecken der Administration oder Nutzung der Applikation erforderlich ist. Im Übrigen verweisen wir im Hinblick auf die Verarbeitung der Daten der Nutzer auf die Datenschutzhinweise in dieser Datenschutzerklärung.</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Die Verarbeitung von Daten, die für die Bereitstellung der Funktionalitäten der Applikation erforderlich ist, dient der Erfüllung von vertraglichen Pflichten. Dies gilt auch, wenn die Bereitstellung der Funktionen eine Berechtigung der Nutzer (z. B. Freigaben von Gerätefunktionen) voraussetzt. Sofern die Verarbeitung von Daten für die Bereitstellung der Funktionalitäten der Applikation nicht erforderlich ist, aber der Sicherheit der Applikation oder unseren betriebswirtschaftlichen Interessen dient (z. B. Erhebung von Daten zu Zwecken der Optimierung der Applikation oder Sicherheitszwecken), erfolgt sie auf Grundlage unserer berechtigten Interessen. Sofern Nutzer ausdrücklich deren Einwilligung in die Verarbeitung ihrer Daten gebeten werden, erfolgt die Verarbeitung der von der Einwilligung umfassten Daten auf Grundlage der Einwilligung.</p>
-        <p class="lp-p"><strong>Kommerzielle Nutzung:</strong> Wir verarbeiten die Daten der Nutzer unserer Applikation, angemeldeter und etwaiger Testnutzer (nachfolgend einheitlich als „Nutzer" bezeichnet), um ihnen gegenüber unsere vertraglichen Leistungen erbringen zu können sowie auf Grundlage berechtigter Interessen, um die Sicherheit unserer Applikation gewährleisten und sie weiterzuentwickeln zu können. Die erforderlichen Angaben sind als solche im Rahmen des Nutzungs-, Auftrags-, Bestell- bzw. vergleichbaren Vertragsschlusses gekennzeichnet und können die zur Leistungserbringung und zur etwaigen Abrechnung benötigten Angaben sowie Kontaktinformationen, um etwaige Rücksprachen halten zu können, umfassen.</p>
-        <p class="lp-p"><strong>Geräteberechtigungen für den Zugriff auf Funktionen und Daten:</strong> Die Nutzung unserer Applikation oder ihrer Funktionalitäten kann Berechtigungen der Nutzer für Zugriff auf bestimmten Funktionen der verwendeten Geräte oder auf die, auf den Geräten gespeicherten oder mit Hilfe der Geräte zugänglichen Daten voraussetzen. Standardmäßig müssen diese Berechtigungen von den Nutzern erteilt werden und können jederzeit in den Einstellungen der jeweiligen Geräte widerrufen werden. Das genaue Verfahren zur Kontrolle der App-Berechtigungen kann vom Gerät und der Software der Nutzern abhängig sein. Bei Erläuterungsbedarf können sich Nutzer an uns wenden. Wir weisen darauf hin, dass die Versagung oder Widerruf der jeweiligen Berechtigungen die Funktionsfähigkeit unsere Applikation beeinflussen kann.</p>
-        <p class="lp-p"><strong>Zugriff auf die Kamera sowie gespeicherten Aufnahmen:</strong> Im Rahmen der Nutzung unserer Applikation werden Bild- und/ oder Videoaufnahmen (wobei auch Audioaufnahmen umfasst sind) der Nutzer (und von anderen, von den Aufnahmen erfassten Personen) durch den Zugriff auf die Kamerafunktionen oder auf gespeicherte Aufnahmen verarbeitet. Der Zugriff auf die Kamerafunktionen oder gespeicherte Aufnahmen setzt eine jederzeit widerrufbare Berechtigung durch die Nutzer voraus. Die Verarbeitung der Bild- und/ oder Videoaufnahmen dient jeweils nur der Bereitstellung der jeweiligen Funktionalität unserer Applikation, entsprechend ihrer Beschreibung gegenüber den Nutzern, bzw. ihrer typischen und erwartbaren Funktionsweise.</p>
-        <p class="lp-p"><strong>Nutzung von Mikrofonfunktionen:</strong> Im Rahmen der Nutzung unserer Applikation werden die Mikrofonfunktionen und mit dessen Hilfe erfasste Audioaufnahmen verarbeitet. Die Nutzung der Mikrofonfunktionen setzt eine Berechtigung der Nutzer, die jederzeit widerrufen werden kann, voraus. Die Nutzung der Mikrofonfunktionen und Audiodaten dient jeweils nur der Bereitstellung der jeweiligen Funktionalität unserer Applikation, entsprechend ihrer Beschreibung gegenüber den Nutzern, bzw. ihrer typischen und erwartbaren Funktionsweise</p>
-        <p class="lp-p"><strong>Verarbeitung von Standortdaten:</strong> Im Rahmen der Nutzung unserer Applikation werden die von dem verwendeten Gerät erhobenen oder sonst durch die Nutzer eingegebenen Standortdaten verarbeitet. Die Nutzung der Standortdaten setzt eine Berechtigung der Nutzer, die jederzeit widerrufen werden kann, voraus. Die Nutzung der Standortdaten dient jeweils nur der Bereitstellung der jeweiligen Funktionalität unserer Applikation, entsprechend ihrer Beschreibung gegenüber den Nutzern, bzw. ihrer typischen und erwartbaren Funktionsweise.</p>
-        <p class="lp-p"><strong>Verarbeitete Datenarten:</strong> Bestandsdaten (z. B. Namen, Adressen), Meta-/Kommunikationsdaten (z. B. Geräte-Informationen, IP-Adressen), Zahlungsdaten (z. B. Bankverbindungen, Rechnungen, Zahlungshistorie), Vertragsdaten (z. B. Vertragsgegenstand, Laufzeit, Kundenkategorie), Bild- und/ oder Videoaufnahmen (z. B. Fotografien oder Videoaufnahmen einer Person), Tonaufnahmen, Standortdaten (Angaben zur geografischen Position eines Gerätes oder einer Person).</p>
-        <p class="lp-p"><strong>Betroffene Personen:</strong> Nutzer (z. B. Webseitenbesucher, Nutzer von Onlinediensten).</p>
-        <p class="lp-p"><strong>Zwecke der Verarbeitung:</strong> Erbringung vertragliche Leistungen und Kundenservice.</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO), Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b. DSGVO), Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).</p>
-
-        <h2 class="lp-h2" id="appstores">Bezug von Applikationen über Appstores</h2>
-        <p class="lp-p">Der Bezug unserer Applikation erfolgt über über spezielle Online-Plattformen, die von anderen Dienstanbietern betrieben werden, an (so genannte „Appstores". In diesem Zusammenhang gelten zusätzlich zu unseren Datenschutzhinweisen die Datenschutzhinweise der jeweiligen Appstores. Dies gilt insbesondere im Hinblick auf die auf den Plattformen eingesetzten Verfahren zur Reichweitemessung und zum interessensbezogenen Marketing sowie etwaige Kostenpflicht.</p>
-        <p class="lp-p"><strong>Verarbeitete Datenarten:</strong> Bestandsdaten (z. B. Namen, Adressen), Zahlungsdaten (z. B. Bankverbindungen, Rechnungen, Zahlungshistorie), Kontaktdaten (z. B. E-Mail, Telefonnummern), Vertragsdaten (z. B. Vertragsgegenstand, Laufzeit, Kundenkategorie), Nutzungsdaten (z. B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten), Meta-/Kommunikationsdaten (z. B. Geräte-Informationen, IP-Adressen).</p>
-        <p class="lp-p"><strong>Betroffene Personen:</strong> Kunden.</p>
-        <p class="lp-p"><strong>Zwecke der Verarbeitung:</strong> Erbringung vertragliche Leistungen und Kundenservice.</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b. DSGVO), Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).</p>
-        <p class="lp-p"><strong>Eingesetzte Dienste und Diensteanbieter:</strong></p>
-        <ul class="lp-ul">
-          <li><strong>Apple App Store:</strong> App und Software Verkaufsplattform; Dienstanbieter: Apple Inc., Infinite Loop, Cupertino, CA 95014, USA; Website: <a href="https://www.apple.com/de/ios/app-store/" target="_blank" rel="noopener">apple.com/de/ios/app-store</a>; Datenschutzerklärung: <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noopener">apple.com/legal/privacy/de-ww</a>.</li>
-          <li><strong>Google Play:</strong> App- und Software-Verkaufsplattform; Dienstanbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, Mutterunternehmen: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; Website: <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>; Datenschutzerklärung: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</li>
+          <li>Apple App Store: Apple Inc., Infinite Loop, Cupertino, CA 95014, USA, <a href="https://www.apple.com/de/ios/app-store/" target="_blank" rel="noopener">apple.com/de/ios/app-store</a>. Die Datenschutzerklärung finden Sie unter: <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noopener">apple.com/legal/privacy/de-ww</a></li>
+          <li>Google Play: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. Muttergesellschaft ist die Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, sodass eine Übermittlung Ihrer Daten in die USA nicht ausgeschlossen werden kann. Die Datenschutzerklärung finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
         </ul>
 
-        <h2 class="lp-h2" id="kontakt">Kontaktaufnahme</h2>
-        <p class="lp-p">Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail, Telefon oder via soziale Medien) werden die Angaben der anfragenden Personen verarbeitet, soweit dies zur Beantwortung der Kontaktanfragen und etwaiger angefragter Maßnahmen erforderlich ist.</p>
-        <p class="lp-p">Die Beantwortung der Kontaktanfragen im Rahmen von vertraglichen oder vorvertraglichen Beziehungen erfolgt zur Erfüllung unserer vertraglichen Pflichten oder zur Beantwortung von (vor)vertraglichen Anfragen und im Übrigen auf Grundlage der berechtigten Interessen an der Beantwortung der Anfragen.</p>
-        <p class="lp-p"><strong>Verarbeitete Datenarten:</strong> Bestandsdaten (z.B. Namen, Adressen), Kontaktdaten (z.B. E-Mail, Telefonnummern), Inhaltsdaten (z.B. Eingaben in Onlineformularen).</p>
-        <p class="lp-p"><strong>Betroffene Personen:</strong> Kommunikationspartner.</p>
-        <p class="lp-p"><strong>Zwecke der Verarbeitung:</strong> Kontaktanfragen und Kommunikation.</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b. DSGVO), Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).</p>
-
-        <h2 class="lp-h2" id="push">Push-Nachrichten</h2>
-        <p class="lp-p">Mit der Zustimmung der Nutzer, können wir den Nutzern so genannte „Push-Benachrichtigungen" zusenden. Dabei handelt es sich um Nachrichten, die auf den Bildschirmen, Endgeräten oder in Browsern der Nutzer angezeigt werden, auch wenn unser Onlinedienst gerade nicht aktiv genutzt wird.</p>
-        <p class="lp-p">Um sich für die Push-Nachrichten anzumelden, müssen Nutzer die Abfrage ihres Browsers bzw. Endgerätes zum Erhalt der Push-Nachrichten bestätigen. Dieser Zustimmungsprozess wird dokumentiert und gespeichert. Die Speicherung ist erforderlich, um zu erkennen, ob Nutzer dem Empfang der Push-Nachrichten zugestimmt haben sowie.</p>
-        <p class="lp-p"><strong>Zwecke der Verarbeitung:</strong> Erbringung vertragliche Leistungen und Kundenservice.</p>
-        <p class="lp-p"><strong>Rechtsgrundlagen:</strong> Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO), Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b. DSGVO).</p>
-
-        <h2 class="lp-h2" id="loeschung">Löschung von Daten</h2>
-        <p class="lp-p">Die von uns verarbeiteten Daten werden nach Maßgabe der gesetzlichen Vorgaben gelöscht, sobald deren zur Verarbeitung erlaubten Einwilligungen widerrufen werden oder sonstige Erlaubnisse entfallen (z.B., wenn der Zweck der Verarbeitung dieser Daten entfallen ist oder sie für den Zweck nicht erforderlich sind).</p>
-        <p class="lp-p">Sofern die Daten nicht gelöscht werden, weil sie für andere und gesetzlich zulässige Zwecke erforderlich sind, wird deren Verarbeitung auf diese Zwecke beschränkt. D.h., die Daten werden gesperrt und nicht für andere Zwecke verarbeitet. Das gilt z.B. für Daten, die aus handels- oder steuerrechtlichen Gründen aufbewahrt werden müssen oder deren Speicherung zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder juristischen Person erforderlich ist.</p>
-        <p class="lp-p">Weitere Hinweise zu der Löschung von personenbezogenen Daten können ferner im Rahmen der einzelnen Datenschutzhinweise dieser Datenschutzerklärung erfolgen.</p>
-
-        <h2 class="lp-h2" id="aenderung">Änderung und Aktualisierung der Datenschutzerklärung</h2>
-        <p class="lp-p">Wir bitten Sie, sich regelmäßig über den Inhalt unserer Datenschutzerklärung zu informieren. Wir passen die Datenschutzerklärung an, sobald die Änderungen der von uns durchgeführten Datenverarbeitungen dies erforderlich machen. Wir informieren Sie, sobald durch die Änderungen eine Mitwirkungshandlung Ihrerseits (z.B. Einwilligung) oder eine sonstige individuelle Benachrichtigung erforderlich wird.</p>
-        <p class="lp-p">Sofern wir in dieser Datenschutzerklärung Adressen und Kontaktinformationen von Unternehmen und Organisationen angeben, bitten wir zu beachten, dass die Adressen sich über die Zeit ändern können und bitten die Angaben vor Kontaktaufnahme zu prüfen.</p>
-
-        <h2 class="lp-h2" id="rechte">Rechte der betroffenen Personen</h2>
-        <p class="lp-p">Ihnen stehen als Betroffene nach der DSGVO verschiedene Rechte zu, die sich insbesondere aus Art. 15 bis 21 DSGVO ergeben:</p>
+        <h3 class="lp-h3">Datenverarbeitung im Rahmen des Abo-Modells</h3>
+        <p class="lp-p">Wenn Sie über unsere App ein Abonnement abschließen, verarbeiten wir die von Ihnen angegebenen personenbezogenen Daten zur Bereitstellung und Abwicklung des Abonnements. Zu diesen Daten gehören:</p>
         <ul class="lp-ul">
-          <li><strong>Widerspruchsrecht:</strong> Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling. Werden die Sie betreffenden personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten zum Zwecke derartiger Werbung einzulegen; dies gilt auch für das Profiling, soweit es mit solcher Direktwerbung in Verbindung steht.</li>
-          <li><strong>Widerrufsrecht bei Einwilligungen:</strong> Sie haben das Recht, erteilte Einwilligungen jederzeit zu widerrufen.</li>
-          <li><strong>Auskunftsrecht:</strong> Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten verarbeitet werden und auf Auskunft über diese Daten sowie auf weitere Informationen und Kopie der Daten entsprechend den gesetzlichen Vorgaben.</li>
-          <li><strong>Recht auf Berichtigung:</strong> Sie haben entsprechend den gesetzlichen Vorgaben das Recht, die Vervollständigung der Sie betreffenden Daten oder die Berichtigung der Sie betreffenden unrichtigen Daten zu verlangen.</li>
-          <li><strong>Recht auf Löschung und Einschränkung der Verarbeitung:</strong> Sie haben nach Maßgabe der gesetzlichen Vorgaben das Recht, zu verlangen, dass Sie betreffende Daten unverzüglich gelöscht werden, bzw. alternativ nach Maßgabe der gesetzlichen Vorgaben eine Einschränkung der Verarbeitung der Daten zu verlangen.</li>
-          <li><strong>Recht auf Datenübertragbarkeit:</strong> Sie haben das Recht, Sie betreffende Daten, die Sie uns bereitgestellt haben, nach Maßgabe der gesetzlichen Vorgaben in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder deren Übermittlung an einen anderen Verantwortlichen zu fordern.</li>
-          <li><strong>Beschwerde bei Aufsichtsbehörde:</strong> Sie haben ferner nach Maßgabe der gesetzlichen Vorgaben das Recht, bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat Ihres gewöhnlichen Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes Beschwerde einzulegen, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt.</li>
+          <li>Ihre Stammdaten (z. B. Name, E-Mail-Adresse)</li>
+          <li>Zahlungsdaten (z. B. Kreditkartennummer, Kontoverbindung)</li>
+          <li>Abo-Informationen (z. B. Abo-Art, Laufzeit, Nutzungshistorie)</li>
+        </ul>
+        <p class="lp-p">Wir verwenden diese Daten für folgende Zwecke:</p>
+        <ul class="lp-ul">
+          <li>Verwaltung Ihres Abonnements (Art. 6 Abs. 1 lit. b DSGVO)</li>
+          <li>Abrechnung und Zahlungsabwicklung (Art. 6 Abs. 1 lit. b DSGVO)</li>
+          <li>Erfüllung gesetzlicher Pflichten, z. B. steuerrechtlicher Vorgaben (Art. 6 Abs. 1 lit. c DSGVO)</li>
+          <li>Analyse zur Verbesserung unserer Leistungen (Art. 6 Abs. 1 lit. f DSGVO)</li>
+        </ul>
+        <p class="lp-p">Für die Zahlungsabwicklung setzen wir externe Zahlungsdienstleister ein (z. B. PayPal). Ihre Zahlungsdaten werden direkt von diesen Dienstleistern verarbeitet. Weitere Informationen entnehmen Sie bitte der Datenschutzerklärung des jeweiligen Zahlungsdienstleisters.</p>
+        <p class="lp-p">Ihre Daten werden für die Dauer des Abonnements gespeichert. Nach Ende des Abonnements bewahren wir Ihre Daten entsprechend den gesetzlichen Aufbewahrungspflichten (z. B. steuerrechtlichen Vorschriften) auf. Daten ohne gesetzliche Aufbewahrungspflicht werden gelöscht, sobald sie nicht mehr benötigt werden.</p>
+
+        <h3 class="lp-h3">Datenverarbeitung im Rahmen der API-Anbindung an die Bank</h3>
+        <p class="lp-p">Die App bietet die Möglichkeit, das Haushaltsbuch mit Ihren Konten zu verknüpfen. Dazu muss über eine technische Schnittstelle eine Verbindung zur Bank hergestellt werden. Nach der Verbindung werden alle Kontobewegungen in der App erfasst und vom Anbieter auf dessen Servern gespeichert. Hinsichtlich der Daten Dritter, die dabei verarbeitet werden (z. B. Daten von Personen, die Ihnen Geld überwiesen haben), handelt der App-Anbieter ausschließlich als Auftragsverarbeiter.</p>
+        <p class="lp-p">Rechtsgrundlage der Datenverarbeitung ist die Erfüllung des Vertrags, den wir mit Ihnen geschlossen haben (Art. 6 Abs. 1 lit. b DSGVO).</p>
+
+        <h3 class="lp-h3">Spendenmöglichkeit</h3>
+        <p class="lp-p">Wenn Sie über unsere App spenden, verarbeiten wir die von Ihnen angegebenen personenbezogenen Daten (z. B. Name, Adresse, Zahlungsdaten) zur Abwicklung der Spende. Rechtsgrundlage hierfür ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+        <p class="lp-p">Für die Zahlungsabwicklung setzen wir externe Zahlungsdienstleister ein (z. B. PayPal). Die Übermittlung Ihrer Zahlungsdaten erfolgt ausschließlich verschlüsselt. Weitere Informationen zur Datenverarbeitung durch den Zahlungsdienstleister entnehmen Sie bitte dessen Datenschutzerklärung.</p>
+        <p class="lp-p">Ihre Daten werden entsprechend den gesetzlichen Aufbewahrungspflichten gespeichert und anschließend gelöscht, sofern keine weiteren gesetzlichen Pflichten bestehen.</p>
+        <p class="lp-p">Sie haben jederzeit das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten.</p>
+
+        <h3 class="lp-h3">Kontaktaufnahme</h3>
+        <p class="lp-p">Wenn Sie uns kontaktieren (z. B. per Kontaktformular, E-Mail, Telefon, Fax oder über einen anderen Kanal), wird Ihre Anfrage einschließlich aller daraus hervorgehenden personenbezogenen Daten (z. B. Name, Anliegen) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) und/oder auf unseren berechtigten Interessen (Art. 6 Abs. 1 lit. f DSGVO), da wir ein berechtigtes Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen haben. Die von Ihnen an uns per Kontaktanfrage übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.</p>
+
+        <h3 class="lp-h3">Analyse und Tracking</h3>
+        <p class="lp-p">Beim Aufruf unserer App kann Ihr Verhalten mit bestimmten Analysewerkzeugen statistisch ausgewertet und zu Werbezwecken oder zur Verbesserung unserer Angebote analysiert werden. Beim Einsatz solcher Werkzeuge achten wir auf die Einhaltung der gesetzlichen Datenschutzvorschriften. Beim Einsatz externer Dienstleister stellen wir durch entsprechende Verträge mit den Dienstleistern sicher, dass die Datenverarbeitung den deutschen und europäischen Datenschutzstandards entspricht.</p>
+        <p class="lp-p">Wir setzen folgende Werkzeuge zur Analyse des Nutzerverhaltens ein:</p>
+        <p class="lp-p"><strong>Firebase Analytics:</strong> Wir nutzen den externen Analysedienst Firebase Analytics von Google (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Irland), um unsere App optimal auf die Interessen der Nutzer abzustimmen. Dazu verwenden wir eine von Google bereitgestellte Programmierschnittstelle, das Firebase Software Development Kit (SDK), um auf die Nutzer-ID der App und Geräteinformationen wie die Werbe-ID (IDFA von Apple und GAID von Google) des verwendeten Geräts zuzugreifen und eine statistische Auswertung der App-Nutzung zu ermöglichen. Mithilfe des Firebase SDK können wir verschiedene Ereignisse definieren (z. B. durchschnittliche App-Nutzung, durchschnittliche Sitzungen pro Nutzer, Tastenbetätigungen, Erkennung von Nutzungsvorlieben), um das Verhalten der App-Nutzer geräteübergreifend nachvollziehen und verstehen zu können und die Funktionen der App entsprechend zu optimieren und zu verbessern. Außerdem können wir Programmierfehler erkennen und beheben sowie betrügerische Aktivitäten in der App verhindern. Zum Zwecke der Betrugsprävention und statistischen Auswertung verarbeitet Google Geräteinformationen wie die Werbe-ID (IDFA von Apple und GAID von Google) und die IP-Adresse des verwendeten Geräts und stellt uns anonyme Statistiken über Interaktionen mit unserer App zur Verfügung. Rechtsgrundlage der Verarbeitung ist Art. 6 Abs. 1 S. 1 lit. f DSGVO. Unsere berechtigten Interessen liegen in der Betrugsprävention, der IT-Sicherheit, der dynamischen Bereitstellung von Inhalten sowie der Optimierung unserer App und Leistungen. Google verarbeitet einen Teil der Daten auch in den USA. Wir haben mit Google Standardvertragsklauseln vereinbart, um Google zur Einhaltung eines angemessenen Datenschutzniveaus zu verpflichten. Eine Kopie stellen wir Ihnen auf Anfrage zur Verfügung. Ihre Daten werden spätestens nach dreizehn Monaten gelöscht. Weitere Informationen zum Datenschutz bei Google finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>. Sofern eine Einwilligung abgefragt wurde, erfolgt die Nutzung dieses Dienstes auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar.</p>
+        <p class="lp-p"><strong>Google Analytics:</strong> Diese App nutzt Funktionen des Webanalysedienstes Google Analytics. Anbieter ist die Google Ireland Limited („Google"), Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics ermöglicht es uns, das Verhalten der App-Nutzer zu analysieren. Dabei erhält der App-Betreiber verschiedene Nutzungsdaten, wie z. B. App-Aufrufe, Verweildauer, verwendete Betriebssysteme und Herkunft des Nutzers. Diese Daten können dem jeweiligen Endgerät des Nutzers zugeordnet werden. Darüber hinaus nutzt Google Analytics verschiedene Modellierungsansätze, um die erfassten Datensätze zu ergänzen, und setzt bei der Datenanalyse Technologien des maschinellen Lernens ein. Google Analytics verwendet Technologien, die die Wiedererkennung des Nutzers zum Zwecke der Analyse des Nutzerverhaltens ermöglichen. Die von Google erfassten Informationen über die Nutzung werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Die Nutzung dieses Dienstes erfolgt auf Grundlage Ihrer Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar. Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt. Details finden Sie hier: <a href="https://privacy.google.com/businesses/controllerterms/mccs/" target="_blank" rel="noopener">privacy.google.com/businesses/controllerterms/mccs</a>. Das Unternehmen ist nach dem „EU-US Data Privacy Framework" (DPF) zertifiziert. Der DPF ist ein Übereinkommen zwischen der Europäischen Union und den USA, das die Einhaltung europäischer Datenschutzstandards bei Datenverarbeitungen in den USA gewährleisten soll. Jedes nach dem DPF zertifizierte Unternehmen verpflichtet sich, diese Datenschutzstandards einzuhalten. Weitere Informationen hierzu erhalten Sie vom Anbieter unter folgendem Link: <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener">dataprivacyframework.gov/list</a></p>
+
+        <h3 class="lp-h3">YouTube</h3>
+        <p class="lp-p">Diese App bindet Videos der Website YouTube ein. Betreiber von YouTube ist die Google Ireland Limited („Google"), Gordon House, Barrow Street, Dublin 4, Irland. YouTube ist in unsere App eingebunden, dabei wird eine Verbindung zu den Servern von YouTube hergestellt. Außerdem kann YouTube verschiedene Cookies auf Ihrem Endgerät speichern oder vergleichbare Wiedererkennungstechnologien (z. B. Device-Fingerprinting) einsetzen. Auf diese Weise kann YouTube Informationen über Nutzer dieser App erhalten. Diese Informationen werden unter anderem verwendet, um Videostatistiken zu erfassen, die Nutzerfreundlichkeit zu verbessern und Betrugsversuchen vorzubeugen. Außerdem werden die erfassten Daten im Google-Werbenetzwerk verarbeitet. Wenn Sie in Ihrem YouTube-Account eingeloggt sind, ermöglichen Sie YouTube, Ihr Surfverhalten direkt Ihrem persönlichen Profil zuzuordnen. Dies können Sie verhindern, indem Sie sich aus Ihrem YouTube-Account ausloggen. Die Nutzung von YouTube erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit widerrufbar. Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von YouTube unter: <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">policies.google.com/privacy</a>. Das Unternehmen ist nach dem „EU-US Data Privacy Framework" (DPF) zertifiziert. Der DPF ist ein Übereinkommen zwischen der Europäischen Union und den USA, das die Einhaltung europäischer Datenschutzstandards bei Datenverarbeitungen in den USA gewährleisten soll. Jedes nach dem DPF zertifizierte Unternehmen verpflichtet sich, diese Datenschutzstandards einzuhalten. Weitere Informationen hierzu erhalten Sie vom Anbieter unter folgendem Link: <a href="https://www.dataprivacyframework.gov/participant/5780" target="_blank" rel="noopener">dataprivacyframework.gov/participant/5780</a></p>
+
+        <h3 class="lp-h3">Verschlüsselung</h3>
+        <p class="lp-p">Diese App nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine Verschlüsselung. Durch diese Verschlüsselung wird verhindert, dass die von Ihnen übermittelten Daten von unbefugten Dritten mitgelesen werden können.</p>
+
+        <h3 class="lp-h3">Hosting</h3>
+        <p class="lp-p">Die App selbst wird vom Anbieter des App Stores gehostet, aus dem Sie die App heruntergeladen haben. Die in der App erfassten Nutzerdaten werden bei unserem Hoster gespeichert. Unser Hoster ist:</p>
+        <p class="lp-p">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a></p>
+        <p class="lp-p">Wir haben mit unserem Hoster einen Vertrag über Auftragsverarbeitung geschlossen, der sicherstellt, dass dieser die Daten nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.</p>
+
+        <h3 class="lp-h3">Datenübermittlung in Drittstaaten</h3>
+        <p class="lp-p">Wir verwenden unter anderem Tools von Unternehmen mit Sitz in den USA oder sonstigen datenschutzrechtlich nicht sicheren Drittstaaten. Wenn diese Tools aktiv sind, können Ihre personenbezogenen Daten in diese Drittstaaten übertragen und dort verarbeitet werden. Wir weisen darauf hin, dass in diesen Ländern kein mit der EU vergleichbares Datenschutzniveau garantiert werden kann. Beispielsweise sind US-Unternehmen dazu verpflichtet, personenbezogene Daten an Sicherheitsbehörden herauszugeben, ohne dass Sie als Betroffener hiergegen gerichtlich vorgehen könnten. Es kann daher nicht ausgeschlossen werden, dass US-Behörden (z. B. Geheimdienste) Ihre auf US-Servern befindlichen Daten zu Überwachungszwecken verarbeiten, auswerten und dauerhaft speichern. Wir haben auf diese Verarbeitungstätigkeiten keinen Einfluss.</p>
+
+        <h3 class="lp-h3">Speicherdauer</h3>
+        <p class="lp-p">Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Ein Wegfall des Zwecks liegt in der Regel vor, wenn Sie sich aus der App abmelden.</p>
+        <p class="lp-p">Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.</p>
+        <p class="lp-p">Daten, die ausschließlich auf Ihrem Endgerät gespeichert sind, verbleiben dort, bis Sie diese Daten oder die App selbst löschen.</p>
+
+        <h3 class="lp-h3">Automatisierte Entscheidungsfindung</h3>
+        <p class="lp-p">Eine automatisierte Entscheidungsfindung findet nicht statt.</p>
+
+        <h3 class="lp-h3">Ihre Rechte</h3>
+        <p class="lp-p">Ihnen stehen im Rahmen der DSGVO folgende Datenschutzrechte zu:</p>
+        <ul class="lp-ul">
+          <li><strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Sie haben das Recht, Auskunft über die von uns zu Ihrer Person gespeicherten personenbezogenen Daten zu verlangen.</li>
+          <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Sie haben das Recht, die Berichtigung Sie betreffender unrichtiger personenbezogener Daten zu verlangen. Unter Berücksichtigung der Zwecke der Verarbeitung haben Sie zudem das Recht, die Vervollständigung unvollständiger personenbezogener Daten zu verlangen.</li>
+          <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Sie haben das Recht, die Löschung Ihrer personenbezogenen Daten zu verlangen.</li>
+          <li><strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Sie haben das Recht, die Einschränkung der Verarbeitung Sie betreffender personenbezogener Daten zu verlangen.</li>
+          <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Sie haben das Recht, personenbezogene Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen anderen Verantwortlichen in einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.</li>
+          <li><strong>Recht auf Widerruf Ihrer Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Sofern Sie in die Verarbeitung Ihrer Daten eingewilligt haben, haben Sie das Recht, diese Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen.</li>
+          <li><strong>Beschwerderecht (Art. 77 DSGVO):</strong> Wenn Sie der Ansicht sind, dass wir bei der Verarbeitung Ihrer personenbezogenen Daten gegen Datenschutzvorschriften verstoßen, haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</li>
+        </ul>
+        <p class="lp-p"><strong>In Fällen, in denen die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 S. 1 lit. e oder f DSGVO erfolgt, haben Sie das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, der Datenverarbeitung zu widersprechen (Widerspruchsrecht nach Art. 21 DSGVO).</strong></p>
+
+        <hr class="lp-rule" />
+
+        <h2 class="lp-h2" id="english">Privacy policy for the app</h2>
+        <p class="lp-note">Original English version. In case of doubt, please refer to the German version above.</p>
+
+        <h3 class="lp-h3">Privacy policy declaration for the app „OnePeek"</h3>
+
+        <h3 class="lp-h3">1. Scope of the privacy policy declaration</h3>
+        <p class="lp-p">This privacy policy applies to our apps for mobile operating systems and devices (hereinafter “app”). It explains the type, purpose and scope of data collection when using the app.</p>
+        <p class="lp-p">When you download this app, certain necessary personal data will be transmitted to the relevant app store (e.g. Apple App Store or Google Play). In particular, when downloading, the email address, user name, customer number of the downloading account, the individual device identification number, payment information and the time of download will be transmitted to the App Store. We have no influence on the collection and processing of this data; rather, it is carried out exclusively by the app store you have selected. Accordingly, we are not responsible for this collection and processing; responsibility for this lies solely with the App Store.</p>
+        <p class="lp-p">We reserve the right to change this privacy policy at any time in compliance with legal requirements.</p>
+
+        <h3 class="lp-h3">2. Responsible body</h3>
+        <p class="lp-p">The responsible body for the data processing described in this data protection declaration is:</p>
+        <p class="lp-p">
+          Schippl Weise-Onnen Oldenburg GmbH &amp; Co. KG<br />
+          Christoph Weise-Onnen<br />
+          <a href="mailto:cwo@swoo-digital.de">cwo@swoo-digital.de</a><br />
+          <a href="tel:+4944192206202">+49 441 922 06 202</a>
+        </p>
+
+        <h3 class="lp-h3">3. Data Protection Officer</h3>
+        <p class="lp-p">You can reach our data protection officer using the following contact details:</p>
+        <p class="lp-p">
+          Per Schippl<br />
+          Markt 22<br />
+          26122 Oldenburg<br />
+          <a href="mailto:ps@onepeek.app">ps@onepeek.app</a><br />
+          <a href="tel:+4944192206202">+49 441 922 06 202</a>
+        </p>
+
+        <h3 class="lp-h3">4. Type, scope, purpose and legal basis of data processing</h3>
+        <p class="lp-p"><em>Purpose and legal basis of data processing</em></p>
+        <p class="lp-p">Unless more specific requirements are set out in this data protection declaration, we process your personal data as part of the use of the app in order to provide the functionalities of the app, to ensure the security of the app or - if necessary and legally permitted - to contact you step. The legal basis is Art. 6 Para. 1 lit. b GDPR (fulfillment of the contract) and our legitimate interest in providing a functional app (Art. 6 Para. 1 lit. f GDPR). If appropriate consent has been requested, processing is carried out exclusively on the basis of Art. 6 Para. 1 lit. for device fingerprinting) within the meaning of the TDDDG. Consent can be revoked at any time. Details can be found in the following statements.</p>
+
+        <p class="lp-p"><em>Data categories processed</em></p>
+        <p class="lp-p">If you use this app, the following personal data will be processed:</p>
+        <ul class="lp-ul">
+          <li>First and Last Name</li>
+          <li>Address</li>
+          <li>user name</li>
+          <li>Email-Address</li>
+          <li>Telephone and cell phone number</li>
+          <li>Profile picture</li>
+          <li>Order data (which products were ordered from which seller)</li>
+          <li>Invoice and contract data</li>
+          <li>Representatives and contact persons</li>
+          <li>Data that you enter in the chat or contact forms</li>
+          <li>Device identifiers / device IDs</li>
+          <li>Device number and device type of the smartphone/end device</li>
+          <li>Pictures</li>
+          <li>IBAN</li>
+          <li>BIC</li>
+          <li>If applicable, sales and text</li>
+          <li>Device information, such as the IP address, device type, device-specific settings and app settings as well as app properties, the date and time of access, time zone, the amount of data transferred and the message as to whether the data exchange was complete, crash of the app, browser type and operating system; This access data is processed to enable the technical operation of the app</li>
+          <li>Data you provide to us: To use the app, you need to create a user account. To do this, you must provide at least your login name.</li>
+        </ul>
+        <p class="lp-p">If the processing of the data requires the storage of information in your terminal device or access to information that is already stored in the terminal device, § 25 Abs. 1, 2 TDDDG is the legal basis for this.</p>
+        <p class="lp-p">This data is collected to implement the usage contract between us and the app users (Art. 6 Para. 1 Sentence 1 Letter b GDPR). With regard to voluntary information, data processing is also carried out on the basis of Article 6 Paragraph 1 Sentence 1 Letter f of the GDPR. We have a legitimate interest in collecting voluntarily provided data from our users. If appropriate consent has been requested, processing is carried out exclusively on the basis of Article 6 Paragraph 1 Letter a GDPR and Section 25 Paragraph 1 TDDDG. Consent can be revoked at any time.</p>
+
+        <p class="lp-p"><em>Registration</em></p>
+        <p class="lp-p">You can register in the app to use additional functionalities of the app. We only use the data entered for the purpose of using the respective offer or service for which you have registered. The mandatory information requested during registration must be provided in full. Otherwise we will reject the registration. For important changes, such as the scope of the offer or technically necessary changes, we use the email address provided during registration to inform you in this way. The data entered during registration is processed for the purpose of implementing the usage relationship established by registration and, if necessary, to initiate further contracts (Art. 6 Para. 1 lit. b GDPR). The data collected during registration will be stored by us as long as you are registered on this app and will then be deleted. Statutory retention periods remain unaffected.</p>
+        <p class="lp-p">To register with a Google account The provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. When you register with your account, you only need to enter your respective account name and the associated password. Your account in our app will then be automatically completed with the data stored with the respective provider. The use of this function is in our legitimate interest, to enable our users to make the registration process as simple as possible (Art. 6 Para. 1 lit. f GDPR). Since the use of the registration function is voluntary and the users can decide for themselves about the respective access options, there are no conflicting overriding rights of those affected.</p>
+        <p class="lp-p">For registration with an Apple account, the provider is Apple Inc., Infinite Loop, Cupertino, CA 95014, USA, <a href="https://www.apple.com/de/ios/app-store/" target="_blank" rel="noopener">apple.com/de/ios/app-store</a>. When you register with your account, you only need to enter your respective account name and the associated password. Your account in our app will then be automatically completed with the data stored with the respective provider. The use of this function is in our legitimate interest, to enable our users to make the registration process as simple as possible (Art. 6 Para. 1 lit. f GDPR). Since the use of the registration function is voluntary and the users can decide for themselves about the respective access options, there are no conflicting overriding rights of those affected..</p>
+        <p class="lp-p">For registration via Magic Link is Provider die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. When you register with your account, you only need to enter your respective account name and the associated password. Your account in our app will then be automatically completed with the data stored with the respective provider. The use of this function is in our legitimate interest, to enable our users to make the registration process as simple as possible (Art. 6 Para. 1 lit. f GDPR). Since the use of the registration function is voluntary and the users can decide for themselves about the respective access options, there are no conflicting overriding rights of those affected.</p>
+
+        <p class="lp-p"><em>Access rights of the app</em></p>
+        <p class="lp-p">To provide our services, the app requests the access rights listed below, which enable us to access certain functions of your device.</p>
+        <ul class="lp-ul">
+          <li>Camera. Access is for the following purpose:</li>
+        </ul>
+        <p class="lp-p">The access permissions granted are used exclusively to provide the associated app functionalities.</p>
+        <p class="lp-p">The data may be processed by the app store providers under certain circumstances.</p>
+        <p class="lp-p">The legal basis for access is your consent, which you gave during the installation (Art. 6 Para. 1 lit. a GDPR). You can change the app access permissions at any time. However, in this case, the app or certain app functions may no longer work properly.</p>
+
+        <p class="lp-p"><em>InApp Purchases</em></p>
+        <p class="lp-p">Within the app you have the option to purchase additional services (in-app purchases). The purchase therefore takes place via the AppStore, which is also responsible for data protection. Details can be found in the respective data protection declarations of the AppStore. In the case of in-app purchases, you will be redirected to your AppStore provider. These can be the following app stores:</p>
+        <ul class="lp-ul">
+          <li>Apple App Store: Apple Inc., Infinite Loop, Cupertino, CA 95014, USA, <a href="https://www.apple.com/de/ios/app-store/" target="_blank" rel="noopener">apple.com/de/ios/app-store</a>. The data protection declaration can be found at: <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noopener">apple.com/legal/privacy/de-ww</a>.</li>
+          <li>Google Play: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a>. The parent company is Google LLC, 1600 Amphitheater Parkway, Mountain View, CA 94043, USA, so that a transfer of your data to the USA cannot be ruled out. The data protection declaration can be found at: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</li>
         </ul>
 
-        <h2 class="lp-h2" id="begriffe">Begriffsdefinitionen</h2>
-        <p class="lp-p">In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser Datenschutzerklärung verwendeten Begrifflichkeiten. Viele der Begriffe sind dem Gesetz entnommen und vor allem im Art. 4 DSGVO definiert. Die gesetzlichen Definitionen sind verbindlich. Die nachfolgenden Erläuterungen sollen dagegen vor allem dem Verständnis dienen. Die Begriffe sind alphabetisch sortiert.</p>
+        <p class="lp-p"><em>Data processing as part of the subscription model</em></p>
+        <p class="lp-p">If you take out a subscription via our app, we process the personal data you provide to provide and process the subscription. This data includes:</p>
         <ul class="lp-ul">
-          <li><strong>Personenbezogene Daten:</strong> „Personenbezogene Daten" sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden „betroffene Person" beziehen; als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten, zu einer Online-Kennung (z.B. Cookie) oder zu einem oder mehreren besonderen Merkmalen identifiziert werden kann, die Ausdruck der physischen, physiologischen, genetischen, psychischen, wirtschaftlichen, kulturellen oder sozialen Identität dieser natürlichen Person sind.</li>
-          <li><strong>Standortdaten:</strong> Standortdaten entstehen, wenn sich ein mobiles Gerät (oder ein anderes Gerät mit den technischen Voraussetzungen einer Standortbestimmung) mit einer Funkzelle, einem WLAN oder ähnlichen technischen Mittlern und Funktionen der Standortbestimmung, verbindet. Standortdaten dienen der Angabe, an welcher geografisch bestimmbaren Position der Erde sich das jeweilige Gerät befindet. Standortdaten können z. B. eingesetzt werden, um Kartenfunktionen oder andere von einem Ort abhängige Informationen darzustellen.</li>
-          <li><strong>Verantwortlicher:</strong> Als „Verantwortlicher" wird die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet, bezeichnet.</li>
-          <li><strong>Verarbeitung:</strong> „Verarbeitung" ist jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten. Der Begriff reicht weit und umfasst praktisch jeden Umgang mit Daten, sei es das Erheben, das Auswerten, das Speichern, das Übermitteln oder das Löschen.</li>
+          <li>Your basic data (e.g. name, email address)</li>
+          <li>Payment data (e.g. credit card number, account details)</li>
+          <li>Subscription information (e.g. subscription type, term, usage history).</li>
         </ul>
+        <p class="lp-p">We use this data for the following purposes:</p>
+        <ul class="lp-ul">
+          <li>Management of your subscription (Art. 6 Para. 1 lit. b GDPR)</li>
+          <li>Billing and payment processing (Art. 6 Para. 1 lit. b GDPR)</li>
+          <li>ulfillment of legal obligations, e.g. B. tax law requirements (Art. 6 Para. 1 lit. c GDPR)</li>
+          <li>Analysis to improve our services (Art. 6 Para. 1 lit. f GDPR).</li>
+        </ul>
+        <p class="lp-p">We use external payment service providers to process payments (e.g. PayPal). Your payment data is processed directly by these service providers. For further information, please refer to the data protection declaration of the respective payment service provider.</p>
+        <p class="lp-p">Your data will be stored for the duration of the subscription. After the subscription has ended, we will retain your data in accordance with legal retention requirements (e.g. tax regulations). Data without a legal storage obligation will be deleted as soon as it is no longer needed.</p>
 
-        <p class="lp-copy">Stand: 10. Oktober 2020</p>
+        <p class="lp-p"><em>Data processing as part of the API connection to the bank</em></p>
+        <p class="lp-p">The app offers the option of linking the household book with your accounts. To do this, a connection to the bank must be established via a technical interface. After connection, all account transactions are recorded in the app and stored by the provider on its servers. With regard to the third-party data that is processed in this way (e.g. data from people who have transferred money to you), the app provider acts exclusively as a processor.</p>
+        <p class="lp-p">The legal basis for data processing is the fulfillment of the contract that we have concluded with you (Art. 6 Para. 1 lit. b GDPR).</p>
+
+        <p class="lp-p"><em>Donation option</em></p>
+        <p class="lp-p">If you donate via our app, we process the personal data you provide (e.g. name, address, payment details) to process the donation. The legal basis for this is Article 6 Paragraph 1 Letter b GDPR (fulfillment of a contract).</p>
+        <p class="lp-p">We use external payment service providers (e.g. PayPal) to process payments. The transmission of your payment data is only encrypted. For further information on data processing by the payment service provider, please see their data protection declaration.</p>
+        <p class="lp-p">Your data will be stored in accordance with legal retention requirements and then deleted, provided there are no further legal obligations.</p>
+        <p class="lp-p">You have the right to information, correction and deletion of your data at any time.</p>
+
+        <p class="lp-p"><em>Contact us</em></p>
+        <p class="lp-p">If you contact us (e.g. via contact form, by e-mail, telephone, fax or via another channel), your request including all resulting personal data (e.g. name, request) will be sent to us for the purpose of processing your request stored and processed. This data is processed on the basis of Art. 6 Para. 1 lit. b GDPR, provided your request is related to the fulfillment of a contract or is necessary to carry out pre-contractual measures. In all other cases, the processing is based on your consent (Art. 6 Para. 1 lit. a GDPR) and/or on our legitimate interests (Art. 6 Para. 1 lit. f GDPR), as we have a legitimate interest in the effective Processing inquiries sent to us. The data you send to us via contact request will remain with us until you request us to delete it, revoke your consent to storage or the purpose for data storage no longer applies (e.g. after your request has been processed). Mandatory legal provisions – in particular statutory retention periods – remain unaffected.</p>
+
+        <p class="lp-p"><em>Analysis and tracking</em></p>
+        <p class="lp-p">When you access our app, your behavior can be statistically evaluated using certain analysis tools and analyzed for advertising purposes or to improve our offerings. When using such tools, we ensure compliance with statutory data protection regulations. When using external service providers, we ensure through appropriate contracts with the service providers that data processing complies with German and European data protection standards.</p>
+        <p class="lp-p">We use the following tools to analyze user behavior:</p>
+        <p class="lp-p"><strong>Firebase Analytics:</strong> We use the external analysis service Firebase Analytics from Google (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Ireland) to optimally tailor our app to the interests of the users. For this purpose, we use a programming interface, the Firebase Software Development Kit (SDK), provided by Google, to access the user ID from the app and device information such as the advertising ID (IDFA from Apple and GAID from Google) of the device used and to enable statistical analysis of the use of the app. Using the Firebase SDK, we can define various events (e.g. average app usage, average sessions per user, button presses, recognition of usage preferences) in order to be able to track and understand the behavior of app users across devices and thus the app's functionalities accordingly to optimize and improve. We can also identify and fix errors in programming and prevent fraudulent activity in the app. For the purpose of fraud prevention and statistical analysis, Google processes device information such as the advertising ID (IDFA from Apple and GAID from Google) and the IP address of the device used and provides us with anonymous statistics about interactions with our app. The legal basis for the processing is Article 6 Paragraph 1 Sentence 1 Letter f of the GDPR. Our legitimate interests lie in fraud prevention, IT security, dynamic provision of content and optimization of our app and services. Google also processes some of the data in the USA. We have agreed standard contractual clauses with Google to require Google to maintain an appropriate level of data protection. We will provide you with a copy upon request. Your data will be deleted after thirteen months at the latest. Further information about data protection at Google can be found at: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>. If consent has been requested, the use of this service is based on your consent in accordance with Article 6 Paragraph 1 Letter a GDPR and Section 25 Paragraph 1 TDDDG. Consent can be revoked at any time.</p>
+        <p class="lp-p"><strong>Google Analytics:</strong> This app uses functions of the web analysis service Google Analytics. The provider is Google Ireland Limited (“Google”), Gordon House, Barrow Street, Dublin 4, Ireland. Google Analytics allows us to analyze the behavior of app users. The app operator receives various usage data, such as: B. App views, length of stay, operating systems used and origin of the user. This data can be assigned to the user’s respective device. Furthermore, Google Analytics uses various modeling approaches to complement the data sets collected and uses machine learning technologies in data analysis. Google Analytics uses technologies that enable user recognition for the purpose of analyzing user behavior. The information collected by Google about the use of this website is usually transmitted to a Google server in the USA and stored there. The use of this service is based on your consent in accordance with Article 6 Paragraph 1 Letter a GDPR and Section 25 Paragraph 1 TDDDG. Consent can be revoked at any time. Data transfer to the USA is based on the EU Commission's standard contractual clauses. Details can be found here: <a href="https://privacy.google.com/businesses/controllerterms/mccs/" target="_blank" rel="noopener">privacy.google.com/businesses/controllerterms/mccs</a>. The company is certified according to the “EU-US Data Privacy Framework” (DPF). The DPF is an agreement between the European Union and the USA that is intended to ensure compliance with European data protection standards when data is processed in the USA. Every DPF certified company undertakes to comply with these data protection standards. Further information can be obtained from the provider using the following link: <a href="https://www.dataprivacyframework.gov/list" target="_blank" rel="noopener">dataprivacyframework.gov/list</a>.</p>
+
+        <p class="lp-p"><em>YouTube</em></p>
+        <p class="lp-p">This app integrates videos from the YouTube website. YouTube is provided by Google Ireland Limited (“Google”), Gordon House, Barrow Street, Dublin 4, Ireland. YouTube is integrated into our app and a connection is established to the YouTube servers. Furthermore, YouTube can store various cookies on your device or use comparable technologies for recognition (e.g. device fingerprinting). In this way, YouTube can obtain information about users of this app. This information is, among other things, used to collect video statistics, improve user experience and prevent fraud attempts. Furthermore, the data collected is processed in the Google advertising network. If you are logged into your YouTube account, you enable YouTube to assign your surfing behavior directly to your personal profile. You can prevent this by logging out of your YouTube account. The use of YouTube is in the interest of an attractive presentation of our online offerings. This represents a legitimate interest within the meaning of Art. 6 Para. 1 lit TDDDG, insofar as the consent includes the storage of cookies or access to information on the user's end device (e.g. device fingerprinting) within the meaning of the TDDDG. Consent can be revoked at any time. Further information on how to handle user data can be found in YouTube's privacy policy at: <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">policies.google.com/privacy</a>. The company is certified according to the “EU-US Data Privacy Framework” (DPF). The DPF is an agreement between the European Union and the USA that is intended to ensure compliance with European data protection standards when data is processed in the USA. Every DPF certified company undertakes to comply with these data protection standards. Further information on this can be obtained from the provider at the following link: <a href="https://www.dataprivacyframework.gov/participant/5780" target="_blank" rel="noopener">dataprivacyframework.gov/participant/5780</a>.</p>
+
+        <p class="lp-p"><em>Encryption</em></p>
+        <p class="lp-p">This app uses encryption for security reasons and to protect the transmission of confidential content. This encryption prevents that the data you transmit can be read by unauthorized third parties.</p>
+
+        <p class="lp-p"><em>Hosting</em></p>
+        <p class="lp-p">The app itself is hosted by the AppStore provider from which you downloaded the app. The user data collected in the APP is stored by our host. Our host is:</p>
+        <p class="lp-p">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, <a href="https://play.google.com/store/apps?hl=de" target="_blank" rel="noopener">play.google.com/store/apps</a></p>
+        <p class="lp-p">We have concluded a contract for order processing with our host, which ensures that they process the data based on our instructions and in compliance with the GDPR.</p>
+
+        <p class="lp-p"><em>Data transfer to third countries</em></p>
+        <p class="lp-p">We use, among other things, tools from companies based in the USA or other third countries that are not secure in terms of data protection. If these tools are active, your personal data may be transferred to these third countries and processed there. We would like to point out that a level of data protection comparable to the EU cannot be guaranteed in these countries. For example, US companies are obliged to hand over personal data to security authorities without you as the data subject being able to take legal action against this. It cannot therefore be ruled out that US authorities (e.g. secret services) process, evaluate and permanently store your data on US servers for surveillance purposes. We have no influence on these processing activities.</p>
+
+        <p class="lp-p"><em>Storage period</em></p>
+        <p class="lp-p">Unless a specific storage period is specified in this data protection declaration, your personal data will remain with us until the purpose for data processing no longer applies. A Loss of purpose usually occurs when you log out of the app.</p>
+        <p class="lp-p">If you make a legitimate request for deletion or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g. tax or commercial law retention periods); In the latter case, the deletion takes place after these reasons no longer apply.</p>
+        <p class="lp-p">Data that is stored exclusively on your device remains there until you delete this data or the app yourself.</p>
+
+        <p class="lp-p"><em>Automated decision making</em></p>
+        <p class="lp-p">There is no automated decision making.</p>
+
+        <p class="lp-p"><em>Your rights</em></p>
+        <p class="lp-p">You have the following data protection rights within the framework of the GDPR:</p>
+        <ul class="lp-ul">
+          <li><strong>Right to information (Article 15 GDPR):</strong> You have the right to request information about the personal data we have stored about you.</li>
+          <li><strong>Right to rectification (Article 16 GDPR):</strong> You have the right to request that inaccurate personal data concerning you be corrected. Taking into account the purpose of processing, you also have the right to request that incomplete personal data be completed.</li>
+          <li><strong>Right to deletion (Article 17 GDPR):</strong> You have the right to request the deletion of your personal data.</li>
+          <li><strong>Right to restriction of processing (Article 18 GDPR):</strong> You have the right to request that the processing of personal data concerning you be restricted.</li>
+          <li><strong>Right to data portability (Article 20 GDPR):</strong> You have the right to have personal data that we process automatically based on your consent or in fulfillment of a contract handed over to you or another person responsible in a common, machine-readable format. If you request the data to be transferred directly to another person responsible, this will only be done if it is technically feasible.</li>
+          <li><strong>Right to revoke your consent (Art. 7 Para. 3 GDPR):</strong> If you have given your consent to the processing of your data, you have the right to revoke this at any time with future effect.</li>
+          <li><strong>Right to complain (Art. 77 GDPR):</strong> If you are of the opinion that we are not complying with data protection regulations when processing your personal data, you have the right to lodge a complaint with a data protection authority.</li>
+        </ul>
+        <p class="lp-p">In cases where data processing is carried out in accordance with Article 6 Paragraph 1 Sentence 1 Letter e or f GDPR, you have the right to object to data processing for reasons arising from your particular situation (right to object according to Art. 21 GDPR).</p>
       </div>
     </div>
   </main>
@@ -216,9 +333,14 @@ const inhalt = [
 <style>
   .lp-h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; color: var(--gv-ink); line-height: 1.0; margin: 18px 0 0; font-size: clamp(40px, 6vw, 64px); }
   .lp-h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; color: var(--gv-ink); line-height: 1.05; margin: 40px 0 10px; font-size: 26px; scroll-margin-top: 24px; }
-  .lp-h3 { font-family: var(--font-body); font-weight: 700; color: var(--gv-ink); margin: 22px 0 6px; font-size: 18px; }
+  .lp-h3 { font-family: var(--font-body); font-weight: 700; color: var(--gv-ink); margin: 26px 0 6px; font-size: 18px; }
   .lp-p { font-size: 17px; line-height: 1.7; color: var(--gv-ink-soft); margin: 0 0 12px; }
   .lp-ul { font-size: 17px; line-height: 1.7; color: var(--gv-ink-soft); margin: 0 0 12px; padding-left: 22px; display: grid; gap: 6px; }
-  .lp-copy { font-size: 14px; color: var(--gv-muted); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--gv-border); }
-  .lp-p a, .lp-ul a { color: var(--gv-blue); }
+  .lp-lang { font-size: 15px; margin: 18px 0 28px; }
+  .lp-note { font-size: 15px; color: var(--gv-muted); margin: 0 0 18px; }
+  .lp-rule { border: 0; border-top: 1px solid var(--gv-border); margin: 56px 0 0; }
+  .lp-p a, .lp-ul a, .lp-lang a { color: var(--gv-blue); }
+  /* Die langen Link-Adressen im Text sonst über den Bildschirmrand hinaus */
+  .lp-p, .lp-ul { overflow-wrap: break-word; }
+  .lp-p a, .lp-ul a { overflow-wrap: anywhere; }
 </style>
