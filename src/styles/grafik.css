@@ -1,0 +1,77 @@
+/* GELD VERSTEHEN — Regelwerk für Artikel-Grafiken
+   Jede Grafik im Ratgeber besteht aus denselben Bausteinen, damit sie wie
+   aus einem Guss wirken. Die Regeln in Kürze:
+
+   1. Rahmen: Fläche --gv-surface, Titel oben (Bebas), Fazit unten (ein Satz).
+   2. Schrift: nur Bebas für Titel, Manrope für alles andere. Text immer in
+      Ink-Tönen, nie in Datenfarben. Keine Schrift in SVGs — alles HTML,
+      damit die Grafik auf dem Handy genauso lesbar ist wie der Fließtext.
+   3. Farbe hat genau drei Aufgaben:
+        Blau-100  = Basis, das Gewohnte (laufende Kosten, Planbares)
+        Blau      = der gute Weg, behalten
+        Gelb      = darauf kommt es an — höchstens ein Fokus pro Grafik
+      Kein Rot, kein Grün: Der Ratgeber urteilt nicht, er zeigt.
+   4. Beschriftung steht direkt am Element, keine Legenden.
+   5. Flach: keine Icons, Verläufe oder Schatten. */
+
+.ag {
+  margin: 34px 0; padding: 26px 28px 24px;
+  background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 16px;
+}
+.ag-titel {
+  margin: 0 0 20px; font-family: var(--font-display); font-weight: 400;
+  font-size: 17px; letter-spacing: .12em; line-height: 1.2; color: var(--gv-blue);
+}
+.ag-fazit {
+  margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--gv-border);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.5; font-weight: 600;
+  color: var(--gv-ink);
+}
+
+/* Karten: weiß = neutral, blau = behalten / guter Weg, gelb = Fokus */
+.ag-karte {
+  background: #fff; border: 1px solid var(--gv-border); border-radius: 12px;
+  padding: 16px 18px;
+}
+.ag-karte-blau { background: var(--gv-blue-050); border-color: var(--gv-blue-100); }
+.ag-karte-gelb { background: var(--gv-yellow-050); border-color: var(--gv-yellow); }
+
+/* Kleine Großbuchstaben-Marke (z. B. „behalten", „ja") */
+.ag-marke {
+  display: inline-block; justify-self: start; align-self: start;
+  font-family: var(--font-body); font-weight: 700; font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; line-height: 1;
+  padding: 5px 10px; border-radius: 999px;
+  background: var(--gv-surface-2); color: var(--gv-ink-soft);
+}
+.ag-marke-blau { background: var(--gv-blue); color: #fff; }
+.ag-marke-gelb { background: var(--gv-yellow); color: var(--gv-ink); }
+
+/* Schritt- oder Fragenummer: gelber Kreis */
+.ag-nr {
+  flex: none; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--gv-yellow); color: var(--gv-ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-body); font-weight: 700; font-size: 14px; line-height: 1;
+}
+
+/* Frage / Schritt als dunkle Pille */
+.ag-frage {
+  display: inline-flex; align-items: center; gap: 12px; justify-self: start;
+  background: var(--gv-ink); color: #fff; border-radius: 12px; padding: 12px 18px;
+}
+.ag-frage p { margin: 0; font-family: var(--font-display); font-size: 22px; letter-spacing: .01em; line-height: 1.1; color: #fff; }
+
+/* Textbausteine */
+.ag-name { margin: 0; font-family: var(--font-display); font-size: 24px; letter-spacing: .01em; line-height: 1.1; color: var(--gv-ink); }
+.ag-text { margin: 0; font-family: var(--font-body); font-size: 15px; line-height: 1.5; color: var(--gv-ink-soft); }
+.ag-klein { margin: 0; font-family: var(--font-body); font-size: 13px; line-height: 1.4; color: var(--gv-muted); }
+
+/* Listen in Grafiken sind Bausteine, keine Aufzählungen */
+.ag ul, .ag ol { margin: 0; padding: 0; list-style: none; }
+.ag li { padding: 0; }
+
+@media (max-width: 620px) {
+  .ag { padding: 20px 16px 18px; margin: 28px -4px; }
+  .ag-frage p { font-size: 20px; }
+}

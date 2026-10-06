@@ -5,6 +5,8 @@ import { u } from '../lib/url';
 import { img } from '../lib/images';
 import NennerGrafik from '../components/NennerGrafik.astro';
 import HappyBalanceGrafik from '../components/HappyBalanceGrafik.astro';
+import RichtungenGrafik from '../components/RichtungenGrafik.astro';
+import KategorienGrafik from '../components/KategorienGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -37,10 +39,6 @@ const kapitel = [
   { id: 'womit-fuehren', titel: 'App, Excel oder Papier – womit führt man ein Haushaltsbuch am besten?' },
   { id: 'faq', titel: 'Häufige Fragen zum Haushaltsbuch führen' },
 ];
-// Artikel-Grafiken (aus design/uploads, weboptimiert) — über die Vite-Pipeline.
-import spiraleImg from '../../design/uploads/spiralen.png?url';
-import kreislaufImg from '../../design/uploads/kreislauf_v2.png?url';
-import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
 ---
 <Base
   title="Haushaltsbuch führen: Anleitung, die wirklich funktioniert"
@@ -86,10 +84,7 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
         <p><strong>3. Es schafft Messbarkeit.</strong><br />Und Messbarkeit ist der entscheidende Schlüssel zu dauerhaftem Fortschritt. Wer keinen Maßstab hat, weiß nie, ob er sich überhaupt verbessert – und gibt früher oder später auf. Wer dagegen erste kleine Fortschritte schwarz auf weiß sieht, will dranbleiben. Man gewinnt regelrecht Spaß an der Sache.</p>
         <p>Wichtig dabei: Erfolgreich ein Haushaltsbuch zu führen heißt vor allem, <strong>beobachten zu lernen</strong>. Über einen längeren Zeitraum. Nicht sofort urteilen, nicht sofort Konsequenzen ziehen – sondern erst einmal ehrlich hinschauen.</p>
 
-        <figure class="gv-figure">
-          <img src={spiraleImg} alt="Zwei Spiralen im Vergleich: die rote Abwärtsspirale (wegschauen, böse Überraschungen, das Geld wird eng, schlechtes Gewissen) und die grüne Aufwärtsspirale (hinschauen & notieren, verstehen, andere Prioritäten, mehr Erfolg mit den Finanzen, mehr Spaß)." loading="lazy" />
-          <figcaption>Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale.</figcaption>
-        </figure>
+        <RichtungenGrafik />
 
         <h2 id="haeufigste-fehler">Die 4 häufigsten Fehler beim Haushaltsbuch führen</h2>
         <p>Bevor wir zur konkreten Anleitung kommen, das Wichtigste zuerst: Warum scheitern so viele Haushaltsbuch-Vorhaben? Aus meiner Coaching-Erfahrung kann ich sagen – es sind immer wieder dieselben vier Fehler.</p>
@@ -111,10 +106,7 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
           <li><strong>Flexkosten</strong> – alles, was flexibel rausgeht</li>
         </ol>
         <p>Jeder Geldfluss in deinem Leben lässt sich einer dieser drei Kategorien zuordnen. Diese Einteilung bringt Ordnung ins Chaos, ohne dass du dich in Details verlierst. Und sie spiegelt den entscheidenden Unterschied wider: Einkommen und Fixkosten sind planbar – das ist deine stabile Basis. Flexkosten schwanken – hier passiert die meiste Bewegung.</p>
-        <figure class="gv-figure">
-          <img src={dreiKategorienImg} alt="Die drei Geldfluss-Kategorien als Kacheln: Einkommen, Fixkosten und Flexkosten." loading="lazy" />
-          <figcaption>Jeder Geldfluss gehört in genau eine dieser drei Kategorien.</figcaption>
-        </figure>
+        <KategorienGrafik />
         <h3>Schritt 1: Dein Einkommen ermitteln</h3>
         <p>Der einfachste Geldfluss: alles, was regelmäßig als Plus auf deinem Konto landet. Gehalt, Nebeneinkommen, Kindergeld, Unterhalt, Mieteinnahmen. Wichtig: Nur Einnahmen, mit denen du sicher rechnen kannst. Einmalige Geldgeschenke gehören nicht dazu.</p>
         <p>Rechne alles auf den Monat um. Am Ende steht eine Zahl: der Betrag, der dir monatlich zur Verfügung steht.</p>
@@ -163,11 +155,6 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
         </ol>
         <p>Und dann kommt die goldene Regel, die wichtigste der ganzen Analyse: <strong>Geh immer nur die Geldfresser an. Alles andere lässt du in Ruhe.</strong></p>
         <p>Warum? Weil du bei Geldfressern auf nichts verzichtest. Es fällt nichts weg, das dir etwas bedeutet – es hört nur etwas auf zu verschwinden. Genau das ist der Kern meiner Philosophie: <strong>Verstehen statt Verzichten.</strong> Wer versteht, wohin sein Geld fließt, muss nicht verzichten – er sortiert nur aus, was ihm ohnehin nichts gibt.</p>
-
-        <figure class="gv-figure">
-          <img src={kreislaufImg} alt="Positiver Kreislauf: hinschauen & notieren, verstehen, andere Prioritäten, weniger sinnlose Käufe, mehr Erfolg mit den Finanzen, mehr Spaß – ohne Zwang, ohne schlechtes Gewissen." loading="lazy" />
-          <figcaption>Verstehen statt Verzichten – ein Kreislauf, der sich selbst trägt.</figcaption>
-        </figure>
 
         <h2 id="womit-fuehren">App, Excel oder Papier – womit führt man ein Haushaltsbuch am besten?</h2>
         <p>Die ehrliche Antwort: Das Werkzeug ist zweitrangig. Entscheidend ist, dass du es einfach hältst und dranbleibst.</p>
@@ -279,14 +266,6 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
   }
   .gv-formula-result { color: var(--gv-blue); }
 
-  /* Artikel-Grafiken */
-  .gv-figure {
-    margin: 34px 0; padding: 28px; background: var(--gv-surface);
-    border: 1px solid var(--gv-border); border-radius: 16px;
-  }
-  .gv-figure img { display: block; width: 100%; height: auto; max-width: 540px; margin: 0 auto; }
-  .gv-figure figcaption { margin: 16px auto 0; max-width: 520px; text-align: center; font-size: 14px; line-height: 1.5; color: var(--gv-muted); font-style: italic; }
-
   /* FAQ-Akkordeon */
   .gv-faq { display: grid; gap: 12px; margin: 8px 0 24px; }
   .gv-faq-item {
@@ -330,6 +309,5 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
     .gv-article p, .gv-article ul, .gv-article ol { font-size: 17px; }
     .gv-faq-item summary { font-size: 17px; padding: 16px 18px; }
     .gv-faq-body { padding: 0 18px 18px; }
-    .gv-figure { padding: 18px; }
   }
 </style>

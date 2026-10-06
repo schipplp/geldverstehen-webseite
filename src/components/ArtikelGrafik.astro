@@ -1,0 +1,18 @@
+---
+// Gemeinsamer Rahmen für alle Grafiken im Ratgeber: Titel, Grafik, Fazit.
+// Die Regeln dazu stehen in src/styles/grafik.css.
+import '../styles/grafik.css';
+
+export interface Props {
+  titel: string;
+  fazit: string;
+  /** Beschreibung für Screenreader, wenn die Grafik selbst nicht als Text lesbar ist */
+  beschreibung?: string;
+}
+const { titel, fazit, beschreibung } = Astro.props;
+---
+<figure class="ag" aria-label={beschreibung}>
+  <p class="ag-titel">{titel}</p>
+  <slot />
+  <figcaption class="ag-fazit">{fazit}</figcaption>
+</figure>

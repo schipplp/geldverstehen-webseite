@@ -1,0 +1,75 @@
+---
+// Die drei Geldfluss-Kategorien. Statt Icons zeigt jede Karte in vier
+// Mini-Balken, wie sich die Kategorie über die Monate verhält — genau der
+// Unterschied, den der Text erklärt: planbar oder schwankend.
+// Die Balkenhöhen sind Form, keine echten Beträge.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const kategorien = [
+  { nr: 1, name: 'Einkommen', richtung: 'rein', verhalten: 'planbar', balken: [70, 70, 70, 70], farbe: 'blau' },
+  { nr: 2, name: 'Fixkosten', richtung: 'raus', verhalten: 'planbar', balken: [52, 52, 52, 52], farbe: 'basis' },
+  { nr: 3, name: 'Flexkosten', richtung: 'raus', verhalten: 'schwankt', balken: [34, 62, 24, 48], farbe: 'gelb' },
+];
+---
+<ArtikelGrafik
+  titel="Drei Kategorien für jeden Geldfluss"
+  fazit="Jeder Geldfluss gehört in genau eine dieser drei Kategorien."
+  beschreibung="Einkommen und Fixkosten sind jeden Monat gleich und bilden die stabile Basis. Flexkosten schwanken von Monat zu Monat."
+>
+  <div class="kg">
+    <p class="kg-klammer"><span>deine stabile Basis</span></p>
+    {kategorien.map((k) => (
+      <div class:list={['ag-karte', 'kg-karte', { 'ag-karte-gelb': k.farbe === 'gelb' }]}>
+        <div class="kg-kopf">
+          <span class="ag-nr">{k.nr}</span>
+          <p class="ag-name">{k.name}</p>
+        </div>
+        <div class="kg-balken" aria-hidden="true">
+          {k.balken.map((h) => (
+            <span class:list={['kg-b', `kg-${k.farbe}`]} style={`height:${h}%`}></span>
+          ))}
+        </div>
+        <p class="ag-text"><strong>{k.richtung}</strong> · {k.verhalten}</p>
+      </div>
+    ))}
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .kg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .kg-klammer {
+    grid-column: 1 / 3; margin: 0 0 2px; position: relative;
+    border-top: 2px solid var(--gv-blue); padding-top: 0; text-align: center;
+  }
+  .kg-klammer::before, .kg-klammer::after {
+    content: ''; position: absolute; top: -2px; width: 2px; height: 10px; background: var(--gv-blue);
+  }
+  .kg-klammer::before { left: 0; }
+  .kg-klammer::after { right: 0; }
+  .kg-klammer span {
+    position: relative; top: -11px; padding: 0 10px; background: var(--gv-surface);
+    font-family: var(--font-body); font-size: 13px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--gv-blue);
+  }
+
+  .kg-karte { display: grid; gap: 14px; grid-row: 2; }
+  .kg-kopf { display: flex; align-items: center; gap: 10px; }
+  .kg-kopf .ag-name { font-size: 22px; }
+
+  .kg-balken { display: flex; align-items: flex-end; gap: 6px; height: 64px; border-bottom: 1px solid var(--gv-border); }
+  .kg-b { flex: 1; border-radius: 3px 3px 0 0; }
+  .kg-blau { background: var(--gv-blue); }
+  .kg-basis { background: var(--gv-blue-100); }
+  .kg-gelb { background: var(--gv-yellow); }
+
+  .kg-karte .ag-text strong { color: var(--gv-ink); }
+
+  @media (max-width: 620px) {
+    .kg { grid-template-columns: 1fr; }
+    .kg-klammer { display: none; }
+    .kg-karte { grid-row: auto; grid-template-columns: 1fr 96px; align-items: center; gap: 4px 14px; padding: 12px 14px; }
+    .kg-kopf { grid-column: 1; }
+    .kg-karte .ag-text { grid-column: 1; }
+    .kg-balken { grid-column: 2; grid-row: 1 / 3; height: 44px; gap: 4px; }
+  }
+</style>

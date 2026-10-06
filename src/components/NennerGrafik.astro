@@ -2,6 +2,10 @@
 // Zeigt den Kerngedanken des Artikels: Dieselben Jahreskosten, einmal
 // ungleich auf einzelne Monate verteilt, einmal auf den Monat umgerechnet.
 // Bewusst ohne Eurobeträge — es geht um die Form, nicht um ein Rechenbeispiel.
+// Die Jahreskosten sind in beiden Reihen gelb: Es ist dasselbe Geld, nur
+// anders verteilt. Gebaut aus HTML statt SVG, damit die Schrift auf dem
+// Handy so groß bleibt wie in den anderen Grafiken.
+import ArtikelGrafik from './ArtikelGrafik.astro';
 
 const MONATE = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
 const LAUFEND = 100;        // laufende Kosten, jeden Monat gleich
@@ -13,111 +17,118 @@ const EINSCHLAEGE: Record<number, number> = { 2: 120, 6: 150, 10: 90 };
 // Mit Nenner: dieselbe Summe, gleichmäßig zurückgelegt
 const RUECKLAGE = JAHRESKOSTEN / 12;
 
-const S = 0.6;              // Maßstab: Einheiten → Zeichenfläche
-const BREITE = 34;
-const LUECKE = 10;
-const START = 61;
-const x = (i: number) => START + i * (BREITE + LUECKE);
-const h = (wert: number) => wert * S;
-
-// Jede Reihe bekommt ihre eigene Höhe: Die untere braucht nur Platz für
-// niedrige Balken, sonst klafft dazwischen eine tote Fläche.
 const reihen = [
-  { kopf: 26, basis: 246, titel: 'Ohne gemeinsamen Nenner', unter: 'Die Jahreskosten schlagen in einzelnen Monaten ein.', streuung: true, budgetText: true },
-  { kopf: 344, basis: 494, titel: 'Mit gemeinsamem Nenner', unter: 'Dieselbe Summe, jeden Monat zurückgelegt.', streuung: false, budgetText: false },
+  {
+    titel: 'Ohne gemeinsamen Nenner',
+    unter: 'Die Jahreskosten schlagen in einzelnen Monaten ein.',
+    hoehe: LAUFEND + Math.max(...Object.values(EINSCHLAEGE)),
+    extra: (i: number) => EINSCHLAEGE[i] ?? 0,
+    labels: [
+      { wert: 205, text: 'Jahreskosten', klasse: 'nf-l-gelb' },
+      { wert: BUDGET, text: 'Monatsbudget', klasse: 'nf-l-budget' },
+      { wert: LAUFEND / 2, text: 'laufende Kosten', klasse: 'nf-l-basis' },
+    ],
+  },
+  {
+    titel: 'Mit gemeinsamem Nenner',
+    unter: 'Dieselbe Summe, jeden Monat zurückgelegt.',
+    hoehe: BUDGET + 12,
+    extra: () => RUECKLAGE,
+    labels: [
+      { wert: BUDGET + 4, text: 'Monatsbudget', klasse: 'nf-l-budget' },
+      { wert: LAUFEND + RUECKLAGE / 2 - 6, text: 'Rücklage', klasse: 'nf-l-gelb' },
+      { wert: LAUFEND / 2, text: 'laufende Kosten', klasse: 'nf-l-basis' },
+    ],
+  },
 ];
+const px = (wert: number) => `calc(var(--u) * ${wert})`;
 ---
-<figure class="gv-figure nf-figur">
-  <svg
-    class="nf"
-    viewBox="0 0 640 540"
-    role="img"
-    aria-label="Zwei Balkendiagramme über zwölf Monate. Oben schlagen die Jahreskosten in drei einzelnen Monaten ein und überschreiten dort das Monatsbudget deutlich. Unten ist dieselbe Summe gleichmäßig auf alle zwölf Monate verteilt, sodass jeder Monat innerhalb des Budgets bleibt."
-  >
+<ArtikelGrafik
+  titel="Dasselbe Geld, anders verteilt"
+  fazit="Es ist dasselbe Geld. Nur im unteren Bild sprengt es keinen einzigen Monat."
+  beschreibung="Zwei Balkendiagramme über zwölf Monate. Oben schlagen die Jahreskosten in drei einzelnen Monaten ein und überschreiten dort das Monatsbudget deutlich. Unten ist dieselbe Summe gleichmäßig auf alle zwölf Monate verteilt, sodass jeder Monat innerhalb des Budgets bleibt."
+>
+  <div class="nf">
     {reihen.map((r) => (
-      <>
-        <text class="nf-titel" x={START} y={r.kopf}>{r.titel}</text>
-        <text class="nf-unter" x={START} y={r.kopf + 26}>{r.unter}</text>
+      <div class="nf-reihe">
+        <p class="nf-name">{r.titel}</p>
+        <p class="ag-klein nf-unter">{r.unter}</p>
 
-        {MONATE.map((m, i) => {
-          const extra = r.streuung ? (EINSCHLAEGE[i] ?? 0) : RUECKLAGE;
-          return (
-            <>
-              <rect
-                x={x(i)} y={r.basis - h(LAUFEND)} width={BREITE} height={h(LAUFEND)}
-                rx="3" class="nf-laufend"
-              />
-              {extra > 0 && (
-                <rect
-                  x={x(i)} y={r.basis - h(LAUFEND + extra)} width={BREITE} height={h(extra)}
-                  rx="3" class={r.streuung ? 'nf-einschlag' : 'nf-ruecklage'}
-                />
-              )}
-              <text class="nf-monat" x={x(i) + BREITE / 2} y={r.basis + 24}>{m}</text>
-            </>
-          );
-        })}
-
-        <line
-          x1={START - 12} y1={r.basis - h(BUDGET)}
-          x2={x(11) + BREITE + 12} y2={r.basis - h(BUDGET)}
-          class="nf-budget"
-        />
-        {r.budgetText && (
-          <text class="nf-budget-text" x={START - 12} y={r.basis - h(BUDGET) - 10}>
-            dein Monatsbudget
-          </text>
-        )}
-      </>
+        <div class="nf-diagramm" aria-hidden="true">
+          <div class="nf-flaeche" style={`height:${px(r.hoehe)}`}>
+            <div class="nf-budget" style={`bottom:${px(BUDGET)}`}></div>
+            {MONATE.map((_, i) => {
+              const extra = r.extra(i);
+              return (
+                <div class="nf-saeule">
+                  {extra > 0 && <span class="nf-gelb" style={`height:${px(extra)}`}></span>}
+                  <span class="nf-basis" style={`height:${px(LAUFEND)}`}></span>
+                </div>
+              );
+            })}
+          </div>
+          <div class="nf-labels" style={`height:${px(r.hoehe)}`}>
+            {r.labels.map((l) => (
+              <span class:list={['nf-label', l.klasse]} style={`bottom:${px(l.wert)}`}>{l.text}</span>
+            ))}
+          </div>
+          <div class="nf-monate">
+            {MONATE.map((m) => <span>{m}</span>)}
+          </div>
+        </div>
+      </div>
     ))}
-  </svg>
-
-  <ul class="nf-legende">
-    <li><span class="nf-punkt nf-p-laufend"></span>laufende Kosten</li>
-    <li><span class="nf-punkt nf-p-einschlag"></span>Jahreskosten</li>
-    <li><span class="nf-punkt nf-p-ruecklage"></span>monatliche Rücklage</li>
-  </ul>
-
-  <figcaption>
-    Es ist dasselbe Geld. Nur im unteren Bild sprengt es keinen einzigen Monat.
-  </figcaption>
-</figure>
+  </div>
+</ArtikelGrafik>
 
 <style>
-  .nf-figur { margin-top: 34px; }
-  .nf { width: 100%; height: auto; display: block; }
+  .nf { --u: 0.8px; display: grid; gap: 34px; }
+  .nf-reihe { display: grid; gap: 4px; }
+  .nf-name { margin: 0; font-family: var(--font-display); font-size: 22px; letter-spacing: .01em; line-height: 1.1; color: var(--gv-ink); }
+  .nf-unter { margin-bottom: 18px; }
 
-  .nf-titel { font-family: var(--font-display); font-size: 21px; fill: var(--gv-ink); letter-spacing: .01em; }
-  .nf-unter { font-family: var(--font-body); font-size: 15px; fill: var(--gv-muted); }
-  .nf-monat { font-family: var(--font-body); font-size: 14px; fill: var(--gv-muted); text-anchor: middle; }
-
-  .nf-laufend { fill: var(--gv-blue-100); }
-  .nf-einschlag { fill: var(--gv-error); }
-  .nf-ruecklage { fill: var(--gv-yellow); }
-
-  .nf-budget { stroke: var(--gv-ink); stroke-width: 2; stroke-dasharray: 6 5; }
-  .nf-budget-text { font-family: var(--font-body); font-size: 13px; font-weight: 700; fill: var(--gv-ink); }
-
-  .nf-legende {
-    list-style: none; margin: 26px 0 0; padding: 0;
-    display: flex; flex-wrap: wrap; gap: 8px 22px;
-    font-family: var(--font-body); font-size: 15px; color: var(--gv-ink-soft);
+  .nf-diagramm {
+    display: grid; grid-template-columns: 1fr 118px; column-gap: 14px;
   }
-  .nf-legende li { display: flex; align-items: center; gap: 8px; }
-  .nf-punkt { width: 13px; height: 13px; border-radius: 3px; flex: none; }
-  .nf-p-laufend { background: var(--gv-blue-100); }
-  .nf-p-einschlag { background: var(--gv-error); }
-  .nf-p-ruecklage { background: var(--gv-yellow); }
+  .nf-flaeche {
+    position: relative; display: grid; grid-template-columns: repeat(12, 1fr);
+    column-gap: 6px; align-items: end; border-bottom: 1px solid var(--gv-ink-soft);
+  }
+  .nf-saeule { display: flex; flex-direction: column; gap: 2px; }
+  .nf-saeule span { display: block; }
+  .nf-basis { background: var(--gv-blue-100); border-radius: 0; }
+  .nf-gelb { background: var(--gv-yellow); border-radius: 4px 4px 0 0; }
+  /* Säulen ohne Jahreskosten: die Basis bekommt selbst die runde Kante */
+  .nf-basis:first-child { border-radius: 4px 4px 0 0; }
 
-  /* Die Grafik skaliert als Ganzes mit der Breite — auf schmalen Schirmen
-     würde ihre Schrift sonst winzig neben der HTML-Legende stehen. Deshalb
-     hier größere Werte in Zeichenflächen-Einheiten. */
+  .nf-budget {
+    position: absolute; left: -6px; right: -6px; height: 0; z-index: 1;
+    border-top: 2px dashed var(--gv-ink);
+  }
+
+  .nf-labels { position: relative; }
+  .nf-label {
+    position: absolute; left: 0; transform: translateY(50%);
+    font-family: var(--font-body); font-size: 13px; font-weight: 700; line-height: 1.2;
+    color: var(--gv-ink); display: flex; align-items: center; gap: 7px;
+  }
+  .nf-label::before { content: ''; flex: none; width: 10px; height: 10px; border-radius: 2px; }
+  .nf-l-gelb::before { background: var(--gv-yellow); }
+  .nf-l-basis::before { background: var(--gv-blue-100); }
+  .nf-l-budget::before { height: 0; border-top: 2px dashed var(--gv-ink); border-radius: 0; }
+
+  .nf-monate {
+    grid-column: 1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 6px;
+    margin-top: 6px; text-align: center;
+    font-family: var(--font-body); font-size: 12px; color: var(--gv-muted);
+  }
+
   @media (max-width: 620px) {
-    .nf-titel { font-size: 27px; }
-    .nf-unter { font-size: 18px; }
-    .nf-monat { font-size: 18px; }
-    .nf-budget-text { font-size: 17px; }
-    .nf-budget { stroke-width: 3; }
-    .nf-legende { font-size: 14px; gap: 6px 16px; }
+    .nf { --u: 0.6px; gap: 28px; }
+    .nf-diagramm { grid-template-columns: 1fr 76px; column-gap: 10px; }
+    .nf-flaeche, .nf-monate { column-gap: 3px; }
+    .nf-label { font-size: 12px; gap: 5px; }
+    .nf-label::before { display: none; }
+    .nf-monate { font-size: 11px; }
   }
 </style>

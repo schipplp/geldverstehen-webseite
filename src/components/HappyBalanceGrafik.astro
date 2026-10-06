@@ -4,119 +4,100 @@
 // Eine Vier-Felder-Matrix wäre naheliegend, geht aber nicht auf: „Wackel-
 // kandidaten" ist kein Quadrant, sondern der Zustand vor der Einordnung.
 // Zwei Fragen nacheinander bilden Pers Modell dagegen genau ab — und sagen
-// dem Leser zusätzlich, wie er sortiert. Die Namen allein stehen schon in
-// der Liste daneben.
+// dem Leser zusätzlich, wie er sortiert.
+//
+// Farbe nach dem Regelwerk (src/styles/grafik.css): Sie zeigt, was mit der
+// Ausgabe passiert. Blau = behalten, weiß = beobachten, gelb = der eine
+// Ort, an dem du handelst.
+import ArtikelGrafik from './ArtikelGrafik.astro';
 ---
-<figure class="gv-figure hb-figur">
+<ArtikelGrafik
+  titel="Die Happy-Balance-Analyse"
+  fazit="Zwei Fragen, und jede Ausgabe landet von selbst an ihrem Platz."
+>
   <div class="hb">
-    <p class="hb-start">Eine Ausgabe aus deinem Monat</p>
+    <p class="ag-klein hb-start">Eine Ausgabe aus deinem Monat</p>
 
-    <div class="hb-frage">
-      <span class="hb-nr">1</span>
+    <div class="ag-frage">
+      <span class="ag-nr">1</span>
       <p>Brauchst du es wirklich?</p>
     </div>
 
     <div class="hb-zweige">
       <div class="hb-zweig">
-        <span class="hb-antwort hb-ja">ja</span>
-        <div class="hb-karte hb-blau">
-          <p class="hb-titel">Notwendigkeiten</p>
-          <p class="hb-text">Behalten — aber regelmäßig prüfen, ob der Preis noch stimmt.</p>
+        <span class="hb-antwort">ja</span>
+        <div class="ag-karte ag-karte-blau hb-karte">
+          <p class="ag-name">Notwendigkeiten</p>
+          <p class="ag-text">Behalten — aber regelmäßig prüfen, ob der Preis noch stimmt.</p>
+          <span class="ag-marke ag-marke-blau">behalten</span>
         </div>
       </div>
 
       <div class="hb-zweig">
-        <span class="hb-antwort hb-unklar">unsicher</span>
-        <div class="hb-karte hb-grau">
-          <p class="hb-titel">Wackelkandidaten</p>
-          <p class="hb-text">Noch nichts entscheiden. Einen Monat weiter beobachten.</p>
+        <span class="hb-antwort">unsicher</span>
+        <div class="ag-karte hb-karte">
+          <p class="ag-name">Wackelkandidaten</p>
+          <p class="ag-text">Noch nichts entscheiden. Einen Monat weiter beobachten.</p>
+          <span class="ag-marke">beobachten</span>
         </div>
       </div>
 
       <div class="hb-zweig hb-zweig-weiter">
-        <span class="hb-antwort hb-nein">nein</span>
+        <span class="hb-antwort">nein</span>
 
-        <div class="hb-frage hb-frage-2">
-          <span class="hb-nr">2</span>
+        <div class="ag-frage">
+          <span class="ag-nr">2</span>
           <p>Macht es dir Freude?</p>
         </div>
 
         <div class="hb-unterzweige">
           <div class="hb-zweig">
-            <span class="hb-antwort hb-ja">ja</span>
-            <div class="hb-karte hb-gelb">
-              <p class="hb-titel">Gönn-ich-mir</p>
-              <p class="hb-text">Behalten, ohne schlechtes Gewissen. Dafür ist Geld da.</p>
+            <span class="hb-antwort">ja</span>
+            <div class="ag-karte ag-karte-blau hb-karte">
+              <p class="ag-name">Gönn-ich-mir</p>
+              <p class="ag-text">Behalten, ohne schlechtes Gewissen. Dafür ist Geld da.</p>
+              <span class="ag-marke ag-marke-blau">behalten</span>
             </div>
           </div>
           <div class="hb-zweig">
-            <span class="hb-antwort hb-nein">nein</span>
-            <div class="hb-karte hb-rot">
-              <p class="hb-titel">Geldfresser</p>
-              <p class="hb-text">Hier — und nur hier — streichst du. Du verzichtest auf nichts.</p>
+            <span class="hb-antwort">nein</span>
+            <div class="ag-karte ag-karte-gelb hb-karte">
+              <p class="ag-name">Geldfresser</p>
+              <p class="ag-text">Hier — und nur hier — streichst du. Du verzichtest auf nichts.</p>
+              <span class="ag-marke ag-marke-gelb">streichen</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <figcaption>
-    Zwei Fragen, und jede Ausgabe landet von selbst an ihrem Platz.
-  </figcaption>
-</figure>
+</ArtikelGrafik>
 
 <style>
-  .hb-figur { margin-top: 34px; }
-  .hb { display: grid; gap: 14px; }
+  .hb { display: grid; gap: 12px; }
+  .hb-start { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
-  .hb-start {
-    justify-self: start; margin: 0;
-    font-family: var(--font-body); font-size: 14px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--gv-muted);
-  }
-
-  .hb-frage {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--gv-ink); color: #fff; border-radius: 12px;
-    padding: 14px 20px; justify-self: start;
-  }
-  .hb-frage p { margin: 0; font-family: var(--font-display); font-size: 23px; letter-spacing: .01em; }
-  .hb-nr {
-    flex: none; width: 26px; height: 26px; border-radius: 50%;
-    background: var(--gv-yellow); color: var(--gv-ink);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-body); font-weight: 700; font-size: 14px;
-  }
-
-  .hb-zweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .hb-zweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; margin-top: 4px; }
   .hb-zweig-weiter { grid-column: 1 / -1; }
-  .hb-unterzweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-  .hb-zweig { display: grid; gap: 8px; }
+  .hb-unterzweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; margin-top: 4px; }
+  .hb-zweig { display: grid; grid-template-rows: auto 1fr; gap: 8px; }
+  .hb-zweig-weiter { grid-template-rows: auto auto auto; }
 
+  /* Antwort als kleiner Abzweig mit Strich nach oben */
   .hb-antwort {
-    justify-self: start; font-family: var(--font-body); font-weight: 700;
-    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-    padding: 3px 11px; border-radius: 999px;
+    justify-self: start; position: relative; padding-left: 14px;
+    font-family: var(--font-body); font-weight: 700; font-size: 13px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--gv-ink-soft);
   }
-  .hb-ja { background: var(--gv-blue-050); color: var(--gv-blue); }
-  .hb-nein { background: var(--gv-surface-2); color: var(--gv-ink-soft); }
-  .hb-unklar { background: var(--gv-warning-bg); color: #8A6400; }
+  .hb-antwort::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 8px; height: 2px; background: var(--gv-ink-soft);
+  }
 
-  .hb-frage-2 { margin-top: 2px; }
-
-  .hb-karte { border-radius: 14px; padding: 20px 22px 22px; border: 1px solid var(--gv-border); }
-  .hb-titel { font-family: var(--font-display); font-size: 25px; letter-spacing: .01em; margin: 0 0 6px; color: var(--gv-ink); }
-  .hb-text { font-family: var(--font-body); font-size: 15px; line-height: 1.55; margin: 0; color: var(--gv-ink-soft); }
-
-  .hb-blau { background: var(--gv-blue-050); border-color: var(--gv-blue-100); }
-  .hb-gelb { background: var(--gv-yellow-050); border-color: #F2DFA8; }
-  .hb-grau { background: var(--gv-surface); }
-  .hb-rot { background: var(--gv-error-bg); border-color: #F0C9C9; }
-  .hb-rot .hb-titel { color: var(--gv-error); }
+  .hb-karte { display: grid; gap: 6px; align-content: start; }
+  .hb-karte .ag-marke { margin-top: 6px; }
 
   @media (max-width: 620px) {
     .hb-zweige, .hb-unterzweige { grid-template-columns: 1fr; }
-    .hb-frage p { font-size: 21px; }
   }
 </style>
