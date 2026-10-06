@@ -25,9 +25,13 @@ const { id, title, label, poster } = Astro.props;
     <span class="gv-yt-play" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="var(--gv-ink)"><path d="M8 5.5v13l11-6.5z"/></svg>
     </span>
-    {label && <span class="gv-yt-name">{label}</span>}
-    {!poster && <span class="gv-yt-label">Video abspielen</span>}
-    <span class="gv-yt-note">Mit Klick wird das Video von YouTube (Google) geladen und dabei eine Verbindung zu Google hergestellt.</span>
+    {/* Mit Standbild stehen Name und Hinweis als Block zusammen, sonst
+        drängeln sie sich nebeneinander in die Ecke. */}
+    <span class="gv-yt-text">
+      {label && <span class="gv-yt-name">{label}</span>}
+      {!poster && <span class="gv-yt-label">Video abspielen</span>}
+      <span class="gv-yt-note">Mit Klick wird das Video von YouTube (Google) geladen und dabei eine Verbindung zu Google hergestellt.</span>
+    </span>
   </button>
 </div>
 
@@ -48,6 +52,7 @@ const { id, title, label, poster } = Astro.props;
   }
   .gv-yt-play svg { margin-left: 3px; }
   .gv-yt-btn:hover .gv-yt-play { transform: scale(1.06); background: var(--gv-yellow-600); }
+  .gv-yt-text { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .gv-yt-name { font-family: var(--font-display); font-size: 28px; line-height: 1; letter-spacing: .02em; color: #fff; margin-top: 2px; }
   .gv-yt-label { font-family: var(--font-body); font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--gv-yellow); }
   .gv-yt-note { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,.6); max-width: 320px; }
@@ -64,6 +69,8 @@ const { id, title, label, poster } = Astro.props;
   }
   .gv-yt-poster > * { position: relative; }
   .gv-yt-poster .gv-yt-play { width: 64px; height: 64px; flex: none; }
+  .gv-yt-poster .gv-yt-text { align-items: flex-start; gap: 4px; text-align: left; min-width: 0; }
+  .gv-yt-poster .gv-yt-name { font-size: 26px; text-shadow: 0 1px 10px rgba(8,20,36,.65); }
   .gv-yt-poster .gv-yt-note { color: rgba(255,255,255,.82); max-width: 300px; }
 </style>
 
