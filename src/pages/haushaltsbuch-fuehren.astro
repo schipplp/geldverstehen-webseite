@@ -4,6 +4,7 @@ import EmailOptIn from '../components/EmailOptIn.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 import NennerGrafik from '../components/NennerGrafik.astro';
+import HappyBalanceGrafik from '../components/HappyBalanceGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -38,7 +39,6 @@ const kapitel = [
 ];
 // Artikel-Grafiken (aus design/uploads, weboptimiert) — über die Vite-Pipeline.
 import spiraleImg from '../../design/uploads/spiralen.png?url';
-import happyBalanceImg from '../../design/uploads/happy-balance_v3.png?url';
 import kreislaufImg from '../../design/uploads/kreislauf_v2.png?url';
 import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
 ---
@@ -154,9 +154,7 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
         <h2 id="happy-balance">Auswerten ohne Verzichts-Falle: die Happy-Balance-Analyse</h2>
         <p>Nach einem vollen Monat mit sauberen Daten stellt sich die Frage: Und jetzt? Hier scheitern viele ein zweites Mal – weil sie zu schnell zu kritisch mit sich werden und die Achterbahn aus Sparen und Rückfall starten.</p>
         <p>Mein Ansatz heißt <strong>Happy-Balance-Analyse</strong>. Sie ist kein Sparwerkzeug, sondern ein Klarheitswerkzeug. Ihr Ziel: herauszufinden, welche Ausgaben wirklich zu dir passen – und welche nicht. Dafür sortierst du deine Ausgaben in vier Kategorien:</p>
-        <figure class="gv-figure">
-          <img src={happyBalanceImg} alt="Die vier Kategorien der Happy-Balance-Analyse: Notwendigkeiten, Gönn-ich-mir, Wackelkandidaten und Geldfresser." loading="lazy" />
-        </figure>
+        <HappyBalanceGrafik />
         <ol>
           <li><strong>Notwendigkeiten</strong> – Miete, Strom, Versicherungen. Behalten – aber regelmäßig prüfen, ob der Preis noch stimmt. Denn die Kategorie schützt die Ausgabe, nicht den Preis.</li>
           <li><strong>Gönn-ich-mir</strong> – Ausgaben, die dir echte Freude bereiten. Behalten, ohne schlechtes Gewissen. Diese Ausgaben sind der Sinn von Geld.</li>
@@ -167,28 +165,27 @@ import dreiKategorienImg from '../../design/uploads/drei-kategorien_v1.png?url';
         <p>Warum? Weil du bei Geldfressern auf nichts verzichtest. Es fällt nichts weg, das dir etwas bedeutet – es hört nur etwas auf zu verschwinden. Genau das ist der Kern meiner Philosophie: <strong>Verstehen statt Verzichten.</strong> Wer versteht, wohin sein Geld fließt, muss nicht verzichten – er sortiert nur aus, was ihm ohnehin nichts gibt.</p>
 
         <figure class="gv-figure">
-          <img src={kreislaufImg} alt="Positiver Kreislauf: hinschauen & notieren, verstehen, andere Prioritäten, weniger sinnlose Käu        <div class="gv-faq">
+          <img src={kreislaufImg} alt="Positiver Kreislauf: hinschauen & notieren, verstehen, andere Prioritäten, weniger sinnlose Käufe, mehr Erfolg mit den Finanzen, mehr Spaß – ohne Zwang, ohne schlechtes Gewissen." loading="lazy" />
+          <figcaption>Verstehen statt Verzichten – ein Kreislauf, der sich selbst trägt.</figcaption>
+        </figure>
+
+        <h2 id="womit-fuehren">App, Excel oder Papier – womit führt man ein Haushaltsbuch am besten?</h2>
+        <p>Die ehrliche Antwort: Das Werkzeug ist zweitrangig. Entscheidend ist, dass du es einfach hältst und dranbleibst.</p>
+        <ul>
+          <li><strong>Papier</strong> funktioniert, ist aber auf Dauer mühsam – vor allem beim Umrechnen auf den Monat.</li>
+          <li><strong>Eine Tabellenkalkulation</strong> (Excel, Google Sheets) ist flexibel und für viele ein guter Start.</li>
+          <li><strong>Eine App</strong> ist im Alltag am praktischsten, weil du Ausgaben direkt unterwegs erfassen kannst – und die Umrechnung automatisch passiert.</li>
+        </ul>
+        <p>Ich selbst durfte an der Entwicklung <a href={`${u('/app')}?k=startseite`}>unserer App</a> mitwirken, in die genau die Prinzipien aus diesem Artikel eingeflossen sind – von den drei Geldfluss-Kategorien bis zur Monatsbilanz. Aber unabhängig vom Werkzeug gilt: Je einfacher dein System, desto höher deine Erfolgsrate.</p>
+
+        <h2 id="faq">Häufige Fragen zum Haushaltsbuch führen</h2>
+        <div class="gv-faq">
           {faq.map((f) => (
             <details class="gv-faq-item">
               <summary>{f.frage}</summary>
               <div class="gv-faq-body"><p>{f.antwort}</p></div>
             </details>
           ))}
-        </div>
-nd deine Zahlen sich einpendeln.</p></div>
-          </details>
-          <details class="gv-faq-item">
-            <summary>Muss ich jede Ausgabe centgenau erfassen?</summary>
-            <div class="gv-faq-body"><p>Nein – im Gegenteil. Tendenzen sind wichtiger als Centgenauigkeit. Grobe Kategorien und gerundete Beträge reichen völlig und sorgen dafür, dass du dranbleibst.</p></div>
-          </details>
-          <details class="gv-faq-item">
-            <summary>Lohnt sich ein Haushaltsbuch auch bei gutem Einkommen?</summary>
-            <div class="gv-faq-body"><p>Gerade dann. Die häufigste Situation in meinen Coachings ist nicht zu wenig Einkommen – sondern gutes Einkommen, bei dem trotzdem nichts übrig bleibt. Ohne hinzuschauen bleibt unsichtbar, wohin das Geld verschwindet.</p></div>
-          </details>
-          <details class="gv-faq-item">
-            <summary>Was ist der Unterschied zwischen Haushaltsbuch und Monatsbilanz?</summary>
-            <div class="gv-faq-body"><p>Das Haushaltsbuch erfasst deine Geldflüsse. Die Monatsbilanz bringt sie auf einen gemeinsamen Nenner – den Monat – und zeigt dir dein echtes Monatsergebnis inklusive aller unregelmäßigen Ausgaben. Erst die Monatsbilanz macht aus gesammelten Daten echte Klarheit.</p></div>
-          </details>
         </div>
 
         <!-- CTA mit integriertem Opt-in -->
@@ -214,9 +211,9 @@ nd deine Zahlen sich einpendeln.</p></div>
     </div>
   </section>
 
-  {/* Strukturierte Daten: beschreibt Suchmaschinen Artikel und FAQ.
-      Kein datePublished — das Datum kennen wir nicht, und raten wäre schlimmer
-      als weglassen. TODO(Per): echtes Veröffentlichungsdatum nachtragen. */}
+  {/* Strukturierte Daten für Suchmaschinen. Kein datePublished — das Datum
+      kennen wir nicht, und raten wäre schlechter als weglassen.
+      TODO(Per): echtes Veröffentlichungsdatum nachtragen. */}
   <script
     type="application/ld+json"
     set:html={JSON.stringify({
@@ -235,11 +232,7 @@ nd deine Zahlen sich einpendeln.</p></div>
             jobTitle: 'Finanzcoach',
             url: new URL('/ueber', Astro.site).href,
           },
-          publisher: {
-            '@type': 'Organization',
-            name: 'GELD VERSTEHEN',
-            url: new URL('/', Astro.site).href,
-          },
+          publisher: { '@type': 'Organization', name: 'GELD VERSTEHEN', url: new URL('/', Astro.site).href },
         },
         {
           '@type': 'FAQPage',

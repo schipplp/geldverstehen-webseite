@@ -23,21 +23,21 @@ const h = (wert: number) => wert * S;
 // Jede Reihe bekommt ihre eigene Höhe: Die untere braucht nur Platz für
 // niedrige Balken, sonst klafft dazwischen eine tote Fläche.
 const reihen = [
-  { kopf: 22, basis: 212, titel: 'Ohne gemeinsamen Nenner', unter: 'Die Jahreskosten schlagen in einzelnen Monaten ein.', streuung: true },
-  { kopf: 274, basis: 404, titel: 'Mit gemeinsamem Nenner', unter: 'Dieselbe Summe, jeden Monat zurückgelegt.', streuung: false },
+  { kopf: 26, basis: 246, titel: 'Ohne gemeinsamen Nenner', unter: 'Die Jahreskosten schlagen in einzelnen Monaten ein.', streuung: true, budgetText: true },
+  { kopf: 344, basis: 494, titel: 'Mit gemeinsamem Nenner', unter: 'Dieselbe Summe, jeden Monat zurückgelegt.', streuung: false, budgetText: false },
 ];
 ---
 <figure class="gv-figure nf-figur">
   <svg
     class="nf"
-    viewBox="0 0 640 446"
+    viewBox="0 0 640 540"
     role="img"
     aria-label="Zwei Balkendiagramme über zwölf Monate. Oben schlagen die Jahreskosten in drei einzelnen Monaten ein und überschreiten dort das Monatsbudget deutlich. Unten ist dieselbe Summe gleichmäßig auf alle zwölf Monate verteilt, sodass jeder Monat innerhalb des Budgets bleibt."
   >
     {reihen.map((r) => (
       <>
         <text class="nf-titel" x={START} y={r.kopf}>{r.titel}</text>
-        <text class="nf-unter" x={START} y={r.kopf + 20}>{r.unter}</text>
+        <text class="nf-unter" x={START} y={r.kopf + 26}>{r.unter}</text>
 
         {MONATE.map((m, i) => {
           const extra = r.streuung ? (EINSCHLAEGE[i] ?? 0) : RUECKLAGE;
@@ -53,7 +53,7 @@ const reihen = [
                   rx="3" class={r.streuung ? 'nf-einschlag' : 'nf-ruecklage'}
                 />
               )}
-              <text class="nf-monat" x={x(i) + BREITE / 2} y={r.basis + 18}>{m}</text>
+              <text class="nf-monat" x={x(i) + BREITE / 2} y={r.basis + 24}>{m}</text>
             </>
           );
         })}
@@ -63,9 +63,11 @@ const reihen = [
           x2={x(11) + BREITE + 12} y2={r.basis - h(BUDGET)}
           class="nf-budget"
         />
-        <text class="nf-budget-text" x={START - 12} y={r.basis - h(BUDGET) - 8}>
-          dein Monatsbudget
-        </text>
+        {r.budgetText && (
+          <text class="nf-budget-text" x={START - 12} y={r.basis - h(BUDGET) - 10}>
+            dein Monatsbudget
+          </text>
+        )}
       </>
     ))}
   </svg>
@@ -86,7 +88,7 @@ const reihen = [
   .nf { width: 100%; height: auto; display: block; }
 
   .nf-titel { font-family: var(--font-display); font-size: 21px; fill: var(--gv-ink); letter-spacing: .01em; }
-  .nf-unter { font-family: var(--font-body); font-size: 14px; fill: var(--gv-muted); }
+  .nf-unter { font-family: var(--font-body); font-size: 15px; fill: var(--gv-muted); }
   .nf-monat { font-family: var(--font-body); font-size: 14px; fill: var(--gv-muted); text-anchor: middle; }
 
   .nf-laufend { fill: var(--gv-blue-100); }
@@ -97,7 +99,7 @@ const reihen = [
   .nf-budget-text { font-family: var(--font-body); font-size: 13px; font-weight: 700; fill: var(--gv-ink); }
 
   .nf-legende {
-    list-style: none; margin: 18px 0 0; padding: 0;
+    list-style: none; margin: 26px 0 0; padding: 0;
     display: flex; flex-wrap: wrap; gap: 8px 22px;
     font-family: var(--font-body); font-size: 15px; color: var(--gv-ink-soft);
   }
