@@ -1,0 +1,121 @@
+---
+// Zeigt den Kerngedanken des Artikels: Dieselben Jahreskosten, einmal
+// ungleich auf einzelne Monate verteilt, einmal auf den Monat umgerechnet.
+// Bewusst ohne Eurobeträge — es geht um die Form, nicht um ein Rechenbeispiel.
+
+const MONATE = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+const LAUFEND = 100;        // laufende Kosten, jeden Monat gleich
+const JAHRESKOSTEN = 360;   // Summe der unregelmäßigen Kosten im Jahr
+const BUDGET = 140;         // das monatlich verfügbare Budget
+
+// Ohne Nenner: die Jahreskosten fallen in drei Monaten an
+const EINSCHLAEGE: Record<number, number> = { 2: 120, 6: 150, 10: 90 };
+// Mit Nenner: dieselbe Summe, gleichmäßig zurückgelegt
+const RUECKLAGE = JAHRESKOSTEN / 12;
+
+const S = 0.6;              // Maßstab: Einheiten → Zeichenfläche
+const BREITE = 34;
+const LUECKE = 10;
+const START = 61;
+const x = (i: number) => START + i * (BREITE + LUECKE);
+const h = (wert: number) => wert * S;
+
+// Jede Reihe bekommt ihre eigene Höhe: Die untere braucht nur Platz für
+// niedrige Balken, sonst klafft dazwischen eine tote Fläche.
+const reihen = [
+  { kopf: 22, basis: 212, titel: 'Ohne gemeinsamen Nenner', unter: 'Die Jahreskosten schlagen in einzelnen Monaten ein.', streuung: true },
+  { kopf: 274, basis: 404, titel: 'Mit gemeinsamem Nenner', unter: 'Dieselbe Summe, jeden Monat zurückgelegt.', streuung: false },
+];
+---
+<figure class="gv-figure nf-figur">
+  <svg
+    class="nf"
+    viewBox="0 0 640 446"
+    role="img"
+    aria-label="Zwei Balkendiagramme über zwölf Monate. Oben schlagen die Jahreskosten in drei einzelnen Monaten ein und überschreiten dort das Monatsbudget deutlich. Unten ist dieselbe Summe gleichmäßig auf alle zwölf Monate verteilt, sodass jeder Monat innerhalb des Budgets bleibt."
+  >
+    {reihen.map((r) => (
+      <>
+        <text class="nf-titel" x={START} y={r.kopf}>{r.titel}</text>
+        <text class="nf-unter" x={START} y={r.kopf + 20}>{r.unter}</text>
+
+        {MONATE.map((m, i) => {
+          const extra = r.streuung ? (EINSCHLAEGE[i] ?? 0) : RUECKLAGE;
+          return (
+            <>
+              <rect
+                x={x(i)} y={r.basis - h(LAUFEND)} width={BREITE} height={h(LAUFEND)}
+                rx="3" class="nf-laufend"
+              />
+              {extra > 0 && (
+                <rect
+                  x={x(i)} y={r.basis - h(LAUFEND + extra)} width={BREITE} height={h(extra)}
+                  rx="3" class={r.streuung ? 'nf-einschlag' : 'nf-ruecklage'}
+                />
+              )}
+              <text class="nf-monat" x={x(i) + BREITE / 2} y={r.basis + 18}>{m}</text>
+            </>
+          );
+        })}
+
+        <line
+          x1={START - 12} y1={r.basis - h(BUDGET)}
+          x2={x(11) + BREITE + 12} y2={r.basis - h(BUDGET)}
+          class="nf-budget"
+        />
+        <text class="nf-budget-text" x={START - 12} y={r.basis - h(BUDGET) - 8}>
+          dein Monatsbudget
+        </text>
+      </>
+    ))}
+  </svg>
+
+  <ul class="nf-legende">
+    <li><span class="nf-punkt nf-p-laufend"></span>laufende Kosten</li>
+    <li><span class="nf-punkt nf-p-einschlag"></span>Jahreskosten</li>
+    <li><span class="nf-punkt nf-p-ruecklage"></span>monatliche Rücklage</li>
+  </ul>
+
+  <figcaption>
+    Es ist dasselbe Geld. Nur im unteren Bild sprengt es keinen einzigen Monat.
+  </figcaption>
+</figure>
+
+<style>
+  .nf-figur { margin-top: 34px; }
+  .nf { width: 100%; height: auto; display: block; }
+
+  .nf-titel { font-family: var(--font-display); font-size: 21px; fill: var(--gv-ink); letter-spacing: .01em; }
+  .nf-unter { font-family: var(--font-body); font-size: 14px; fill: var(--gv-muted); }
+  .nf-monat { font-family: var(--font-body); font-size: 14px; fill: var(--gv-muted); text-anchor: middle; }
+
+  .nf-laufend { fill: var(--gv-blue-100); }
+  .nf-einschlag { fill: var(--gv-error); }
+  .nf-ruecklage { fill: var(--gv-yellow); }
+
+  .nf-budget { stroke: var(--gv-ink); stroke-width: 2; stroke-dasharray: 6 5; }
+  .nf-budget-text { font-family: var(--font-body); font-size: 13px; font-weight: 700; fill: var(--gv-ink); }
+
+  .nf-legende {
+    list-style: none; margin: 18px 0 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+    font-family: var(--font-body); font-size: 15px; color: var(--gv-ink-soft);
+  }
+  .nf-legende li { display: flex; align-items: center; gap: 8px; }
+  .nf-punkt { width: 13px; height: 13px; border-radius: 3px; flex: none; }
+  .nf-p-laufend { background: var(--gv-blue-100); }
+  .nf-p-einschlag { background: var(--gv-error); }
+  .nf-p-ruecklage { background: var(--gv-yellow); }
+
+  /* Die Grafik skaliert als Ganzes mit der Breite — auf schmalen Schirmen
+     würde ihre Schrift sonst winzig neben der HTML-Legende stehen. Deshalb
+     hier größere Werte in Zeichenflächen-Einheiten. */
+  @media (max-width: 620px) {
+    .nf-titel { font-size: 27px; }
+    .nf-unter { font-size: 18px; }
+    .nf-monat { font-size: 18px; }
+    .nf-budget-text { font-size: 17px; }
+    .nf-budget { stroke-width: 3; }
+    .nf-legende { font-size: 14px; gap: 6px 16px; }
+  }
+</style>
