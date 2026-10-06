@@ -3,6 +3,11 @@ import Base from '../layouts/Base.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+// Standbilder der Erfahrungsberichte — liegen bei uns, damit vor dem Klick
+// keine Verbindung zu YouTube entsteht.
+import ytAndrea from '../../design/uploads/yt-3Z6KL3H_uNM.webp?url';
+import ytLena from '../../design/uploads/yt-wXwpsAVkH3M.webp?url';
+import ytMiracle from '../../design/uploads/yt-_odyMvW5ghQ.webp?url';
 import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
 const testimonials = [
@@ -15,6 +20,7 @@ const testimonials = [
   },
   {
     id: '3Z6KL3H_uNM',
+    poster: ytAndrea,
     name: 'Andrea',
     role: 'Coaching-Teilnehmerin',
     headline: 'Es macht mir richtig Spaß.',
@@ -22,6 +28,7 @@ const testimonials = [
   },
   {
     id: 'wXwpsAVkH3M',
+    poster: ytLena,
     name: 'Lena',
     role: 'Coaching-Teilnehmerin',
     headline: 'Die beste Investition, die ich machen konnte.',
@@ -29,6 +36,7 @@ const testimonials = [
   },
   {
     id: '_odyMvW5ghQ',
+    poster: ytMiracle,
     name: 'Miracle',
     role: 'Coaching-Teilnehmerin',
     headline: 'Es hat mir sehr, sehr geholfen.',
@@ -162,7 +170,7 @@ const testimonials = [
         {testimonials.map((t) => (
           <figure class="gv-tcard">
             <div class="gv-tvideo">
-              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} label={t.name} />
+              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} label={t.name} poster={t.poster} />
             </div>
             <figcaption class="gv-tbody">
               <p class="gv-thead">„{t.headline}"</p>
