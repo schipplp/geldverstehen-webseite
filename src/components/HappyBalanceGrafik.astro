@@ -5,8 +5,8 @@
 // darunter.
 //
 // Ausnahme im Grafik-Regelwerk: Diese vier Farben gehören zur Analyse und
-// sollen sich klar voneinander unterscheiden. Die Schrift steht in Ink statt
-// Weiß, weil Weiß auf Gelb und Grün kaum lesbar wäre.
+// sollen sich klar voneinander unterscheiden. Schrift und Symbole in Weiß wie
+// im Original (Pers Entscheidung).
 import ArtikelGrafik from './ArtikelGrafik.astro';
 ---
 <ArtikelGrafik
@@ -39,7 +39,7 @@ import ArtikelGrafik from './ArtikelGrafik.astro';
     aspect-ratio: 1 / 0.82; border-radius: 18px;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
     font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1;
-    color: var(--gv-ink); text-align: center; padding: 12px;
+    color: #fff; text-align: center; padding: 12px;
   }
   .hb-kachel svg {
     width: 52px; height: 52px; fill: none; stroke: currentColor;
