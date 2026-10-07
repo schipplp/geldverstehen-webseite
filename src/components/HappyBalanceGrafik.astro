@@ -1,0 +1,61 @@
+---
+// Die vier Kategorien der Happy-Balance-Analyse, nachgebaut nach Pers
+// ursprünglicher Grafik (design/uploads/happy-balance_v3.png): vier Kacheln,
+// je eine Farbe und ein Symbol, sonst nichts. Erklärt wird in der Liste
+// darunter.
+//
+// Ausnahme im Grafik-Regelwerk: Diese vier Farben gehören zur Analyse und
+// sollen sich klar voneinander unterscheiden. Die Schrift steht in Ink statt
+// Weiß, weil Weiß auf Gelb und Grün kaum lesbar wäre.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+---
+<ArtikelGrafik
+  fazit="Vier Kategorien – und nur bei den Geldfressern wird gestrichen."
+  beschreibung="Die vier Kategorien der Happy-Balance-Analyse: Notwendigkeiten, Gönn-ich-mir, Wackelkandidaten und Geldfresser."
+>
+  <ul class="hb">
+    <li class="hb-kachel hb-blau">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 23 24 9l16 14M13 19v19h22V19M21 38v-9h6v9"/></svg>
+      <span>Notwendigkeiten</span>
+    </li>
+    <li class="hb-kachel hb-gruen">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 39 10 25a8 8 0 0 1 14-10 8 8 0 0 1 14 10z"/></svg>
+      <span>Gönn-ich-mir</span>
+    </li>
+    <li class="hb-kachel hb-gelb">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 26 41 20"/><circle cx="24" cy="31" r="3" class="hb-voll"/></svg>
+      <span>Wackelkandidaten</span>
+    </li>
+    <li class="hb-kachel hb-rot">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M33 11a14 14 0 1 0 6 9 4 4 0 0 1-6-4 4 4 0 0 1 0-5z"/><path d="M27 19a6 6 0 1 0 0 10M17 23h8M17 26h7"/></svg>
+      <span>Geldfresser</span>
+    </li>
+  </ul>
+</ArtikelGrafik>
+
+<style>
+  .hb { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 520px; margin: 0 auto !important; }
+  .hb-kachel {
+    aspect-ratio: 1 / 0.82; border-radius: 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1;
+    color: var(--gv-ink); text-align: center; padding: 12px;
+  }
+  .hb-kachel svg {
+    width: 52px; height: 52px; fill: none; stroke: currentColor;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .hb-kachel .hb-voll { fill: currentColor; stroke: none; }
+
+  /* Farben aus der Originalgrafik */
+  .hb-blau { background: #7B97C8; }
+  .hb-gruen { background: #84D294; }
+  .hb-gelb { background: #F0CB63; }
+  .hb-rot { background: #E96060; }
+
+  @media (max-width: 620px) {
+    .hb { gap: 10px; }
+    .hb-kachel { font-size: 20px; gap: 10px; border-radius: 14px; }
+    .hb-kachel svg { width: 38px; height: 38px; }
+  }
+</style>

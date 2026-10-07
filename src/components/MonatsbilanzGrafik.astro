@@ -1,0 +1,58 @@
+---
+// Die Monatsbilanz-Formel als ruhige Rechnung: weiße Zeilen, die Farbe der
+// Kategorie nur als Streifen links (wie in Pers info_monatsbilanz.png die
+// farbigen Unterstriche). Ersetzt den Formel-Kasten im Text.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const zeilen = [
+  { op: '', name: 'Einkommen', farbe: 'gruen' },
+  { op: '–', name: 'Fixkosten', farbe: 'blau' },
+  { op: '–', name: 'Flexkosten', farbe: 'gelb' },
+];
+---
+<ArtikelGrafik
+  fazit="Die Monatsbilanz zeigt dir deinen wahren monatlichen Spielraum."
+  beschreibung="Die Monatsbilanz: Einkommen minus Fixkosten minus Flexkosten ergibt dein Monatsergebnis."
+>
+  <div class="mb">
+    {zeilen.map((z) => (
+      <div class="mb-zeile">
+        <span class="mb-op" aria-hidden="true">{z.op}</span>
+        <div class:list={['mb-kachel', `mb-${z.farbe}`]}>
+          <span class="mb-name">{z.name}</span>
+        </div>
+      </div>
+    ))}
+    <div class="mb-zeile">
+      <span class="mb-op" aria-hidden="true">=</span>
+      <div class="mb-kachel mb-ergebnis">
+        <span class="mb-name">Dein Monatsergebnis</span>
+      </div>
+    </div>
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .mb { display: grid; gap: 10px; max-width: 460px; margin: 0 auto; }
+  .mb-zeile { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 10px; }
+  .mb-op { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--gv-ink); text-align: center; }
+  .mb-kachel {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    border-radius: 14px; padding: 16px 20px; color: var(--gv-ink);
+  }
+  .mb-name { font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1; }
+
+  .mb-kachel { background: #fff; border: 1px solid var(--gv-border); border-left-width: 6px; }
+  .mb-gruen { border-left-color: #84D294; }
+  .mb-blau { border-left-color: #7B97C8; }
+  .mb-gelb { border-left-color: #F0CB63; }
+  .mb-ergebnis { border: 2px solid var(--gv-ink); margin-top: 6px; }
+  .mb-zeile:last-child .mb-op { margin-top: 6px; }
+
+  @media (max-width: 620px) {
+    .mb-zeile { grid-template-columns: 20px 1fr; gap: 8px; }
+    .mb-op { font-size: 28px; }
+    .mb-kachel { padding: 12px 14px; gap: 2px 10px; }
+    .mb-name { font-size: 23px; }
+    }
+</style>

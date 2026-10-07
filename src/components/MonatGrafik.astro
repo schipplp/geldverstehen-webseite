@@ -1,0 +1,44 @@
+---
+// Fehler 2 „Zu früh auswerten": vier Wochen als Strecke. Nach drei Wochen
+// ist es zu früh, erst am Monatsende entsteht ein aussagekräftiges Bild.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+---
+<ArtikelGrafik
+  fazit="Erst nach einem vollen Monat entsteht ein aussagekräftiges Bild deiner Geldflüsse."
+  beschreibung="Vier Wochen als Zeitstrahl. Nach drei Wochen ist es zu früh für Schlüsse, erst nach der vierten Woche wird ausgewertet."
+>
+  <div class="mg">
+    <ol class="mg-wochen">
+      <li>Woche 1</li>
+      <li>Woche 2</li>
+      <li>Woche 3</li>
+      <li class="mg-letzte">Woche 4</li>
+    </ol>
+    <div class="mg-marken">
+      <span class="mg-zu-frueh">zu früh</span>
+      <span class="mg-jetzt">auswerten</span>
+    </div>
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .mg { max-width: 600px; margin: 0 auto; }
+  .mg-wochen { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .mg-wochen li {
+    background: var(--gv-blue-100); color: var(--gv-ink-soft);
+    font-family: var(--font-body); font-size: 14px; font-weight: 700; text-align: center;
+    padding: 12px 4px;
+  }
+  .mg-wochen li:first-child { border-radius: 10px 0 0 10px; }
+  .mg-wochen .mg-letzte { background: var(--gv-blue); color: #fff; border-radius: 0 10px 10px 0; }
+
+  .mg-marken { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 700; text-align: center; }
+  .mg-zu-frueh { grid-column: 1 / 4; color: var(--gv-muted); padding: 4px 0; border-top: 2px solid var(--gv-border); }
+  .mg-jetzt { justify-self: center; background: var(--gv-yellow); color: var(--gv-ink); padding: 4px 10px; border-radius: 999px; }
+
+  @media (max-width: 620px) {
+    .mg-wochen li { font-size: 12px; padding: 10px 2px; }
+    .mg-marken { font-size: 12px; }
+    .mg-jetzt { padding: 4px 8px; }
+  }
+</style>

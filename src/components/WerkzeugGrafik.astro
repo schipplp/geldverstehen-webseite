@@ -1,0 +1,41 @@
+---
+// „App, Excel oder Papier": die drei Werkzeuge nebeneinander, nur mit dem,
+// was der Artikel über sie sagt. Ersetzt die Aufzählung im Text.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const werkzeuge = [
+  { name: 'Papier', punkte: ['funktioniert', 'auf Dauer mühsam – vor allem beim Umrechnen auf den Monat'] },
+  { name: 'Tabelle', zusatz: 'Excel, Google Sheets', punkte: ['flexibel', 'für viele ein guter Start'] },
+  { name: 'App', punkte: ['Ausgaben direkt unterwegs erfassen', 'Umrechnung passiert automatisch'] },
+];
+---
+<ArtikelGrafik fazit="Das Werkzeug ist zweitrangig. Entscheidend ist, dass du es einfach hältst und dranbleibst.">
+  <div class="wg">
+    {werkzeuge.map((w) => (
+      <div class="wg-karte">
+        <p class="ag-name">{w.name}</p>
+        {w.zusatz && <p class="wg-zusatz">{w.zusatz}</p>}
+        <ul class="wg-punkte">
+          {w.punkte.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .wg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .wg-karte { background: #fff; border: 1px solid var(--gv-border); border-radius: 12px; padding: 18px; display: grid; gap: 4px; align-content: start; }
+  .wg-zusatz { margin: 0; font-family: var(--font-body); font-size: 13px; color: var(--gv-muted); }
+  .wg-punkte { display: grid !important; gap: 8px; margin-top: 10px !important; }
+  .wg-punkte li {
+    font-family: var(--font-body); font-size: 15px; line-height: 1.45; color: var(--gv-ink-soft);
+    padding-left: 14px !important; position: relative;
+  }
+  .wg-punkte li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--gv-blue); }
+
+  @media (max-width: 620px) {
+    .wg { grid-template-columns: 1fr; gap: 8px; }
+    .wg-karte { padding: 14px 16px; }
+  }
+</style>

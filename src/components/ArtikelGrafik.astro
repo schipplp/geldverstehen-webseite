@@ -1,0 +1,16 @@
+---
+// Gemeinsamer Rahmen für alle Grafiken im Ratgeber: Grafik plus ein Satz
+// Bildunterschrift. Die Regeln dazu stehen in src/styles/grafik.css.
+import '../styles/grafik.css';
+
+export interface Props {
+  fazit: string;
+  /** Beschreibung für Screenreader, wenn die Grafik selbst nicht als Text lesbar ist */
+  beschreibung?: string;
+}
+const { fazit, beschreibung } = Astro.props;
+---
+<figure class="ag" aria-label={beschreibung}>
+  <slot />
+  <figcaption class="ag-fazit">{fazit}</figcaption>
+</figure>
