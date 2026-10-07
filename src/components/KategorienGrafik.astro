@@ -2,12 +2,13 @@
 // Die drei Geldfluss-Kategorien. Statt Icons zeigt jede Karte in vier
 // Mini-Balken, wie sich die Kategorie über die Monate verhält — genau der
 // Unterschied, den der Text erklärt: planbar oder schwankend.
-// Die Balkenhöhen sind Form, keine echten Beträge.
+// Die Balkenhöhen sind Form, keine echten Beträge. Farben wie in der
+// Monatsbilanz-Grafik: Einkommen grün, Fixkosten blau, Flexkosten gelb.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
 const kategorien = [
-  { name: 'Einkommen', verhalten: 'planbar', balken: [70, 70, 70, 70], farbe: 'blau' },
-  { name: 'Fixkosten', verhalten: 'planbar', balken: [52, 52, 52, 52], farbe: 'basis' },
+  { name: 'Einkommen', verhalten: 'planbar', balken: [70, 70, 70, 70], farbe: 'gruen' },
+  { name: 'Fixkosten', verhalten: 'planbar', balken: [52, 52, 52, 52], farbe: 'blau' },
   { name: 'Flexkosten', verhalten: 'schwankt', balken: [34, 62, 24, 48], farbe: 'gelb' },
 ];
 ---
@@ -38,9 +39,10 @@ const kategorien = [
   }
   .kg-balken { display: flex; align-items: flex-end; gap: 6px; height: 56px; }
   .kg-b { flex: 1; border-radius: 3px 3px 0 0; }
-  .kg-blau { background: var(--gv-blue); }
-  .kg-basis { background: var(--gv-blue-100); }
-  .kg-gelb { background: var(--gv-yellow); }
+  /* Kategorie-Farben aus Pers Originalgrafiken, wie Monatsbilanz und Happy-Balance */
+  .kg-gruen { background: #84D294; }
+  .kg-blau { background: #7B97C8; }
+  .kg-gelb { background: #F0CB63; }
 
   @media (max-width: 620px) {
     .kg { gap: 8px; }

@@ -1,0 +1,63 @@
+---
+// Die Monatsbilanz-Formel im Stil der Happy-Balance-Kacheln. Die Farben der
+// drei Kategorien stammen aus Pers ursprünglichen Grafiken
+// (info_monatsbilanz.png, drei-kategorien_v1.png): Einkommen grün,
+// Fixkosten blau, Flexkosten gelb. Ersetzt den Formel-Kasten im Text.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const zeilen = [
+  { op: '', name: 'Einkommen', zusatz: 'monatlich', farbe: 'gruen' },
+  { op: '–', name: 'Fixkosten', zusatz: 'monatlich umgerechnet', farbe: 'blau' },
+  { op: '–', name: 'Flexkosten', zusatz: 'monatlicher Durchschnitt', farbe: 'gelb' },
+];
+---
+<ArtikelGrafik
+  fazit="Die Monatsbilanz zeigt dir deinen wahren monatlichen Spielraum."
+  beschreibung="Die Monatsbilanz: Einkommen (monatlich) minus Fixkosten (monatlich umgerechnet) minus Flexkosten (monatlicher Durchschnitt) ergibt dein Monatsergebnis."
+>
+  <div class="mb">
+    {zeilen.map((z) => (
+      <div class="mb-zeile">
+        <span class="mb-op" aria-hidden="true">{z.op}</span>
+        <div class:list={['mb-kachel', `mb-${z.farbe}`]}>
+          <span class="mb-name">{z.name}</span>
+          <span class="mb-zusatz">{z.zusatz}</span>
+        </div>
+      </div>
+    ))}
+    <div class="mb-zeile">
+      <span class="mb-op" aria-hidden="true">=</span>
+      <div class="mb-kachel mb-ergebnis">
+        <span class="mb-name">Dein Monatsergebnis</span>
+      </div>
+    </div>
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .mb { display: grid; gap: 10px; max-width: 460px; margin: 0 auto; }
+  .mb-zeile { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 10px; }
+  .mb-op { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--gv-ink); text-align: center; }
+  .mb-kachel {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    border-radius: 14px; padding: 16px 20px; color: var(--gv-ink);
+  }
+  .mb-name { font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1; }
+  .mb-zusatz { font-family: var(--font-body); font-size: 14px; font-weight: 700; opacity: .75; }
+
+  /* Farben aus den Originalgrafiken, wie bei der Happy-Balance */
+  .mb-gruen { background: #84D294; }
+  .mb-blau { background: #7B97C8; }
+  .mb-gelb { background: #F0CB63; }
+  .mb-ergebnis { background: var(--gv-ink); margin-top: 6px; }
+  .mb-ergebnis .mb-name { color: var(--gv-yellow); }
+  .mb-zeile:last-child .mb-op { margin-top: 6px; }
+
+  @media (max-width: 620px) {
+    .mb-zeile { grid-template-columns: 20px 1fr; gap: 8px; }
+    .mb-op { font-size: 28px; }
+    .mb-kachel { padding: 12px 14px; gap: 2px 10px; }
+    .mb-name { font-size: 23px; }
+    .mb-zusatz { font-size: 12px; }
+  }
+</style>

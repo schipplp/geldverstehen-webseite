@@ -10,6 +10,7 @@ import KategorienGrafik from '../components/KategorienGrafik.astro';
 import UmrechnungGrafik from '../components/UmrechnungGrafik.astro';
 import MonatGrafik from '../components/MonatGrafik.astro';
 import WerkzeugGrafik from '../components/WerkzeugGrafik.astro';
+import MonatsbilanzGrafik from '../components/MonatsbilanzGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -130,12 +131,7 @@ const kapitel = [
         <p>Warum? <strong>Weil ihre Zahlen keinen gemeinsamen Nenner haben.</strong></p>
         <p>Die meisten Haushaltsbücher erfassen nur die Ausgaben, die in diesem Monat passieren. Was im Januar abgebucht wird, steht im Januar. Und was nur einmal im Jahr kommt – die KFZ-Versicherung, der Rundfunkbeitrag, die neuen Winterreifen – fehlt in elf von zwölf Monaten komplett. Es ist schlicht nicht da. Bis es plötzlich da ist. Und dann wirkt es wie eine Überraschung, obwohl es vollkommen absehbar war.</p>
         <p>Die Lösung ist die <strong>Monatsbilanz</strong>: Du rechnest <em>alle</em> Geldflüsse auf den Monat um – auch die unregelmäßigen. Die Formel ist denkbar einfach:</p>
-        <div class="gv-formula">
-          <span>Einkommen (monatlich)</span>
-          <span>– Fixkosten (monatlich umgerechnet)</span>
-          <span>– Flexkosten (monatlicher Durchschnitt)</span>
-          <span class="gv-formula-result">= Dein Monatsergebnis</span>
-        </div>
+        <MonatsbilanzGrafik />
         <p>Warum ausgerechnet der Monat? Weil er die natürliche Einheit unseres Finanzlebens ist. Das Gehalt kommt monatlich, die meisten Rechnungen sind monatlich, und auch unser Denken über Geld – „Was kann ich mir leisten? Was bleibt übrig?" – findet im Monatsrhythmus statt.</p>
         <p>Für planbare unregelmäßige Ausgaben bedeutet das: Du bildest monatlich eine kleine Rücklage. Jahresbetrag geteilt durch zwölf – jeden Monat, konsequent. So ist das Geld da, wenn die Ausgabe kommt, ohne dass sie deinen Monat sprengt. Und warum monatlich? Weil du diese Dinge ja auch monatlich nutzt: Das Auto, der Urlaub, die Waschmaschine sind Teil deines Lebens – nicht nur im Monat des Kaufs.</p>
         <p>Erst wenn diese Rücklagen in deiner Monatsbilanz stehen, zeigt sie dir deinen <strong>wirklich wahren monatlichen Spielraum</strong>. Das ist die Zahl, die alles verändert – weil du zum ersten Mal weißt, was du dir tatsächlich leisten kannst.</p>
@@ -252,14 +248,6 @@ const kapitel = [
 
   /* Sprungziele nicht unter den Seitenrand schieben */
   .gv-article h2 { scroll-margin-top: 24px; }
-
-  /* Monatsbilanz-Formel als Callout */
-  .gv-formula {
-    display: grid; gap: 6px; margin: 8px 0 24px; padding: 24px 26px;
-    background: var(--gv-surface); border-left: 4px solid var(--gv-yellow); border-radius: 0 14px 14px 0;
-    font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); letter-spacing: .02em; color: var(--gv-ink); line-height: 1.2;
-  }
-  .gv-formula-result { color: var(--gv-blue); }
 
   /* FAQ-Akkordeon */
   .gv-faq { display: grid; gap: 12px; margin: 8px 0 24px; }
