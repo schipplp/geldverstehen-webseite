@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+import { organisation, person } from '../lib/strukturdaten';
 // Standbilder der Erfahrungsberichte — liegen bei uns, damit vor dem Klick
 // keine Verbindung zu YouTube entsteht.
 import ytSalih from '../../design/uploads/yt-1ZS8FXuURDg.webp?url';
@@ -50,6 +51,7 @@ const testimonials = [
   title="Über Per Schippl"
   description="Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch."
   active="ueber"
+  bild="/og/ueber.png"
 >
   <!-- HERO -->
   <div style="background:var(--gv-blue);">
@@ -211,6 +213,16 @@ const testimonials = [
       </div>
     </div>
   </section>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        { ...person, image: new URL(img.perHero, Astro.site).href, description: 'Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch.' },
+        organisation,
+      ],
+    })}
+  />
 </Base>
 
 <style>
