@@ -6,10 +6,12 @@
 // Freigestellt mit echter Transparenz: Das Original hatte einen weißen
 // Aufkleber-Rand und einen eigenen Blauton, der neben dem Marken-Blau stand.
 import perHero from '../../design/uploads/per-hero-freisteller.webp?url';
-import podcastCover from '../../design/uploads/new podcast cover_v5.jpg?url';
-import appScreenshot from '../../design/uploads/1de.webp?url';
+// Web-Fassungen (verkleinert, WebP): Die Originale waren 1920 px breit und
+// bremsten die Startseite auf dem Handy.
+import podcastCover from '../../design/uploads/podcast-cover-web.webp?url';
+import appScreenshot from '../../design/uploads/1de-web.webp?url';
 import buchCover from '../../design/uploads/md.jpeg?url';
-import perUeberSplit from '../../design/uploads/DSC00065.JPG?url';
+import perUeberSplit from '../../design/uploads/DSC00065-web.webp?url';
 import perUeberHero from '../../design/uploads/DSC00117.JPG?url';
 import perStory from '../../design/uploads/DSC00058.JPG?url';
 import perCrashkurs from '../../design/uploads/DSC00163.JPG?url';

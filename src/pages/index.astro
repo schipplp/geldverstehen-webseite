@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import EmailOptIn from '../components/EmailOptIn.astro';
 import { u } from '../lib/url';
+import { organisation, person } from '../lib/strukturdaten';
 import { img } from '../lib/images';
 import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 ---
@@ -9,6 +10,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
   title="Deine Finanzen im Griff. Für immer!"
   description="GELD VERSTEHEN von Per Schippl: von Chaos in den Finanzen zu Klarheit, Struktur und einem entspannten Umgang mit deinem Geld — Podcast, App und Buch."
   active=""
+  bild="/og/startseite.png"
 >
   <div id="top">
 
@@ -28,7 +30,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
           </div>
 
           <div class="gv-hero-portrait" style="position:relative; overflow:hidden; min-height:480px;">
-            <img class="gv-hero-img" src={img.perHero} alt="Per Schippl, Gründer von GELD VERSTEHEN, lächelnd" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 18%; display:block; transform:scaleX(-1);" />
+            <img class="gv-hero-img" fetchpriority="high" src={img.perHero} alt="Per Schippl, Gründer von GELD VERSTEHEN, lächelnd" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 18%; display:block; transform:scaleX(-1);" />
           </div>
 
         </div>
@@ -77,7 +79,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
       <div class="gv-wrap">
         <div class="gv-split" style="display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center;">
           <div class="gv-split-media">
-            <img class="gv-ueber-img" src={img.perUeberSplit} alt="Per Schippl im Porträt" style="width:100%; height:480px; object-fit:cover; border-radius:14px; display:block;" />
+            <img class="gv-ueber-img" loading="lazy" decoding="async" width="1200" height="802" src={img.perUeberSplit} alt="Per Schippl im Porträt" style="width:100%; height:480px; object-fit:cover; border-radius:14px; display:block;" />
           </div>
           <div>
             <p class="gv-eyebrow"><span class="gv-rule"></span>ÜBER PER</p>
@@ -100,7 +102,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
         <div class="gv-3tiles">
 
           <a class="gv-tile" href={`${u('/app')}?k=startseite`}>
-            <div class="gv-tile-media"><img src={img.appScreenshot} alt="Screenshot der App von GELD VERSTEHEN mit Finanzübersicht" style="max-width:100%; max-height:100%; object-fit:contain;" /></div>
+            <div class="gv-tile-media"><img loading="lazy" decoding="async" src={img.appScreenshot} alt="Screenshot der App von GELD VERSTEHEN mit Finanzübersicht" style="max-width:100%; max-height:100%; object-fit:contain;" /></div>
             <div class="gv-tile-body">
               <div class="gv-tile-label"><span style="color:var(--gv-blue);">01</span>&nbsp;&nbsp;APP</div>
               <h3 class="gv-tile-title">Die Haushaltsbuch-App</h3>
@@ -110,7 +112,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
           </a>
 
           <a class="gv-tile" href={u('/buch')}>
-            <div class="gv-tile-media"><img src={img.buchCover} alt="Cover des GELD VERSTEHEN Buchs" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 12px 30px rgba(15,35,58,.14);" /></div>
+            <div class="gv-tile-media"><img loading="lazy" decoding="async" src={img.buchCover} alt="Cover des GELD VERSTEHEN Buchs" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 12px 30px rgba(15,35,58,.14);" /></div>
             <div class="gv-tile-body">
               <div class="gv-tile-label"><span style="color:var(--gv-blue);">02</span>&nbsp;&nbsp;BUCH</div>
               <h3 class="gv-tile-title">GELD VERSTEHEN – Das Buch</h3>
@@ -120,7 +122,7 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
           </a>
 
           <a class="gv-tile" href={u('/podcast')}>
-            <div class="gv-tile-media"><img src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 12px 30px rgba(15,35,58,.14);" /></div>
+            <div class="gv-tile-media"><img loading="lazy" decoding="async" src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 12px 30px rgba(15,35,58,.14);" /></div>
             <div class="gv-tile-body">
               <div class="gv-tile-label"><span style="color:var(--gv-blue);">03</span>&nbsp;&nbsp;PODCAST</div>
               <h3 class="gv-tile-title">GELD VERSTEHEN – Der Podcast</h3>
@@ -146,6 +148,17 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
     </section>
 
   </div>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        organisation,
+        person,
+        { '@type': 'WebSite', name: 'GELD VERSTEHEN', url: 'https://geldverstehen.de/', inLanguage: 'de', publisher: { '@id': organisation['@id'] } },
+      ],
+    })}
+  />
 </Base>
 
 <style>

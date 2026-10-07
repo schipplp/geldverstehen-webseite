@@ -29,7 +29,8 @@ export interface Props {
   ogTyp?: 'website' | 'article';
 }
 const { title, description, active = '', bild, ogTyp = 'website' } = Astro.props;
-const bildUrl = bild ? new URL(bild, Astro.site).href : undefined;
+// Ohne eigenes Bild bekommt jede Seite das Vorschaubild der Startseite.
+const bildUrl = new URL(bild ?? '/og/startseite.png', Astro.site).href;
 const fullTitle = title ? `${title} · GELD VERSTEHEN` : 'GELD VERSTEHEN';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---

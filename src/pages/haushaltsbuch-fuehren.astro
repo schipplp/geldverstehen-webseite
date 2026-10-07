@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { organisation, person } from '../lib/strukturdaten';
 import EmailOptIn from '../components/EmailOptIn.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
@@ -226,14 +227,11 @@ const kapitel = [
           dateModified: '2026-10-07',
           image: new URL('/og/haushaltsbuch-fuehren.png', Astro.site).href,
           mainEntityOfPage: seitenUrl,
-          author: {
-            '@type': 'Person',
-            name: 'Per Schippl',
-            jobTitle: 'Finanzcoach',
-            url: new URL('/ueber', Astro.site).href,
-          },
-          publisher: { '@type': 'Organization', name: 'GELD VERSTEHEN', url: new URL('/', Astro.site).href },
+          author: { '@id': person['@id'] },
+          publisher: { '@id': organisation['@id'] },
         },
+        person,
+        organisation,
         {
           '@type': 'FAQPage',
           mainEntity: faq.map((f) => ({
