@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { img } from '../lib/images';
+import { u } from '../lib/url';
 
 // Fallback ohne Kanal-Kennung — das Skript am Seitenende hängt sie an.
 const APP_STORE = 'https://apps.apple.com/de/app/id1571656912';
@@ -386,6 +387,7 @@ const faq = [
           </details>
         ))}
       </div>
+      <p style="margin:32px 0 0; font-size:17px; line-height:1.6; color:var(--gv-ink-soft); max-width:640px;">Wie du ein Haushaltsbuch sinnvoll führst – egal ob mit App, Excel oder Papier – erkläre ich im Ratgeber <a href={u('/haushaltsbuch-fuehren')} style="color:var(--gv-blue); text-decoration:underline;">Haushaltsbuch führen</a>.</p>
     </div>
   </section>
 

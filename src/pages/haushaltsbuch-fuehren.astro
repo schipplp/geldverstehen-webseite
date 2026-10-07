@@ -50,6 +50,8 @@ const kapitel = [
   title="Haushaltsbuch führen: Anleitung, die wirklich funktioniert"
   description="Haushaltsbuch führen ohne Frust: Warum die meisten scheitern, welche 4 Fehler du vermeiden musst und wie du in 3 Schritten echte Klarheit gewinnst."
   active=""
+  bild="/og/haushaltsbuch-fuehren.png"
+  ogTyp="article"
 >
   <!-- HERO -->
   <div style="background:var(--gv-blue);">
@@ -72,6 +74,19 @@ const kapitel = [
         <p>Gleichzeitig weiß ich aus denselben Coachings: Die meisten Haushaltsbuch-Versuche scheitern. Und zwar fast nie am Willen – sondern an der Herangehensweise.</p>
         <p>Genau darum geht es in diesem Artikel: Was ein Haushaltsbuch wirklich leistet, welche Fehler die meisten Menschen machen, und wie du es so führst, dass sich der Aufwand tatsächlich lohnt.</p>
 
+        {/* Kurzantwort für eilige Leser, Suchmaschinen und KI-Antworten.
+            Inhalt 1:1 aus dem Artikel zusammengefasst. */}
+        <aside class="gv-kurz" aria-label="Kurz gesagt">
+          <p class="gv-kurz-kopf">Kurz gesagt</p>
+          <p>Ein Haushaltsbuch zeigt dir, wo dein Geld wirklich bleibt. So führst du es in 3 Schritten:</p>
+          <ol>
+            <li><strong>Einkommen ermitteln</strong> – alles, womit du sicher rechnen kannst, auf den Monat umgerechnet.</li>
+            <li><strong>Fixkosten ermitteln</strong> – auch Quartals- und Jahresbeträge, auf den Monat umgerechnet.</li>
+            <li><strong>Flexkosten erfassen</strong> – alle Alltagsausgaben, die nicht fest planbar sind, eine Zeit lang protokollieren.</li>
+          </ol>
+          <p>Bring alles in der <strong>Monatsbilanz</strong> zusammen und werte erst nach einem vollen Monat aus.</p>
+        </aside>
+
         <nav class="gv-toc" aria-label="Inhalt des Artikels">
           <p class="gv-toc-kopf">Worum es geht</p>
           <ol class="gv-toc-liste">
@@ -90,6 +105,7 @@ const kapitel = [
         <p><strong>3. Es schafft Messbarkeit.</strong><br />Und Messbarkeit ist der entscheidende Schlüssel zu dauerhaftem Fortschritt. Wer keinen Maßstab hat, weiß nie, ob er sich überhaupt verbessert – und gibt früher oder später auf. Wer dagegen erste kleine Fortschritte schwarz auf weiß sieht, will dranbleiben. Man gewinnt regelrecht Spaß an der Sache.</p>
         <EbenenGrafik />
         <p>Wichtig dabei: Erfolgreich ein Haushaltsbuch zu führen heißt vor allem, <strong>beobachten zu lernen</strong>. Über einen längeren Zeitraum. Nicht sofort urteilen, nicht sofort Konsequenzen ziehen – sondern erst einmal ehrlich hinschauen.</p>
+        <p>Denn wer wegschaut, landet in der <strong>Abwärtsspirale</strong>: böse Überraschungen, das Geld wird eng, schlechtes Gewissen. Wer hinschaut und notiert, kommt in die <strong>Aufwärtsspirale</strong>: verstehen, andere Prioritäten, mehr Erfolg mit den Finanzen – und mehr Spaß.</p>
 
 
         <h2 id="haeufigste-fehler">Die 4 häufigsten Fehler beim Haushaltsbuch führen</h2>
@@ -207,6 +223,8 @@ const kapitel = [
             'Haushaltsbuch führen ohne Frust: Warum die meisten scheitern, welche 4 Fehler du vermeiden musst und wie du in 3 Schritten echte Klarheit gewinnst.',
           inLanguage: 'de',
           datePublished: '2016-12-01',
+          dateModified: '2026-10-07',
+          image: new URL('/og/haushaltsbuch-fuehren.png', Astro.site).href,
           mainEntityOfPage: seitenUrl,
           author: {
             '@type': 'Person',
@@ -240,6 +258,11 @@ const kapitel = [
   .gv-article strong { color: var(--gv-ink); }
   .gv-article a { color: var(--gv-blue); text-decoration: underline; }
   .gv-article a:hover { color: var(--gv-blue-600); }
+
+  /* Kurzantwort */
+  .gv-kurz { margin: 36px 0 0; padding: 22px 26px 8px; background: var(--gv-yellow-050); border-left: 4px solid var(--gv-yellow); border-radius: 0 14px 14px 0; }
+  .gv-kurz-kopf { font-family: var(--font-display); font-size: 17px !important; letter-spacing: .12em; color: var(--gv-ink) !important; margin: 0 0 10px !important; }
+  .gv-kurz ol { margin-bottom: 14px; }
 
   /* Sprungmenü */
   .gv-toc { margin: 40px 0 8px; padding: 24px 26px 26px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 14px; }
