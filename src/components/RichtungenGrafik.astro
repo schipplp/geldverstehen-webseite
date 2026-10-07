@@ -1,46 +1,55 @@
 ---
-// Ersetzt die Spiralen-Grafik: dieselben Stationen, als zwei schlichte Wege,
-// die mit einer einzigen Entscheidung beginnen — wegschauen oder hinschauen.
+// Ersetzt die Spiralen-Grafik: dieselben Stationen als zwei Treppen. Die
+// Abwärtsspirale führt Stufe für Stufe nach unten, die Aufwärtsspirale von
+// „hinschauen & notieren" Stufe für Stufe nach oben. Die Form zeigt die
+// Richtung, ohne dass jemand eine Liste lesen muss.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
-const wege = [
-  { name: 'Abwärtsspirale', farbe: 'grau', stationen: ['wegschauen', 'böse Überraschungen', 'das Geld wird eng', 'schlechtes Gewissen'] },
-  { name: 'Aufwärtsspirale', farbe: 'blau', stationen: ['hinschauen & notieren', 'verstehen', 'andere Prioritäten', 'mehr Erfolg mit den Finanzen', 'mehr Spaß'] },
-];
+const abwaerts = ['wegschauen', 'böse Überraschungen', 'das Geld wird eng', 'schlechtes Gewissen'];
+const aufwaerts = ['hinschauen & notieren', 'verstehen', 'andere Prioritäten', 'mehr Erfolg mit den Finanzen', 'mehr Spaß'];
 ---
-<ArtikelGrafik fazit="Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale.">
+<ArtikelGrafik
+  fazit="Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale."
+  beschreibung="Zwei Treppen. Abwärtsspirale, nach unten: wegschauen, böse Überraschungen, das Geld wird eng, schlechtes Gewissen. Aufwärtsspirale, nach oben: hinschauen und notieren, verstehen, andere Prioritäten, mehr Erfolg mit den Finanzen, mehr Spaß."
+>
   <div class="rg">
-    {wege.map((w) => (
-      <div class:list={['rg-weg', `rg-${w.farbe}`]}>
-        <p class="ag-name rg-name">{w.name}</p>
-        <ol class="rg-stationen">
-          {w.stationen.map((s) => <li>{s}</li>)}
-        </ol>
-      </div>
-    ))}
+    <div class="rg-weg rg-ab">
+      <p class="ag-name rg-name">Abwärtsspirale <span aria-hidden="true">↘</span></p>
+      <ol class="rg-treppe">
+        {abwaerts.map((s, i) => <li style={`--i:${i}`}>{s}</li>)}
+      </ol>
+    </div>
+    <div class="rg-weg rg-auf">
+      <p class="ag-name rg-name">Aufwärtsspirale <span aria-hidden="true">↗</span></p>
+      <ol class="rg-treppe">
+        {aufwaerts.map((s, i) => <li style={`--i:${i}`}>{s}</li>)}
+      </ol>
+    </div>
   </div>
 </ArtikelGrafik>
 
 <style>
-  .rg { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: center; }
-  .rg-name { display: inline-block; padding-bottom: 6px; border-bottom: 4px solid var(--gv-border); margin-bottom: 14px; }
-  .rg-blau .rg-name { border-color: var(--gv-blue); }
+  .rg { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: end; }
+  .rg-name { margin-bottom: 14px; }
+  .rg-name span { color: var(--gv-muted); }
+  .rg-auf .rg-name span { color: var(--gv-blue); }
 
-  .rg-stationen { display: grid; gap: 0; }
-  .rg-stationen li {
-    font-family: var(--font-body); font-size: 16px; line-height: 1.4; color: var(--gv-muted);
+  .rg-treppe { display: flex !important; flex-direction: column; gap: 6px; }
+  /* Aufwärts: erste Station unten, jede weitere eine Stufe höher */
+  .rg-auf .rg-treppe { flex-direction: column-reverse; }
+
+  .rg-treppe li {
+    /* jede Stufe rückt ein Stück nach rechts */
+    margin-left: calc(var(--i) * 9%) !important;
+    width: fit-content; max-width: 100%;
+    font-family: var(--font-body); font-size: 15px; font-weight: 700; line-height: 1.3;
+    border-radius: 8px; padding: 8px 12px;
+    background: #fff; color: var(--gv-muted); border: 1px solid var(--gv-border);
   }
-  /* Kleiner Pfeil zwischen den Stationen */
-  .rg-stationen li + li::before {
-    content: '↓'; display: block; margin: 2px 0; font-size: 14px; color: var(--gv-border);
-  }
-  .rg-blau .rg-stationen li { color: var(--gv-ink); }
-  .rg-blau .rg-stationen li + li::before { color: var(--gv-blue); }
-  .rg-blau .rg-stationen li:first-child { font-weight: 700; }
+  .rg-auf .rg-treppe li { background: var(--gv-blue); color: #fff; border-color: var(--gv-blue); }
 
   @media (max-width: 620px) {
-    .rg { gap: 12px; }
-    .rg-stationen li { font-size: 14px; }
-    .rg-name { font-size: 20px; }
+    .rg { grid-template-columns: 1fr; gap: 26px; }
+    .rg-treppe li { font-size: 14px; margin-left: calc(var(--i) * 7%) !important; }
   }
 </style>
