@@ -1,121 +1,61 @@
 ---
-// Die vier Kategorien als Entscheidungsweg statt als Namensliste.
+// Die vier Kategorien der Happy-Balance-Analyse, nachgebaut nach Pers
+// ursprünglicher Grafik (design/uploads/happy-balance_v3.png): vier Kacheln,
+// je eine Farbe und ein Symbol, sonst nichts. Erklärt wird in der Liste
+// darunter.
 //
-// Eine Vier-Felder-Matrix wäre naheliegend, geht aber nicht auf: „Wackel-
-// kandidaten" ist kein Quadrant, sondern der Zustand vor der Einordnung.
-// Zwei Fragen nacheinander bilden Pers Modell dagegen genau ab — und sagen
-// dem Leser zusätzlich, wie er sortiert. Die Namen allein stehen schon in
-// der Liste daneben.
-//
-// Ausnahme im Grafik-Regelwerk: Die vier Kategorien behalten ihre eigenen
-// Farben (blau, grau, gelb, rot), damit sie sich klar unterscheiden.
+// Ausnahme im Grafik-Regelwerk: Diese vier Farben gehören zur Analyse und
+// sollen sich klar voneinander unterscheiden. Die Schrift steht in Ink statt
+// Weiß, weil Weiß auf Gelb und Grün kaum lesbar wäre.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 ---
-<ArtikelGrafik fazit="Zwei Fragen, und jede Ausgabe landet von selbst an ihrem Platz.">
-  <div class="hb">
-    <p class="hb-start">Eine Ausgabe aus deinem Monat</p>
-
-    <div class="hb-frage">
-      <span class="hb-nr">1</span>
-      <p>Brauchst du es wirklich?</p>
-    </div>
-
-    <div class="hb-zweige">
-      <div class="hb-zweig">
-        <span class="hb-antwort hb-ja">ja</span>
-        <div class="hb-karte hb-blau">
-          <p class="hb-titel">Notwendigkeiten</p>
-          <p class="hb-text">Behalten — aber regelmäßig prüfen, ob der Preis noch stimmt.</p>
-        </div>
-      </div>
-
-      <div class="hb-zweig">
-        <span class="hb-antwort hb-unklar">unsicher</span>
-        <div class="hb-karte hb-grau">
-          <p class="hb-titel">Wackelkandidaten</p>
-          <p class="hb-text">Noch nichts entscheiden. Einen Monat weiter beobachten.</p>
-        </div>
-      </div>
-
-      <div class="hb-zweig hb-zweig-weiter">
-        <span class="hb-antwort hb-nein">nein</span>
-
-        <div class="hb-frage hb-frage-2">
-          <span class="hb-nr">2</span>
-          <p>Macht es dir Freude?</p>
-        </div>
-
-        <div class="hb-unterzweige">
-          <div class="hb-zweig">
-            <span class="hb-antwort hb-ja">ja</span>
-            <div class="hb-karte hb-gelb">
-              <p class="hb-titel">Gönn-ich-mir</p>
-              <p class="hb-text">Behalten, ohne schlechtes Gewissen. Dafür ist Geld da.</p>
-            </div>
-          </div>
-          <div class="hb-zweig">
-            <span class="hb-antwort hb-nein">nein</span>
-            <div class="hb-karte hb-rot">
-              <p class="hb-titel">Geldfresser</p>
-              <p class="hb-text">Hier — und nur hier — streichst du. Du verzichtest auf nichts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<ArtikelGrafik
+  fazit="Vier Kategorien – und nur bei den Geldfressern wird gestrichen."
+  beschreibung="Die vier Kategorien der Happy-Balance-Analyse: Notwendigkeiten, Gönn-ich-mir, Wackelkandidaten und Geldfresser."
+>
+  <ul class="hb">
+    <li class="hb-kachel hb-blau">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 23 24 9l16 14M13 19v19h22V19M21 38v-9h6v9"/></svg>
+      <span>Notwendigkeiten</span>
+    </li>
+    <li class="hb-kachel hb-gruen">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 39 10 25a8 8 0 0 1 14-10 8 8 0 0 1 14 10z"/></svg>
+      <span>Gönn-ich-mir</span>
+    </li>
+    <li class="hb-kachel hb-gelb">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 26 41 20"/><circle cx="24" cy="31" r="3" class="hb-voll"/></svg>
+      <span>Wackelkandidaten</span>
+    </li>
+    <li class="hb-kachel hb-rot">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M33 11a14 14 0 1 0 6 9 4 4 0 0 1-6-4 4 4 0 0 1 0-5z"/><path d="M27 19a6 6 0 1 0 0 10M17 23h8M17 26h7"/></svg>
+      <span>Geldfresser</span>
+    </li>
+  </ul>
 </ArtikelGrafik>
 
 <style>
-  .hb { display: grid; gap: 14px; }
-
-  .hb-start {
-    justify-self: start; margin: 0;
-    font-family: var(--font-body); font-size: 14px; font-weight: 700;
-    letter-spacing: .08em; text-transform: uppercase; color: var(--gv-muted);
+  .hb { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 520px; margin: 0 auto !important; }
+  .hb-kachel {
+    aspect-ratio: 1 / 0.82; border-radius: 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1;
+    color: var(--gv-ink); text-align: center; padding: 12px;
   }
-
-  .hb-frage {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--gv-ink); color: #fff; border-radius: 12px;
-    padding: 14px 20px; justify-self: start;
+  .hb-kachel svg {
+    width: 52px; height: 52px; fill: none; stroke: currentColor;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
   }
-  .hb-frage p { margin: 0; font-family: var(--font-display); font-size: 23px; letter-spacing: .01em; }
-  .hb-nr {
-    flex: none; width: 26px; height: 26px; border-radius: 50%;
-    background: var(--gv-yellow); color: var(--gv-ink);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-body); font-weight: 700; font-size: 14px;
-  }
+  .hb-kachel .hb-voll { fill: currentColor; stroke: none; }
 
-  .hb-zweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
-  .hb-zweig-weiter { grid-column: 1 / -1; }
-  .hb-unterzweige { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-  .hb-zweig { display: grid; gap: 8px; }
-
-  .hb-antwort {
-    justify-self: start; font-family: var(--font-body); font-weight: 700;
-    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-    padding: 3px 11px; border-radius: 999px;
-  }
-  .hb-ja { background: var(--gv-blue-050); color: var(--gv-blue); }
-  .hb-nein { background: var(--gv-surface-2); color: var(--gv-ink-soft); }
-  .hb-unklar { background: var(--gv-warning-bg); color: #8A6400; }
-
-  .hb-frage-2 { margin-top: 2px; }
-
-  .hb-karte { border-radius: 14px; padding: 20px 22px 22px; border: 1px solid var(--gv-border); }
-  .hb-titel { font-family: var(--font-display); font-size: 25px; letter-spacing: .01em; margin: 0 0 6px; color: var(--gv-ink); }
-  .hb-text { font-family: var(--font-body); font-size: 15px; line-height: 1.55; margin: 0; color: var(--gv-ink-soft); }
-
-  .hb-blau { background: var(--gv-blue-050); border-color: var(--gv-blue-100); }
-  .hb-gelb { background: var(--gv-yellow-050); border-color: #F2DFA8; }
-  .hb-grau { background: #fff; }
-  .hb-rot { background: var(--gv-error-bg); border-color: #F0C9C9; }
-  .hb-rot .hb-titel { color: var(--gv-error); }
+  /* Farben aus der Originalgrafik */
+  .hb-blau { background: #7B97C8; }
+  .hb-gruen { background: #84D294; }
+  .hb-gelb { background: #F0CB63; }
+  .hb-rot { background: #E96060; }
 
   @media (max-width: 620px) {
-    .hb-zweige, .hb-unterzweige { grid-template-columns: 1fr; }
-    .hb-frage p { font-size: 21px; }
+    .hb { gap: 10px; }
+    .hb-kachel { font-size: 20px; gap: 10px; border-radius: 14px; }
+    .hb-kachel svg { width: 38px; height: 38px; }
   }
 </style>

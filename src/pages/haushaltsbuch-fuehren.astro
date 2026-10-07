@@ -8,6 +8,8 @@ import HappyBalanceGrafik from '../components/HappyBalanceGrafik.astro';
 import RichtungenGrafik from '../components/RichtungenGrafik.astro';
 import KategorienGrafik from '../components/KategorienGrafik.astro';
 import UmrechnungGrafik from '../components/UmrechnungGrafik.astro';
+import MonatGrafik from '../components/MonatGrafik.astro';
+import WerkzeugGrafik from '../components/WerkzeugGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -93,6 +95,7 @@ const kapitel = [
         <p>Man startet motiviert und teilt alles haargenau auf: Lebensmittel, Bio-Lebensmittel, Getränke, Drogerie, Tiernahrung – alles separat. Das kostet mehr Zeit, als es bringt, und überfordert auf Dauer. Für deine Erkenntnisse sind <strong>Tendenzen wichtiger als Centgenauigkeit</strong>. Wer versucht, centgenau zu sein, gibt meist nach zwei Wochen auf. Wer mit groben Kategorien und gerundeten Beträgen arbeitet, bleibt dran. Und nur wer dranbleibt, sieht Ergebnisse.</p>
         <h3>Fehler 2: Zu früh auswerten</h3>
         <p>Drei Wochen Daten – und schon werden große Schlüsse gezogen. Das ist, als würdest du einen Marathon nach dem ersten Kilometer bewerten. Erst nach einem vollen Monat entsteht ein aussagekräftiges Bild deiner Geldflüsse.</p>
+        <MonatGrafik />
         <h3>Fehler 3: Auswertungen ohne klare Frage</h3>
         <p>Viele Apps verführen dazu, alles zu analysieren: Diagramme, Statistiken, Wochenvergleiche. Aber was ist eigentlich die Frage, die du beantworten willst? Fang mit der einfachsten und wichtigsten an: <strong>Wo geht mein Geld hin?</strong></p>
         <h3>Fehler 4: Zu schnell Konsequenzen ziehen</h3>
@@ -154,11 +157,7 @@ const kapitel = [
 
         <h2 id="womit-fuehren">App, Excel oder Papier – womit führt man ein Haushaltsbuch am besten?</h2>
         <p>Die ehrliche Antwort: Das Werkzeug ist zweitrangig. Entscheidend ist, dass du es einfach hältst und dranbleibst.</p>
-        <ul>
-          <li><strong>Papier</strong> funktioniert, ist aber auf Dauer mühsam – vor allem beim Umrechnen auf den Monat.</li>
-          <li><strong>Eine Tabellenkalkulation</strong> (Excel, Google Sheets) ist flexibel und für viele ein guter Start.</li>
-          <li><strong>Eine App</strong> ist im Alltag am praktischsten, weil du Ausgaben direkt unterwegs erfassen kannst – und die Umrechnung automatisch passiert.</li>
-        </ul>
+        <WerkzeugGrafik />
         <p>Ich selbst durfte an der Entwicklung <a href={`${u('/app')}?k=startseite`}>unserer App</a> mitwirken, in die genau die Prinzipien aus diesem Artikel eingeflossen sind – von den drei Geldfluss-Kategorien bis zur Monatsbilanz. Aber unabhängig vom Werkzeug gilt: Je einfacher dein System, desto höher deine Erfolgsrate.</p>
 
         <h2 id="faq">Häufige Fragen zum Haushaltsbuch führen</h2>
