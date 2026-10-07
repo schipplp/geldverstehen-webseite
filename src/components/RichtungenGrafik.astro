@@ -1,34 +1,20 @@
 ---
-// Ersetzt die Spiralen-Grafik: dieselben Stationen, aber als zwei Wege, die
-// mit einer einzigen Entscheidung beginnen — wegschauen oder hinschauen.
-// Der Fokus (gelb) liegt auf dem, was der Artikel vom Leser will.
+// Ersetzt die Spiralen-Grafik: dieselben Stationen, als zwei schlichte Wege,
+// die mit einer einzigen Entscheidung beginnen — wegschauen oder hinschauen.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
 const wege = [
-  {
-    name: 'Abwärtsspirale',
-    farbe: 'neutral',
-    stationen: ['wegschauen', 'böse Überraschungen', 'das Geld wird eng', 'schlechtes Gewissen'],
-  },
-  {
-    name: 'Aufwärtsspirale',
-    farbe: 'blau',
-    stationen: ['hinschauen & notieren', 'verstehen', 'andere Prioritäten', 'mehr Erfolg mit den Finanzen', 'mehr Spaß'],
-  },
+  { name: 'Abwärtsspirale', farbe: 'grau', stationen: ['wegschauen', 'böse Überraschungen', 'das Geld wird eng', 'schlechtes Gewissen'] },
+  { name: 'Aufwärtsspirale', farbe: 'blau', stationen: ['hinschauen & notieren', 'verstehen', 'andere Prioritäten', 'mehr Erfolg mit den Finanzen', 'mehr Spaß'] },
 ];
 ---
-<ArtikelGrafik
-  titel="Zwei Richtungen"
-  fazit="Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale."
->
+<ArtikelGrafik fazit="Wegschauen führt in die Abwärtsspirale – hinschauen in die Aufwärtsspirale.">
   <div class="rg">
     {wege.map((w) => (
       <div class:list={['rg-weg', `rg-${w.farbe}`]}>
-        <p class="ag-name">{w.name}</p>
+        <p class="ag-name rg-name">{w.name}</p>
         <ol class="rg-stationen">
-          {w.stationen.map((s, i) => (
-            <li class:list={['rg-station', { 'rg-start': i === 0 }]}>{s}</li>
-          ))}
+          {w.stationen.map((s) => <li>{s}</li>)}
         </ol>
       </div>
     ))}
@@ -36,35 +22,25 @@ const wege = [
 </ArtikelGrafik>
 
 <style>
-  .rg { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-  .rg-weg { display: grid; gap: 14px; }
+  .rg { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: center; }
+  .rg-name { display: inline-block; padding-bottom: 6px; border-bottom: 4px solid var(--gv-border); margin-bottom: 14px; }
+  .rg-blau .rg-name { border-color: var(--gv-blue); }
 
-  .rg-stationen { display: grid; gap: 0; counter-reset: none; }
-  .rg-station {
-    position: relative; margin: 0;
-    font-family: var(--font-body); font-size: 15px; line-height: 1.35; font-weight: 600;
-    color: var(--gv-ink-soft); background: #fff;
-    border: 1px solid var(--gv-border); border-radius: 10px; padding: 10px 14px;
+  .rg-stationen { display: grid; gap: 0; }
+  .rg-stationen li {
+    font-family: var(--font-body); font-size: 16px; line-height: 1.4; color: var(--gv-muted);
   }
-  /* Verbindungspfeil zwischen den Stationen */
-  .rg-station + .rg-station { margin-top: 22px; }
-  .rg-station + .rg-station::before {
-    content: ''; position: absolute; left: 22px; top: -17px;
-    width: 2px; height: 12px; background: var(--gv-border);
+  /* Kleiner Pfeil zwischen den Stationen */
+  .rg-stationen li + li::before {
+    content: '↓'; display: block; margin: 2px 0; font-size: 14px; color: var(--gv-border);
   }
-  .rg-station + .rg-station::after {
-    content: ''; position: absolute; left: 19px; top: -9px;
-    border: 4px solid transparent; border-top: 5px solid var(--gv-border); border-bottom: 0;
-  }
-
-  .rg-blau .rg-station { background: var(--gv-blue-050); border-color: var(--gv-blue-100); color: var(--gv-ink); }
-  .rg-blau .rg-station + .rg-station::before { background: var(--gv-blue); }
-  .rg-blau .rg-station + .rg-station::after { border-top-color: var(--gv-blue); }
-  .rg-blau .rg-start { background: var(--gv-yellow); border-color: var(--gv-yellow); color: var(--gv-ink); }
-
-  .rg-neutral .rg-start { color: var(--gv-ink); }
+  .rg-blau .rg-stationen li { color: var(--gv-ink); }
+  .rg-blau .rg-stationen li + li::before { color: var(--gv-blue); }
+  .rg-blau .rg-stationen li:first-child { font-weight: 700; }
 
   @media (max-width: 620px) {
-    .rg { grid-template-columns: 1fr; gap: 26px; }
+    .rg { gap: 12px; }
+    .rg-stationen li { font-size: 14px; }
+    .rg-name { font-size: 20px; }
   }
 </style>

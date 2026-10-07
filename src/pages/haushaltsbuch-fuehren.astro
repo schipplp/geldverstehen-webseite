@@ -7,6 +7,7 @@ import NennerGrafik from '../components/NennerGrafik.astro';
 import HappyBalanceGrafik from '../components/HappyBalanceGrafik.astro';
 import RichtungenGrafik from '../components/RichtungenGrafik.astro';
 import KategorienGrafik from '../components/KategorienGrafik.astro';
+import UmrechnungGrafik from '../components/UmrechnungGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -114,12 +115,7 @@ const kapitel = [
         <p>Fixkosten sind alle Ausgaben, die wiederkehrend und planbar auf dich zukommen – meist vertraglich festgelegt: Miete, Strom, Versicherungen, Abos, Vereinsbeiträge, Leasingraten, KFZ-Steuer.</p>
         <p>Und hier lauert eine der häufigsten Fallen: <strong>Fixkosten laufen nicht alle monatlich.</strong> Manche kommen quartalsweise, manche jährlich. Genau diese Posten werden leicht übersehen, geraten in Vergessenheit – und treffen dich dann unvorbereitet.</p>
         <p>Die Lösung: Rechne alle Fixkosten auf den Monat um. Ein Beispiel:</p>
-        <ul>
-          <li>Miete: 500 € pro Monat → 500 €</li>
-          <li>Haftpflichtversicherung: 40 € pro Quartal → 10 € (40 ÷ 4)</li>
-          <li>KFZ-Steuer: 120 € pro Jahr → 10 € (120 ÷ 12)</li>
-        </ul>
-        <p><strong>Monatliche Fixkosten gesamt: 520 €</strong></p>
+        <UmrechnungGrafik />
         <p>Der große Vorteil: Diese Summen kennst du exakt. Du findest sie in deinen Verträgen oder auf den Kontoauszügen der letzten Monate. Nimm dir die Zeit, diesen Wert vollständig zu ermitteln – es ist extrem wertvoll, ihn jederzeit klar zu kennen.</p>
         <h3>Schritt 3: Deine Flexkosten erfassen</h3>
         <p>Flexkosten – ein Begriff, den ich geprägt habe, weil er den Kern so treffend beschreibt: <strong>flexible Ausgaben.</strong> Alles, was im Alltag anfällt und nicht fest planbar ist: der Supermarkteinkauf, das Tanken, der Friseur, der Restaurantbesuch, die Drogerie, das Brötchen auf die Hand.</p>
@@ -198,9 +194,8 @@ const kapitel = [
     </div>
   </section>
 
-  {/* Strukturierte Daten für Suchmaschinen. Kein datePublished — das Datum
-      kennen wir nicht, und raten wäre schlechter als weglassen.
-      TODO(Per): echtes Veröffentlichungsdatum nachtragen. */}
+  {/* Strukturierte Daten für Suchmaschinen. Veröffentlicht laut Per
+      „ungefähr am 1. Dezember 2016". */}
   <script
     type="application/ld+json"
     set:html={JSON.stringify({
@@ -212,6 +207,7 @@ const kapitel = [
           description:
             'Haushaltsbuch führen ohne Frust: Warum die meisten scheitern, welche 4 Fehler du vermeiden musst und wie du in 3 Schritten echte Klarheit gewinnst.',
           inLanguage: 'de',
+          datePublished: '2016-12-01',
           mainEntityOfPage: seitenUrl,
           author: {
             '@type': 'Person',
