@@ -1,0 +1,38 @@
+---
+// Die drei Ebenen, auf denen ein Haushaltsbuch wirkt — als Zusammenfassung
+// nach den drei Absätzen im Text, mit Pers Formulierungen in Kurzform.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const ebenen = [
+  'Beobachten verändert dein Verhalten',
+  'Die echte Wahrheit statt der vermuteten',
+  'Messbarkeit',
+];
+---
+<ArtikelGrafik fazit="Ein gut geführtes Haushaltsbuch wirkt auf drei Ebenen.">
+  <ol class="eg">
+    {ebenen.map((e, i) => (
+      <li class="eg-ebene">
+        <span class="eg-nr">{i + 1}</span>
+        <span class="eg-text">{e}</span>
+      </li>
+    ))}
+  </ol>
+</ArtikelGrafik>
+
+<style>
+  .eg { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .eg-ebene {
+    background: #fff; border: 1px solid var(--gv-border); border-radius: 12px;
+    padding: 18px; display: grid; gap: 8px; align-content: start;
+  }
+  .eg-nr { font-family: var(--font-display); font-size: 40px; line-height: .9; color: var(--gv-blue); }
+  .eg-text { font-family: var(--font-body); font-size: 16px; line-height: 1.35; font-weight: 700; color: var(--gv-ink); }
+
+  @media (max-width: 620px) {
+    .eg { grid-template-columns: 1fr; gap: 8px; }
+    .eg-ebene { grid-template-columns: 36px 1fr; align-items: center; padding: 12px 14px; }
+    .eg-nr { font-size: 32px; }
+    .eg-text { font-size: 15px; }
+  }
+</style>

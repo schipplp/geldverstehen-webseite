@@ -1,8 +1,7 @@
 ---
-// Die Monatsbilanz-Formel im Stil der Happy-Balance-Kacheln. Die Farben der
-// drei Kategorien stammen aus Pers ursprünglichen Grafiken
-// (info_monatsbilanz.png, drei-kategorien_v1.png): Einkommen grün,
-// Fixkosten blau, Flexkosten gelb. Ersetzt den Formel-Kasten im Text.
+// Die Monatsbilanz-Formel als ruhige Rechnung: weiße Zeilen, die Farbe der
+// Kategorie nur als Streifen links (wie in Pers info_monatsbilanz.png die
+// farbigen Unterstriche). Ersetzt den Formel-Kasten im Text.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
 const zeilen = [
@@ -45,12 +44,12 @@ const zeilen = [
   .mb-name { font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1; }
   .mb-zusatz { font-family: var(--font-body); font-size: 14px; font-weight: 700; opacity: .75; }
 
-  /* Farben aus den Originalgrafiken, wie bei der Happy-Balance */
-  .mb-gruen { background: #84D294; }
-  .mb-blau { background: #7B97C8; }
-  .mb-gelb { background: #F0CB63; }
-  .mb-ergebnis { background: var(--gv-ink); margin-top: 6px; }
-  .mb-ergebnis .mb-name { color: var(--gv-yellow); }
+  .mb-kachel { background: #fff; border: 1px solid var(--gv-border); border-left-width: 6px; }
+  .mb-zusatz { opacity: 1; color: var(--gv-muted); font-weight: 600; }
+  .mb-gruen { border-left-color: #84D294; }
+  .mb-blau { border-left-color: #7B97C8; }
+  .mb-gelb { border-left-color: #F0CB63; }
+  .mb-ergebnis { border: 2px solid var(--gv-ink); margin-top: 6px; }
   .mb-zeile:last-child .mb-op { margin-top: 6px; }
 
   @media (max-width: 620px) {

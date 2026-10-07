@@ -11,6 +11,9 @@ import UmrechnungGrafik from '../components/UmrechnungGrafik.astro';
 import MonatGrafik from '../components/MonatGrafik.astro';
 import WerkzeugGrafik from '../components/WerkzeugGrafik.astro';
 import MonatsbilanzGrafik from '../components/MonatsbilanzGrafik.astro';
+import EbenenGrafik from '../components/EbenenGrafik.astro';
+import BuendelnGrafik from '../components/BuendelnGrafik.astro';
+import AchterbahnGrafik from '../components/AchterbahnGrafik.astro';
 
 const LESEZEIT = 10; // 1.953 Wörter bei 200 Wörtern pro Minute
 const seitenUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -86,6 +89,7 @@ const kapitel = [
         <p><strong>1. Allein das Beobachten verändert dein Verhalten.</strong><br />Wer weiß, dass er jede Ausgabe notiert, überlegt automatisch zweimal. Nicht aus Zwang – sondern weil das Bewusstsein schärfer wird. Dein Kaufverhalten verändert sich fast wie von selbst.</p>
         <p><strong>2. Es bringt die echte Wahrheit ans Licht – nicht die vermutete.</strong><br />Nicht selten stellt sich heraus: Das, was man für das Problem hielt, ist gar nicht das Problem. Die wahren Geldfresser verstecken sich woanders. Und solange man nicht hinschaut, bleiben sie unantastbar.</p>
         <p><strong>3. Es schafft Messbarkeit.</strong><br />Und Messbarkeit ist der entscheidende Schlüssel zu dauerhaftem Fortschritt. Wer keinen Maßstab hat, weiß nie, ob er sich überhaupt verbessert – und gibt früher oder später auf. Wer dagegen erste kleine Fortschritte schwarz auf weiß sieht, will dranbleiben. Man gewinnt regelrecht Spaß an der Sache.</p>
+        <EbenenGrafik />
         <p>Wichtig dabei: Erfolgreich ein Haushaltsbuch zu führen heißt vor allem, <strong>beobachten zu lernen</strong>. Über einen längeren Zeitraum. Nicht sofort urteilen, nicht sofort Konsequenzen ziehen – sondern erst einmal ehrlich hinschauen.</p>
 
         <RichtungenGrafik />
@@ -94,6 +98,7 @@ const kapitel = [
         <p>Bevor wir zur konkreten Anleitung kommen, das Wichtigste zuerst: Warum scheitern so viele Haushaltsbuch-Vorhaben? Aus meiner Coaching-Erfahrung kann ich sagen – es sind immer wieder dieselben vier Fehler.</p>
         <h3>Fehler 1: Zu viele Kategorien</h3>
         <p>Man startet motiviert und teilt alles haargenau auf: Lebensmittel, Bio-Lebensmittel, Getränke, Drogerie, Tiernahrung – alles separat. Das kostet mehr Zeit, als es bringt, und überfordert auf Dauer. Für deine Erkenntnisse sind <strong>Tendenzen wichtiger als Centgenauigkeit</strong>. Wer versucht, centgenau zu sein, gibt meist nach zwei Wochen auf. Wer mit groben Kategorien und gerundeten Beträgen arbeitet, bleibt dran. Und nur wer dranbleibt, sieht Ergebnisse.</p>
+        <BuendelnGrafik />
         <h3>Fehler 2: Zu früh auswerten</h3>
         <p>Drei Wochen Daten – und schon werden große Schlüsse gezogen. Das ist, als würdest du einen Marathon nach dem ersten Kilometer bewerten. Erst nach einem vollen Monat entsteht ein aussagekräftiges Bild deiner Geldflüsse.</p>
         <MonatGrafik />
@@ -101,6 +106,7 @@ const kapitel = [
         <p>Viele Apps verführen dazu, alles zu analysieren: Diagramme, Statistiken, Wochenvergleiche. Aber was ist eigentlich die Frage, die du beantworten willst? Fang mit der einfachsten und wichtigsten an: <strong>Wo geht mein Geld hin?</strong></p>
         <h3>Fehler 4: Zu schnell Konsequenzen ziehen</h3>
         <p>Man sieht die Restaurantausgaben des letzten Monats – und streicht sie sofort komplett. Das Ergebnis ist eine Achterbahn: erst radikale Enthaltsamkeit, dann der Rückfall, dann das schlechte Gewissen. Genau diese Achterbahn wollen wir unbedingt vermeiden. Ein Haushaltsbuch ist keine Crashdiät für deine Finanzen.</p>
+        <AchterbahnGrafik />
         <p>Die Lösung für alle vier Fehler lautet: <strong>Keep it simple.</strong> Weniger ist mehr. Das Ziel ist nicht die perfekte Buchhaltung – sondern Bewusstsein und Klarheit.</p>
 
         <h2 id="anleitung">Haushaltsbuch führen in 3 Schritten: Die Anleitung</h2>

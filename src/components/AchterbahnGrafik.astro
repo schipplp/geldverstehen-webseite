@@ -1,0 +1,41 @@
+---
+// Fehler 4 „Zu schnell Konsequenzen ziehen": die Achterbahn aus dem Text —
+// radikale Enthaltsamkeit, Rückfall, schlechtes Gewissen. Die Linie ist
+// reine Form (keine Beträge); die Beschriftung steht als HTML darunter,
+// jeweils unter ihrer Phase.
+import ArtikelGrafik from './ArtikelGrafik.astro';
+
+const phasen = ['radikale Enthaltsamkeit', 'Rückfall', 'schlechtes Gewissen'];
+---
+<ArtikelGrafik
+  fazit="Ein Haushaltsbuch ist keine Crashdiät für deine Finanzen."
+  beschreibung="Eine Wellenlinie wie eine Achterbahn: erst radikale Enthaltsamkeit, dann der Rückfall, dann das schlechte Gewissen – und alles beginnt von vorn."
+>
+  <div class="ab">
+    <svg class="ab-linie" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 30 C25 30 25 68 50 68 C90 68 110 12 150 12 C190 12 210 58 250 58 C275 58 288 36 300 32" />
+    </svg>
+    <ol class="ab-phasen">
+      {phasen.map((p) => <li>{p}</li>)}
+    </ol>
+  </div>
+</ArtikelGrafik>
+
+<style>
+  .ab { max-width: 620px; margin: 0 auto; }
+  .ab-linie { display: block; width: 100%; height: 110px; overflow: visible; }
+  .ab-linie path {
+    fill: none; stroke: var(--gv-muted); stroke-width: 3; stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .ab-phasen { display: grid !important; grid-template-columns: repeat(3, 1fr); margin-top: 12px !important; }
+  .ab-phasen li {
+    text-align: center; font-family: var(--font-body); font-size: 15px; font-weight: 700;
+    line-height: 1.3; color: var(--gv-ink-soft); padding: 0 6px;
+  }
+
+  @media (max-width: 620px) {
+    .ab-linie { height: 80px; }
+    .ab-phasen li { font-size: 13px; }
+  }
+</style>
