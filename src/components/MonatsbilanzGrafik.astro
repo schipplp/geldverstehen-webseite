@@ -5,14 +5,14 @@
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
 const zeilen = [
-  { op: '', name: 'Einkommen', zusatz: 'monatlich', farbe: 'gruen' },
-  { op: '–', name: 'Fixkosten', zusatz: 'monatlich umgerechnet', farbe: 'blau' },
-  { op: '–', name: 'Flexkosten', zusatz: 'monatlicher Durchschnitt', farbe: 'gelb' },
+  { op: '', name: 'Einkommen', farbe: 'gruen' },
+  { op: '–', name: 'Fixkosten', farbe: 'blau' },
+  { op: '–', name: 'Flexkosten', farbe: 'gelb' },
 ];
 ---
 <ArtikelGrafik
   fazit="Die Monatsbilanz zeigt dir deinen wahren monatlichen Spielraum."
-  beschreibung="Die Monatsbilanz: Einkommen (monatlich) minus Fixkosten (monatlich umgerechnet) minus Flexkosten (monatlicher Durchschnitt) ergibt dein Monatsergebnis."
+  beschreibung="Die Monatsbilanz: Einkommen minus Fixkosten minus Flexkosten ergibt dein Monatsergebnis."
 >
   <div class="mb">
     {zeilen.map((z) => (
@@ -20,7 +20,6 @@ const zeilen = [
         <span class="mb-op" aria-hidden="true">{z.op}</span>
         <div class:list={['mb-kachel', `mb-${z.farbe}`]}>
           <span class="mb-name">{z.name}</span>
-          <span class="mb-zusatz">{z.zusatz}</span>
         </div>
       </div>
     ))}
@@ -42,10 +41,8 @@ const zeilen = [
     border-radius: 14px; padding: 16px 20px; color: var(--gv-ink);
   }
   .mb-name { font-family: var(--font-display); font-size: 28px; letter-spacing: .01em; line-height: 1; }
-  .mb-zusatz { font-family: var(--font-body); font-size: 14px; font-weight: 700; opacity: .75; }
 
   .mb-kachel { background: #fff; border: 1px solid var(--gv-border); border-left-width: 6px; }
-  .mb-zusatz { opacity: 1; color: var(--gv-muted); font-weight: 600; }
   .mb-gruen { border-left-color: #84D294; }
   .mb-blau { border-left-color: #7B97C8; }
   .mb-gelb { border-left-color: #F0CB63; }
@@ -57,6 +54,5 @@ const zeilen = [
     .mb-op { font-size: 28px; }
     .mb-kachel { padding: 12px 14px; gap: 2px 10px; }
     .mb-name { font-size: 23px; }
-    .mb-zusatz { font-size: 12px; }
-  }
+    }
 </style>
