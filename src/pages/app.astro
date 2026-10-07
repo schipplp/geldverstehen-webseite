@@ -4,6 +4,7 @@ import StoreButtons from '../components/StoreButtons.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { img } from '../lib/images';
 import { u } from '../lib/url';
+import { organisation } from '../lib/strukturdaten';
 
 // Fallback ohne Kanal-Kennung — das Skript am Seitenende hängt sie an.
 const APP_STORE = 'https://apps.apple.com/de/app/id1571656912';
@@ -423,6 +424,31 @@ const faq = [
       });
     })();
   </script>
+  {/* Strukturierte Daten zur App. Name und Preismodell laut Per:
+      grundsätzlich kostenlos, Premium als optionales Upgrade. Bewertungen
+      bewusst nicht ausgezeichnet — die müssten aus den Stores stammen. */}
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'MobileApplication',
+          name: 'Haushaltsbuch: Geld verstehen',
+          alternateName: 'OnePeek',
+          url: new URL('/app/', Astro.site).href,
+          image: new URL('/og/app.png', Astro.site).href,
+          operatingSystem: 'iOS, Android',
+          applicationCategory: 'FinanceApplication',
+          inLanguage: 'de',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+          publisher: { '@id': organisation['@id'] },
+          sameAs: [APP_STORE, 'https://play.google.com/store/apps/details?id=app.onepeek'],
+        },
+        organisation,
+      ],
+    })}
+  />
 </Base>
 
 <style>
