@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+import { organisation, person } from '../lib/strukturdaten';
 
 // Amazon-Links zur veröffentlichten Ausgabe (saubere Kurzform amazon.de/dp/<ASIN>).
 const amazonTaschenbuch = 'https://www.amazon.de/dp/B0HFXP5X8B'; // Taschenbuch
@@ -245,6 +246,44 @@ const voices = [
       </div>
     </div>
   </section>
+  {/* Strukturdaten zum Buch. ISBN und Erscheinungsdatum laut Per (über
+      Amazon KDP veröffentlicht). Die ISBN gehört zum Taschenbuch — die
+      Kindle-Ausgabe hat keine eigene. Leserstimmen bewusst nicht als
+      Bewertungen ausgezeichnet, sie stammen nicht aus Amazon. */}
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Book',
+          '@id': new URL('/buch/#buch', Astro.site).href,
+          name: 'GELD VERSTEHEN – Struktur und Ordnung in deinen Finanzen',
+          url: new URL('/buch/', Astro.site).href,
+          image: new URL(coverImg, Astro.site).href,
+          author: { '@id': person['@id'] },
+          inLanguage: 'de',
+          datePublished: '2026-08-12',
+          workExample: [
+            {
+              '@type': 'Book',
+              bookFormat: 'https://schema.org/Paperback',
+              isbn: '9798188967178',
+              datePublished: '2026-08-12',
+              url: amazonTaschenbuch,
+            },
+            {
+              '@type': 'Book',
+              bookFormat: 'https://schema.org/EBook',
+              url: amazonKindle,
+            },
+          ],
+        },
+        person,
+        organisation,
+      ],
+    })}
+  />
 </Base>
 
 <style>
