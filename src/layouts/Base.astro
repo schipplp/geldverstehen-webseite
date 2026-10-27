@@ -27,8 +27,10 @@ export interface Props {
   bild?: string;
   /** og:type — „article" für Ratgeber-Artikel */
   ogTyp?: 'website' | 'article';
+  /** Seite aus Suchmaschinen heraushalten (z. B. Bestätigungs- und 404-Seite) */
+  noindex?: boolean;
 }
-const { title, description, active = '', bild, ogTyp = 'website' } = Astro.props;
+const { title, description, active = '', bild, ogTyp = 'website', noindex = false } = Astro.props;
 // Ohne eigenes Bild bekommt jede Seite das Vorschaubild der Startseite.
 const bildUrl = new URL(bild ?? '/og/startseite.png', Astro.site).href;
 const fullTitle = title ? `${title} · GELD VERSTEHEN` : 'GELD VERSTEHEN';
@@ -41,8 +43,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={canonical} />
+  {noindex
+    ? <meta name="robots" content="noindex" />
+    : <link rel="canonical" href={canonical} />}
   <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+  <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
   <meta name="theme-color" content="#1E73BE" />
   <!-- Smart App Banner: blendet iOS-Safari-Besuchern oben einen App-Store-Hinweis
        ein. Unterstützt keine Kampagnenparameter — bekannt und so gewollt. -->

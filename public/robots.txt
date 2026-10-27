@@ -1,4 +1,25 @@
+# Alle Crawler dürfen die ganze Seite lesen.
 User-agent: *
+Allow: /
+
+# KI-Suche und KI-Assistenten: lesen die Seite, um sie in Antworten zu
+# zitieren und zu verlinken (ChatGPT, Claude, Perplexity).
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# KI-Training: Texte dürfen zum Trainieren von Sprachmodellen genutzt werden.
+# Wer das nicht will, ändert hier „Allow: /" in „Disallow: /" — die KI-Suche
+# oben bleibt davon unberührt.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://geldverstehen.de/sitemap.xml
