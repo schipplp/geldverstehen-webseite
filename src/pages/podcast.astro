@@ -2,13 +2,13 @@
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
+import { RSS_URL } from '../lib/podcast';
 
 // Podcast-Host: letscast.fm. Die Folgen werden beim Build direkt aus dem
 // RSS-Feed geladen, damit die Seite automatisch aktuell bleibt. Ein geplanter
 // Rebuild (siehe .github/workflows/deploy.yml, cron) sorgt dafür, dass neue
 // Folgen auch ohne Code-Änderung erscheinen. Ist der Feed beim Build nicht
 // erreichbar, greift die Fallback-Liste (keine leere Seite).
-const RSS_URL = 'https://letscast.fm/podcasts/geld-verstehen-struktur-und-ordnung-in-deinen-finanzen-4d31713a/feed';
 const allEpisodes = 'https://geldverstehen.letscast.fm';
 
 const fallbackEpisodes = [
