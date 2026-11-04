@@ -55,7 +55,7 @@ export const GET: APIRoute = async ({ site }) => {
     ...folgen.map((f) =>
       eintrag(`/podcast/${f.slug}/`, [
         f.iso ? new Date(f.iso) : null,
-        f.transkript ? gitDatum(`src/content/transkripte/${f.transkript.datei}`) : null,
+        f.transkript ? gitDatum(`src/transkripte/${f.transkript.datei}`) : null,
       ]),
     ),
   ].join('\n');

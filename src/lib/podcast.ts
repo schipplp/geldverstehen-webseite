@@ -10,7 +10,7 @@
 // Folgen-Seiten verschwinden. Lokal (ohne Netz) greift eine kurze
 // Fallback-Liste, damit man trotzdem entwickeln kann.
 //
-// Transkripte liegen als Markdown in src/content/transkripte/NNN.md
+// Transkripte liegen als Markdown in src/transkripte/NNN.md
 // (bereinigte Fassung von Pers Rohtranskripten). Sie werden über den Titel
 // einer Folge zugeordnet, nicht über die Nummer – Pers Folgennummern und die
 // Reihenfolge im Feed weichen an einzelnen Stellen voneinander ab.
@@ -195,7 +195,7 @@ function norm(s: string) {
 }
 
 function ladeTranskripte(): Transkript[] {
-  const module = import.meta.glob('../content/transkripte/*.md', { eager: true }) as Record<string, any>;
+  const module = import.meta.glob('../transkripte/*.md', { eager: true }) as Record<string, any>;
   return Object.entries(module).map(([pfad, mod]) => {
     // rawContent() = Markdown-Quelltext (ohne Frontmatter); die Transkripte sind reiner Fließtext.
     const roh: string = typeof mod.rawContent === 'function' ? mod.rawContent() : '';
