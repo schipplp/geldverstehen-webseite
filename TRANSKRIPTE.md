@@ -23,14 +23,27 @@ wöchentliche Claude-Aufgabe, die neue Transkripte automatisch übernimmt.
    „Willkommen bei Geldverstehen …"). Skripte, Stichpunkte o. Ä. nicht übernehmen.
 3. **Dublettencheck:** Ist der Text weitgehend gleich mit einem schon vorhandenen
    Transkript (z. B. falsche Datei hochgeladen), nicht übernehmen und melden.
-   Bekannte Fälle: Drive-„060" = Text von Folge 17, `068.docx` = Text von Folge 33.
-4. **Titel zuordnen** – über den INHALT, exakt mit dem Titel aus dem Katalog (ohne Datum,
+   **Bewusst nicht übernommen (nicht erneut anfassen, außer Per liefert Ersatz):**
+   - „060" – enthält den Text von Folge 17
+   - `068.docx` – fast wortgleich mit Folge 33
+   - `084.docx` – zweite Fassung; übernommen ist das Google Doc „084 – … – Transkript"
+   - `003.pdf` – gleicher Text wie das Google Doc „003"
+   - „027" – bricht mitten in der Folge ab
+   - „013" – Rohtext zu lückenhaft
+   - Unterordner „Archiv"
+4. **Noch nicht erschienene Folgen:** Per legt Transkripte oft schon vor der
+   Veröffentlichung ab. Ist die Folge noch nicht erschienen, Transkript trotzdem
+   vollständig bereinigen und mit `titel: ""` speichern. Solche Dateien gelten als
+   „wartend": Bei jedem Lauf prüfen, ob die Folge inzwischen erschienen ist
+   (Katalog im Themen-Playbook bzw. Folgenliste auf geldverstehen.de/podcast/folgen/),
+   und dann den exakten Titel eintragen.
+5. **Titel zuordnen** – über den INHALT, exakt mit dem Titel aus dem Katalog (ohne Datum,
    ohne Klammerzusätze wie „(Special)"). Die Dateinummer ist nur ein Hinweis: Pers
    Nummern weichen teils ab (080 = „Blick aufs Konto", 081 = „Cash Stuffing",
    086/087 vertauscht). Passt kein Titel eindeutig → nicht übernehmen, melden.
-5. Bereinigen (Regeln unten) und speichern als `src/transkripte/NNN.md`.
-6. `kurz` und `themen` ergänzen (Regeln unten).
-7. `npm run build` muss fehlerfrei laufen.
+6. Bereinigen (Regeln unten) und speichern als `src/transkripte/NNN.md`.
+7. `kurz` und `themen` ergänzen (Regeln unten).
+8. `npm run build` muss fehlerfrei laufen.
 
 ## Dateiformat
 
@@ -96,5 +109,7 @@ sondern „…".
 Im Log des GitHub-Actions-Builds („Build with Astro") darf keine Zeile
 `[podcast] Transkripte ohne passende Folge im Feed` stehen. Steht sie dort, passt der Titel
 im Transkript nicht zum Feed-Titel: Titel im Frontmatter an den Feed-Titel angleichen.
+Die Zeile `[podcast] Transkripte warten auf ihre Folge` ist dagegen normal (Folgen mit
+leerem Titel, noch nicht erschienen).
 Die Zeile `[podcast] Feed: … Folgen, … mit <podcast:transcript>` zeigt außerdem, ob letscast
 selbst Transkripte im Feed mitliefert.
