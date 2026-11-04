@@ -251,7 +251,12 @@ export function alleFolgen(): Promise<Folge[]> {
       return { ...r, nummer: isNaN(nummer) ? null : nummer, slug, transkript: t };
     });
 
-    const ohne = transkripte.filter((t) => !vergeben.has(t));
+    // Transkripte mit leerem Titel gehören zu noch nicht erschienenen Folgen.
+    const wartend = transkripte.filter((t) => !t.titel);
+    if (wartend.length) {
+      console.log('[podcast] Transkripte warten auf ihre Folge (Titel leer): ' + wartend.map((t) => t.datei).join(', '));
+    }
+    const ohne = transkripte.filter((t) => t.titel && !vergeben.has(t));
     if (ohne.length && roh !== fallback) {
       console.warn(
         '[podcast] Transkripte ohne passende Folge im Feed (Titel prüfen): ' +
