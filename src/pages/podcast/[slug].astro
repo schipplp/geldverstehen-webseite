@@ -1,0 +1,202 @@
+---
+// Eine Seite pro Podcast-Folge: Player, Beschreibung aus dem Feed und – wenn
+// vorhanden – das bereinigte Transkript (src/content/transkripte/). Die
+// Seiten entstehen beim Build automatisch aus dem RSS-Feed.
+import Base from '../../layouts/Base.astro';
+import EmailOptIn from '../../components/EmailOptIn.astro';
+import { u } from '../../lib/url';
+import { img } from '../../lib/images';
+import { organisation, person } from '../../lib/strukturdaten';
+import { SPOTIFY, APPLE, alleFolgen, kurzbeschreibung, type Folge } from '../../lib/podcast';
+
+export async function getStaticPaths() {
+  const folgen = await alleFolgen();
+  return folgen.map((folge, i) => ({
+    params: { slug: folge.slug },
+    props: { folge, neuer: folgen[i - 1] ?? null, aelter: folgen[i + 1] ?? null },
+  }));
+}
+
+interface Props { folge: Folge; neuer: Folge | null; aelter: Folge | null }
+const { folge, neuer, aelter } = Astro.props;
+const t = folge.transkript;
+const seitenUrl = new URL(`/podcast/${folge.slug}/`, Astro.site).href;
+const podcastUrl = new URL('/podcast/', Astro.site).href;
+const folgeLabel = folge.nummer ? `Folge ${folge.nummer}` : 'Folge';
+const metaZeile = [folgeLabel, folge.date, folge.dur].filter(Boolean).join(' · ');
+const woerter = t ? t.text.split(/\s+/).length : 0;
+const lesezeit = woerter ? Math.max(1, Math.round(woerter / 200)) : 0;
+
+// URLs in der Folgenbeschreibung klickbar machen (Text vorher escapen).
+function escape(s: string) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function mitLinks(absatz: string) {
+  return escape(absatz)
+    .replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+    .replace(/\n/g, '<br />');
+}
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'PodcastEpisode',
+      '@id': `${seitenUrl}#folge`,
+      name: folge.title,
+      url: seitenUrl,
+      description: kurzbeschreibung(folge),
+      inLanguage: 'de',
+      ...(folge.iso ? { datePublished: folge.iso } : {}),
+      ...(folge.sekunden ? { duration: `PT${Math.round(folge.sekunden / 60)}M` } : {}),
+      ...(folge.nummer ? { episodeNumber: String(folge.nummer) } : {}),
+      associatedMedia: { '@type': 'AudioObject', contentUrl: folge.mp3, encodingFormat: 'audio/mpeg' },
+      partOfSeries: { '@id': `${podcastUrl}#podcast`, '@type': 'PodcastSeries', name: 'GELD VERSTEHEN', url: podcastUrl },
+      author: { '@id': person['@id'] },
+      publisher: { '@id': organisation['@id'] },
+      image: new URL(img.podcastCover, Astro.site).href,
+      sameAs: [folge.link],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Startseite', item: new URL('/', Astro.site).href },
+        { '@type': 'ListItem', position: 2, name: 'Podcast', item: podcastUrl },
+        { '@type': 'ListItem', position: 3, name: folge.title, item: seitenUrl },
+      ],
+    },
+    person,
+    organisation,
+  ],
+};
+---
+<Base
+  title={folge.title}
+  description={kurzbeschreibung(folge)}
+  active="podcast"
+  bild="/og/podcast.png"
+  ogTyp="article"
+>
+  <!-- HERO -->
+  <div style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:44px; padding-bottom:56px;">
+      <nav class="gv-crumbs" aria-label="Brotkrumen">
+        <a href={u('/podcast')}>Podcast</a>
+        <span aria-hidden="true">›</span>
+        <a href={u('/podcast/folgen')}>Alle Folgen</a>
+      </nav>
+      <div class="gv-ep-head">
+        <img class="gv-ep-cover" src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" width="800" height="800" />
+        <div>
+          <div class="gv-ep-kicker">{metaZeile.toUpperCase()}</div>
+          <h1 class="gv-ep-h1">{folge.title}</h1>
+        </div>
+      </div>
+      <div class="gv-ep-player">
+        <audio controls preload="none" src={folge.mp3} aria-label={`Folge anhören: ${folge.title}`}></audio>
+        <div class="gv-ep-platforms">
+          <span>Auch auf</span>
+          <a href={SPOTIFY} target="_blank" rel="noopener">Spotify</a>
+          <a href={APPLE} target="_blank" rel="noopener">Apple Podcasts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:56px; padding-bottom:80px;">
+      <article class="gv-article">
+        {folge.beschreibung.length > 0 && (
+          <div class="gv-ep-desc">
+            <h2>Worum es geht</h2>
+            {folge.beschreibung.map((p) => <p set:html={mitLinks(p)} />)}
+          </div>
+        )}
+
+        {t && (
+          <div class="gv-ep-transkript">
+            <h2 id="transkript">Transkript</h2>
+            <p class="gv-ep-hinweis">{folgeLabel} zum Nachlesen{lesezeit ? ` · ${lesezeit} Minuten Lesezeit` : ''}</p>
+            <div class="gv-ep-text"><t.Content /></div>
+          </div>
+        )}
+
+        <!-- CTA mit integriertem Opt-in (Texte wie im Ratgeber-Artikel) -->
+        <div class="gv-article-cta">
+          <h2 style="margin-top:0;">Der nächste Schritt: Bring Struktur in deine Finanzen</h2>
+          <p>Genau dafür habe ich einen <strong>kostenlosen Crashkurs</strong> erstellt: Schritt für Schritt, direkt in dein Postfach, ohne Fachchinesisch – und ohne Verzichtspredigten.</p>
+          <div class="gv-article-optin">
+            <EmailOptIn
+              source="crashkurs"
+              cta="Jetzt kostenlos eintragen"
+              theme="on-surface"
+              successText="Bitte bestätige deine Anmeldung in der E-Mail, die wir dir gerade geschickt haben."
+            />
+          </div>
+        </div>
+
+        <nav class="gv-ep-nav" aria-label="Weitere Folgen">
+          {aelter ? (
+            <a href={u(`/podcast/${aelter.slug}`)} class="gv-ep-nav-a">
+              <span class="gv-ep-nav-l">&larr; Vorherige Folge</span>
+              <span class="gv-ep-nav-t">{aelter.title}</span>
+            </a>
+          ) : <span />}
+          {neuer ? (
+            <a href={u(`/podcast/${neuer.slug}`)} class="gv-ep-nav-a gv-ep-nav-r">
+              <span class="gv-ep-nav-l">Nächste Folge &rarr;</span>
+              <span class="gv-ep-nav-t">{neuer.title}</span>
+            </a>
+          ) : <span />}
+        </nav>
+      </article>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Base>
+
+<style>
+  .gv-crumbs { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 26px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .gv-crumbs a { color: #EAF2FA; text-decoration: none; }
+  .gv-crumbs a:hover { color: #fff; text-decoration: underline; }
+
+  .gv-ep-head { display: flex; gap: 28px; align-items: center; max-width: 900px; }
+  .gv-ep-cover { flex: none; width: 132px; height: 132px; border-radius: 14px; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,.3); }
+  .gv-ep-kicker { font-family: var(--font-display); font-size: 16px; letter-spacing: .12em; color: var(--gv-yellow); margin-bottom: 10px; }
+  .gv-ep-h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; color: #fff; line-height: 1.02; margin: 0; font-size: clamp(34px, 4.6vw, 60px); }
+
+  .gv-ep-player { margin-top: 32px; display: flex; align-items: center; gap: 18px 24px; flex-wrap: wrap; }
+  .gv-ep-player audio { width: 100%; max-width: 460px; height: 44px; }
+  .gv-ep-platforms { display: flex; gap: 14px; align-items: center; font-size: 15px; color: rgba(255,255,255,.7); }
+  .gv-ep-platforms a { color: #fff; font-weight: 700; text-decoration: none; }
+  .gv-ep-platforms a:hover { text-decoration: underline; }
+
+  .gv-article { max-width: 760px; margin: 0 auto; }
+  .gv-article h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; color: var(--gv-ink); line-height: 1.06; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 16px; }
+  .gv-article p, .gv-ep-text :global(p) { font-size: 18px; line-height: 1.75; color: var(--gv-ink-soft); margin: 0 0 18px; }
+  .gv-ep-desc :global(a) { color: var(--gv-blue); text-decoration: underline; word-break: break-word; }
+  .gv-ep-desc { margin-bottom: 48px; }
+  .gv-ep-transkript { margin-bottom: 16px; }
+  .gv-article .gv-ep-hinweis { font-size: 15px; color: var(--gv-muted); margin: -6px 0 26px; }
+
+  .gv-article-cta { margin: 56px 0 40px; padding: 32px 34px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 16px; }
+  .gv-article-cta h2 { margin: 0 0 12px; font-size: clamp(26px, 3vw, 34px); }
+  .gv-article-optin { margin-top: 20px; max-width: 440px; }
+
+  .gv-ep-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; border-top: 1px solid var(--gv-border); padding-top: 28px; }
+  .gv-ep-nav-a { display: flex; flex-direction: column; gap: 6px; text-decoration: none !important; }
+  .gv-ep-nav-r { text-align: right; }
+  .gv-ep-nav-l { font-size: 14px; font-weight: 700; color: var(--gv-blue); }
+  .gv-ep-nav-t { font-family: var(--font-display); font-size: 21px; line-height: 1.1; color: var(--gv-ink); }
+  .gv-ep-nav-a:hover .gv-ep-nav-t { color: var(--gv-blue); }
+
+  @media (max-width: 860px) {
+    .gv-ep-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .gv-ep-cover { width: 96px; height: 96px; }
+    .gv-article p, .gv-ep-text :global(p) { font-size: 17px; }
+    .gv-article-cta { padding: 26px 22px; }
+    .gv-ep-nav { grid-template-columns: 1fr; }
+    .gv-ep-nav-r { text-align: left; }
+  }
+</style>

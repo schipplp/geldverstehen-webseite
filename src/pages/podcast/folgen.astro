@@ -1,0 +1,101 @@
+---
+// Archiv aller Podcast-Folgen (aus dem RSS-Feed). Verlinkt jede Folgen-Seite –
+// so finden Besucher, Suchmaschinen und KI-Systeme alle Folgen.
+import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url';
+import { alleFolgen } from '../../lib/podcast';
+
+const folgen = await alleFolgen();
+const mitTranskript = folgen.filter((f) => f.transkript).length;
+const podcastUrl = new URL('/podcast/', Astro.site).href;
+const seitenUrl = new URL('/podcast/folgen/', Astro.site).href;
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'Alle Folgen des GELD VERSTEHEN Podcasts',
+      url: seitenUrl,
+      inLanguage: 'de',
+      isPartOf: { '@id': `${podcastUrl}#podcast` },
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: folgen.length,
+        itemListElement: folgen.map((f, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          url: new URL(`/podcast/${f.slug}/`, Astro.site).href,
+          name: f.title,
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Startseite', item: new URL('/', Astro.site).href },
+        { '@type': 'ListItem', position: 2, name: 'Podcast', item: podcastUrl },
+        { '@type': 'ListItem', position: 3, name: 'Alle Folgen', item: seitenUrl },
+      ],
+    },
+  ],
+};
+---
+<Base
+  title="Alle Podcast-Folgen"
+  description={`Alle ${folgen.length} Folgen des GELD VERSTEHEN Podcasts von Per Schippl – zum Anhören und viele davon mit Transkript zum Nachlesen.`}
+  active="podcast"
+  bild="/og/podcast.png"
+>
+  <div style="background:var(--gv-blue);">
+    <div class="gv-wrap" style="padding-top:44px; padding-bottom:56px;">
+      <nav class="gv-crumbs" aria-label="Brotkrumen"><a href={u('/podcast')}>Podcast</a></nav>
+      <h1 style="font-family:var(--font-display); font-weight:400; letter-spacing:.01em; color:#fff; line-height:1.02; margin:0; font-size:clamp(40px,5vw,68px);">Alle <span style="color:var(--gv-yellow);">Folgen</span></h1>
+      <p style="font-size:18px; line-height:1.6; color:#EAF2FA; margin:18px 0 0; max-width:560px;">{folgen.length} Folgen{mitTranskript ? `, ${mitTranskript} davon mit Transkript zum Nachlesen` : ''}.</p>
+    </div>
+  </div>
+
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:40px; padding-bottom:84px;">
+      <ol class="gv-list">
+        {folgen.map((f) => (
+          <li>
+            <a class="gv-item" href={u(`/podcast/${f.slug}`)}>
+              <span class="gv-item-no">{f.no}</span>
+              <span class="gv-item-body">
+                <span class="gv-item-title">{f.title}</span>
+                <span class="gv-item-meta">
+                  {[f.date, f.dur].filter(Boolean).join(' · ')}
+                  {f.transkript && <span class="gv-item-badge">Transkript</span>}
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Base>
+
+<style>
+  .gv-crumbs { font-size: 14px; margin-bottom: 26px; }
+  .gv-crumbs a { color: #EAF2FA; text-decoration: none; }
+  .gv-crumbs a:hover { color: #fff; text-decoration: underline; }
+
+  .gv-list { list-style: none; margin: 0; padding: 0; }
+  .gv-item { display: flex; align-items: center; gap: 22px; padding: 20px 0; border-bottom: 1px solid var(--gv-border); text-decoration: none; }
+  .gv-item-no { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--gv-blue); min-width: 70px; }
+  .gv-item-body { display: flex; flex-direction: column; gap: 4px; }
+  .gv-item-title { font-family: var(--font-display); font-size: 23px; line-height: 1.1; color: var(--gv-ink); }
+  .gv-item:hover .gv-item-title { color: var(--gv-blue); }
+  .gv-item-meta { font-size: 14px; color: var(--gv-muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .gv-item-badge { font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--gv-blue); background: #EAF2FA; border-radius: 999px; padding: 2px 10px; }
+
+  @media (max-width: 860px) {
+    .gv-item { gap: 14px; }
+    .gv-item-no { font-size: 26px; min-width: 48px; }
+    .gv-item-title { font-size: 20px; }
+  }
+</style>
