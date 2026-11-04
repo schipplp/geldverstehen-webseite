@@ -12,9 +12,9 @@ import podcastCover from '../../design/uploads/podcast-cover-web.webp?url';
 import appScreenshot from '../../design/uploads/1de-web.webp?url';
 import buchCover from '../../design/uploads/md.jpeg?url';
 import perUeberSplit from '../../design/uploads/DSC00065-web.webp?url';
-import perUeberHero from '../../design/uploads/DSC00117.JPG?url';
-import perStory from '../../design/uploads/DSC00058.JPG?url';
-import perCrashkurs from '../../design/uploads/DSC00163.JPG?url';
+import perUeberHero from '../../design/uploads/DSC00117-web.webp?url';
+import perStory from '../../design/uploads/DSC00058-web.webp?url';
+import perCrashkurs from '../../design/uploads/DSC00163-web.webp?url';
 
 // App-Seite: Produkt-Screenshots, Presse und stern-TV-Standbild
 import appHeroPhones from '../../design/uploads/md2xde.webp?url';
