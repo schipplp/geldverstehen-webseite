@@ -23,7 +23,14 @@ wöchentliche Claude-Aufgabe, die neue Transkripte automatisch übernimmt.
    „Willkommen bei Geldverstehen …"). Skripte, Stichpunkte o. Ä. nicht übernehmen.
 3. **Dublettencheck:** Ist der Text weitgehend gleich mit einem schon vorhandenen
    Transkript (z. B. falsche Datei hochgeladen), nicht übernehmen und melden.
-   Bekannte Fälle: Drive-„060" = Text von Folge 17, `068.docx` = Text von Folge 33.
+   **Bewusst nicht übernommen (nicht erneut anfassen, außer Per liefert Ersatz):**
+   - „060" – enthält den Text von Folge 17
+   - `068.docx` – fast wortgleich mit Folge 33
+   - `084.docx` – zweite Fassung; übernommen ist das Google Doc „084 – … – Transkript"
+   - `003.pdf` – gleicher Text wie das Google Doc „003"
+   - „027" – bricht mitten in der Folge ab
+   - „013" – Rohtext zu lückenhaft
+   - Unterordner „Archiv"
 4. **Noch nicht erschienene Folgen:** Per legt Transkripte oft schon vor der
    Veröffentlichung ab. Ist die Folge noch nicht erschienen, Transkript trotzdem
    vollständig bereinigen und mit `titel: ""` speichern. Solche Dateien gelten als
