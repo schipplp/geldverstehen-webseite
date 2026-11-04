@@ -1,98 +1,21 @@
 ---
-import Base from '../layouts/Base.astro';
-import { u } from '../lib/url';
-import { img } from '../lib/images';
-import { RSS_URL } from '../lib/podcast';
-import { organisation, person } from '../lib/strukturdaten';
+import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url';
+import { img } from '../../lib/images';
+import { RSS_URL, ALLE_PLATTFORMEN, SPOTIFY, APPLE, PODCAST_NAME, alleFolgen } from '../../lib/podcast';
+import { organisation, person } from '../../lib/strukturdaten';
 
-// Podcast-Host: letscast.fm. Die Folgen werden beim Build direkt aus dem
-// RSS-Feed geladen, damit die Seite automatisch aktuell bleibt. Ein geplanter
-// Rebuild (siehe .github/workflows/deploy.yml, cron) sorgt dafür, dass neue
-// Folgen auch ohne Code-Änderung erscheinen. Ist der Feed beim Build nicht
-// erreichbar, greift die Fallback-Liste (keine leere Seite).
-const allEpisodes = 'https://geldverstehen.letscast.fm';
-
-const fallbackEpisodes = [
-  { no: '#74', title: 'Warum Geld in Beziehungen so oft für Streit sorgt – und wie ihr das löst', dur: '11 Min', date: '9. Juli 2026', iso: '2026-07-09', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/e0cf9878.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-geld-in-beziehungen-so-oft-fuer-streit-sorgt-und-wie-ihr-das-loest' },
-  { no: '#73', title: '5 Finanzregeln, die du nie brechen solltest', dur: '12 Min', date: '2. Juli 2026', iso: '2026-07-02', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/741915e4.mp3', link: 'https://geldverstehen.letscast.fm/episode/5-finanzregeln-die-du-nie-brechen-solltest' },
-  { no: '#72', title: 'Warum ich keine Budgetplanung empfehle', dur: '8 Min', date: '25. Juni 2026', iso: '2026-06-25', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/b57e030b.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-ich-keine-budgetplanung-empfehle' },
-  { no: '#71', title: 'Was finanziell erfolgreiche Menschen anders machen', dur: '9 Min', date: '18. Juni 2026', iso: '2026-06-18', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/8d3113f0.mp3', link: 'https://geldverstehen.letscast.fm/episode/was-finanziell-erfolgreiche-menschen-anders-machen-3-kleine-stellschrauben' },
-  { no: '#70', title: 'Du machst vieles richtig – und gibst trotzdem immer wieder auf?', dur: '9 Min', date: '11. Juni 2026', iso: '2026-06-11', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/2cfa6c19.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-machst-vieles-richtig-und-gibst-trotzdem-immer-wieder-auf' },
-  { no: '#69', title: 'Du kennst deine Geldfresser – und änderst trotzdem nichts. Warum?', dur: '6 Min', date: '4. Juni 2026', iso: '2026-06-04', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/d546b58f.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-kennst-deine-geldfresser-und-aenderst-trotzdem-nichts-warum' },
-];
-
-function decodeEntities(s = '') {
-  return s
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
-    .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#0*39;/g, "'").replace(/&apos;/g, "'")
-    .replace(/&amp;/g, '&')
-    .trim();
-}
-function pickTag(block, name) {
-  const m = block.match(new RegExp('<' + name + '[^>]*>([\\s\\S]*?)</' + name + '>', 'i'));
-  return m ? decodeEntities(m[1]) : '';
-}
-function pickAttr(block, tagName, attrName) {
-  const m = block.match(new RegExp('<' + tagName + '\\b[^>]*\\b' + attrName + '="([^"]*)"', 'i'));
-  return m ? m[1] : '';
-}
-function fmtDate(pub) {
-  const d = new Date(pub);
-  if (isNaN(d.getTime())) return '';
-  return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
-}
-function isoDate(pub) {
-  const d = new Date(pub);
-  return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
-}
-function fmtDur(raw) {
-  if (!raw) return '';
-  const secs = /^\d+$/.test(raw)
-    ? parseInt(raw, 10)
-    : raw.split(':').map(Number).reduce((a, b) => a * 60 + b, 0);
-  if (!secs || isNaN(secs)) return '';
-  return Math.max(1, Math.round(secs / 60)) + ' Min';
-}
-function parseFeed(xml) {
-  const blocks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
-  const out = [];
-  for (const b of blocks) {
-    const title = pickTag(b, 'title');
-    const mp3 = pickAttr(b, 'enclosure', 'url');
-    if (!title || !mp3) continue;
-    const num = pickTag(b, 'itunes:episode');
-    out.push({
-      no: num ? '#' + num : '',
-      title,
-      dur: fmtDur(pickTag(b, 'itunes:duration')),
-      date: fmtDate(pickTag(b, 'pubDate')),
-      iso: isoDate(pickTag(b, 'pubDate')),
-      mp3,
-      link: pickTag(b, 'link') || mp3,
-    });
-  }
-  return out;
-}
-async function loadEpisodes() {
-  try {
-    const res = await fetch(RSS_URL, { signal: AbortSignal.timeout(10000) });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const parsed = parseFeed(await res.text());
-    if (parsed.length) return parsed;
-    throw new Error('Feed enthielt keine Folgen');
-  } catch (err) {
-    console.warn('[podcast] RSS-Feed nicht ladbar – nutze Fallback-Liste:', err instanceof Error ? err.message : err);
-    return fallbackEpisodes;
-  }
-}
-
-const episodes = (await loadEpisodes()).slice(0, 6);
+// Folgen kommen beim Build aus dem RSS-Feed (siehe src/lib/podcast.ts).
+// Jede Folge hat eine eigene Seite unter /podcast/<slug>/, das Archiv liegt
+// unter /podcast/folgen/.
+const allEpisodes = ALLE_PLATTFORMEN;
+const alle = await alleFolgen();
+const episodes = alle.slice(0, 6);
 const current = episodes[0];
 
 // Strukturdaten: Podcast als PodcastSeries mit den aktuellen Folgen. So
 // erkennen Suchmaschinen und KI-Systeme die Seite eindeutig als Podcast von
-// Per Schippl. Folgen-URLs zeigen auf letscast (dort liegen die Folgen).
+// Per Schippl. Folgen-URLs zeigen auf die eigenen Folgen-Seiten.
 const podcastUrl = new URL('/podcast/', Astro.site).href;
 const podcastLd = {
   '@context': 'https://schema.org',
@@ -100,7 +23,7 @@ const podcastLd = {
     {
       '@type': 'PodcastSeries',
       '@id': `${podcastUrl}#podcast`,
-      name: 'GELD VERSTEHEN – Struktur und Ordnung in deinen Finanzen',
+      name: PODCAST_NAME,
       description:
         'Konkrete Impulse und praktische Tipps rund um Geld — zum Mitnehmen für unterwegs. Jede Woche eine neue Folge.',
       url: podcastUrl,
@@ -109,19 +32,15 @@ const podcastLd = {
       webFeed: RSS_URL,
       author: { '@id': person['@id'] },
       publisher: { '@id': organisation['@id'] },
-      sameAs: [
-        'https://open.spotify.com/show/4eydcBTI1cYTk6LZndehWU',
-        'https://podcasts.apple.com/de/podcast/geld-verstehen-struktur-und-ordnung-in-deinen-finanzen/id1798477013',
-        allEpisodes,
-      ],
+      sameAs: [SPOTIFY, APPLE, allEpisodes],
     },
     ...episodes.map((ep) => ({
       '@type': 'PodcastEpisode',
       name: ep.title,
-      url: ep.link,
+      url: new URL(`/podcast/${ep.slug}/`, Astro.site).href,
       ...(ep.iso ? { datePublished: ep.iso } : {}),
-      ...(/^\d+ Min$/.test(ep.dur) ? { duration: `PT${parseInt(ep.dur, 10)}M` } : {}),
-      ...(ep.no ? { episodeNumber: ep.no.replace('#', '') } : {}),
+      ...(ep.sekunden ? { duration: `PT${Math.round(ep.sekunden / 60)}M` } : {}),
+      ...(ep.nummer ? { episodeNumber: String(ep.nummer) } : {}),
       associatedMedia: { '@type': 'AudioObject', contentUrl: ep.mp3 },
       partOfSeries: { '@id': `${podcastUrl}#podcast` },
     })),
@@ -145,11 +64,11 @@ const podcastLd = {
           <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.0; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(44px,5.4vw,78px);">Jede Woche ein Stück mehr <span style="color:var(--gv-yellow);">Klarheit</span>.</h1>
           <p style="font-size:19px; line-height:1.6; color:#EAF2FA; max-width:480px; margin:22px 0 28px;">Konkrete Impulse und praktische Tipps rund um Geld — zum Mitnehmen für unterwegs. Jede Woche eine neue Folge.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="gv-store" href="https://open.spotify.com/show/4eydcBTI1cYTk6LZndehWU" target="_blank" rel="noopener" aria-label="GELD VERSTEHEN Podcast auf Spotify">
+            <a class="gv-store" href={SPOTIFY} target="_blank" rel="noopener" aria-label="GELD VERSTEHEN Podcast auf Spotify">
               <svg viewBox="0 0 24 24" width="19" height="19" style="flex:none" aria-hidden="true"><path fill="#1ED760" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.3-2.1-10.4-1.2-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.5-1 8.4-.6 11.5 1.3.4.2.5.7.2 1.1zm1.5-3.3c-.3.4-.8.6-1.2.3-3.2-2-8.1-2.5-11.9-1.4-.5.2-1-.1-1.1-.6-.1-.5.1-1 .6-1.1 4.4-1.3 9.8-.7 13.5 1.5.3.3.5.9.1 1.3zm.1-3.4C15.5 8.3 8.8 8.1 5 9.2c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.4-1.3 11.8-1.1 16.4 1.6.5.3.7 1 .4 1.5-.3.6-1 .8-1.5.5z"/></svg>
               <span>Spotify</span>
             </a>
-            <a class="gv-store" href="https://podcasts.apple.com/de/podcast/geld-verstehen-struktur-und-ordnung-in-deinen-finanzen/id1798477013" target="_blank" rel="noopener" aria-label="GELD VERSTEHEN Podcast bei Apple Podcasts">
+            <a class="gv-store" href={APPLE} target="_blank" rel="noopener" aria-label="GELD VERSTEHEN Podcast bei Apple Podcasts">
               <svg viewBox="0 0 24 24" width="19" height="19" style="flex:none" aria-hidden="true">
                 <path d="M4.9 15.2a8 8 0 1 1 14.2 0" fill="none" stroke="#C24BE6" stroke-width="1.5" stroke-linecap="round"/>
                 <path d="M7.8 13.6a5 5 0 1 1 8.4 0" fill="none" stroke="#C24BE6" stroke-width="1.5" stroke-linecap="round"/>
@@ -219,13 +138,13 @@ const podcastLd = {
               <div class="gv-ep-title">{ep.title}</div>
               <div class="gv-ep-meta">{ep.dur} &middot; {ep.date}</div>
             </div>
-            <a class="gv-btn" href={ep.link} target="_blank" rel="noopener" style="white-space:nowrap;">Details</a>
+            <a class="gv-btn" href={u(`/podcast/${ep.slug}`)} style="white-space:nowrap;">Zur Folge</a>
           </div>
         ))}
       </div>
 
       <div style="margin-top:32px;">
-        <a href={allEpisodes} target="_blank" rel="noopener" style="font-family:var(--font-body); font-weight:700; font-size:16px; color:var(--gv-blue); text-decoration:none;">Alle Folgen ansehen &rarr;</a>
+        <a href={u('/podcast/folgen')} style="font-family:var(--font-body); font-weight:700; font-size:16px; color:var(--gv-blue); text-decoration:none;">Alle {alle.length} Folgen ansehen &rarr;</a>
       </div>
     </div>
   </section>

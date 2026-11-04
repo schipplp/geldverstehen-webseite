@@ -12,6 +12,7 @@ Claim: „Deine Finanzen im Griff. Für immer!" Kontakt: mail@geldverstehen.de
 - [Kostenloser Crashkurs — Vom Geld-Chaos zur Klarheit](https://geldverstehen.de/crashkurs/): Der kostenlose GELD VERSTEHEN Crashkurs per E-Mail: die wichtigsten Schritte zu mehr Überblick, Tag für Tag verständlich erklärt. Ein paar Minuten täglich genügen.
 - [Das Buch — Struktur und Ordnung in deinen Finanzen](https://geldverstehen.de/buch/): Das Buch von Per Schippl: kein Ratgeber voller Verbote, sondern ein System, das sich in deinen Alltag integriert. Als Taschenbuch und Kindle-Ausgabe bei Amazon.
 - [Der Podcast — Jede Woche ein Stück mehr Klarheit](https://geldverstehen.de/podcast/): Der GELD VERSTEHEN Podcast: konkrete Impulse und praktische Tipps rund um Geld — kurze Folgen zum Mitnehmen, jede Woche neu.
+- [Alle Podcast-Folgen](https://geldverstehen.de/podcast/folgen/): Archiv aller Folgen, jede mit eigener Seite, viele mit Transkript zum Nachlesen.
 - [Über Per Schippl](https://geldverstehen.de/ueber/): Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch.
 
 ## Kanäle
