@@ -7,18 +7,21 @@ import EmailOptIn from '../../components/EmailOptIn.astro';
 import { u } from '../../lib/url';
 import { img } from '../../lib/images';
 import { organisation, person } from '../../lib/strukturdaten';
-import { SPOTIFY, APPLE, alleFolgen, kurzbeschreibung, type Folge } from '../../lib/podcast';
+import { SPOTIFY, APPLE, alleFolgen, kurzbeschreibung, passendeFolgen, type Folge } from '../../lib/podcast';
 
 export async function getStaticPaths() {
   const folgen = await alleFolgen();
-  return folgen.map((folge, i) => ({
-    params: { slug: folge.slug },
-    props: { folge, neuer: folgen[i - 1] ?? null, aelter: folgen[i + 1] ?? null },
-  }));
+  return folgen.map((folge, i) => {
+    const neuer = folgen[i - 1] ?? null;
+    const aelter = folgen[i + 1] ?? null;
+    // Direkte Nachbarn stehen schon in der Vor/Zurück-Navigation.
+    const passend = passendeFolgen(folge, folgen.filter((f) => f !== neuer && f !== aelter));
+    return { params: { slug: folge.slug }, props: { folge, neuer, aelter, passend } };
+  });
 }
 
-interface Props { folge: Folge; neuer: Folge | null; aelter: Folge | null }
-const { folge, neuer, aelter } = Astro.props;
+interface Props { folge: Folge; neuer: Folge | null; aelter: Folge | null; passend: Folge[] }
+const { folge, neuer, aelter, passend } = Astro.props;
 const t = folge.transkript;
 const seitenUrl = new URL(`/podcast/${folge.slug}/`, Astro.site).href;
 const podcastUrl = new URL('/podcast/', Astro.site).href;
@@ -46,6 +49,7 @@ const ld = {
       name: folge.title,
       url: seitenUrl,
       description: kurzbeschreibung(folge),
+      ...(t?.kurz.length ? { abstract: t.kurz.join(' ') } : {}),
       inLanguage: 'de',
       ...(folge.iso ? { datePublished: folge.iso } : {}),
       ...(folge.sekunden ? { duration: `PT${Math.round(folge.sekunden / 60)}M` } : {}),
@@ -106,6 +110,17 @@ const ld = {
   <section style="background:#fff;">
     <div class="gv-wrap" style="padding-top:56px; padding-bottom:80px;">
       <article class="gv-article">
+        {/* Kernaussagen aus dem Transkript – für eilige Leser, Suchmaschinen
+            und KI-Antworten. Nur Pers eigene Aussagen aus dieser Folge. */}
+        {t && t.kurz.length > 0 && (
+          <aside class="gv-kurz" aria-label="Kurz gesagt">
+            <p class="gv-kurz-kopf">KURZ GESAGT</p>
+            <ul>
+              {t.kurz.map((k) => <li>{k}</li>)}
+            </ul>
+          </aside>
+        )}
+
         {folge.beschreibung.length > 0 && (
           <div class="gv-ep-desc">
             <h2>Worum es geht</h2>
@@ -134,6 +149,22 @@ const ld = {
             />
           </div>
         </div>
+
+        {passend.length > 0 && (
+          <section class="gv-passend" aria-labelledby="passend-h">
+            <h2 id="passend-h">Passende Folgen</h2>
+            <ul>
+              {passend.map((p) => (
+                <li>
+                  <a href={u(`/podcast/${p.slug}`)}>
+                    <span class="gv-passend-meta">{[p.nummer ? `Folge ${p.nummer}` : '', p.dur].filter(Boolean).join(' · ')}</span>
+                    <span class="gv-passend-t">{p.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <nav class="gv-ep-nav" aria-label="Weitere Folgen">
           {aelter ? (
@@ -177,6 +208,18 @@ const ld = {
   .gv-article p, .gv-ep-text :global(p) { font-size: 18px; line-height: 1.75; color: var(--gv-ink-soft); margin: 0 0 18px; }
   .gv-ep-desc :global(a) { color: var(--gv-blue); text-decoration: underline; word-break: break-word; }
   .gv-ep-desc { margin-bottom: 48px; }
+
+  .gv-kurz { margin: 0 0 44px; padding: 22px 26px 8px; background: var(--gv-yellow-050); border-left: 4px solid var(--gv-yellow); border-radius: 0 14px 14px 0; }
+  .gv-article .gv-kurz-kopf { font-family: var(--font-display); font-size: 17px; letter-spacing: .12em; color: var(--gv-ink); margin: 0 0 10px; }
+  .gv-kurz ul { margin: 0 0 14px; padding-left: 22px; display: grid; gap: 8px; font-size: 17px; line-height: 1.6; color: var(--gv-ink); }
+
+  .gv-passend { margin: 0 0 40px; }
+  .gv-passend h2 { font-size: clamp(26px, 3vw, 34px); }
+  .gv-passend ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .gv-passend a { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border: 1px solid var(--gv-border); border-radius: 12px; text-decoration: none; transition: border-color .15s ease; }
+  .gv-passend a:hover { border-color: var(--gv-blue); }
+  .gv-passend-meta { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--gv-blue); }
+  .gv-passend-t { font-family: var(--font-display); font-size: 21px; line-height: 1.1; color: var(--gv-ink); }
   .gv-ep-transkript { margin-bottom: 16px; }
   .gv-article .gv-ep-hinweis { font-size: 15px; color: var(--gv-muted); margin: -6px 0 26px; }
 
