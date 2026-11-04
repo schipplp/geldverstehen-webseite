@@ -31,6 +31,10 @@ export interface Transkript {
   Content: any;
   // reiner Text (für Beschreibung und Wortzahl)
   text: string;
+  /** „Kurz gesagt": 3–4 Kernaussagen aus dem Transkript (Frontmatter `kurz`) */
+  kurz: string[];
+  /** Themen-Schlüssel für „Passende Folgen" (Frontmatter `themen`, erstes = Hauptthema) */
+  themen: string[];
 }
 
 export interface Folge {
@@ -174,8 +178,11 @@ async function ladeFeed(): Promise<Roh[]> {
   try {
     const res = await fetch(RSS_URL, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const folgen = parseFeed(await res.text());
+    const xml = await res.text();
+    const folgen = parseFeed(xml);
     if (!folgen.length) throw new Error('Feed enthielt keine Folgen');
+    const mitTranskript = (xml.match(/<podcast:transcript\b/gi) || []).length;
+    console.log(`[podcast] Feed: ${folgen.length} Folgen, ${mitTranskript} mit <podcast:transcript>`);
     return folgen;
   } catch (err) {
     const grund = err instanceof Error ? err.message : String(err);
@@ -205,6 +212,8 @@ function ladeTranskripte(): Transkript[] {
       datei: pfad.split('/').pop() ?? pfad,
       Content: mod.Content,
       text: roh.replace(/\s+/g, ' ').trim(),
+      kurz: Array.isArray(mod.frontmatter?.kurz) ? mod.frontmatter.kurz.map(String) : [],
+      themen: Array.isArray(mod.frontmatter?.themen) ? mod.frontmatter.themen.map(String) : [],
     };
   });
 }
@@ -262,4 +271,28 @@ export function kurzbeschreibung(f: Folge): string {
   if (text.length <= 155) return text;
   const schnitt = text.slice(0, 152);
   return schnitt.slice(0, schnitt.lastIndexOf(' ')) + ' …';
+}
+
+/**
+ * „Passende Folgen": andere Folgen mit Transkript und gemeinsamem Thema.
+ * Gleiches Hauptthema zählt doppelt; bei Gleichstand gewinnt die zeitlich
+ * nähere Folge.
+ */
+export function passendeFolgen(folge: Folge, alle: Folge[], anzahl = 3): Folge[] {
+  const eigene = folge.transkript?.themen ?? [];
+  if (!eigene.length) return [];
+  const zeit = (f: Folge) => (f.iso ? new Date(f.iso).getTime() : 0);
+  return alle
+    .filter((f) => f !== folge && f.transkript?.themen.length)
+    .map((f) => {
+      const t = f.transkript!.themen;
+      let punkte = 0;
+      for (const th of t) if (eigene.includes(th)) punkte += 1;
+      if (t[0] === eigene[0]) punkte += 2;
+      return { f, punkte, abstand: Math.abs(zeit(f) - zeit(folge)) };
+    })
+    .filter((x) => x.punkte > 0)
+    .sort((a, b) => b.punkte - a.punkte || a.abstand - b.abstand)
+    .slice(0, anzahl)
+    .map((x) => x.f);
 }

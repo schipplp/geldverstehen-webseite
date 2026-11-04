@@ -11,7 +11,8 @@ export const GET: APIRoute = async ({ site }) => {
   const liste = folgen
     .map((f) => {
       const zusatz = f.transkript ? ' (mit Transkript)' : '';
-      return `- [${f.title}](${new URL(`/podcast/${f.slug}/`, site).href})${zusatz}: ${kurzbeschreibung(f)}`;
+      const text = f.transkript?.kurz.length ? f.transkript.kurz.join(' ') : kurzbeschreibung(f);
+      return `- [${f.title}](${new URL(`/podcast/${f.slug}/`, site).href})${zusatz}: ${text}`;
     })
     .join('\n');
   const abschnitt = `## Podcast-Folgen\n\nAlle Folgen: ${new URL('/podcast/folgen/', site).href}\n\n${liste}\n`;
