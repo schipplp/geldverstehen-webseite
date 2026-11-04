@@ -8,7 +8,13 @@ export const organisation = {
   '@id': `${SITE}/#organisation`,
   name: 'GELD VERSTEHEN',
   url: `${SITE}/`,
-  logo: `${SITE}/favicon.svg`,
+  // PNG statt SVG: Google zeigt Raster-Logos zuverlässiger an (mind. 112 px).
+  logo: {
+    '@type': 'ImageObject',
+    url: `${SITE}/apple-touch-icon.png`,
+    width: 180,
+    height: 180,
+  },
   founder: { '@id': `${SITE}/ueber/#person` },
   sameAs: [
     'https://www.instagram.com/geldverstehen.de',

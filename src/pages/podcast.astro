@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { u } from '../lib/url';
 import { img } from '../lib/images';
 import { RSS_URL } from '../lib/podcast';
+import { organisation, person } from '../lib/strukturdaten';
 
 // Podcast-Host: letscast.fm. Die Folgen werden beim Build direkt aus dem
 // RSS-Feed geladen, damit die Seite automatisch aktuell bleibt. Ein geplanter
@@ -12,12 +13,12 @@ import { RSS_URL } from '../lib/podcast';
 const allEpisodes = 'https://geldverstehen.letscast.fm';
 
 const fallbackEpisodes = [
-  { no: '#74', title: 'Warum Geld in Beziehungen so oft für Streit sorgt – und wie ihr das löst', dur: '11 Min', date: '9. Juli 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/e0cf9878.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-geld-in-beziehungen-so-oft-fuer-streit-sorgt-und-wie-ihr-das-loest' },
-  { no: '#73', title: '5 Finanzregeln, die du nie brechen solltest', dur: '12 Min', date: '2. Juli 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/741915e4.mp3', link: 'https://geldverstehen.letscast.fm/episode/5-finanzregeln-die-du-nie-brechen-solltest' },
-  { no: '#72', title: 'Warum ich keine Budgetplanung empfehle', dur: '8 Min', date: '25. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/b57e030b.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-ich-keine-budgetplanung-empfehle' },
-  { no: '#71', title: 'Was finanziell erfolgreiche Menschen anders machen', dur: '9 Min', date: '18. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/8d3113f0.mp3', link: 'https://geldverstehen.letscast.fm/episode/was-finanziell-erfolgreiche-menschen-anders-machen-3-kleine-stellschrauben' },
-  { no: '#70', title: 'Du machst vieles richtig – und gibst trotzdem immer wieder auf?', dur: '9 Min', date: '11. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/2cfa6c19.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-machst-vieles-richtig-und-gibst-trotzdem-immer-wieder-auf' },
-  { no: '#69', title: 'Du kennst deine Geldfresser – und änderst trotzdem nichts. Warum?', dur: '6 Min', date: '4. Juni 2026', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/d546b58f.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-kennst-deine-geldfresser-und-aenderst-trotzdem-nichts-warum' },
+  { no: '#74', title: 'Warum Geld in Beziehungen so oft für Streit sorgt – und wie ihr das löst', dur: '11 Min', date: '9. Juli 2026', iso: '2026-07-09', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/e0cf9878.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-geld-in-beziehungen-so-oft-fuer-streit-sorgt-und-wie-ihr-das-loest' },
+  { no: '#73', title: '5 Finanzregeln, die du nie brechen solltest', dur: '12 Min', date: '2. Juli 2026', iso: '2026-07-02', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/741915e4.mp3', link: 'https://geldverstehen.letscast.fm/episode/5-finanzregeln-die-du-nie-brechen-solltest' },
+  { no: '#72', title: 'Warum ich keine Budgetplanung empfehle', dur: '8 Min', date: '25. Juni 2026', iso: '2026-06-25', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/b57e030b.mp3', link: 'https://geldverstehen.letscast.fm/episode/warum-ich-keine-budgetplanung-empfehle' },
+  { no: '#71', title: 'Was finanziell erfolgreiche Menschen anders machen', dur: '9 Min', date: '18. Juni 2026', iso: '2026-06-18', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/8d3113f0.mp3', link: 'https://geldverstehen.letscast.fm/episode/was-finanziell-erfolgreiche-menschen-anders-machen-3-kleine-stellschrauben' },
+  { no: '#70', title: 'Du machst vieles richtig – und gibst trotzdem immer wieder auf?', dur: '9 Min', date: '11. Juni 2026', iso: '2026-06-11', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/2cfa6c19.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-machst-vieles-richtig-und-gibst-trotzdem-immer-wieder-auf' },
+  { no: '#69', title: 'Du kennst deine Geldfresser – und änderst trotzdem nichts. Warum?', dur: '6 Min', date: '4. Juni 2026', iso: '2026-06-04', mp3: 'https://lcdn.letscast.fm/media/podcast/4d31713a/episode/d546b58f.mp3', link: 'https://geldverstehen.letscast.fm/episode/du-kennst-deine-geldfresser-und-aenderst-trotzdem-nichts-warum' },
 ];
 
 function decodeEntities(s = '') {
@@ -41,6 +42,10 @@ function fmtDate(pub) {
   if (isNaN(d.getTime())) return '';
   return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 }
+function isoDate(pub) {
+  const d = new Date(pub);
+  return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+}
 function fmtDur(raw) {
   if (!raw) return '';
   const secs = /^\d+$/.test(raw)
@@ -62,6 +67,7 @@ function parseFeed(xml) {
       title,
       dur: fmtDur(pickTag(b, 'itunes:duration')),
       date: fmtDate(pickTag(b, 'pubDate')),
+      iso: isoDate(pickTag(b, 'pubDate')),
       mp3,
       link: pickTag(b, 'link') || mp3,
     });
@@ -83,6 +89,46 @@ async function loadEpisodes() {
 
 const episodes = (await loadEpisodes()).slice(0, 6);
 const current = episodes[0];
+
+// Strukturdaten: Podcast als PodcastSeries mit den aktuellen Folgen. So
+// erkennen Suchmaschinen und KI-Systeme die Seite eindeutig als Podcast von
+// Per Schippl. Folgen-URLs zeigen auf letscast (dort liegen die Folgen).
+const podcastUrl = new URL('/podcast/', Astro.site).href;
+const podcastLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'PodcastSeries',
+      '@id': `${podcastUrl}#podcast`,
+      name: 'GELD VERSTEHEN – Struktur und Ordnung in deinen Finanzen',
+      description:
+        'Konkrete Impulse und praktische Tipps rund um Geld — zum Mitnehmen für unterwegs. Jede Woche eine neue Folge.',
+      url: podcastUrl,
+      image: new URL(img.podcastCover, Astro.site).href,
+      inLanguage: 'de',
+      webFeed: RSS_URL,
+      author: { '@id': person['@id'] },
+      publisher: { '@id': organisation['@id'] },
+      sameAs: [
+        'https://open.spotify.com/show/4eydcBTI1cYTk6LZndehWU',
+        'https://podcasts.apple.com/de/podcast/geld-verstehen-struktur-und-ordnung-in-deinen-finanzen/id1798477013',
+        allEpisodes,
+      ],
+    },
+    ...episodes.map((ep) => ({
+      '@type': 'PodcastEpisode',
+      name: ep.title,
+      url: ep.link,
+      ...(ep.iso ? { datePublished: ep.iso } : {}),
+      ...(/^\d+ Min$/.test(ep.dur) ? { duration: `PT${parseInt(ep.dur, 10)}M` } : {}),
+      ...(ep.no ? { episodeNumber: ep.no.replace('#', '') } : {}),
+      associatedMedia: { '@type': 'AudioObject', contentUrl: ep.mp3 },
+      partOfSeries: { '@id': `${podcastUrl}#podcast` },
+    })),
+    person,
+    organisation,
+  ],
+};
 ---
 <Base
   title="Der Podcast — Jede Woche ein Stück mehr Klarheit"
@@ -120,7 +166,7 @@ const current = episodes[0];
           </div>
         </div>
         <div style="display:flex; justify-content:center;">
-          <img src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" style="width:100%; max-width:420px; aspect-ratio:1/1; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.34);" />
+          <img src={img.podcastCover} alt="Cover des GELD VERSTEHEN Podcasts" width="800" height="800" style="width:100%; max-width:420px; height:auto; aspect-ratio:1/1; object-fit:cover; border-radius:18px; display:block; box-shadow:0 24px 60px rgba(0,0,0,.34);" />
         </div>
       </div>
     </div>
@@ -157,7 +203,7 @@ const current = episodes[0];
 
       <!-- PLAYER -->
       <div id="gv-player" style="display:flex; align-items:center; gap:20px; background:var(--gv-surface); border:1px solid var(--gv-border); border-radius:16px; padding:20px 24px; margin-bottom:20px; flex-wrap:wrap;">
-        <img src={img.podcastCover} alt="" style="width:74px; height:74px; border-radius:10px; object-fit:cover; flex-shrink:0;" />
+        <img src={img.podcastCover} alt="" width="800" height="800" loading="lazy" decoding="async" style="width:74px; height:74px; border-radius:10px; object-fit:cover; flex-shrink:0;" />
         <div style="flex:1; min-width:220px;">
           <div id="gv-player-no" style="font-family:var(--font-display); font-size:15px; letter-spacing:.08em; color:var(--gv-blue);">{current.no} &middot; JETZT SPIELEN</div>
           <div id="gv-player-title" style="font-family:var(--font-body); font-weight:700; font-size:17px; color:var(--gv-ink); line-height:1.3; margin-top:2px;">{current.title}</div>
@@ -192,6 +238,7 @@ const current = episodes[0];
       <a class="gv-btn" href={allEpisodes} target="_blank" rel="noopener">Jetzt abonnieren</a>
     </div>
   </section>
+  <script type="application/ld+json" set:html={JSON.stringify(podcastLd)} />
 </Base>
 
 <style>
