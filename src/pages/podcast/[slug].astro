@@ -30,6 +30,12 @@ const metaZeile = [folgeLabel, folge.date, folge.dur].filter(Boolean).join(' · 
 const woerter = t ? t.text.split(/\s+/).length : 0;
 const lesezeit = woerter ? Math.max(1, Math.round(woerter / 200)) : 0;
 
+// Folgen rund ums Haushaltsbuch verlinken auf Ratgeber und App — stärkt die
+// beiden Seiten, über die die meisten Suchanfragen kommen.
+const themen = t?.themen ?? [];
+const zumHaushaltsbuch = themen.includes('haushaltsbuch') || /haushalts?buch|\bapp\b/i.test(folge.title);
+const fuerPaare = themen.includes('paare') || /paare|beziehung|partner/i.test(folge.title);
+
 // URLs in der Folgenbeschreibung klickbar machen (Text vorher escapen).
 function escape(s: string) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -128,6 +134,18 @@ const ld = {
           </div>
         )}
 
+        {(zumHaushaltsbuch || fuerPaare) && (
+          <aside class="gv-weiter" aria-label="Weiterlesen">
+            <p class="gv-weiter-kopf">PASSEND ZUR FOLGE</p>
+            <ul>
+              {zumHaushaltsbuch && <li><a href={u('/haushaltsbuch-fuehren')}>Haushaltsbuch führen: die Anleitung</a></li>}
+              {fuerPaare
+                ? <li><a href={`${u('/app')}#paare`}>Die kostenlose Haushaltsbuch-App – auch gemeinsam mit Partner oder Familie</a></li>
+                : <li><a href={u('/app')}>Die kostenlose Haushaltsbuch-App von GELD VERSTEHEN</a></li>}
+            </ul>
+          </aside>
+        )}
+
         {t && (
           <div class="gv-ep-transkript">
             <h2 id="transkript">Transkript</h2>
@@ -212,6 +230,11 @@ const ld = {
   .gv-kurz { margin: 0 0 44px; padding: 22px 26px 8px; background: var(--gv-yellow-050); border-left: 4px solid var(--gv-yellow); border-radius: 0 14px 14px 0; }
   .gv-article .gv-kurz-kopf { font-family: var(--font-display); font-size: 17px; letter-spacing: .12em; color: var(--gv-ink); margin: 0 0 10px; }
   .gv-kurz ul { margin: 0 0 14px; padding-left: 22px; display: grid; gap: 8px; font-size: 17px; line-height: 1.6; color: var(--gv-ink); }
+
+  .gv-weiter { margin: 0 0 48px; padding: 20px 26px; border: 1px solid var(--gv-border); border-radius: 14px; }
+  .gv-article .gv-weiter-kopf { font-family: var(--font-display); font-size: 17px; letter-spacing: .12em; color: var(--gv-blue); margin: 0 0 8px; }
+  .gv-weiter ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size: 17px; line-height: 1.6; }
+  .gv-weiter a { color: var(--gv-blue); text-decoration: underline; }
 
   .gv-passend { margin: 0 0 40px; }
   .gv-passend h2 { font-size: clamp(26px, 3vw, 34px); }
