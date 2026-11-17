@@ -9,7 +9,7 @@ Im Ordner `design/` liegt ein vollständiges High-Fidelity-Designpaket aus Claud
 Aus dem Designpaket die echte, produktive Website bauen und über GitHub Pages veröffentlichen.
 
 1. **Framework:** Astro mit rein statischem Output (`output: 'static'`). Kein CMS, keine Datenbank, kein Server — die Seite muss auf GitHub Pages laufen. Struktur so schlank wie möglich halten.
-2. **Design:** Pixelgenau nach `design/HANDOFF.md` nachbauen. Die `.dc.html`-Dateien sind Design-Referenzen (Prototyp-Runtime nicht übernehmen). Design-Tokens aus `design/_ds/tokens.css` übernehmen. Fonts: Bebas Neue + PT Sans (Google Fonts, mit `font-display: swap`).
+2. **Design:** Pixelgenau nach `design/HANDOFF.md` nachbauen. Die `.dc.html`-Dateien sind Design-Referenzen (Prototyp-Runtime nicht übernehmen). Design-Tokens aus `design/_ds/tokens.css` übernehmen. Fonts: Bebas Neue + Manrope, selbst gehostet über `@fontsource` (statt PT Sans/Google Fonts, von Per so entschieden).
 3. **Seiten:** Startseite, App (OnePeek), Podcast, Buch, Über, Crashkurs, Impressum, Datenschutz. Navigation und Footer als gemeinsame Layout-Komponenten.
 4. **Bilder:** In `design/uploads/` liegen bereits weboptimierte Versionen (max. 1920px). Diese verwenden, sinnvolle deutsche Alt-Texte ergänzen. Keine unoptimierten Originale einchecken.
 5. **Deployment:** GitHub Action, die bei jedem Push auf `main` baut und auf GitHub Pages veröffentlicht (offizieller Astro-Pages-Workflow). Später kommt die Domain geldverstehen.de als Custom Domain dazu (CNAME-Datei) — erst auf Zuruf von Per.
@@ -27,15 +27,16 @@ Alle Formulare (Crashkurs auf Startseite + Crashkurs-Seite, Buch-Benachrichtigun
 - Impressum und Datenschutz sind Platzhalter — nur mit echten Angaben von Per befüllen.
 - Sprache: Deutsch, informelles „du", Ton: kurz, ruhig, selbstbewusst.
 
-## Offene Punkte (bei Per erfragen, sobald relevant)
-- [ ] Podcast-Plattform-Links (Spotify, Apple Podcasts, RSS)
-- [ ] App-Store-Links für OnePeek (iOS/Android)
-- [ ] Brevo-Formular-URLs + Listen-IDs (crashkurs / buch / newsletter)
-- [ ] Impressum: vollständige Anbieterangaben
-- [ ] Datenschutz: finaler, geprüfter Text (inkl. Brevo-Passus)
+## Stand
+Die Seite ist live unter https://geldverstehen.de (Custom Domain, HTTPS). Brevo, GA4 (mit Consent-Banner), Impressum und Datenschutz sind eingepflegt.
+Aktuelle offene Punkte stehen in `LAUNCH-CHECKLIST.md`.
+
+## Technik-Hinweise
+- `package-lock.json` ist eingecheckt, der Build nutzt `npm ci`. Bei Paketänderungen die Lockfile mit einchecken.
+- Kontrast beachten: Fließtext auf Blau in Weiß (`#FFFFFF`), nicht in Hellblau.
 
 ## Marke (Kurzreferenz)
 - Blau `#1E73BE` (Flächen), Gelb `#FFD000` (CTAs — nie mit weißem Text), Border `#D9DEE5`
-- Display: Bebas Neue · Body: PT Sans 17px / 1.6
+- Display: Bebas Neue · Body: Manrope 17px / 1.6
 - Claim: „Deine Finanzen im Griff. Für immer!"
 - Kontakt: mail@geldverstehen.de
