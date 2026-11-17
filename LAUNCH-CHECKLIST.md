@@ -12,6 +12,13 @@ _Stand: 2026-07-21 — Seite vollständig live_
 **Keine offenen Blocker mehr — die Seite ist vollständig live unter
 https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
 
+- [ ] 🟡 **Presse-Links auf der Über-Seite prüfen** — die sechs verlinkten Berichte
+  (stern TV/GMX, BILD, Berliner Zeitung, Nordkurier, ING, iphone-ticker.de) wurden
+  per Websuche gefunden, konnten aber nicht direkt geöffnet werden. Einmal anklicken
+  und bestätigen, dass Per darin vorkommt. Steht auch in der `llms.txt`.
+- [ ] 🟡 **Handelsblatt, Kölner Stadt-Anzeiger, Augsburger Allgemeine, NWZ, Express**:
+  online kein Artikel gefunden — falls Per Links oder Scans hat, nachtragen.
+
 ## 🟢 Nice-to-have (auch nach Live möglich)
 
 - [ ] **Datenschutz: formaler Rechts-Check** (optional) — inhaltlich vollständig
