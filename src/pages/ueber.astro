@@ -18,31 +18,37 @@ import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 const presse = [
   {
     medium: 'stern TV',
-    titel: '„So teuer ist Deutschland“ (Bericht zur Sendung)',
+    thema: 'Haushaltsbuch',
+    titel: 'Bericht zur Sondersendung „So teuer ist Deutschland“',
     url: 'https://www.gmx.net/magazine/unterhaltung/tv-shows/stern-tv-spezial-teuer-deutschland-experte-rechnet-benzinpreis-hoffnung-36414250',
   },
   {
     medium: 'BILD',
+    thema: 'App-Test',
     titel: 'Digitales Haushaltsbuch: BILD testet Apps im Vergleich',
     url: 'https://www.bild.de/bild-plus/ratgeber/2023/ratgeber/digitales-haushaltsbuch-bild-testet-apps-im-vergleich-83484730.bild.html',
   },
   {
     medium: 'Berliner Zeitung',
+    thema: 'Geld in der Partnerschaft',
     titel: 'Wie Paare Streit ums Geld vermeiden können',
     url: 'https://archiv.berliner-zeitung.de/ratgeber/verbraucher/geld/tipps-von-profis-wie-paare-streit-ums-geld-vermeiden-koennen-33257196',
   },
   {
     medium: 'Nordkurier',
+    thema: 'Geld in der Partnerschaft',
     titel: 'So vermeiden Sie Streit um Geld',
     url: 'https://www.nordkurier.de/ratgeber/so-vermeiden-sie-streit-um-geld-0836043907.html',
   },
   {
     medium: 'ING',
+    thema: 'Vermögensaufbau',
     titel: 'So klappt der Vermögensaufbau',
     url: 'https://www.ing.de/wissen/tipps-vermoegensaufbau/',
   },
   {
     medium: 'iphone-ticker.de',
+    thema: 'App-Test',
     titel: 'OnePeek-App: Ein super-simples Haushaltsbuch aus Oldenburg',
     url: 'https://www.iphone-ticker.de/onepeek-ein-super-simples-haushaltsbuch-aus-oldenburg-188725/',
   },
@@ -169,6 +175,29 @@ const testimonials = [
     </div>
   </section>
 
+  <!-- IN DEN MEDIEN -->
+  <section style="background:#fff;">
+    <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
+      <div class="gv-bar"></div>
+      <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:16px 0 8px;">IN DEN MEDIEN</p>
+      <h2 class="gv-h2">Zum Nachlesen</h2>
+      <ul class="gv-medien">
+        {presse.map((p) => (
+          <li>
+            <a href={p.url} target="_blank" rel="noopener">
+              <span class="gv-medien-quelle">{p.medium}</span>
+              <span class="gv-medien-text">
+                <span class="gv-medien-thema">{p.thema}</span>
+                <span class="gv-medien-titel">{p.titel}</span>
+              </span>
+              <span class="gv-medien-pfeil" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- VALUES -->
   <section style="background:var(--gv-surface);">
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
@@ -235,11 +264,6 @@ const testimonials = [
         <span>Express</span>
         <span>stern TV</span>
       </div>
-      <ul class="gv-presse-links">
-        {presse.map((p) => (
-          <li><a href={p.url} target="_blank" rel="noopener"><strong>{p.medium}:</strong> {p.titel}</a></li>
-        ))}
-      </ul>
     </div>
   </div>
 
@@ -278,12 +302,22 @@ const testimonials = [
   .gv-press { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; }
   .gv-press span { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 21px; color: #7c8794; }
 
-  /* Nachlesbare Berichte unter dem „Bekannt aus"-Band */
-  .gv-presse-links { list-style: none; margin: 26px auto 0; padding: 0; max-width: 860px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; }
-  .gv-presse-links li { text-align: center; }
-  .gv-presse-links a { font-size: 14px; line-height: 1.5; color: var(--gv-ink-soft); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--gv-border); }
-  .gv-presse-links a:hover { color: var(--gv-blue); text-decoration-color: currentColor; }
-  .gv-presse-links strong { font-weight: 700; color: var(--gv-ink); }
+  /* In den Medien: eine Zeile pro Bericht */
+  .gv-medien { list-style: none; margin: 36px 0 0; padding: 0; border-top: 1px solid var(--gv-border); }
+  .gv-medien li { border-bottom: 1px solid var(--gv-border); }
+  .gv-medien a { display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; align-items: center; padding: 22px 8px; text-decoration: none; color: inherit; transition: background .15s ease; }
+  .gv-medien a:hover { background: var(--gv-surface); }
+  .gv-medien a:focus-visible { outline: 2px solid var(--gv-blue); outline-offset: 2px; }
+  .gv-medien-quelle { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 21px; color: #7c8794; }
+  .gv-medien-text { display: flex; flex-direction: column; gap: 4px; }
+  .gv-medien-thema { font-family: var(--font-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gv-blue); }
+  .gv-medien-titel { font-size: 18px; line-height: 1.45; font-weight: 700; color: var(--gv-ink); }
+  .gv-medien-pfeil { font-size: 22px; color: var(--gv-blue); transition: transform .15s ease; }
+  .gv-medien a:hover .gv-medien-pfeil { transform: translate(2px, -2px); }
+  @media (max-width: 720px) {
+    .gv-medien a { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 20px 4px; }
+    .gv-medien-quelle { grid-column: 1 / -1; font-size: 18px; }
+  }
 
   .gv-value { background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; padding: 30px; }
   .gv-value-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }
