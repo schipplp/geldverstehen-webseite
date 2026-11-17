@@ -26,10 +26,10 @@ const vorteile = [
   },
   {
     bild: img.appTeilen,
-    alt: 'Haushaltsbuch per QR-Code teilen',
-    titel: 'Haushaltsbücher teilen',
+    alt: 'Haushaltsbuch per QR-Code mit Partner oder Familie teilen',
+    titel: 'Gemeinsam mit Partner oder Familie',
     punkte: [
-      'Teile ein Buch per QR-Code — in Sekunden, ohne Konto.',
+      'Teile ein Buch per QR-Code mit deinem Partner oder deiner Familie — in Sekunden, ohne Konto.',
       'Ihr seht beide dieselben Zahlen, jederzeit aktuell.',
       'Persönliche Bücher bleiben trotzdem privat.',
     ],
@@ -127,6 +127,11 @@ const faq = [
       'Nein. Du kannst ohne Registrierung sofort starten und die App komplett anonym nutzen — ohne Konto, ohne Daten zu hinterlegen. Wenn du möchtest, kannst du dir ein Konto anlegen und bekommst damit zusätzliche Möglichkeiten. Freiwillig, nicht nötig.',
   },
   {
+    frage: 'Muss ich mein Bankkonto verbinden?',
+    antwort:
+      'Nein. Du trägst deine Einnahmen und Ausgaben selbst ein — eine Kontoanbindung ist nicht nötig. Du gibst keine Bankdaten, keine PIN und keine TAN preis.',
+  },
+  {
     frage: 'Wie sicher sind meine Daten?',
     antwort:
       'Wir setzen auf Datenverschlüsselung nach neustem Standard. Ohne Konto bleiben deine Einträge ohnehin auf deinem Gerät — du hinterlegst nichts bei uns.',
@@ -148,8 +153,8 @@ const faq = [
 ];
 ---
 <Base
-  title="Die App — das Haushaltsbuch, das du wirklich führst"
-  description="Das Haushaltsbuch von GELD VERSTEHEN (früher OnePeek): Flexkosten in zwei Sekunden eintragen und sehen, was übrig bleibt. BILD-Testsieger, ohne Registrierung."
+  title="Haushaltsbuch-App kostenlos – ohne Kontoanbindung"
+  description="Kostenlose Haushaltsbuch-App ohne Kontoanbindung und ohne Registrierung: Ausgaben in zwei Sekunden eintragen und sehen, was übrig bleibt. BILD-Testsieger, früher OnePeek."
   active="app"
   bild="/og/app.png"
 >
@@ -277,7 +282,7 @@ const faq = [
   </section>
 
   <!-- WEITERE VORTEILE -->
-  <section style="background:#fff;">
+  <section id="paare" style="background:#fff;">
     <div class="gv-wrap" style="padding-top:112px; padding-bottom:40px;">
       <div class="gv-bar"></div>
       <p class="gv-eyebrow-plain" style="color:var(--gv-blue); margin:18px 0 8px;">WEITERE VORTEILE</p>
@@ -302,6 +307,7 @@ const faq = [
           </div>
         ))}
       </div>
+      <p style="margin:48px 0 0; font-size:17px; line-height:1.6; color:var(--gv-ink-soft); max-width:640px;">Wie ihr als Paar eure gemeinsamen Finanzen regelt, hörst du im Podcast: <a href={u('/podcast/gemeinsame-finanzen-6-tipps-fuer-paare-und-familien')} style="color:var(--gv-blue); text-decoration:underline;">Gemeinsame Finanzen: 6 Tipps für Paare und Familien</a> und <a href={u('/podcast/gemeinsames-konto-oder-getrennte-kassen-eine-klare-antwort')} style="color:var(--gv-blue); text-decoration:underline;">Gemeinsames Konto oder getrennte Kassen?</a></p>
     </div>
   </section>
 
@@ -445,6 +451,14 @@ const faq = [
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
           publisher: { '@id': organisation['@id'] },
           sameAs: [APP_STORE, 'https://play.google.com/store/apps/details?id=app.onepeek'],
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: faq.map((f) => ({
+            '@type': 'Question',
+            name: f.frage,
+            acceptedAnswer: { '@type': 'Answer', text: f.antwort },
+          })),
         },
         organisation,
       ],
