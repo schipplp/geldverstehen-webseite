@@ -12,15 +12,11 @@ _Stand: 2026-07-21 — Seite vollständig live_
 **Keine offenen Blocker mehr — die Seite ist vollständig live unter
 https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
 
-- [ ] 🟡 **Presse-Links auf der Über-Seite prüfen** — die sechs verlinkten Berichte
-  (stern TV/GMX, BILD, Berliner Zeitung, Nordkurier, ING, iphone-ticker.de) wurden
-  per Websuche gefunden, konnten aber nicht direkt geöffnet werden. Einmal anklicken
-  und bestätigen, dass Per darin vorkommt. Steht auch in der `llms.txt`.
-- [ ] 🟡 **Handelsblatt, Kölner Stadt-Anzeiger, Augsburger Allgemeine, NWZ, Express**:
-  online kein Artikel gefunden — falls Per Links oder Scans hat, nachtragen.
-
 ## 🟢 Nice-to-have (auch nach Live möglich)
 
+- [ ] **Presse-Links für Handelsblatt, Kölner Stadt-Anzeiger, Augsburger Allgemeine,
+  NWZ, Express** — online kein Artikel gefunden. Falls Per Links oder Scans hat,
+  unter „Bekannt aus“ auf der Über-Seite und in der `llms.txt` nachtragen.
 - [ ] **Datenschutz: formaler Rechts-Check** (optional) — inhaltlich vollständig
   (alle genutzten Dienste sind erklärt, siehe unten); ein anwaltlicher Blick ist
   reine Absicherung, kein Blocker.
@@ -33,6 +29,7 @@ https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
 
 ## ✅ Bereits erledigt
 
+- ✅ **KI-Sichtbarkeit**: Themen und Amazon-Autorenseite in den Strukturdaten, BILD-Testsieg als App-Auszeichnung, sechs verlinkte Presseberichte auf der Über-Seite und in der `llms.txt` (Links von Per geprüft, 17.11.2026). LinkedIn bewusst nicht verknüpft.
 - ✅ Komplette Website aus dem Designpaket gebaut (Start, App/OnePeek, Podcast, Buch, Über, Crashkurs, Impressum, Datenschutz, 404, Haushaltsbuch-Artikel)
 - ✅ GitHub-Pages-Deployment läuft (Push auf `main` → automatischer Build & Deploy)
 - ✅ Echte Links: App Store (iOS), Google Play, Spotify, Apple Podcasts
