@@ -12,6 +12,42 @@ import ytLena from '../../design/uploads/yt-wXwpsAVkH3M.webp?url';
 import ytMiracle from '../../design/uploads/yt-_odyMvW5ghQ.webp?url';
 import '@fontsource/playfair-display/600.css'; // „Bekannt aus"-Band
 
+// Berichte über Per und die App, die online nachlesbar sind (recherchiert
+// 11/2026). Belegbare Nennungen helfen Suchmaschinen und KI-Systemen, Per
+// als Ansprechpartner fürs Thema einzuordnen.
+const presse = [
+  {
+    medium: 'stern TV',
+    titel: '„So teuer ist Deutschland“ (Bericht zur Sendung)',
+    url: 'https://www.gmx.net/magazine/unterhaltung/tv-shows/stern-tv-spezial-teuer-deutschland-experte-rechnet-benzinpreis-hoffnung-36414250',
+  },
+  {
+    medium: 'BILD',
+    titel: 'Digitales Haushaltsbuch: BILD testet Apps im Vergleich',
+    url: 'https://www.bild.de/bild-plus/ratgeber/2023/ratgeber/digitales-haushaltsbuch-bild-testet-apps-im-vergleich-83484730.bild.html',
+  },
+  {
+    medium: 'Berliner Zeitung',
+    titel: 'Wie Paare Streit ums Geld vermeiden können',
+    url: 'https://archiv.berliner-zeitung.de/ratgeber/verbraucher/geld/tipps-von-profis-wie-paare-streit-ums-geld-vermeiden-koennen-33257196',
+  },
+  {
+    medium: 'Nordkurier',
+    titel: 'So vermeiden Sie Streit um Geld',
+    url: 'https://www.nordkurier.de/ratgeber/so-vermeiden-sie-streit-um-geld-0836043907.html',
+  },
+  {
+    medium: 'ING',
+    titel: 'So klappt der Vermögensaufbau',
+    url: 'https://www.ing.de/wissen/tipps-vermoegensaufbau/',
+  },
+  {
+    medium: 'iphone-ticker.de',
+    titel: 'OnePeek-App: Ein super-simples Haushaltsbuch aus Oldenburg',
+    url: 'https://www.iphone-ticker.de/onepeek-ein-super-simples-haushaltsbuch-aus-oldenburg-188725/',
+  },
+];
+
 const testimonials = [
   {
     id: '1ZS8FXuURDg',
@@ -199,6 +235,11 @@ const testimonials = [
         <span>Express</span>
         <span>stern TV</span>
       </div>
+      <ul class="gv-presse-links">
+        {presse.map((p) => (
+          <li><a href={p.url} target="_blank" rel="noopener"><strong>{p.medium}:</strong> {p.titel}</a></li>
+        ))}
+      </ul>
     </div>
   </div>
 
@@ -218,7 +259,15 @@ const testimonials = [
     set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@graph': [
-        { ...person, image: new URL(img.perHero, Astro.site).href, description: 'Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch.' },
+        {
+          ...person,
+          image: new URL(img.perHero, Astro.site).href,
+          description: 'Per Schippl räumt seit 2016 mit dem Geld-Chaos auf: Struktur und Ordnung in den Finanzen — verständlich, ehrlich und ohne Fachchinesisch.',
+          subjectOf: [
+            { '@type': 'VideoObject', name: 'stern TV Beitrag mit Per Schippl', url: 'https://www.youtube.com/watch?v=Awvgf0Dth5Q' },
+            ...presse.map((p) => ({ '@type': 'Article', name: p.titel, url: p.url, publisher: { '@type': 'Organization', name: p.medium } })),
+          ],
+        },
         organisation,
       ],
     })}
@@ -228,6 +277,13 @@ const testimonials = [
 <style>
   .gv-press { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; }
   .gv-press span { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 21px; color: #7c8794; }
+
+  /* Nachlesbare Berichte unter dem „Bekannt aus"-Band */
+  .gv-presse-links { list-style: none; margin: 26px auto 0; padding: 0; max-width: 860px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; }
+  .gv-presse-links li { text-align: center; }
+  .gv-presse-links a { font-size: 14px; line-height: 1.5; color: var(--gv-ink-soft); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--gv-border); }
+  .gv-presse-links a:hover { color: var(--gv-blue); text-decoration-color: currentColor; }
+  .gv-presse-links strong { font-weight: 700; color: var(--gv-ink); }
 
   .gv-value { background: #fff; border: 1px solid var(--gv-border); border-radius: 16px; padding: 30px; }
   .gv-value-num { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--gv-yellow); }

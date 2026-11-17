@@ -3,6 +3,22 @@
 // Social-Media-Kanäle zusammengehören. Nur belegte Angaben — nichts geraten.
 const SITE = 'https://geldverstehen.de';
 
+// Themen, für die GELD VERSTEHEN und Per stehen. Die ersten drei hat Per
+// vorgegeben, der Rest stammt aus den Podcast-Folgen und Seiten — KI-Systeme
+// lesen daraus, wofür die Marke als Ansprechpartner gilt.
+export const themen = [
+  'Haushaltsbuch führen',
+  'Kontrolle über die eigenen Finanzen',
+  'Struktur und Ordnung in den Finanzen',
+  'Überblick über die eigenen Finanzen',
+  'Mehr Geld am Monatsende übrig haben',
+  'Geldfresser finden',
+  'Sparen und Rücklagen bilden',
+  'Gemeinsame Finanzen für Paare und Familien',
+  'Umgang mit Geld lernen',
+  'Haushaltsbuch-App',
+];
+
 export const organisation = {
   '@type': 'Organization',
   '@id': `${SITE}/#organisation`,
@@ -16,6 +32,7 @@ export const organisation = {
     height: 180,
   },
   founder: { '@id': `${SITE}/ueber/#person` },
+  knowsAbout: themen,
   sameAs: [
     'https://www.instagram.com/geldverstehen.de',
     'https://www.tiktok.com/@geldverstehen.de',
@@ -32,4 +49,6 @@ export const person = {
   jobTitle: 'Finanzcoach',
   url: `${SITE}/ueber/`,
   worksFor: { '@id': `${SITE}/#organisation` },
+  knowsAbout: themen,
+  sameAs: ['https://www.amazon.de/stores/Per-Schippl/author/B0HB7CD56L'],
 };
