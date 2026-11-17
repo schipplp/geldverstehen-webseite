@@ -27,16 +27,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Volle Historie: die Sitemap liest daraus das Änderungsdatum je Seite
           fetch-depth: 0
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          cache: npm
+      # Exakt die Versionen aus package-lock.json – kein ungeplantes Update beim Build
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build with Astro
         run: npm run build
       - name: Upload Pages artifact
