@@ -8,22 +8,14 @@
 //
 // Die Texte sind eng an die Buchseite angelehnt (src/pages/buch.astro).
 import Base from '../layouts/Base.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { img } from '../lib/images';
+import { testimonials } from '../lib/stimmen';
 
 // TODO(Per): Wohin führt die Bewerbung? Vorläufig eine E-Mail an die
 // Kontaktadresse. Später z. B. Bewerbungsformular oder Terminbuchung.
 const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
 
-// Auswahl aus den Leserstimmen der Buchseite — Wortlaut unverändert.
-// TODO(Per): Sobald es Stimmen von Coaching-Teilnehmern gibt, hier ersetzen.
-const voices = [
-  { name: 'Barbara', text: `Ich bin begeistert! Per hat mich an die Hand genommen und mir genau gezeigt, wie ich meine Finanzen in den Griff bekomme. Die ersten Erfolge zeigen sich. Ich kann Per's Komplettset jedem empfehlen, der finanziell sorgenfrei leben möchte! Es ist jeden Cent wert.` },
-  { name: 'Edeltraud', text: `Das dumpfe Gefühl, keinen Überblick zu haben, ist weg. Es läuft.` },
-  { name: 'Gerd', text: `Dank Per's Hilfe habe ich meine Finanzen komplett in den Griff bekommen. Ich weiß jetzt genau wo ich stehe, was ich mir leisten kann und was nicht. Das neue Gefühl im Umgang mit meinem Geld ist überwältigend. Ich fühle mich endlich wohl mit meinem Geld. Ich weiß, wo ich in der Vergangenheit Fehler gemacht habe und bin überglücklich zu wissen, wie ich sie in Zukunft vermeiden kann. Per's Buch ist eine super Anleitung und hat mein Leben komplett zum Positiven verändert.` },
-  { name: 'Jasmin', text: `Lieber Per, ich möchte auf diesem Weg Danke sagen für dein tolles Buch, den tollen Leitfaden. Ich schon viel gelesen über das Thema Geld aber dein Buch hat mich ins Handeln gebracht. Dankeschön ✌🏼🦋` },
-  { name: 'Mehmet', text: `Ich habe das Buch mittlerweile 2 mal durchgelesen. Ich bin sehr begeistert. Endlich habe ich ein klares System wie ich mit dem Geld umgehen muss um finanziell voran zu kommen. Ich habe alles umgesetzt was im Buch steht. Ich kann mit gutem Gewissen Geld ausgeben.` },
-  { name: 'Fatih', text: `Das Geld hat seinen „Fluss" bekommen.` },
-];
 ---
 <Base
   title="Coaching mit Per Schippl"
@@ -136,16 +128,22 @@ const voices = [
     </div>
   </section>
 
-  <!-- ── LESERSTIMMEN ── -->
+  <!-- ── STIMMEN VON COACHING-TEILNEHMERN (wie auf der Über-Seite) ── -->
   <section style="background:#fff;">
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px;">
-      <p class="gv-eyebrow"><span class="gv-rule"></span>LESERSTIMMEN</p>
-      <h2 class="gv-h2">Das sagen Leser meines Buchs</h2>
-      <div class="co-voices">
-        {voices.map((v) => (
-          <figure class="co-voice">
-            <blockquote class="co-voice-q">{v.text}</blockquote>
-            <figcaption class="co-voice-name">{v.name}</figcaption>
+      <p class="gv-eyebrow"><span class="gv-rule"></span>STIMMEN</p>
+      <h2 class="gv-h2">Das sagen Coaching-Teilnehmer</h2>
+      <div class="co-2 co-tgrid" style="margin-top:44px;">
+        {testimonials.map((t) => (
+          <figure class="co-tcard">
+            <div class="co-tvideo">
+              <YouTubeEmbed id={t.id} title={`Erfahrungsbericht von ${t.name}`} label={t.name} poster={t.poster} />
+            </div>
+            <figcaption class="co-tbody">
+              <p class="co-thead">„{t.headline}"</p>
+              <blockquote class="co-tquote">„{t.quote}"</blockquote>
+              <div class="co-tname">{t.name}<span class="co-trole"> · {t.role}</span></div>
+            </figcaption>
           </figure>
         ))}
       </div>
@@ -193,10 +191,16 @@ const voices = [
   .co-ico-check { background: var(--gv-blue-050); color: var(--gv-blue); }
   .co-ico-cross { background: var(--gv-error-bg); color: var(--gv-error); }
 
-  .co-voices { columns: 320px; column-gap: 24px; margin-top: 44px; }
-  .co-voice { margin: 0 0 24px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 14px; padding: 26px; break-inside: avoid; -webkit-column-break-inside: avoid; }
-  .co-voice-q { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); }
-  .co-voice-name { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; font-size: 22px; color: var(--gv-blue); margin-top: 16px; }
+  /* Testimonial-Karten (Video + Text) wie auf der Über-Seite */
+  .co-tgrid { align-items: start; }
+  .co-tcard { display: flex; flex-direction: column; margin: 0; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 16px; overflow: hidden; }
+  .co-tvideo { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+  .co-tvideo :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .co-tbody { padding: 24px 26px 26px; display: flex; flex-direction: column; }
+  .co-thead { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.1; color: var(--gv-ink); margin: 0 0 12px; }
+  .co-tquote { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gv-ink-soft); }
+  .co-tname { margin-top: 16px; font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--gv-ink); }
+  .co-trole { font-weight: 400; color: var(--gv-muted); text-transform: uppercase; letter-spacing: .04em; font-size: 13px; }
 
   @media (max-width: 860px) {
     .co-3, .co-2 { grid-template-columns: 1fr; }
