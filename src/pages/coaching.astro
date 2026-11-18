@@ -37,8 +37,8 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   </div>
 
   <!-- ── DER BRIEF ── -->
-  <section style="background:#fff;">
-    <div class="gv-wrap" style="padding-top:72px; padding-bottom:84px;">
+  <section class="co-brief">
+    <div class="gv-wrap">
       <article class="co-letter">
         <p class="co-hallo">Liebe Leserin, lieber Leser,</p>
 
@@ -196,8 +196,10 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   .co-hero-bild { align-self: end; }
   .co-hero-bild img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; transform: scaleX(-1); }
 
-  /* Der Brief: schmale Lesespalte direkt auf Weiß, ohne Rahmen */
-  .co-letter { max-width: 680px; margin: 0 auto; }
+  /* Der Brief: am Desktop ein weißes Blatt auf hellem Grund, klar unter dem
+     Hero abgesetzt. Auf dem Handy ohne Rahmen über die volle Breite. */
+  .co-brief { background: var(--gv-surface); padding: 64px 0 84px; }
+  .co-letter { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 6px; padding: 72px 84px 64px; box-shadow: 0 1px 2px rgba(21,35,58,.06), 0 16px 40px rgba(21,35,58,.08); }
   .co-letter p { font-size: 18px; line-height: 1.75; color: var(--gv-ink-soft); margin: 0 0 18px; }
   .co-letter p strong { color: var(--gv-ink); }
   .co-letter .co-hallo { font-family: var(--font-display); font-size: 34px; line-height: 1.05; letter-spacing: .01em; color: var(--gv-ink); margin-bottom: 26px; }
@@ -243,6 +245,8 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
 
   @media (max-width: 860px) {
     .co-3, .co-2 { grid-template-columns: 1fr; }
+    .co-brief { background: #fff; padding: 48px 0 64px; }
+    .co-letter { max-width: none; padding: 0; border-radius: 0; box-shadow: none; }
     .co-hero { grid-template-columns: 1fr; gap: 0; }
     .co-hero-text { padding: 44px 0 8px; }
     .co-hero-bild img { max-width: 280px; }
