@@ -31,7 +31,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Klingt gut? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann ist dieser Brief für dich.</p>
       </div>
       <div class="co-hero-bild">
-        <img fetchpriority="high" src={img.perHero} width="1200" height="1200" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd" />
+        <img fetchpriority="high" src={img.perCrashkurs} width="1200" height="800" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd an einem Fenster" />
       </div>
     </div>
   </div>
@@ -186,11 +186,9 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
 </Base>
 
 <style>
-  /* Hero mit freigestelltem Foto, das unten auf der Kante steht */
-  .co-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: end; }
-  .co-hero-text { padding: 64px 0 72px; }
-  .co-hero-bild { align-self: end; }
-  .co-hero-bild img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; transform: scaleX(-1); }
+  /* Hero: Text links, großes Foto von Per rechts */
+  .co-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 52px; align-items: center; padding-top: 56px; padding-bottom: 64px; }
+  .co-hero-bild img { display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: 46% center; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
 
   /* Der Brief: am Desktop ein weißes Blatt auf hellem Grund, klar unter dem
      Hero abgesetzt. Auf dem Handy ohne Rahmen über die volle Breite. */
@@ -241,9 +239,8 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
     .co-3, .co-2 { grid-template-columns: 1fr; }
     .co-brief { background: #fff; padding: 48px 0 64px; }
     .co-letter { max-width: none; padding: 0; border-radius: 0; box-shadow: none; }
-    .co-hero { grid-template-columns: 1fr; gap: 0; }
-    .co-hero-text { padding: 44px 0 8px; }
-    .co-hero-bild img { max-width: 280px; }
+    .co-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; padding-bottom: 44px; }
+    .co-hero-bild img { aspect-ratio: 4/3; object-position: 46% 20%; }
     .co-letter .co-hallo { font-size: 30px; }
     .co-letter p { font-size: 17px; }
   }
