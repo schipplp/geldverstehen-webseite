@@ -2,13 +2,21 @@
 // ERSTER AUFRISS der Coaching-Seite — bewusst noch nicht in Navigation und
 // Sitemap und per noindex aus Suchmaschinen herausgehalten.
 //
-// Idee: kein Programm-Pitch, sondern ein Brief von Per. Der Leser wird dort
-// abgeholt, wo er steht; das Coaching wird nur angedeutet. Einziger Call to
-// Action ist die Bewerbung auf einen Platz, danach folgt ein Telefonat.
+// Idee: kein Programm-Pitch, sondern Per schreibt den Leser persönlich an
+// (auf der Seite selbst ist bewusst nicht von einem „Brief" die Rede). Der
+// Leser wird dort abgeholt, wo er steht; das Coaching wird nur angedeutet.
+// Rahmen: Das Coaching ist jetzt wieder möglich, die Plätze sind begrenzt.
+// Einziger Call to Action ist die Bewerbung auf einen Platz, danach folgt
+// ein Telefonat.
 //
-// Die Texte sind eng an die Buchseite angelehnt (src/pages/buch.astro).
+// Die Texte folgen Pers alter Sales-Page und der Buchseite
+// (src/pages/buch.astro). Grafiken nach dem Regelwerk in src/styles/grafik.css,
+// zwei davon stammen aus dem Ratgeber „Haushaltsbuch führen".
 import Base from '../layouts/Base.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import ArtikelGrafik from '../components/ArtikelGrafik.astro';
+import AchterbahnGrafik from '../components/AchterbahnGrafik.astro';
+import MonatsbilanzGrafik from '../components/MonatsbilanzGrafik.astro';
 import { img } from '../lib/images';
 import { testimonials } from '../lib/stimmen';
 
@@ -19,16 +27,17 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
 ---
 <Base
   title="Coaching mit Per Schippl"
-  description="Ein Brief von Per Schippl an alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist. Bewirb dich auf einen Platz im Coaching."
+  description="Für alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist: Das Coaching mit Per Schippl ist jetzt wieder möglich. Die Plätze sind begrenzt – bewirb dich auf einen."
   noindex
 >
   <!-- ── HERO ── -->
   <div style="background:var(--gv-blue);">
     <div class="gv-wrap co-hero">
       <div class="co-hero-text">
-        <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.16em; color:var(--gv-yellow); margin-bottom:16px;">COACHING MIT PER SCHIPPL</div>
+        <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.16em; color:var(--gv-yellow); margin-bottom:16px;">JETZT WIEDER MÖGLICH: COACHING MIT PER SCHIPPL</div>
         <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(32px,4.2vw,54px);">»Nie mehr Geldsorgen. Im Ernstfall abgesichert. Dir mit gutem Gefühl etwas leisten können und immer ein fettes Plus auf dem Konto.«</h1>
-        <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Klingt gut? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann ist dieser Brief für dich.</p>
+        <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Klingt gut? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
+        <p class="co-hero-hinweis">Begrenzte Plätze · Start im neuen Jahr</p>
       </div>
       <div class="co-hero-bild">
         <img fetchpriority="high" src={img.perCrashkurs} width="1200" height="800" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd an einem Fenster" />
@@ -36,54 +45,130 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
     </div>
   </div>
 
-  <!-- ── DER BRIEF ── -->
+  <!-- ── DER TEXT ── -->
   <section class="co-brief">
     <div class="gv-wrap">
       <article class="co-letter">
         <p class="co-hallo">Liebe Leserin, lieber Leser,</p>
 
-        <p>vielleicht hast du dir diesen Satz in letzter Zeit selbst gesagt: So kann das nicht weitergehen.</p>
-        <p>Du verdienst eigentlich ganz gut. Trotzdem bleibt am Ende des Monats zu wenig übrig, und wenn du ehrlich bist, weißt du gar nicht genau, wo das alles hingeht. Es geht einfach zu viel Geld durch.</p>
-        <p>Dabei ist dir das Thema nicht egal. Im Gegenteil, du würdest es gern in Ordnung bringen. Du wünschst dir Klarheit darüber, was reinkommt, was rausgeht und was du dir eigentlich leisten kannst. Und du wünschst dir eine Struktur, auf die du dich verlassen kannst. Nur weißt du nicht recht, wo du anfangen sollst. Dir fehlt der rote Faden.</p>
-        <p>Solange der fehlt, bleibt ein ungutes Gefühl. Beim Geldausgeben meldet sich häufig ein schlechtes Gewissen, weil du nicht sicher bist, was eigentlich drin ist. Selbst die schönen Dinge kannst du nicht richtig genießen: einen Urlaub planen, mit Freunden essen gehen, dir selber etwas gönnen. Und Rücklagen oder Vermögensaufbau wandern immer wieder auf später.</p>
-        <p>Wenn du dich darin wiedererkennst, dann bist du hier richtig. Ich kenne diese Situation aus vielen, vielen Gesprächen mit Lesern und Coaching-Teilnehmern. Und ich schreibe dir diesen Brief, weil sie sich ändern lässt.</p>
+        <p>vielleicht hast du dir diesen Satz in letzter Zeit selbst gesagt: <mark>So kann das nicht weitergehen.</mark></p>
+        <p><strong>Du verdienst eigentlich ganz gut. Trotzdem bleibt am Ende des Monats zu wenig übrig</strong>, und wenn du ehrlich bist, weißt du gar nicht genau, wo das alles hingeht. Es geht einfach zu viel Geld durch.</p>
+        <p>Dabei ist dir das Thema nicht egal. Im Gegenteil, du würdest es gern in Ordnung bringen. Du wünschst dir <strong>Klarheit</strong> darüber, was reinkommt, was rausgeht und was du dir eigentlich leisten kannst. Und du wünschst dir eine <strong>Struktur</strong>, auf die du dich verlassen kannst. Nur weißt du nicht recht, wo du anfangen sollst. <mark>Dir fehlt der rote Faden.</mark></p>
+        <p>Solange der fehlt, bleibt ein ungutes Gefühl. Beim Geldausgeben meldet sich häufig ein <strong>schlechtes Gewissen</strong>, weil du nicht sicher bist, was eigentlich drin ist. Selbst die schönen Dinge kannst du nicht richtig genießen: einen Urlaub planen, mit Freunden essen gehen, dir selber etwas gönnen. Und Rücklagen oder Vermögensaufbau wandern immer wieder auf später.</p>
+        <p>Wenn du dich darin wiedererkennst, dann bist du hier richtig. Und du bist damit nicht allein. Die Frankfurter Allgemeine hat es einmal so überschrieben:</p>
+        <blockquote class="co-zitat">»Nur Arztbesuche und Putzen sind schlimmer als Finanzfragen« – die meisten Deutschen hassen es, sich mit ihren Finanzen zu beschäftigen.<cite>Frankfurter Allgemeine · 31.10.2018</cite></blockquote>
+        <p>Ich kenne diese Situation aus vielen, vielen Gesprächen mit Lesern und Coaching-Teilnehmern. Und ich weiß: <strong>Sie lässt sich ändern.</strong></p>
 
         <h2 class="co-h">Die finanzielle Achterbahn</h2>
-        <p>Lass mich zuerst beschreiben, was bei dir vermutlich gerade passiert. Es gibt einen witzig gemeinten Spruch, den ich immer wieder höre: »Am Ende des Geldes ist noch viel zu viel vom Monat über.«</p>
-        <p>Die meisten lachen, wenn sie ihn sagen. Aber er trifft ziemlich genau, was bei vielen Menschen Monat für Monat abläuft: Das Geld kommt rein und ist nahezu direkt wieder weg. Am Monatsende steht wenig oder nichts mehr auf dem Konto, und man hangelt sich zum nächsten Geldeingang. Ich nenne das die finanzielle Achterbahn.</p>
-        <figure class="co-bahn">
-          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 62 L8 10 L75 62 L83 10 L150 62 L158 10 L225 62 L233 10 L300 62" />
-          </svg>
-          <figcaption>Die finanzielle Achterbahn: Es kommt Geld rein und ist nahezu direkt wieder weg.</figcaption>
-        </figure>
-        <p>Erstaunlich finde ich daran, dass sie mit der Höhe des Einkommens wenig zu tun hat. Sie betrifft häufig gerade Menschen, die eigentlich sehr gut verdienen. Mehr Geld allein hält die Achterbahn also nicht an. Solange die Struktur fehlt, geht auch ein höheres Einkommen einfach durch.</p>
-        <p>Das Tückische ist, dass man sich an diesen Zustand gewöhnt. Solange am Ende irgendwie alles bezahlt ist, fühlt er sich wie Alltag an. Dabei kostet er dich einiges. Du musst ständig improvisieren, und für größere Wünsche und Träume bleibt nie etwas übrig. Du bist auf den nächsten Geldeingang angewiesen, was dich unflexibel macht. Und was du heute nicht zusammenhältst, fehlt dir später, dir und deiner Familie.</p>
+        <p>Lass mich zuerst beschreiben, was bei dir vermutlich gerade passiert. Es gibt einen witzig gemeinten Spruch, den ich immer wieder höre: <strong>»Am Ende des Geldes ist noch viel zu viel vom Monat über.«</strong></p>
+        <p>Die meisten lachen, wenn sie ihn sagen. Aber er trifft ziemlich genau, was bei vielen Menschen Monat für Monat abläuft: Das Geld kommt rein und ist nahezu direkt wieder weg. Am Monatsende steht wenig oder nichts mehr auf dem Konto, und man hangelt sich zum nächsten Geldeingang. Ich nenne das <mark>die finanzielle Achterbahn</mark>.</p>
+        <ArtikelGrafik
+          fazit="Die finanzielle Achterbahn: Es kommt Geld rein und ist nahezu direkt wieder weg."
+          beschreibung="Eine Zickzacklinie über vier Monate: Mit jedem Geldeingang schnellt der Kontostand nach oben und fällt bis zum Monatsende wieder ab."
+        >
+          <div class="co-bahn">
+            <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 62 L8 10 L75 62 L83 10 L150 62 L158 10 L225 62 L233 10 L300 62" />
+            </svg>
+            <ol class="co-bahn-monate">
+              <li>Monat 1</li><li>Monat 2</li><li>Monat 3</li><li>Monat 4</li>
+            </ol>
+          </div>
+        </ArtikelGrafik>
+        <p>Erstaunlich finde ich daran, dass sie mit der Höhe des Einkommens wenig zu tun hat. <strong>Sie betrifft häufig gerade Menschen, die eigentlich sehr gut verdienen.</strong> Mehr Geld allein hält die Achterbahn also nicht an. Solange die Struktur fehlt, geht auch ein höheres Einkommen einfach durch.</p>
+        <p>Das Tückische ist, dass man sich an diesen Zustand gewöhnt. Solange am Ende irgendwie alles bezahlt ist, fühlt er sich wie Alltag an. <strong>Aber er bleibt nicht ohne Folgen.</strong></p>
+
+        <h2 class="co-h">Was dich die Achterbahn kostet</h2>
+        <p>Wenn du deine Finanzen nicht fest im Griff hast und es nicht schaffst, Geld bei dir zu behalten, dann hat das drei Konsequenzen.</p>
+        <ol class="co-folgen">
+          <li>
+            <span class="co-folgen-nr" aria-hidden="true">1</span>
+            <div><strong>Es raubt dir wertvolle Lebensqualität.</strong> Für größere Wünsche und Träume wird es nicht reichen. Du bleibst knapp bei Kasse und bist gezwungen, finanziell zu improvisieren. Mit jedem Tag, den du das Thema aufschiebst, vergibst du die Chance, dir mehr und mehr finanziellen Spielraum aufzubauen.</div>
+          </li>
+          <li>
+            <span class="co-folgen-nr" aria-hidden="true">2</span>
+            <div><strong>Du rutschst immer mehr in eine Abhängigkeit.</strong> Wenn du dein Geld nicht gezielt zusammenhältst, bist du zwangsläufig abhängig: vom nächsten Geldeingang, vom Job, von dritten Personen. Das macht dich unflexibel und zwingt dich unter Umständen, Veränderungen hinzunehmen, mit denen du nicht einverstanden bist.</div>
+          </li>
+          <li>
+            <span class="co-folgen-nr" aria-hidden="true">3</span>
+            <div><strong>Du verbaust dir deine eigene Zukunft.</strong> Wenn du nicht dafür sorgst, dass du dein Geld zusammenhältst, setzt du deine eigene Zukunft aufs Spiel, und natürlich auch die deiner Kinder und deiner Familie. Die meisten Rentner müssen schon heute mit viel weniger Geld auskommen, als sie vor der Rente zur Verfügung hatten.</div>
+          </li>
+        </ol>
         <p>Ich glaube, du spürst das längst. Sonst hättest du dir nicht gesagt, dass es so nicht weitergehen kann.</p>
 
         <h2 class="co-h">Du hast es ja schon versucht</h2>
         <p>Vermutlich hast du auch schon einiges probiert: ein Haushaltsbuch angefangen, eine App runtergeladen, dir fest vorgenommen, mehr zu sparen. Eine Zeit lang lief es vielleicht sogar gut. Und irgendwann hat es sich trotzdem wieder genauso angefühlt wie vorher.</p>
-        <p>An dieser Stelle ziehen viele den Schluss, dass sie eben nicht mit Geld umgehen können. Ich sehe das anders. Als Finanzcoach begegnen mir immer wieder dieselben drei Wege, auf denen Menschen es versuchen. Alle drei sind verständlich, und alle drei führen zurück an den Anfang.</p>
-        <p>Der erste Weg ist das Aufschieben. Ich nenne ihn die »Vogel-Strauß-Taktik«: Man nimmt sich vor, das Thema anzugehen, sobald der richtige Zeitpunkt dafür da ist. Das ist das Einfachste, was man tun kann, und deshalb ist es so verbreitet. Nur kommt der richtige Zeitpunkt nie.</p>
-        <p>Wer nicht länger aufschieben will, landet oft beim zweiten Weg, der »Crash-Diät«. Der erste Gedanke ist dann: »Ich muss weniger ausgeben.« Also werden Ausgaben zusammengestrichen, und das Leben wird auf den Kopf gestellt. Das bringt schnell Ergebnisse, kostet aber so viel Energie, dass es kaum jemand durchhält. Man verfällt schneller in alte Muster, als einem lieb ist, und der Kontostand erlebt den bekannten Jojo-Effekt.</p>
-        <p>Der dritte Weg ist die »Hau-Ruck-Aktion«. Man setzt sich hin, wertet stundenlang akribisch jede Ausgabe aus und steckt viel Zeit und Energie hinein. Am Ende hat man viele Zahlen, aber immer noch keine Klarheit. Der Gedanke »Das ist doch nicht so schwer, ich schaffe das schon« hat schon so manchen zur Verzweiflung gebracht.</p>
+        <p>An dieser Stelle ziehen viele den Schluss, dass sie eben nicht mit Geld umgehen können. Ich sehe das anders. Als Finanzcoach begegnen mir immer wieder dieselben <strong>drei Wege</strong>, auf denen Menschen es versuchen. Alle drei sind verständlich, und alle drei führen zurück an den Anfang.</p>
+        <p>Der erste Weg ist das Aufschieben. Ich nenne ihn die <strong>»Vogel-Strauß-Taktik«</strong>: Man schaut weg und schiebt das Thema auf, getreu dem Motto »Es ist gerade nicht der richtige Zeitpunkt dafür«. Nicht aus Gleichgültigkeit, sondern weil man irgendwie Angst davor hat, was man sehen könnte. Nur kommt der richtige Zeitpunkt nie.</p>
+        <p>Wer nicht länger aufschieben will, landet oft beim zweiten Weg, der <strong>»Crash-Diät«</strong>. Der erste Gedanke ist dann: »Ich muss weniger ausgeben.« Also werden Ausgaben zusammengestrichen, und das Leben wird auf den Kopf gestellt. Das bringt schnell Ergebnisse, aber in 99 % der Fälle ist dieser Weg nicht nachhaltig. Er kostet so viel Energie, dass es kaum jemand durchhält. Man verfällt schneller in alte Muster, als einem lieb ist, und der Kontostand erlebt den bekannten Jojo-Effekt.</p>
+        <AchterbahnGrafik fazit="Die Crash-Diät: schnelle Ergebnisse, und dann der bekannte Jojo-Effekt." />
+        <p>Der dritte Weg ist die <strong>»Hau-Ruck-Aktion«</strong>. Man setzt sich hin, wertet stundenlang akribisch jede Ausgabe aus und steckt viel Zeit und Energie hinein. Am Ende hat man viele Zahlen, aber immer noch keine Klarheit. Der Gedanke »Das ist doch nicht so schwer, ich schaffe das schon« hat schon so manchen zur Verzweiflung gebracht.</p>
+        <ArtikelGrafik fazit="Drei Wege, die zurück an den Anfang führen. Am guten Willen fehlt es bei keinem.">
+          <ol class="co-wege">
+            <li><span class="ag-name">Vogel-Strauß-Taktik</span><span class="ag-text">»Es ist gerade nicht der richtige Zeitpunkt dafür.«</span></li>
+            <li><span class="ag-name">Crash-Diät</span><span class="ag-text">»Ich muss weniger ausgeben.«</span></li>
+            <li><span class="ag-name">Hau-Ruck-Aktion</span><span class="ag-text">»Das ist doch nicht so schwer, ich schaffe das schon.«</span></li>
+          </ol>
+        </ArtikelGrafik>
         <p>Wenn du dich in einem dieser Wege wiedererkennst, dann siehst du auch, was sie gemeinsam haben. In keinem der drei Fälle fehlt es am guten Willen. Es fehlt der rote Faden: eine Herangehensweise, bei der ein Schritt auf den anderen aufbaut und die sich im Alltag durchhalten lässt.</p>
-        <p>Dass es bisher nicht geklappt hat, liegt deshalb nicht an dir. Es liegt daran, dass dir nie jemand gezeigt hat, wie es einfacher geht.</p>
+        <p><mark>Dass es bisher nicht geklappt hat, liegt deshalb nicht an dir.</mark> Dir hat nicht die Disziplin gefehlt. Dir hat ein Plan gefehlt.</p>
 
         <h2 class="co-h">Was stattdessen funktioniert</h2>
         <p>Aus meiner Sicht sollte in der Schule gelehrt werden, wie man erfolgreich mit Geld umgeht. Weil das nicht passiert, bringen es sich die meisten irgendwie selbst bei, und dabei wird das Thema schnell komplizierter, als es sein müsste.</p>
-        <p>Dabei sind es erfahrungsgemäß nur wenige Stellschrauben, die du bedienen musst, um deine Finanzen fest im Griff zu haben. Du brauchst dafür keinen Verzicht und keinen Geiz, und du musst auch nicht alles dem Kontostand unterordnen.</p>
-        <p>Was du brauchst, ist ein klarer Plan. Zuerst verschaffst du dir einen glasklaren Überblick. Dann bringst du eine Struktur in deine Finanzen, die zu dir und deinem Alltag passt. Und diese Struktur ist so einfach, dass du am Ende fast nichts mehr tun musst, um Ordnung zu halten.</p>
-        <p>Stell dir einmal vor, wie sich das anfühlt. Du weißt jederzeit, wo du stehst. Wenn eine unerwartete Rechnung kommt, reißt sie kein Loch mehr ins Budget, weil du darauf vorbereitet bist. Beim Geldausgeben hast du ein gutes Gefühl, weil du zu 100 % weißt, was du dir leisten kannst, und die Dinge, die dir wichtig sind, gönnst du dir mit Freude. Nebenbei beginnt dein Kontostand zu wachsen, und irgendwann zaubert dir der Blick aufs Konto ein Lächeln ins Gesicht.</p>
-        <p>Das meine ich, wenn ich von einem grundsoliden Fundament spreche. Wer es einmal gelegt hat, steigt aus der Achterbahn aus und landet in einer finanziellen Aufwärtsspirale.</p>
+        <p>Eine Frage an dich: Hast du einen Plan, eine konkrete Strategie, wie sich deine finanzielle Situation in den nächsten fünf Jahren verbessern wird?</p>
+        <p>Falls nicht, dann solltest du das ändern. Denn eines ist sicher: <mark>Jeder finanziell erfolgreiche Mensch folgt einem klaren Plan.</mark></p>
+        <p>Und dieser Plan ist kein Hexenwerk. Erfahrungsgemäß sind es <strong>nur wenige Stellschrauben</strong>, die du bedienen musst, um deine Finanzen fest im Griff zu haben. Du brauchst dafür keinen Verzicht und keinen Geiz, und du musst auch nicht alles dem Kontostand unterordnen.</p>
+        <p>Zuerst verschaffst du dir einen <strong>glasklaren Überblick</strong>. Dann bringst du eine <strong>Struktur</strong> in deine Finanzen, die zu dir und deinem Alltag passt. Und diese Struktur ist so einfach, dass du am Ende fast nichts mehr tun musst, um Ordnung zu halten.</p>
+        <MonatsbilanzGrafik fazit="Der glasklare Überblick: was reinkommt, was rausgeht und was du dir leisten kannst." />
+        <p>Stell dir vor, wie es sich anfühlt, wenn die Achterbahn anhält:</p>
+        <ul class="co-ziele">
+          <li>Du hast einen <strong>glasklaren Überblick</strong> über deine Finanzen und verlierst ihn nie wieder.</li>
+          <li>Du hast eine <strong>Struktur</strong>, die zu dir und deiner Situation passt und dir den Rücken freihält. Nichts geht mehr verloren, nichts wird übersehen.</li>
+          <li>Es kommt kein Monat mehr, in dem dir irgendeine nervige Ausgabe ein <strong>Loch ins Budget</strong> reißt. Keine unerwartete Rechnung, kein kleinerer oder größerer »Notfall« wirft dich aus der Bahn.</li>
+          <li>Du hast ein <strong>gutes Gefühl beim Geldausgeben</strong>, weil du zu 100 % weißt, was du dir leisten kannst. Die Dinge, die dir wichtig sind, gönnst du dir mit Freude.</li>
+          <li>Du kennst deine persönlichen <strong>Geldfresser</strong> und hast neue, förderliche Gewohnheiten an ihre Stelle gesetzt.</li>
+          <li>Du hast mit einem sinnvollen <strong>Vermögensaufbau</strong> begonnen, auch wenn du das gerade für unmöglich hältst.</li>
+          <li>Du triffst deine finanziellen Entscheidungen selbst und stehst finanziell <strong>auf eigenen Beinen</strong>.</li>
+        </ul>
+        <p>Und ein Blick auf dein Konto zaubert dir ein Lächeln ins Gesicht.</p>
+        <p>Das ist keine Träumerei. Es ist das Ergebnis eines <strong>grundsoliden Fundaments</strong>. Wer es einmal gelegt hat, steigt aus der Achterbahn aus und landet in einer <mark>finanziellen Aufwärtsspirale</mark>.</p>
+        <ArtikelGrafik
+          fazit="Wer das Fundament einmal gelegt hat, steigt aus der Achterbahn aus."
+          beschreibung="Zwei Linien im Vergleich: links die Zickzacklinie der finanziellen Achterbahn, rechts eine Linie, die Monat für Monat ansteigt – die finanzielle Aufwärtsspirale."
+        >
+          <div class="co-wandel">
+            <div class="co-wandel-seite">
+              <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+                <path class="co-wandel-alt" d="M0 62 L10 14 L100 62 L110 14 L200 62 L210 14 L300 62" />
+              </svg>
+              <span class="ag-name">Achterbahn</span>
+            </div>
+            <span class="co-wandel-pfeil" aria-hidden="true">→</span>
+            <div class="co-wandel-seite">
+              <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+                <path class="co-wandel-neu" d="M0 62 L10 46 L100 54 L110 32 L200 40 L210 16 L300 24" />
+              </svg>
+              <span class="ag-name">Aufwärtsspirale</span>
+            </div>
+          </div>
+        </ArtikelGrafik>
 
         <h2 class="co-h">Warum ich dir das schreibe</h2>
-        <p>Mein Name ist Per Schippl, und ich helfe Menschen dabei, genau dieses Fundament zu legen. 2017 habe ich meinen Weg in einem Buch aufgeschrieben, und viele Leser haben damit ihre Finanzen in den Griff bekommen.</p>
-        <p>Aus dem Buch kamen aber auch immer mehr Anfragen von Menschen, die sich Hilfe bei der Umsetzung wünschten. Überrascht hat mich das nicht. Wissen ist gut, aber es bringt dir nur etwas, wenn du es auch angewendet bekommst. Und dafür braucht es manchmal jemanden, der dich dort abholt, wo du gerade stehst.</p>
-        <p>So sind meine Coachings entstanden. Über die Jahre habe ich hunderte Menschen dabei begleitet, ihre Finanzen in den Griff zu bekommen: Studenten, Selbstständige, Familien, Gutverdiener. Jeder mit einer anderen Situation.</p>
-        <p>Im neuen Jahr starte ich ein neues Coaching. Du musst dir den roten Faden darin nicht selbst suchen. Wir gehen den Weg gemeinsam, von dort, wo du heute stehst, bis du deine Finanzen im Griff hast.</p>
-        <p>Was dich im Einzelnen erwartet, möchte ich dir lieber persönlich erzählen. Denn ob das Coaching zu dir passt, hängt davon ab, wo du stehst, und das erfahre ich nur im Gespräch. Deshalb gibt es auf dieser Seite nichts zu kaufen. Du kannst dich auf einen Platz bewerben, und danach telefonieren wir.</p>
-        <p>Vielleicht zögerst du noch. Das verstehe ich. Bedenke nur, dass sich an deiner Situation von alleine nichts ändern wird. <strong>Wenn du dich in diesem Brief wiedergefunden hast, dann ist das Coaching wie für dich gemacht</strong>, und ich würde mich freuen, von dir zu hören.</p>
+        <p>Mein Name ist Per Schippl. <strong>2016 habe ich GELD VERSTEHEN gestartet</strong>, und seitdem helfe ich Menschen dabei, genau dieses Fundament zu legen. 2017 wurde daraus ein Buch, und viele Leser haben damit ihre Finanzen in den Griff bekommen.</p>
+        <p>Aus dem Buch kamen aber auch immer mehr Anfragen von Menschen, die sich Hilfe bei der Umsetzung wünschten. Überrascht hat mich das nicht. <strong>Wissen ist gut, aber es bringt dir nur etwas, wenn du es auch angewendet bekommst.</strong> Und dafür braucht es manchmal jemanden, der dich dort abholt, wo du gerade stehst.</p>
+        <p>So sind meine Coachings entstanden. Über die Jahre habe ich <strong>hunderte Menschen</strong> dabei begleitet, ihre Finanzen in den Griff zu bekommen: Studenten, Selbstständige, Familien, Gutverdiener. Jeder mit einer anderen Situation.</p>
+        <ArtikelGrafik fazit="Jetzt ist das Coaching wieder möglich. Die Plätze sind begrenzt.">
+          <ol class="co-weg">
+            <li><span class="co-weg-jahr">2016</span><span class="ag-text">GELD VERSTEHEN gestartet</span></li>
+            <li><span class="co-weg-jahr">2017</span><span class="ag-text">Das Buch</span></li>
+            <li><span class="co-weg-jahr">Seitdem</span><span class="ag-text">Hunderte Menschen begleitet</span></li>
+            <li class="co-weg-jetzt"><span class="co-weg-jahr">Jetzt</span><span class="ag-text">Coaching wieder möglich</span></li>
+          </ol>
+        </ArtikelGrafik>
+        <p><mark>Jetzt ist das Coaching wieder möglich.</mark> Im neuen Jahr starte ich ein neues Coaching, und <strong>die Plätze darin sind begrenzt</strong>. Du musst dir den roten Faden darin nicht selbst suchen. Wir gehen den Weg gemeinsam, von dort, wo du heute stehst, bis du deine Finanzen im Griff hast.</p>
+        <p>Was dich im Einzelnen erwartet, möchte ich dir lieber persönlich erzählen. Denn ob das Coaching zu dir passt, hängt davon ab, wo du stehst, und das erfahre ich nur im Gespräch. Deshalb gibt es auf dieser Seite nichts zu kaufen. <strong>Du kannst dich auf einen Platz bewerben, und danach telefonieren wir.</strong></p>
+        <p>Vielleicht zögerst du noch. Das verstehe ich. Bedenke nur, dass sich an deiner Situation von alleine nichts ändern wird. Im Gegenteil, sie wird sich eher weiter zuspitzen.</p>
+        <p><strong>Wenn du dich hier wiedergefunden hast, dann ist das Coaching wie für dich gemacht.</strong> Befreie dich von finanziellen Ängsten, Sorgen und Zweifeln und lass das Thema Geld ab sofort dein Leben bereichern. Ich würde mich freuen, von dir zu hören.</p>
 
         <div class="co-sign">
           <img src={img.perStory} alt="Per Schippl, Finanzcoach" width="72" height="72" loading="lazy" decoding="async" />
@@ -93,9 +178,12 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
           </div>
         </div>
 
-        <p class="co-ps"><strong>P.S.</strong> Falls du jetzt denkst, du gehst das an, sobald der richtige Zeitpunkt da ist: Das ist die Vogel-Strauß-Taktik von oben. Ein besserer Zeitpunkt als jetzt wird nicht kommen.</p>
+        <p class="co-ps"><strong>P.S.</strong> Falls du jetzt denkst, du gehst das an, sobald der richtige Zeitpunkt da ist: Das ist die Vogel-Strauß-Taktik von oben. Ein besserer Zeitpunkt als jetzt wird nicht kommen. Und <strong>die beste Investition, die du jemals tätigen kannst, ist eine Investition in dich.</strong></p>
 
-        <div style="margin-top:32px;">
+        <div class="co-chance">
+          <div class="co-chance-kopf">Jetzt wieder möglich</div>
+          <div class="co-chance-titel">Coaching mit Per Schippl</div>
+          <p>Das Coaching startet im neuen Jahr, und die Plätze sind begrenzt. Wenn du dabei sein möchtest, dann nutze die Chance und bewirb dich jetzt.</p>
           <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
         </div>
       </article>
@@ -121,7 +209,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <div class="co-card">
           <div class="co-num">#3</div>
           <h3 class="co-card-h">Du entscheidest</h3>
-          <p class="co-card-p">Wenn es für uns beide passt, sicherst du dir deinen Platz fürs neue Jahr.</p>
+          <p class="co-card-p">Wenn es für uns beide passt, sicherst du dir einen der begrenzten Plätze fürs neue Jahr.</p>
         </div>
       </div>
     </div>
@@ -178,8 +266,8 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   <!-- ── ABSCHLUSS ── -->
   <section style="background:var(--gv-blue);">
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px; text-align:center;">
-      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Bewirb dich auf deinen Platz</h2>
-      <p style="font-size:18px; line-height:1.6; color:#FFFFFF; margin:0 auto 28px; max-width:520px;">Das Coaching startet im neuen Jahr. Alles Weitere besprechen wir am Telefon.</p>
+      <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Jetzt wieder möglich: Bewirb dich auf deinen Platz</h2>
+      <p style="font-size:18px; line-height:1.6; color:#FFFFFF; margin:0 auto 28px; max-width:520px;">Das Coaching startet im neuen Jahr, und die Plätze sind begrenzt. Alles Weitere besprechen wir am Telefon.</p>
       <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
     </div>
   </section>
@@ -199,10 +287,51 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   .co-letter .co-hallo { font-family: var(--font-display); font-size: 34px; line-height: 1.05; letter-spacing: .01em; color: var(--gv-ink); margin-bottom: 26px; }
   .co-h { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; font-size: clamp(28px,3.4vw,38px); line-height: 1.05; color: var(--gv-blue); margin: 44px 0 16px; }
 
-  .co-bahn { margin: 28px 0; padding: 24px 24px 18px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 14px; }
-  .co-bahn svg { display: block; width: 100%; height: 90px; }
-  .co-bahn path { fill: none; stroke: var(--gv-blue); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-  .co-bahn figcaption { margin-top: 14px; font-size: 14px; line-height: 1.5; color: var(--gv-ink-soft); text-align: center; }
+  /* Hervorhebungen im Text: fett in Ink, die wichtigsten Sätze mit Marker */
+  .co-letter mark { background: linear-gradient(transparent 52%, rgba(255,208,0,.5) 52%); color: var(--gv-ink); font-weight: 700; padding: 0 2px; }
+  .co-zitat { margin: 28px 0; padding: 4px 0 4px 22px; border-left: 5px solid var(--gv-yellow); font-family: var(--font-display); font-size: clamp(24px,3vw,32px); line-height: 1.1; letter-spacing: .01em; color: var(--gv-ink); }
+  .co-zitat cite { display: block; margin-top: 12px; font-style: normal; font-size: 15px; letter-spacing: .14em; color: var(--gv-blue); text-transform: uppercase; }
+
+  /* Die drei Konsequenzen */
+  .co-folgen { list-style: none; margin: 24px 0; padding: 0; display: grid; gap: 14px; }
+  .co-folgen li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 20px 22px; background: var(--gv-surface); border: 1px solid var(--gv-border); border-radius: 14px; font-size: 17px; line-height: 1.7; color: var(--gv-ink-soft); }
+  .co-folgen strong { color: var(--gv-ink); }
+  .co-folgen-nr { font-family: var(--font-display); font-size: 48px; line-height: .9; color: var(--gv-blue); }
+
+  /* Zielbild */
+  .co-ziele { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 12px; }
+  .co-ziele li { position: relative; padding-left: 36px; font-size: 18px; line-height: 1.65; color: var(--gv-ink-soft); }
+  .co-ziele li strong { color: var(--gv-ink); }
+  .co-ziele li::before { content: "✓"; position: absolute; left: 0; top: .2em; width: 24px; height: 24px; border-radius: 999px; background: var(--gv-blue-050); color: var(--gv-blue); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; }
+
+  /* Grafiken (Rahmen und Regeln: src/styles/grafik.css) */
+  .co-bahn svg, .co-wandel svg { display: block; width: 100%; height: 90px; overflow: visible; }
+  .co-bahn path, .co-wandel path { fill: none; stroke: var(--gv-muted); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .co-bahn-monate { display: grid !important; grid-template-columns: repeat(4,1fr); margin-top: 12px !important; }
+  .co-bahn-monate li { text-align: center; font-size: 14px; font-weight: 700; color: var(--gv-ink-soft); }
+
+  .co-wege { display: grid !important; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .co-wege li { background: #fff; border: 1px solid var(--gv-border); border-radius: 12px; padding: 18px !important; display: grid; gap: 8px; align-content: start; }
+
+  .co-wandel { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; }
+  .co-wandel-seite { display: grid; gap: 14px; text-align: center; }
+  .co-wandel svg { height: 80px; }
+  .co-wandel path.co-wandel-neu { stroke: var(--gv-blue); }
+  .co-wandel-pfeil { font-size: 28px; font-weight: 700; color: var(--gv-blue); }
+
+  .co-weg { display: grid !important; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .co-weg li { background: #fff; border: 1px solid var(--gv-border); border-radius: 12px; padding: 16px 14px !important; display: grid; gap: 6px; align-content: start; }
+  .co-weg-jahr { font-family: var(--font-display); font-size: 32px; line-height: 1; letter-spacing: .01em; color: var(--gv-blue); }
+  .co-weg li.co-weg-jetzt { background: var(--gv-yellow); border-color: var(--gv-yellow); }
+  .co-weg-jetzt .co-weg-jahr, .co-weg-jetzt .ag-text { color: var(--gv-ink); }
+  .co-weg-jetzt .ag-text { font-weight: 700; }
+
+  /* Abschluss des Textes: die begrenzte Chance */
+  .co-chance { margin-top: 36px; padding: 32px; background: var(--gv-blue); border-radius: 16px; text-align: center; }
+  .co-chance-kopf { font-family: var(--font-display); font-size: 17px; letter-spacing: .16em; color: var(--gv-yellow); }
+  .co-chance-titel { font-family: var(--font-display); font-size: clamp(30px,3.6vw,40px); line-height: 1.05; letter-spacing: .01em; color: #fff; margin-top: 8px; }
+  .co-letter .co-chance p { color: #FFFFFF; max-width: 460px; margin: 14px auto 22px; }
+  .co-hero-hinweis { display: inline-block; margin: 22px 0 0; padding: 8px 14px; border: 1.5px solid var(--gv-yellow); border-radius: 999px; font-size: 14px; font-weight: 700; letter-spacing: .04em; color: #FFFFFF; }
 
   .co-sign { display: flex; align-items: center; gap: 16px; margin-top: 36px; }
   .co-sign img { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; flex: none; }
@@ -242,6 +371,18 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
     .co-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; padding-bottom: 44px; }
     .co-hero-bild img { aspect-ratio: 4/3; object-position: 46% 20%; }
     .co-letter .co-hallo { font-size: 30px; }
-    .co-letter p { font-size: 17px; }
+    .co-letter p, .co-ziele li { font-size: 17px; }
+    .co-folgen li { grid-template-columns: 32px 1fr; gap: 10px; padding: 16px; font-size: 16px; }
+    .co-folgen-nr { font-size: 38px; }
+    .co-chance { padding: 26px 20px; }
+  }
+
+  @media (max-width: 620px) {
+    .co-wege { grid-template-columns: 1fr; gap: 8px; }
+    .co-weg { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .co-wandel { grid-template-columns: 1fr; gap: 10px; }
+    .co-wandel-pfeil { transform: rotate(90deg); justify-self: center; line-height: 1; }
+    .co-bahn svg { height: 70px; }
+    .co-bahn-monate li { font-size: 13px; }
   }
 </style>

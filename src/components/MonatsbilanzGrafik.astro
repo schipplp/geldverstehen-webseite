@@ -4,6 +4,11 @@
 // farbigen Unterstriche). Ersetzt den Formel-Kasten im Text.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
+// Die Bildunterschrift lässt sich überschreiben, wenn die Grafik außerhalb
+// des Ratgebers steht (Coaching-Seite).
+export interface Props { fazit?: string }
+const { fazit = 'Die Monatsbilanz zeigt dir deinen wahren monatlichen Spielraum.' } = Astro.props;
+
 const zeilen = [
   { op: '', name: 'Einkommen', farbe: 'gruen' },
   { op: '–', name: 'Fixkosten', farbe: 'blau' },
@@ -11,7 +16,7 @@ const zeilen = [
 ];
 ---
 <ArtikelGrafik
-  fazit="Die Monatsbilanz zeigt dir deinen wahren monatlichen Spielraum."
+  fazit={fazit}
   beschreibung="Die Monatsbilanz: Einkommen minus Fixkosten minus Flexkosten ergibt dein Monatsergebnis."
 >
   <div class="mb">
