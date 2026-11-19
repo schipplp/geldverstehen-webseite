@@ -5,7 +5,7 @@
 // Idee: kein Programm-Pitch, sondern Per schreibt den Leser persönlich an
 // (auf der Seite selbst ist bewusst nicht von einem „Brief" die Rede). Der
 // Leser wird dort abgeholt, wo er steht; das Coaching wird nur angedeutet.
-// Rahmen: Das Coaching ist jetzt wieder möglich, die Plätze sind begrenzt.
+// Rahmen: Das Coaching ist jetzt wieder möglich, die Plätze sind begrenzt (Zahl: `plaetze`).
 // Einziger Call to Action ist die Bewerbung auf einen Platz, danach folgt
 // ein Telefonat.
 //
@@ -20,9 +20,10 @@ import MonatsbilanzGrafik from '../components/MonatsbilanzGrafik.astro';
 import { img } from '../lib/images';
 import { testimonials } from '../lib/stimmen';
 
-// TODO(Per): Wie viele Plätze gibt es? Bisher steht nur „begrenzt“ auf der
-// Seite, eine konkrete Zahl (und ggf. Frist) wäre glaubwürdiger.
-//
+// Zahl der Plätze — von Per vorläufig auf 25 gesetzt. Hier ändern, dann
+// stimmt sie überall auf der Seite.
+const plaetze = 25;
+
 // TODO(Per): Wohin führt die Bewerbung? Vorläufig eine E-Mail an die
 // Kontaktadresse. Später z. B. Bewerbungsformular oder Terminbuchung.
 const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
@@ -30,7 +31,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
 ---
 <Base
   title="Coaching mit Per Schippl"
-  description="Für alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist: Das Coaching mit Per Schippl ist jetzt wieder möglich. Die Plätze sind begrenzt – bewirb dich auf einen."
+  description={`Für alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist: Das Coaching mit Per Schippl ist jetzt wieder möglich. Es gibt nur ${plaetze} Plätze – bewirb dich auf einen.`}
   noindex
 >
   <!-- ── HERO ── -->
@@ -40,7 +41,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.16em; color:var(--gv-yellow); margin-bottom:16px;">JETZT WIEDER MÖGLICH: COACHING MIT PER SCHIPPL</div>
         <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(32px,4.2vw,54px);">»Nie mehr Geldsorgen. Im Ernstfall abgesichert. Dir mit gutem Gefühl etwas leisten können und immer ein fettes Plus auf dem Konto.«</h1>
         <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Wünschst du dir das auch? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
-        <p class="co-hero-hinweis">Begrenzte Plätze · Start im neuen Jahr</p>
+        <p class="co-hero-hinweis">Nur {plaetze} Plätze · Start im neuen Jahr</p>
       </div>
       <div class="co-hero-bild">
         <img fetchpriority="high" src={img.perCrashkurs} width="1200" height="800" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd an einem Fenster" />
@@ -59,7 +60,6 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p>Dabei ist dir das Thema nicht egal. Im Gegenteil, du würdest es gern in Ordnung bringen. Du wünschst dir <strong>Klarheit</strong> darüber, was reinkommt, was rausgeht und was du dir eigentlich leisten kannst. Und du wünschst dir eine <strong>Struktur</strong>, auf die du dich verlassen kannst. Nur weißt du nicht recht, wo du anfangen sollst. <mark>Dir fehlt der rote Faden.</mark></p>
         <p>Solange der fehlt, bleibt ein ungutes Gefühl. Beim Geldausgeben meldet sich häufig ein <strong>schlechtes Gewissen</strong>, weil du nicht sicher bist, was eigentlich drin ist. Selbst die schönen Dinge kannst du nicht richtig genießen: einen Urlaub planen, mit Freunden essen gehen, dir selber etwas gönnen. Und Rücklagen oder Vermögensaufbau wandern immer wieder auf später.</p>
         <p>Wenn du dich darin wiedererkennst, dann bist du hier richtig. Und du bist damit nicht allein: Die meisten Menschen beschäftigen sich äußerst ungern mit ihren Finanzen. Die Frankfurter Allgemeine hat es einmal so überschrieben:</p>
-        {/* TODO(Per): Wortlaut und Datum der FAZ-Überschrift bitte gegenprüfen — online nicht auffindbar. */}
         <blockquote class="co-zitat">»Nur Arztbesuche und Putzen sind schlimmer als Finanzfragen«<cite>Frankfurter Allgemeine · 31.10.2018</cite></blockquote>
         <p>Ich kenne diese Situation aus vielen, vielen Gesprächen mit Lesern und Coaching-Teilnehmern. Und ich weiß: <strong>Sie lässt sich ändern.</strong></p>
 
@@ -169,7 +169,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
             <li class="co-weg-jetzt"><span class="co-weg-jahr">Jetzt</span><span class="ag-text">Coaching wieder möglich</span></li>
           </ol>
         </ArtikelGrafik>
-        <p><mark>Jetzt ist das Coaching wieder möglich.</mark> Im neuen Jahr starte ich ein neues Coaching, und <strong>die Plätze darin sind begrenzt</strong>. Du musst dir den roten Faden darin nicht selbst suchen. Wir gehen den Weg gemeinsam, von dort, wo du heute stehst, bis du deine Finanzen im Griff hast.</p>
+        <p><mark>Jetzt ist das Coaching wieder möglich.</mark> Im neuen Jahr starte ich ein neues Coaching, und <strong>darin gibt es nur {plaetze} Plätze</strong>. Du musst dir den roten Faden darin nicht selbst suchen. Wir gehen den Weg gemeinsam, von dort, wo du heute stehst, bis du deine Finanzen im Griff hast.</p>
         <p>Was dich im Einzelnen erwartet, möchte ich dir lieber persönlich erzählen. Denn ob das Coaching zu dir passt, hängt davon ab, wo du stehst, und das erfahre ich nur im Gespräch. Deshalb gibt es auf dieser Seite nichts zu kaufen. <strong>Du kannst dich auf einen Platz bewerben, und danach telefonieren wir.</strong></p>
         <p>Vielleicht zögerst du noch. Das verstehe ich. Bedenke nur, dass sich an deiner Situation von alleine nichts ändern wird. Im Gegenteil, sie wird sich eher weiter zuspitzen.</p>
         <p><strong>Wenn du dich hier wiedergefunden hast, dann ist das Coaching wie für dich gemacht.</strong> Befreie dich von finanziellen Ängsten, Sorgen und Zweifeln und lass das Thema Geld ab sofort dein Leben bereichern. Ich würde mich freuen, von dir zu hören.</p>
@@ -187,7 +187,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <div class="co-chance">
           <div class="co-chance-kopf">Jetzt wieder möglich</div>
           <div class="co-chance-titel">Coaching mit Per Schippl</div>
-          <p>Das Coaching startet im neuen Jahr, und die Plätze sind begrenzt. Wenn du dabei sein möchtest, dann nutze die Chance und bewirb dich jetzt.</p>
+          <p>Das Coaching startet im neuen Jahr, und es gibt nur {plaetze} Plätze. Wenn du dabei sein möchtest, dann nutze die Chance und bewirb dich jetzt.</p>
           <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
         </div>
       </article>
@@ -213,7 +213,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <div class="co-card">
           <div class="co-num">#3</div>
           <h3 class="co-card-h">Du entscheidest</h3>
-          <p class="co-card-p">Wenn es für uns beide passt, sicherst du dir einen der begrenzten Plätze fürs neue Jahr.</p>
+          <p class="co-card-p">Wenn es für uns beide passt, sicherst du dir einen der {plaetze} Plätze fürs neue Jahr.</p>
         </div>
       </div>
     </div>
@@ -271,7 +271,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   <section style="background:var(--gv-blue);">
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px; text-align:center;">
       <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Jetzt wieder möglich: Bewirb dich auf deinen Platz</h2>
-      <p style="font-size:18px; line-height:1.6; color:#FFFFFF; margin:0 auto 28px; max-width:520px;">Das Coaching startet im neuen Jahr, und die Plätze sind begrenzt. Alles Weitere besprechen wir am Telefon.</p>
+      <p style="font-size:18px; line-height:1.6; color:#FFFFFF; margin:0 auto 28px; max-width:520px;">Das Coaching startet im neuen Jahr, und es gibt nur {plaetze} Plätze. Alles Weitere besprechen wir am Telefon.</p>
       <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
     </div>
   </section>
