@@ -20,6 +20,9 @@ import MonatsbilanzGrafik from '../components/MonatsbilanzGrafik.astro';
 import { img } from '../lib/images';
 import { testimonials } from '../lib/stimmen';
 
+// TODO(Per): Wie viele Plätze gibt es? Bisher steht nur „begrenzt“ auf der
+// Seite, eine konkrete Zahl (und ggf. Frist) wäre glaubwürdiger.
+//
 // TODO(Per): Wohin führt die Bewerbung? Vorläufig eine E-Mail an die
 // Kontaktadresse. Später z. B. Bewerbungsformular oder Terminbuchung.
 const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
@@ -36,7 +39,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
       <div class="co-hero-text">
         <div style="font-family:var(--font-display); font-size:17px; letter-spacing:.16em; color:var(--gv-yellow); margin-bottom:16px;">JETZT WIEDER MÖGLICH: COACHING MIT PER SCHIPPL</div>
         <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(32px,4.2vw,54px);">»Nie mehr Geldsorgen. Im Ernstfall abgesichert. Dir mit gutem Gefühl etwas leisten können und immer ein fettes Plus auf dem Konto.«</h1>
-        <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Klingt gut? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
+        <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Wünschst du dir das auch? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
         <p class="co-hero-hinweis">Begrenzte Plätze · Start im neuen Jahr</p>
       </div>
       <div class="co-hero-bild">
@@ -55,8 +58,9 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p><strong>Du verdienst eigentlich ganz gut. Trotzdem bleibt am Ende des Monats zu wenig übrig</strong>, und wenn du ehrlich bist, weißt du gar nicht genau, wo das alles hingeht. Es geht einfach zu viel Geld durch.</p>
         <p>Dabei ist dir das Thema nicht egal. Im Gegenteil, du würdest es gern in Ordnung bringen. Du wünschst dir <strong>Klarheit</strong> darüber, was reinkommt, was rausgeht und was du dir eigentlich leisten kannst. Und du wünschst dir eine <strong>Struktur</strong>, auf die du dich verlassen kannst. Nur weißt du nicht recht, wo du anfangen sollst. <mark>Dir fehlt der rote Faden.</mark></p>
         <p>Solange der fehlt, bleibt ein ungutes Gefühl. Beim Geldausgeben meldet sich häufig ein <strong>schlechtes Gewissen</strong>, weil du nicht sicher bist, was eigentlich drin ist. Selbst die schönen Dinge kannst du nicht richtig genießen: einen Urlaub planen, mit Freunden essen gehen, dir selber etwas gönnen. Und Rücklagen oder Vermögensaufbau wandern immer wieder auf später.</p>
-        <p>Wenn du dich darin wiedererkennst, dann bist du hier richtig. Und du bist damit nicht allein. Die Frankfurter Allgemeine hat es einmal so überschrieben:</p>
-        <blockquote class="co-zitat">»Nur Arztbesuche und Putzen sind schlimmer als Finanzfragen« – die meisten Deutschen hassen es, sich mit ihren Finanzen zu beschäftigen.<cite>Frankfurter Allgemeine · 31.10.2018</cite></blockquote>
+        <p>Wenn du dich darin wiedererkennst, dann bist du hier richtig. Und du bist damit nicht allein: Die meisten Menschen beschäftigen sich äußerst ungern mit ihren Finanzen. Die Frankfurter Allgemeine hat es einmal so überschrieben:</p>
+        {/* TODO(Per): Wortlaut und Datum der FAZ-Überschrift bitte gegenprüfen — online nicht auffindbar. */}
+        <blockquote class="co-zitat">»Nur Arztbesuche und Putzen sind schlimmer als Finanzfragen«<cite>Frankfurter Allgemeine · 31.10.2018</cite></blockquote>
         <p>Ich kenne diese Situation aus vielen, vielen Gesprächen mit Lesern und Coaching-Teilnehmern. Und ich weiß: <strong>Sie lässt sich ändern.</strong></p>
 
         <h2 class="co-h">Die finanzielle Achterbahn</h2>
@@ -83,7 +87,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <ol class="co-folgen">
           <li>
             <span class="co-folgen-nr" aria-hidden="true">1</span>
-            <div><strong>Es raubt dir wertvolle Lebensqualität.</strong> Für größere Wünsche und Träume wird es nicht reichen. Du bleibst knapp bei Kasse und bist gezwungen, finanziell zu improvisieren. Mit jedem Tag, den du das Thema aufschiebst, vergibst du die Chance, dir mehr und mehr finanziellen Spielraum aufzubauen.</div>
+            <div><strong>Es raubt dir wertvolle Lebensqualität.</strong> Für größere Wünsche und Träume wird es nicht reichen. Am Monatsende bleibt nichts übrig, und du bist gezwungen, finanziell zu improvisieren. Mit jedem Tag, den du das Thema aufschiebst, vergibst du die Chance, dir mehr und mehr finanziellen Spielraum aufzubauen.</div>
           </li>
           <li>
             <span class="co-folgen-nr" aria-hidden="true">2</span>
@@ -91,7 +95,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
           </li>
           <li>
             <span class="co-folgen-nr" aria-hidden="true">3</span>
-            <div><strong>Du verbaust dir deine eigene Zukunft.</strong> Wenn du nicht dafür sorgst, dass du dein Geld zusammenhältst, setzt du deine eigene Zukunft aufs Spiel, und natürlich auch die deiner Kinder und deiner Familie. Die meisten Rentner müssen schon heute mit viel weniger Geld auskommen, als sie vor der Rente zur Verfügung hatten.</div>
+            <div><strong>Du verbaust dir deine eigene Zukunft.</strong> Wenn du nicht dafür sorgst, dass du dein Geld zusammenhältst, setzt du deine eigene Zukunft aufs Spiel, und natürlich auch die deiner Kinder und deiner Familie. Und spätestens im Ruhestand steht in aller Regel weniger Geld zur Verfügung als vorher.</div>
           </li>
         </ol>
         <p>Ich glaube, du spürst das längst. Sonst hättest du dir nicht gesagt, dass es so nicht weitergehen kann.</p>
@@ -100,7 +104,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p>Vermutlich hast du auch schon einiges probiert: ein Haushaltsbuch angefangen, eine App runtergeladen, dir fest vorgenommen, mehr zu sparen. Eine Zeit lang lief es vielleicht sogar gut. Und irgendwann hat es sich trotzdem wieder genauso angefühlt wie vorher.</p>
         <p>An dieser Stelle ziehen viele den Schluss, dass sie eben nicht mit Geld umgehen können. Ich sehe das anders. Als Finanzcoach begegnen mir immer wieder dieselben <strong>drei Wege</strong>, auf denen Menschen es versuchen. Alle drei sind verständlich, und alle drei führen zurück an den Anfang.</p>
         <p>Der erste Weg ist das Aufschieben. Ich nenne ihn die <strong>»Vogel-Strauß-Taktik«</strong>: Man schaut weg und schiebt das Thema auf, getreu dem Motto »Es ist gerade nicht der richtige Zeitpunkt dafür«. Nicht aus Gleichgültigkeit, sondern weil man irgendwie Angst davor hat, was man sehen könnte. Nur kommt der richtige Zeitpunkt nie.</p>
-        <p>Wer nicht länger aufschieben will, landet oft beim zweiten Weg, der <strong>»Crash-Diät«</strong>. Der erste Gedanke ist dann: »Ich muss weniger ausgeben.« Also werden Ausgaben zusammengestrichen, und das Leben wird auf den Kopf gestellt. Das bringt schnell Ergebnisse, aber in 99 % der Fälle ist dieser Weg nicht nachhaltig. Er kostet so viel Energie, dass es kaum jemand durchhält. Man verfällt schneller in alte Muster, als einem lieb ist, und der Kontostand erlebt den bekannten Jojo-Effekt.</p>
+        <p>Wer nicht länger aufschieben will, landet oft beim zweiten Weg, der <strong>»Crash-Diät«</strong>. Der erste Gedanke ist dann: »Ich muss weniger ausgeben.« Also werden Ausgaben zusammengestrichen, und das Leben wird auf den Kopf gestellt. Das bringt schnell Ergebnisse, aber nachhaltig ist dieser Weg fast nie. Er kostet so viel Energie, dass es kaum jemand durchhält. Man verfällt schneller in alte Muster, als einem lieb ist, und der Kontostand erlebt den bekannten Jojo-Effekt.</p>
         <AchterbahnGrafik fazit="Die Crash-Diät: schnelle Ergebnisse, und dann der bekannte Jojo-Effekt." />
         <p>Der dritte Weg ist die <strong>»Hau-Ruck-Aktion«</strong>. Man setzt sich hin, wertet stundenlang akribisch jede Ausgabe aus und steckt viel Zeit und Energie hinein. Am Ende hat man viele Zahlen, aber immer noch keine Klarheit. Der Gedanke »Das ist doch nicht so schwer, ich schaffe das schon« hat schon so manchen zur Verzweiflung gebracht.</p>
         <ArtikelGrafik fazit="Drei Wege, die zurück an den Anfang führen. Am guten Willen fehlt es bei keinem.">
@@ -118,8 +122,8 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p>Eine Frage an dich: Hast du einen Plan, eine konkrete Strategie, wie sich deine finanzielle Situation in den nächsten fünf Jahren verbessern wird?</p>
         <p>Falls nicht, dann solltest du das ändern. Denn eines ist sicher: <mark>Jeder finanziell erfolgreiche Mensch folgt einem klaren Plan.</mark></p>
         <p>Und dieser Plan ist kein Hexenwerk. Erfahrungsgemäß sind es <strong>nur wenige Stellschrauben</strong>, die du bedienen musst, um deine Finanzen fest im Griff zu haben. Du brauchst dafür keinen Verzicht und keinen Geiz, und du musst auch nicht alles dem Kontostand unterordnen.</p>
-        <p>Zuerst verschaffst du dir einen <strong>glasklaren Überblick</strong>. Dann bringst du eine <strong>Struktur</strong> in deine Finanzen, die zu dir und deinem Alltag passt. Und diese Struktur ist so einfach, dass du am Ende fast nichts mehr tun musst, um Ordnung zu halten.</p>
-        <MonatsbilanzGrafik fazit="Der glasklare Überblick: was reinkommt, was rausgeht und was du dir leisten kannst." />
+        <p>Am Anfang steht der Überblick. Darauf baut eine Struktur auf, die so einfach ist, dass du am Ende fast nichts mehr tun musst, um Ordnung zu halten.</p>
+        <MonatsbilanzGrafik fazit="Was reinkommt, was rausgeht und was du dir leisten kannst." />
         <p>Stell dir vor, wie es sich anfühlt, wenn die Achterbahn anhält:</p>
         <ul class="co-ziele">
           <li>Du hast einen <strong>glasklaren Überblick</strong> über deine Finanzen und verlierst ihn nie wieder.</li>
@@ -157,7 +161,7 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
         <p>Mein Name ist Per Schippl. <strong>2016 habe ich GELD VERSTEHEN gestartet</strong>, und seitdem helfe ich Menschen dabei, genau dieses Fundament zu legen. 2017 wurde daraus ein Buch, und viele Leser haben damit ihre Finanzen in den Griff bekommen.</p>
         <p>Aus dem Buch kamen aber auch immer mehr Anfragen von Menschen, die sich Hilfe bei der Umsetzung wünschten. Überrascht hat mich das nicht. <strong>Wissen ist gut, aber es bringt dir nur etwas, wenn du es auch angewendet bekommst.</strong> Und dafür braucht es manchmal jemanden, der dich dort abholt, wo du gerade stehst.</p>
         <p>So sind meine Coachings entstanden. Über die Jahre habe ich <strong>hunderte Menschen</strong> dabei begleitet, ihre Finanzen in den Griff zu bekommen: Studenten, Selbstständige, Familien, Gutverdiener. Jeder mit einer anderen Situation.</p>
-        <ArtikelGrafik fazit="Jetzt ist das Coaching wieder möglich. Die Plätze sind begrenzt.">
+        <ArtikelGrafik fazit="Aus einer Webseite wurden ein Buch und die Coachings.">
           <ol class="co-weg">
             <li><span class="co-weg-jahr">2016</span><span class="ag-text">GELD VERSTEHEN gestartet</span></li>
             <li><span class="co-weg-jahr">2017</span><span class="ag-text">Das Buch</span></li>
