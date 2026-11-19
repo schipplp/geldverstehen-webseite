@@ -5,10 +5,15 @@
 // jeweils unter ihrer Phase.
 import ArtikelGrafik from './ArtikelGrafik.astro';
 
+// Die Bildunterschrift lässt sich überschreiben, wenn die Grafik außerhalb
+// des Ratgebers steht (Coaching-Seite).
+export interface Props { fazit?: string }
+const { fazit = 'Ein Haushaltsbuch ist keine Crashdiät für deine Finanzen.' } = Astro.props;
+
 const phasen = ['radikale Enthaltsamkeit', 'Rückfall', 'schlechtes Gewissen'];
 ---
 <ArtikelGrafik
-  fazit="Ein Haushaltsbuch ist keine Crashdiät für deine Finanzen."
+  fazit={fazit}
   beschreibung="Eine Wellenlinie wie eine Achterbahn: erst radikale Enthaltsamkeit, dann der Rückfall, dann das schlechte Gewissen – und alles beginnt von vorn."
 >
   <div class="ab">
