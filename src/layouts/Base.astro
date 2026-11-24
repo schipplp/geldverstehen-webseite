@@ -29,8 +29,10 @@ export interface Props {
   ogTyp?: 'website' | 'article';
   /** Seite aus Suchmaschinen heraushalten (z. B. Bestätigungs- und 404-Seite) */
   noindex?: boolean;
+  /** Navigation ohne Menüpunkte, nur Logo (z. B. Coaching-Seite) */
+  ohneMenue?: boolean;
 }
-const { title, description, active = '', bild, ogTyp = 'website', noindex = false } = Astro.props;
+const { title, description, active = '', bild, ogTyp = 'website', noindex = false, ohneMenue = false } = Astro.props;
 // Ohne eigenes Bild bekommt jede Seite das Vorschaubild der Startseite.
 const bildUrl = new URL(bild ?? '/og/startseite.png', Astro.site).href;
 const fullTitle = title ? `${title} · GELD VERSTEHEN` : 'GELD VERSTEHEN';
@@ -71,7 +73,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <link rel="preload" as="font" type="font/woff2" href={manrope700} crossorigin />
 </head>
 <body>
-  <SiteNav active={active} />
+  <SiteNav active={active} nurLogo={ohneMenue} />
   <slot />
   <SiteFooter />
   <Consent />
