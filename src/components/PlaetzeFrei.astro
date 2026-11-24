@@ -1,17 +1,18 @@
 ---
 // Anzeige der freien Coaching-Plätze (auf blauem Grund): Text + Balken.
 // Die Zahlen kommen aus src/pages/coaching.astro und werden von Hand gepflegt.
-export interface Props { plaetze: number; frei: number; }
-const { plaetze, frei } = Astro.props;
+export interface Props { plaetze: number; frei: number; /** linksbündig statt mittig */ links?: boolean; }
+const { plaetze, frei, links = false } = Astro.props;
 const belegt = Math.max(0, Math.min(plaetze, plaetze - frei));
 ---
-<div class="pf" role="img" aria-label={`Noch ${frei} von ${plaetze} Plätzen frei`}>
+<div class:list={["pf", { "pf-links": links }]} role="img" aria-label={`Noch ${frei} von ${plaetze} Plätzen frei`}>
   <div class="pf-text">Noch <strong>{frei}</strong> von {plaetze} Plätzen frei</div>
   <div class="pf-balken"><span style={`width:${(belegt / plaetze) * 100}%`}></span></div>
 </div>
 
 <style>
   .pf { max-width: 360px; margin: 0 auto 22px; }
+  .pf-links { margin-left: 0; }
   .pf-text { font-size: 15px; font-weight: 700; letter-spacing: .02em; color: #FFFFFF; margin-bottom: 8px; }
   .pf-text strong { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1; color: var(--gv-yellow); margin: 0 2px; }
   /* Gelb = noch frei, der dunkle Teil links = bereits vergeben */
