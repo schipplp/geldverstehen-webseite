@@ -3,10 +3,7 @@
 //
 // Versand: Supabase Edge Function → Resend, siehe src/lib/bewerbung.js.
 //
-// TODO(Per): Felder, Pflichtangaben und alle Texte hier sind Platzhalter und
-// von dir zu bestätigen (Feldauswahl, Einwilligungshinweis, Erfolgsmeldung).
-// TODO(Per): Datenschutzerklärung um das Bewerbungsformular ergänzen
-// (Supabase, Resend, Empfänger).
+// Felder und Texte von Per am 24.11.2026 so bestätigt.
 ---
 <div class="bw-wrap">
   <form class="bw-form" novalidate>
@@ -36,11 +33,9 @@
 
     <button class="gv-btn bw-btn" type="submit" data-label="Jetzt auf einen Platz bewerben">Jetzt auf einen Platz bewerben</button>
     <p class="bw-sendefehler" role="alert" hidden></p>
-    <!-- TODO(Per): Einwilligungshinweis — Platzhalter -->
     <p class="bw-hinweis">Deine Angaben nutze ich nur, um mich wegen deiner Bewerbung bei dir zu melden. Mehr dazu in der <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
   </form>
 
-  <!-- TODO(Per): Erfolgsmeldung — Platzhalter -->
   <div class="bw-erfolg" hidden tabindex="-1">
     <div class="bw-check">✓</div>
     <div>
