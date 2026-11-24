@@ -1,16 +1,12 @@
 ---
 // Bewerbungsformular für das Coaching (src/pages/coaching.astro).
 //
-// Versand über einen Formular-zu-E-Mail-Dienst, siehe src/lib/bewerbung.js.
-// PROTOTYP: Solange dort kein accessKey steht, wird nichts versendet — der
-// Erfolg wird nur simuliert.
+// Versand: Supabase Edge Function → Resend, siehe src/lib/bewerbung.js.
 //
 // TODO(Per): Felder, Pflichtangaben und alle Texte hier sind Platzhalter und
 // von dir zu bestätigen (Feldauswahl, Einwilligungshinweis, Erfolgsmeldung).
-// TODO(Per): Access Key in src/lib/bewerbung.js eintragen.
-// TODO(Per): Datenschutzerklärung um das Bewerbungsformular und den Dienst
-// ergänzen (AV-Vertrag mit dem Anbieter).
-// Die name-Attribute erscheinen so als Feldbezeichnung in der E-Mail.
+// TODO(Per): Datenschutzerklärung um das Bewerbungsformular ergänzen
+// (Supabase, Resend, Empfänger).
 ---
 <div class="bw-wrap">
   <form class="bw-form" novalidate>
@@ -148,16 +144,20 @@
       });
       if (erstes) { (erstes as HTMLElement).focus(); return; }
 
-      // FormData vor dem Sperren lesen (deaktivierte Felder fehlen sonst).
-      const fd = new FormData(form);
-      fd.append('access_key', BEWERBUNG_CONFIG.accessKey);
-      fd.append('subject', BEWERBUNG_CONFIG.subject);
-      fd.append('from_name', BEWERBUNG_CONFIG.fromName);
+      // Werte vor dem Sperren lesen.
+      const wert = (id: string) => (form.querySelector<HTMLInputElement>(`#${id}`)?.value || '').trim();
+      const daten = {
+        vorname: wert('bw-vorname'),
+        telefon: wert('bw-telefon'),
+        email: wert('bw-email'),
+        nachricht: wert('bw-nachricht'),
+        botcheck: !!form.querySelector<HTMLInputElement>('[name="botcheck"]')?.checked,
+      };
       submitting = true;
       sperren(true);
 
-      // Prototyp-Modus (kein Access Key): Erfolg simulieren.
-      if (!BEWERBUNG_CONFIG.accessKey) {
+      // Prototyp-Modus (kein Endpoint): Erfolg simulieren.
+      if (!BEWERBUNG_CONFIG.endpoint) {
         window.setTimeout(fertig, 300);
         return;
       }
@@ -165,8 +165,8 @@
       try {
         const res = await fetch(BEWERBUNG_CONFIG.endpoint, {
           method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: fd,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(daten),
         });
         const json = await res.json().catch(() => null);
         if (!res.ok || !json?.success) throw new Error(json?.message || `HTTP ${res.status}`);
