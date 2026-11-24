@@ -44,6 +44,7 @@ const bewerbung = '#bewerbung';
   description={`Für alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist: Das Coaching mit Per Schippl ist jetzt wieder möglich. Es gibt nur ${plaetze} Plätze – bewirb dich auf einen.`}
   noindex
   ohneMenue
+  ohneBanner
 >
   <!-- ── HERO ── -->
   <div style="background:var(--gv-blue);">
@@ -53,7 +54,7 @@ const bewerbung = '#bewerbung';
         <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(32px,4.2vw,54px);">»Nie mehr Geldsorgen. Im Ernstfall abgesichert. Dir mit gutem Gefühl etwas leisten können und immer ein fettes Plus auf dem Konto.«</h1>
         <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Wünschst du dir das auch? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
         <div class="co-hero-cta">
-          <PlaetzeFrei plaetze={plaetze} frei={frei} links /><a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a></div>
+          <PlaetzeFrei plaetze={plaetze} frei={frei} links /><a class="gv-btn" href={bewerbung} data-track="kopf">Jetzt auf einen Platz bewerben</a></div>
       </div>
       <div class="co-hero-bild">
         <img fetchpriority="high" src={img.perCrashkurs} width="1200" height="800" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd an einem Fenster" />
@@ -201,7 +202,7 @@ const bewerbung = '#bewerbung';
           <div class="co-chance-titel">Coaching mit Per Schippl</div>
           <p>Das Coaching startet am {start}, und es gibt nur {plaetze} Plätze. Wenn du dabei sein möchtest, dann nutze die Chance und bewirb dich jetzt.</p>
           <PlaetzeFrei plaetze={plaetze} frei={frei} />
-          <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
+          <a class="gv-btn" href={bewerbung} data-track="text">Jetzt auf einen Platz bewerben</a>
         </div>
       </article>
     </div>
@@ -290,6 +291,64 @@ const bewerbung = '#bewerbung';
     </div>
   </section>
 </Base>
+
+<!--
+  Zählung der Coaching-Seite — ohne Cookies und ohne Einwilligungsbanner.
+
+  Meldet einzelne Ereignisse (Seitenaufruf, Formular gesehen, Klick auf
+  „Bewerben", Formular begonnen/gesendet) an die Edge Function
+  coaching-zaehler. Es wird nichts im Browser gespeichert: Die Kennung
+  `aufruf` ist eine Zufallszahl, die nur bis zum Verlassen der Seite im
+  Arbeitsspeicher lebt und die Ereignisse EINES Seitenaufrufs verbindet.
+  Die Herkunft kommt aus dem Link (utm_source, utm_medium, utm_campaign).
+
+  Hat ein Besucher auf einer anderen Seite Google Analytics zugestimmt, gehen
+  dieselben Ereignisse zusätzlich an GA4 (gtag).
+-->
+<script>
+  import { BEWERBUNG_CONFIG } from '../lib/bewerbung.js';
+
+  const p = new URLSearchParams(location.search);
+  const kurz = (k: string) => (p.get(k) || '').trim().slice(0, 60);
+  const herkunft = { quelle: kurz('utm_source'), medium: kurz('utm_medium'), kampagne: kurz('utm_campaign') };
+  (window as any).gvHerkunft = herkunft;
+
+  let verweis = '';
+  try { if (document.referrer) verweis = new URL(document.referrer).hostname; } catch { /* egal */ }
+  if (verweis === location.hostname) verweis = '';
+
+  const aufruf = crypto.randomUUID ? crypto.randomUUID() : '';
+  const geraet = matchMedia('(max-width: 860px)').matches ? 'handy' : 'desktop';
+  const GA_NAMEN: Record<string, string> = { bewerbung_gesendet: 'generate_lead' };
+
+  const track = (ereignis: string, detail = '') => {
+    if (BEWERBUNG_CONFIG.zaehler) {
+      // text/plain + keepalive: keine CORS-Vorabanfrage, übersteht den Seitenwechsel.
+      fetch(BEWERBUNG_CONFIG.zaehler, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ aufruf, ereignis, detail, ...herkunft, verweis, geraet }),
+      }).catch(() => {});
+    }
+    (window as any).gtag?.('event', GA_NAMEN[ereignis] || `coaching_${ereignis}`, { detail });
+  };
+  (window as any).gvCoachingTrack = track;
+
+  track('seitenaufruf');
+
+  document.querySelectorAll<HTMLElement>('[data-track]').forEach((a) => {
+    a.addEventListener('click', () => track('klick_bewerben', a.dataset.track));
+  });
+
+  const formular = document.querySelector('.bw-form');
+  if (formular && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((e) => {
+      if (e.some((x) => x.isIntersecting)) { track('formular_gesehen'); io.disconnect(); }
+    }, { threshold: 0.1 });
+    io.observe(formular);
+  }
+</script>
 
 <style>
   /* Hero: Text links, großes Foto von Per rechts */

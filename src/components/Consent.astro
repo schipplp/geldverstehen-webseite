@@ -5,9 +5,13 @@
 import { GA_MEASUREMENT_ID } from '../lib/analytics';
 import { u } from '../lib/url';
 const gaId = GA_MEASUREMENT_ID;
+// still: Banner erscheint nicht von selbst, nur über „Cookie-Einstellungen"
+// im Footer. GA lädt dann weiterhin nur bei bereits erteilter Einwilligung.
+interface Props { still?: boolean }
+const { still = false } = Astro.props;
 ---
 {gaId ? (
-  <div id="gv-consent" class="gv-consent" data-ga-id={gaId} role="dialog" aria-label="Cookie-Einwilligung" aria-live="polite" hidden>
+  <div id="gv-consent" class="gv-consent" data-ga-id={gaId} data-still={still ? "1" : undefined} role="dialog" aria-label="Cookie-Einwilligung" aria-live="polite" hidden>
     <div class="gv-consent-inner">
       <p class="gv-consent-text">
         Wir verwenden Cookies für eine anonyme Reichweitenmessung (Google Analytics), um die Website zu verbessern — aber nur mit deiner Einwilligung. Mehr dazu in der <a href={u('/datenschutz')}>Datenschutzerklärung</a>.
@@ -69,7 +73,7 @@ const gaId = GA_MEASUREMENT_ID;
 
     const choice = localStorage.getItem(KEY);
     if (choice === 'granted') loadGA();
-    else if (choice !== 'denied') show();
+    else if (choice !== 'denied' && !el.dataset.still) show();
 
     el.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
       btn.addEventListener('click', () => {

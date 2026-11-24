@@ -124,7 +124,11 @@
       felder.forEach((f) => (f.disabled = an));
       btn.textContent = an ? 'Wird gesendet…' : label;
     };
+    const melde = (ereignis: string, detail?: string) => (window as any).gvCoachingTrack?.(ereignis, detail);
+    // Erstes Tippen in einem Feld = Formular begonnen.
+    form.addEventListener('input', () => melde('formular_start'), { once: true });
     const fertig = () => {
+      melde('bewerbung_gesendet');
       form.hidden = true;
       success.hidden = false;
       success.focus();
@@ -152,6 +156,8 @@
         erreichbar: wert('bw-erreichbar'),
         nachricht: wert('bw-nachricht'),
         botcheck: !!form.querySelector<HTMLInputElement>('[name="botcheck"]')?.checked,
+        // Kennung aus dem Link (siehe Zähl-Skript in coaching.astro)
+        ...((window as any).gvHerkunft || {}),
       };
       submitting = true;
       sperren(true);
@@ -173,6 +179,7 @@
         fertig();
       } catch (err) {
         console.error('Bewerbung fehlgeschlagen:', err);
+        melde('bewerbung_fehler');
         sperren(false);
         submitting = false;
         sendErr.textContent = 'Es hat leider nicht geklappt. Bitte versuche es später erneut oder schreib an mail@geldverstehen.de.';

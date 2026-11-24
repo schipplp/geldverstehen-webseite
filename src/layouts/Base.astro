@@ -32,8 +32,10 @@ export interface Props {
   /** Seite ohne Absprünge: Navigation nur mit Logo (nicht verlinkt), Fußzeile
       nur mit Pflichtangaben (z. B. Coaching-Seite) */
   ohneMenue?: boolean;
+  /** Cookie-Banner nicht von selbst zeigen (bleibt über den Footer erreichbar) */
+  ohneBanner?: boolean;
 }
-const { title, description, active = '', bild, ogTyp = 'website', noindex = false, ohneMenue = false } = Astro.props;
+const { title, description, active = '', bild, ogTyp = 'website', noindex = false, ohneMenue = false, ohneBanner = false } = Astro.props;
 // Ohne eigenes Bild bekommt jede Seite das Vorschaubild der Startseite.
 const bildUrl = new URL(bild ?? '/og/startseite.png', Astro.site).href;
 const fullTitle = title ? `${title} · GELD VERSTEHEN` : 'GELD VERSTEHEN';
@@ -77,6 +79,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <SiteNav active={active} nurLogo={ohneMenue} />
   <slot />
   <SiteFooter minimal={ohneMenue} />
-  <Consent />
+  <Consent still={ohneBanner} />
 </body>
 </html>

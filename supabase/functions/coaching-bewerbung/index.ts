@@ -60,6 +60,8 @@ Deno.serve(async (req: Request) => {
   const email = feld('email', 200);
   const erreichbar = feld('erreichbar', 300);
   const nachricht = feld('nachricht', 5000);
+  // Kennung aus dem Link (utm_source / utm_medium / utm_campaign), falls vorhanden.
+  const herkunft = [feld('quelle', 60), feld('medium', 60), feld('kampagne', 60)].filter(Boolean).join(' / ');
   if (!vorname || !telefon || !EMAIL_RE.test(email)) return antwort(400, { success: false, error: 'felder' });
 
   const key = Deno.env.get('RESEND_API_KEY');
@@ -71,6 +73,7 @@ Deno.serve(async (req: Request) => {
     ['E-Mail', email],
     ['Erreichbar', erreichbar || '–'],
     ['Nachricht', nachricht || '–'],
+    ['Quelle', herkunft || '(ohne Kennung)'],
   ];
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
