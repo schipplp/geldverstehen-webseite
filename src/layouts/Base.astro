@@ -29,7 +29,8 @@ export interface Props {
   ogTyp?: 'website' | 'article';
   /** Seite aus Suchmaschinen heraushalten (z. B. Bestätigungs- und 404-Seite) */
   noindex?: boolean;
-  /** Navigation ohne Menüpunkte, nur Logo (z. B. Coaching-Seite) */
+  /** Seite ohne Absprünge: Navigation nur mit Logo (nicht verlinkt), Fußzeile
+      nur mit Pflichtangaben (z. B. Coaching-Seite) */
   ohneMenue?: boolean;
 }
 const { title, description, active = '', bild, ogTyp = 'website', noindex = false, ohneMenue = false } = Astro.props;
@@ -75,7 +76,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <body>
   <SiteNav active={active} nurLogo={ohneMenue} />
   <slot />
-  <SiteFooter />
+  <SiteFooter minimal={ohneMenue} />
   <Consent />
 </body>
 </html>

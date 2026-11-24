@@ -12,7 +12,9 @@ const links = [
 ---
 <div class="gv-nv-bar">
   <div class="gv-nv-wrap gv-nv">
-    <a class="gv-nv-word" href={u('/')} aria-label="GELD VERSTEHEN — Startseite"><span class="gv-nv-w1">GELD</span><span class="gv-nv-w2">VERSTEHEN</span></a>
+    {nurLogo
+      ? <span class="gv-nv-word"><span class="gv-nv-w1">GELD</span><span class="gv-nv-w2">VERSTEHEN</span></span>
+      : <a class="gv-nv-word" href={u('/')} aria-label="GELD VERSTEHEN — Startseite"><span class="gv-nv-w1">GELD</span><span class="gv-nv-w2">VERSTEHEN</span></a>}
     {!nurLogo && <Fragment>
     <button class="gv-nv-burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="gv-nv-links"><span></span><span></span><span></span></button>
     <div class="gv-nv-links" id="gv-nv-links">

@@ -2,7 +2,23 @@
 // Blauer Footer mit Wordmark, Tagline und drei Link-Spalten.
 import { u } from '../lib/url';
 import { GA_MEASUREMENT_ID } from '../lib/analytics';
+interface Props { /** nur Pflichtangaben: Impressum, Datenschutz, Cookie-Einstellungen (z. B. Coaching-Seite) */ minimal?: boolean }
+const { minimal = false } = Astro.props;
 ---
+{minimal ? (
+<footer class="gv-site-ft gv-ft-min">
+  <div class="gv-ft-inner gv-ft-min-inner">
+    <div class="gv-ft-copy">© 2026 GELD VERSTEHEN · Per Schippl</div>
+    <div class="gv-ft-min-links">
+      <a class="gv-ft-a" href={u('/impressum')}>Impressum</a>
+      <a class="gv-ft-a" href={u('/datenschutz')}>Datenschutz</a>
+      {GA_MEASUREMENT_ID ? (
+        <button class="gv-ft-a gv-ft-consent" type="button" data-gv-consent-open>Cookie-Einstellungen</button>
+      ) : null}
+    </div>
+  </div>
+</footer>
+) : (
 <footer class="gv-site-ft">
   <div class="gv-ft-inner">
     <div class="gv-ft-top">
@@ -55,6 +71,7 @@ import { GA_MEASUREMENT_ID } from '../lib/analytics';
     <div class="gv-ft-copy">© 2026 GELD VERSTEHEN · Per Schippl</div>
   </div>
 </footer>
+)}
 
 <style>
   .gv-site-ft { background: var(--gv-blue); color: #fff; font-family: var(--font-body); padding: 56px 40px 30px; border-top: 1px solid rgba(255,255,255,.14); }
@@ -75,5 +92,10 @@ import { GA_MEASUREMENT_ID } from '../lib/analytics';
   .gv-ft-a:hover { color: #fff; }
   .gv-ft-consent { background: none; border: 0; padding: 0; font-family: var(--font-body); cursor: pointer; text-align: left; }
   .gv-ft-copy { margin-top: 22px; color: rgba(255,255,255,.45); font-size: 13px; }
+  .gv-site-ft.gv-ft-min { padding-top: 24px; padding-bottom: 24px; }
+  .gv-ft-min-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; }
+  .gv-ft-min .gv-ft-copy { margin-top: 0; }
+  .gv-ft-min-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .gv-ft-min .gv-ft-a { font-size: 13px; }
   @media (max-width: 860px) { .gv-site-ft { padding: 44px 22px 26px; } }
 </style>
