@@ -13,4 +13,7 @@
 
 export const BEWERBUNG_CONFIG = {
   endpoint: 'https://fivtdlrrhzjeanlpuuyb.supabase.co/functions/v1/coaching-bewerbung',
+  // Cookielose Zählung der Coaching-Seite (supabase/functions/coaching-zaehler).
+  // Leer = es wird nichts gezählt.
+  zaehler: 'https://fivtdlrrhzjeanlpuuyb.supabase.co/functions/v1/coaching-zaehler',
 };
