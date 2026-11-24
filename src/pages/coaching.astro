@@ -26,8 +26,9 @@ import { testimonials } from '../lib/stimmen';
 // stimmt sie überall auf der Seite.
 const plaetze = 25;
 
-// TODO(Per): Zahl der noch freien Plätze — von Hand pflegen. Sobald ein Platz
-// vergeben ist, hier herunterzählen und veröffentlichen. Nur echte Zahlen.
+// Zahl der noch freien Plätze — von Hand pflegen (Stand 24.11.2026 laut Per:
+// 25). Sobald ein Platz vergeben ist, hier herunterzählen und veröffentlichen.
+// Nur echte Zahlen.
 const frei = 25;
 
 // Starttermin des Coachings.
@@ -51,6 +52,7 @@ const bewerbung = '#bewerbung';
         <h1 style="font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:.01em; color:#fff; margin:0; font-size:clamp(32px,4.2vw,54px);">»Nie mehr Geldsorgen. Im Ernstfall abgesichert. Dir mit gutem Gefühl etwas leisten können und immer ein fettes Plus auf dem Konto.«</h1>
         <p style="font-size:19px; line-height:1.65; color:#FFFFFF; max-width:520px; margin:22px 0 0;">Wünschst du dir das auch? Wenn bei dir am Monatsende zu wenig übrig bleibt und dir der klare Plan fehlt, dann lies bitte weiter.</p>
         <p class="co-hero-hinweis">Noch {frei} von {plaetze} Plätzen frei · Start am {start}</p>
+        <div class="co-hero-cta"><a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a></div>
       </div>
       <div class="co-hero-bild">
         <img fetchpriority="high" src={img.perCrashkurs} width="1200" height="800" alt="Per Schippl, Finanzcoach und Gründer von GELD VERSTEHEN, lächelnd an einem Fenster" />
@@ -346,6 +348,7 @@ const bewerbung = '#bewerbung';
   .co-chance-kopf { font-family: var(--font-display); font-size: 17px; letter-spacing: .16em; color: var(--gv-yellow); }
   .co-chance-titel { font-family: var(--font-display); font-size: clamp(30px,3.6vw,40px); line-height: 1.05; letter-spacing: .01em; color: #fff; margin-top: 8px; }
   .co-letter .co-chance p { color: #FFFFFF; max-width: 460px; margin: 14px auto 22px; }
+  .co-hero-cta { margin-top: 20px; }
   .co-hero-hinweis { display: inline-block; margin: 22px 0 0; padding: 8px 14px; border: 1.5px solid var(--gv-yellow); border-radius: 999px; font-size: 14px; font-weight: 700; letter-spacing: .04em; color: #FFFFFF; }
 
   .co-sign { display: flex; align-items: center; gap: 16px; margin-top: 36px; }
