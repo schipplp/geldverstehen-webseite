@@ -1,40 +1,42 @@
 ---
 // Bewerbungsformular für das Coaching (src/pages/coaching.astro).
 //
-// PROTOTYP: Solange BREVO_CONFIG.coachingFormUrl leer ist, wird nichts
-// versendet — der Erfolg wird nur simuliert.
+// Versand über einen Formular-zu-E-Mail-Dienst, siehe src/lib/bewerbung.js.
+// PROTOTYP: Solange dort kein accessKey steht, wird nichts versendet — der
+// Erfolg wird nur simuliert.
 //
 // TODO(Per): Felder, Pflichtangaben und alle Texte hier sind Platzhalter und
 // von dir zu bestätigen (Feldauswahl, Einwilligungshinweis, Erfolgsmeldung).
-// TODO(Per): In Brevo ein Formular „Coaching-Bewerbung" anlegen, dessen
-// Feldnamen zu FELDER unten passen, und die URL in src/lib/brevo.js eintragen.
-// TODO(Per): Datenschutzerklärung um das Bewerbungsformular ergänzen.
+// TODO(Per): Access Key in src/lib/bewerbung.js eintragen.
+// TODO(Per): Datenschutzerklärung um das Bewerbungsformular und den Dienst
+// ergänzen (AV-Vertrag mit dem Anbieter).
+// Die name-Attribute erscheinen so als Feldbezeichnung in der E-Mail.
 ---
 <div class="bw-wrap">
   <form class="bw-form" novalidate>
     <div class="bw-zeile">
       <div class="bw-feld">
         <label for="bw-vorname">Vorname</label>
-        <input id="bw-vorname" class="bw-input" type="text" name="VORNAME" autocomplete="given-name" required />
+        <input id="bw-vorname" class="bw-input" type="text" name="Vorname" autocomplete="given-name" required />
         <p class="bw-fehler" role="alert" hidden></p>
       </div>
       <div class="bw-feld">
         <label for="bw-telefon">Telefon</label>
-        <input id="bw-telefon" class="bw-input" type="tel" name="SMS" autocomplete="tel" required />
+        <input id="bw-telefon" class="bw-input" type="tel" name="Telefon" autocomplete="tel" required />
         <p class="bw-fehler" role="alert" hidden></p>
       </div>
     </div>
     <div class="bw-feld">
       <label for="bw-email">E-Mailadresse</label>
-      <input id="bw-email" class="bw-input" type="email" name="EMAIL" autocomplete="email" required />
+      <input id="bw-email" class="bw-input" type="email" name="email" autocomplete="email" required />
       <p class="bw-fehler" role="alert" hidden></p>
     </div>
     <div class="bw-feld">
       <label for="bw-nachricht">Wo stehst du gerade, und was wünschst du dir für deine Finanzen?</label>
-      <textarea id="bw-nachricht" class="bw-input bw-textarea" name="NACHRICHT" rows="5"></textarea>
+      <textarea id="bw-nachricht" class="bw-input bw-textarea" name="Nachricht" rows="5"></textarea>
     </div>
     <!-- Honeypot gegen Bots: muss leer bleiben -->
-    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" class="bw-honig" aria-hidden="true" />
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" class="bw-honig" aria-hidden="true" />
 
     <button class="gv-btn bw-btn" type="submit" data-label="Jetzt auf einen Platz bewerben">Jetzt auf einen Platz bewerben</button>
     <p class="bw-sendefehler" role="alert" hidden></p>
@@ -95,7 +97,8 @@
 </style>
 
 <script>
-  import { BREVO_CONFIG, EMAIL_RE } from '../lib/brevo.js';
+  import { EMAIL_RE } from '../lib/brevo.js';
+  import { BEWERBUNG_CONFIG } from '../lib/bewerbung.js';
 
   document.querySelectorAll<HTMLFormElement>('.bw-form').forEach((form) => {
     const btn = form.querySelector<HTMLButtonElement>('.bw-btn');
@@ -147,19 +150,26 @@
 
       // FormData vor dem Sperren lesen (deaktivierte Felder fehlen sonst).
       const fd = new FormData(form);
-      fd.append('locale', BREVO_CONFIG.locale);
+      fd.append('access_key', BEWERBUNG_CONFIG.accessKey);
+      fd.append('subject', BEWERBUNG_CONFIG.subject);
+      fd.append('from_name', BEWERBUNG_CONFIG.fromName);
       submitting = true;
       sperren(true);
 
-      // Prototyp-Modus (keine Formular-URL): Erfolg simulieren.
-      if (!BREVO_CONFIG.coachingFormUrl) {
+      // Prototyp-Modus (kein Access Key): Erfolg simulieren.
+      if (!BEWERBUNG_CONFIG.accessKey) {
         window.setTimeout(fertig, 300);
         return;
       }
 
       try {
-        // Wie beim Opt-in: no-cors, die Antwort ist nicht auslesbar.
-        await fetch(BREVO_CONFIG.coachingFormUrl, { method: 'POST', mode: 'no-cors', body: fd });
+        const res = await fetch(BEWERBUNG_CONFIG.endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: fd,
+        });
+        const json = await res.json().catch(() => null);
+        if (!res.ok || !json?.success) throw new Error(json?.message || `HTTP ${res.status}`);
         fertig();
       } catch (err) {
         console.error('Bewerbung fehlgeschlagen:', err);
