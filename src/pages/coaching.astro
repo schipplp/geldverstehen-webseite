@@ -13,6 +13,7 @@
 // (src/pages/buch.astro). Grafiken nach dem Regelwerk in src/styles/grafik.css,
 // zwei davon stammen aus dem Ratgeber „Haushaltsbuch führen".
 import Base from '../layouts/Base.astro';
+import BewerbungForm from '../components/BewerbungForm.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import ArtikelGrafik from '../components/ArtikelGrafik.astro';
 import AchterbahnGrafik from '../components/AchterbahnGrafik.astro';
@@ -24,9 +25,9 @@ import { testimonials } from '../lib/stimmen';
 // stimmt sie überall auf der Seite.
 const plaetze = 25;
 
-// TODO(Per): Wohin führt die Bewerbung? Vorläufig eine E-Mail an die
-// Kontaktadresse. Später z. B. Bewerbungsformular oder Terminbuchung.
-const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
+// Beide Buttons führen zum Bewerbungsformular im Abschluss der Seite
+// (components/BewerbungForm.astro — derzeit Prototyp, siehe TODO(Per) dort).
+const bewerbung = '#bewerbung';
 
 ---
 <Base
@@ -268,11 +269,11 @@ const bewerbung = 'mailto:mail@geldverstehen.de?subject=Bewerbung%20Coaching';
   </section>
 
   <!-- ── ABSCHLUSS ── -->
-  <section style="background:var(--gv-blue);">
+  <section id="bewerbung" style="background:var(--gv-blue); scroll-margin-top:80px;">
     <div class="gv-wrap" style="padding-top:84px; padding-bottom:84px; text-align:center;">
       <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(38px,4.6vw,56px); line-height:1; color:#fff; margin:0 0 14px;">Jetzt wieder möglich: Bewirb dich auf deinen Platz</h2>
       <p style="font-size:18px; line-height:1.6; color:#FFFFFF; margin:0 auto 28px; max-width:520px;">Das Coaching startet im neuen Jahr, und es gibt nur {plaetze} Plätze. Alles Weitere besprechen wir am Telefon.</p>
-      <a class="gv-btn" href={bewerbung}>Jetzt auf einen Platz bewerben</a>
+      <BewerbungForm />
     </div>
   </section>
 </Base>

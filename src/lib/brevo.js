@@ -36,6 +36,11 @@ export const BREVO_CONFIG = {
   //   Formular als (verstecktes) Feld hinzufügen, dann hier auf 'QUELLE' setzen.
   sourceField: '',
 
+  // TODO(Per): Formular-URL des Brevo-Formulars „Coaching-Bewerbung"
+  // (components/BewerbungForm.astro). Solange leer: Prototyp-Modus, es wird
+  // nichts versendet.
+  coachingFormUrl: '',
+
   locale: 'de',
 };
 
