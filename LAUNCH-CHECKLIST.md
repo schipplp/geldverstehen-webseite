@@ -17,6 +17,10 @@ https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
 - [ ] **Presse-Links für Handelsblatt, Kölner Stadt-Anzeiger, Augsburger Allgemeine,
   NWZ, Express** — online kein Artikel gefunden. Falls Per Links oder Scans hat,
   unter „Bekannt aus“ auf der Über-Seite und in der `llms.txt` nachtragen.
+- [ ] **Coaching-Bewerbung: Auftragsverarbeitung** — mit Supabase und Resend je einen Vertrag
+  zur Auftragsverarbeitung (DPA) abschließen; danach in der Datenschutzerklärung (Abschnitt 5,
+  „Bewerbung für das Coaching") Firmierung, Anschrift, AV-Vertrag und Grundlage der
+  USA-Übermittlung ergänzen. Absatz zur cookielosen Zählung (Abschnitt 7) rechtlich prüfen lassen.
 - [ ] **Datenschutz: formaler Rechts-Check** (optional) — inhaltlich vollständig
   (alle genutzten Dienste sind erklärt, siehe unten); ein anwaltlicher Blick ist
   reine Absicherung, kein Blocker.
