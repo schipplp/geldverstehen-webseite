@@ -44,7 +44,6 @@ const bewerbung = '#bewerbung';
   description={`Für alle, die eigentlich gut verdienen und sich trotzdem fragen, wo das Geld geblieben ist: Das Coaching mit Per Schippl ist jetzt wieder möglich. Es gibt nur ${plaetze} Plätze – bewirb dich auf einen.`}
   noindex
   ohneMenue
-  ohneBanner
 >
   <!-- ── HERO ── -->
   <div style="background:var(--gv-blue);">
@@ -293,7 +292,7 @@ const bewerbung = '#bewerbung';
 </Base>
 
 <!--
-  Zählung der Coaching-Seite — ohne Cookies und ohne Einwilligungsbanner.
+  Zählung der Coaching-Seite — ohne Cookies, unabhängig vom Consent-Banner.
 
   Meldet einzelne Ereignisse (Seitenaufruf, Formular gesehen, Klick auf
   „Bewerben", Formular begonnen/gesendet) an die Edge Function
@@ -302,8 +301,8 @@ const bewerbung = '#bewerbung';
   Arbeitsspeicher lebt und die Ereignisse EINES Seitenaufrufs verbindet.
   Die Herkunft kommt aus dem Link (utm_source, utm_medium, utm_campaign).
 
-  Hat ein Besucher auf einer anderen Seite Google Analytics zugestimmt, gehen
-  dieselben Ereignisse zusätzlich an GA4 (gtag).
+  Hat ein Besucher Google Analytics zugestimmt, gehen dieselben Ereignisse
+  zusätzlich an GA4 (gtag).
 -->
 <script>
   import { BEWERBUNG_CONFIG } from '../lib/bewerbung.js';
