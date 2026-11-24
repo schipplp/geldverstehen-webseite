@@ -1,8 +1,8 @@
 ---
 // Blaue Navigationsleiste. active = '' | 'podcast' | 'app' | 'buch' | 'ueber'
 import { u } from '../lib/url';
-interface Props { active?: string }
-const { active = '' } = Astro.props;
+interface Props { active?: string; /** nur das Logo zeigen, keine Menüpunkte (z. B. Coaching-Seite) */ nurLogo?: boolean }
+const { active = '', nurLogo = false } = Astro.props;
 const links = [
   { key: 'ueber', label: 'ÜBER', href: u('/ueber') },
   { key: 'app', label: 'APP', href: `${u('/app')}?k=startseite` },
@@ -13,6 +13,7 @@ const links = [
 <div class="gv-nv-bar">
   <div class="gv-nv-wrap gv-nv">
     <a class="gv-nv-word" href={u('/')} aria-label="GELD VERSTEHEN — Startseite"><span class="gv-nv-w1">GELD</span><span class="gv-nv-w2">VERSTEHEN</span></a>
+    {!nurLogo && <Fragment>
     <button class="gv-nv-burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="gv-nv-links"><span></span><span></span><span></span></button>
     <div class="gv-nv-links" id="gv-nv-links">
       <a class="gv-nv-a gv-nv-mobileonly" href={u('/')}>STARTSEITE</a>
@@ -20,6 +21,7 @@ const links = [
         <a class:list={["gv-nv-a", { "gv-nv-active": active === l.key }]} href={l.href}>{l.label}</a>
       ))}
     </div>
+    </Fragment>}
   </div>
 </div>
 

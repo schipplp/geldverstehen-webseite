@@ -25,6 +25,10 @@
       <p class="bw-fehler" role="alert" hidden></p>
     </div>
     <div class="bw-feld">
+      <label for="bw-erreichbar">Wann bist du am besten erreichbar?</label>
+      <input id="bw-erreichbar" class="bw-input" type="text" name="Erreichbarkeit" />
+    </div>
+    <div class="bw-feld">
       <label for="bw-nachricht">Wo stehst du gerade, und was wünschst du dir für deine Finanzen?</label>
       <textarea id="bw-nachricht" class="bw-input bw-textarea" name="Nachricht" rows="5"></textarea>
     </div>
@@ -145,6 +149,7 @@
         vorname: wert('bw-vorname'),
         telefon: wert('bw-telefon'),
         email: wert('bw-email'),
+        erreichbar: wert('bw-erreichbar'),
         nachricht: wert('bw-nachricht'),
         botcheck: !!form.querySelector<HTMLInputElement>('[name="botcheck"]')?.checked,
       };

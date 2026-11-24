@@ -58,6 +58,7 @@ Deno.serve(async (req: Request) => {
   const vorname = feld('vorname', 100);
   const telefon = feld('telefon', 50);
   const email = feld('email', 200);
+  const erreichbar = feld('erreichbar', 300);
   const nachricht = feld('nachricht', 5000);
   if (!vorname || !telefon || !EMAIL_RE.test(email)) return antwort(400, { success: false, error: 'felder' });
 
@@ -68,6 +69,7 @@ Deno.serve(async (req: Request) => {
     ['Vorname', vorname],
     ['Telefon', telefon],
     ['E-Mail', email],
+    ['Erreichbar', erreichbar || '–'],
     ['Nachricht', nachricht || '–'],
   ];
   const res = await fetch('https://api.resend.com/emails', {
