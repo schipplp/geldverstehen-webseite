@@ -1,8 +1,7 @@
 ---
 // Blauer Footer mit Wordmark, Tagline und drei Link-Spalten.
 import { u } from '../lib/url';
-import { GA_MEASUREMENT_ID, META_PIXEL_ID } from '../lib/analytics';
-const mitConsent = !!(GA_MEASUREMENT_ID || META_PIXEL_ID);
+import { GA_MEASUREMENT_ID } from '../lib/analytics';
 interface Props { /** nur Pflichtangaben: Impressum, Datenschutz, Cookie-Einstellungen (z. B. Coaching-Seite) */ minimal?: boolean }
 const { minimal = false } = Astro.props;
 ---
@@ -13,7 +12,7 @@ const { minimal = false } = Astro.props;
     <div class="gv-ft-min-links">
       <a class="gv-ft-a" href={u('/impressum')}>Impressum</a>
       <a class="gv-ft-a" href={u('/datenschutz')}>Datenschutz</a>
-      {mitConsent ? (
+      {GA_MEASUREMENT_ID ? (
         <button class="gv-ft-a gv-ft-consent" type="button" data-gv-consent-open>Cookie-Einstellungen</button>
       ) : null}
     </div>
@@ -62,7 +61,7 @@ const { minimal = false } = Astro.props;
             <li><a class="gv-ft-a" href={u('/impressum')}>Impressum</a></li>
             <li><a class="gv-ft-a" href={u('/datenschutz')}>Datenschutz</a></li>
             <li><a class="gv-ft-a" href={u('/privacy-policy-app')}>Datenschutz App</a></li>
-            {mitConsent ? (
+            {GA_MEASUREMENT_ID ? (
               <li><button class="gv-ft-a gv-ft-consent" type="button" data-gv-consent-open>Cookie-Einstellungen</button></li>
             ) : null}
           </ul>

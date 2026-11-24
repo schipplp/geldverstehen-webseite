@@ -21,9 +21,6 @@ https://geldverstehen.de (mit erzwungenem HTTPS).** 🎉🚀
   geschlossen (Per, 24.11.2026) und stehen in der Datenschutzerklärung. Noch zu ergänzen
   (Abschnitt 5, „Bewerbung für das Coaching"): Firmierung und Anschrift beider Anbieter und die
   Grundlage der USA-Übermittlung bei Resend. Absatz zur cookielosen Zählung (Abschnitt 7) rechtlich prüfen lassen.
-- [ ] **Meta-Pixel auf der Live-Seite prüfen** — Pixel 1715026423379746 lädt nur nach Einwilligung
-  (Banner fragt Google Analytics und Meta getrennt ab). Lokal mit `tests/consent-meta.cjs` geprüft;
-  ob Meta die Aufrufe annimmt, im Events Manager bzw. mit dem Meta Pixel Helper kontrollieren.
 - [ ] **Datenschutz: formaler Rechts-Check** (optional) — inhaltlich vollständig
   (alle genutzten Dienste sind erklärt, siehe unten); ein anwaltlicher Blick ist
   reine Absicherung, kein Blocker.
