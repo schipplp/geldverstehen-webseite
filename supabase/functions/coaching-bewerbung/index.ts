@@ -22,7 +22,7 @@ const ERLAUBTE_ORIGINS = [
   'http://localhost:4321',
 ];
 const EMPFAENGER = Deno.env.get('BEWERBUNG_EMPFAENGER') ?? 'info@swoo-digital.de';
-const ABSENDER = Deno.env.get('BEWERBUNG_ABSENDER') ?? 'GELD VERSTEHEN Website <info@swoo-digital.de>';
+const ABSENDER = Deno.env.get('BEWERBUNG_ABSENDER') ?? 'GELD VERSTEHEN Website <mail@geldverstehen.de>';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const esc = (s: string) =>
