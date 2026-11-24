@@ -1,0 +1,48 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<!--
+  Werbemittel „Coaching mit Per Schippl" im Premium-Look (Nachtblau + Gold,
+  Farben wie der Premium-Bereich auf /app). Texte stammen von der
+  Coaching-Seite. Rendern: node render.cjs (schreibt die PNGs in diesen Ordner).
+  Foto: ../../uploads/DSC00163.JPG (Hero-Foto der Coaching-Seite).
+-->
+<style>
+@font-face{font-family:Bebas;src:url(bebas.woff2)}
+@font-face{font-family:Manrope;font-weight:500;src:url(manrope500.woff2)}
+@font-face{font-family:Manrope;font-weight:700;src:url(manrope700.woff2)}
+:root{--nacht:#0C2138;--gold:#E7C46E;--text:#C9D6E4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,sans-serif;font-weight:700;color:#fff}
+.g{position:relative;overflow:hidden;background:var(--nacht);display:flex}
+.eb{font-family:Bebas;font-weight:400;letter-spacing:.14em;color:var(--gold)}
+h1{font-family:Bebas;font-weight:400;letter-spacing:.01em;line-height:.95}
+.sub{color:var(--text);line-height:1.3;white-space:nowrap}
+.btn{display:inline-block;background:linear-gradient(135deg,#E7C46E 0%,#F6E6B4 55%,#E9CA7C 100%);color:#4A3714;white-space:nowrap}
+.foto{background:url(../../uploads/DSC00163.JPG) no-repeat;background-size:cover;box-shadow:0 0 0 calc(3px*var(--u)) rgba(232,199,122,.55)}
+
+/* Querformate: Text links, Foto als Karte rechts. --u skaliert alles mit der Breite (Basis 1284). */
+.quer{padding:calc(54px*var(--u)) calc(60px*var(--u));gap:calc(40px*var(--u))}
+.quer .txt{flex:1;display:flex;flex-direction:column;align-items:flex-start}
+.quer .eb{font-size:calc(40px*var(--u))}
+.quer h1{font-size:calc(132px*var(--u));margin:calc(10px*var(--u)) 0 calc(18px*var(--u))}
+.quer .sub{font-size:calc(38px*var(--u))}
+.quer .btn{margin-top:auto;font-size:calc(44px*var(--u));padding:calc(24px*var(--u)) calc(40px*var(--u));border-radius:calc(36px*var(--u))}
+.quer .foto{flex:none;width:calc(360px*var(--u));border-radius:calc(36px*var(--u));background-position:42% 0;background-size:auto 122%}
+
+/* Quadrat und Hochformat: Text oben, Foto als breite Karte, Button unten. Basis 1080. */
+.hoch{flex-direction:column;align-items:flex-start;padding:var(--rand-y) 64px}
+.hoch .eb{font-size:calc(46px*var(--k))}
+.hoch h1{font-size:calc(176px*var(--k));margin:10px 0 16px}
+.hoch .sub{font-size:calc(44px*var(--k))}
+.hoch .foto{align-self:stretch;flex:1;margin:calc(40px*var(--k)) 0;border-radius:40px;background-position:46% var(--foto-y)}
+.hoch .btn{font-size:calc(50px*var(--k));padding:calc(30px*var(--k)) calc(48px*var(--k));border-radius:40px}
+</style></head><body>
+<script>
+const P=new URLSearchParams(location.search), w=+P.get('w')||1284, h=+P.get('h')||711;
+const hoch=w/h<1.3;
+const txt=`<div class="eb">JETZT WIEDER MÖGLICH</div><h1>COACHING MIT<br>PER SCHIPPL</h1><div class="sub">Nur 25 Plätze · Start am 15. Januar 2027</div>`;
+const btn=`<span class="btn">Jetzt auf einen Platz bewerben</span>`;
+const stil=`width:${w}px;height:${h}px;--u:${w/1284};--rand-y:${h>1500?230:64}px;--foto-y:${h>1500?'30%':'12%'};--k:${h>1500?1:.8}`;
+document.body.innerHTML=hoch
+ ?`<div class="g hoch" style="${stil}">${txt}<div class="foto"></div>${btn}</div>`
+ :`<div class="g quer" style="${stil}"><div class="txt">${txt}${btn}</div><div class="foto"></div></div>`;
+</script></body></html>
