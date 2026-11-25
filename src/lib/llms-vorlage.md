@@ -21,7 +21,7 @@ Haushaltsbuch führen · Kontrolle über die eigenen Finanzen · Struktur und Or
 
 - [Startseite](https://geldverstehen.de/): GELD VERSTEHEN von Per Schippl: von Chaos in den Finanzen zu Klarheit, Struktur und einem entspannten Umgang mit deinem Geld — Podcast, App und Buch.
 - [Haushaltsbuch führen: Anleitung, die wirklich funktioniert](https://geldverstehen.de/haushaltsbuch-fuehren/): Haushaltsbuch führen ohne Frust: Warum die meisten scheitern, welche 4 Fehler du vermeiden musst und wie du in 3 Schritten echte Klarheit gewinnst.
-- [Haushaltsbuch-App kostenlos – ohne Kontoanbindung](https://geldverstehen.de/app/): Kostenlose Haushaltsbuch-App ohne Kontoanbindung und ohne Registrierung: Ausgaben in zwei Sekunden eintragen und sehen, was übrig bleibt. BILD-Testsieger, früher OnePeek.
+- [Die App — das Haushaltsbuch, das du wirklich führst](https://geldverstehen.de/app/): Kostenlose Haushaltsbuch-App ohne Kontoanbindung und ohne Registrierung: Ausgaben in zwei Sekunden eintragen und sehen, was übrig bleibt. BILD-Testsieger, früher OnePeek.
 - [Kostenloser Crashkurs — Vom Geld-Chaos zur Klarheit](https://geldverstehen.de/crashkurs/): Der kostenlose GELD VERSTEHEN Crashkurs per E-Mail: die wichtigsten Schritte zu mehr Überblick, Tag für Tag verständlich erklärt. Ein paar Minuten täglich genügen.
 - [Das Buch — Struktur und Ordnung in deinen Finanzen](https://geldverstehen.de/buch/): Das Buch von Per Schippl: kein Ratgeber voller Verbote, sondern ein System, das sich in deinen Alltag integriert. Als Taschenbuch und Kindle-Ausgabe bei Amazon.
 - [Der Podcast — Jede Woche ein Stück mehr Klarheit](https://geldverstehen.de/podcast/): Der GELD VERSTEHEN Podcast: konkrete Impulse und praktische Tipps rund um Geld — kurze Folgen zum Mitnehmen, jede Woche neu.
