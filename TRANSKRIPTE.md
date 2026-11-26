@@ -15,6 +15,13 @@ wöchentliche Claude-Aufgabe, die neue Transkripte automatisch übernimmt.
 - Folgenkatalog mit allen Titeln: Google Doc „GELD VERSTEHEN – Themen-Playbook",
   ID `1CBIf-Ofm8m0bkktKQ28UKJJNSoE_KGIuQ1-FWWZoTzE`, Abschnitt 7 „Vollständige Katalogliste".
 
+- **Welche Folgen erschienen sind und wie sie heißen**, zeigt verlässlich nur der Feed. Der
+  Folgenkatalog im Playbook wird nicht immer nachgeführt (Stand dort zeitweise Wochen alt).
+  Maßgeblich ist deshalb das Log des letzten erfolgreichen Laufs „Deploy to GitHub Pages"
+  auf `main` (Job „build"): Dort steht jede gebaute Folgen-Seite als `/podcast/<slug>/`,
+  neueste zuerst. Steht eine Folge dort, ist sie erschienen. Für die Zuordnung zählen im
+  Titel nur Buchstaben und Ziffern (Satzzeichen sind egal), der Slug reicht also als Vorlage.
+
 ## Ablauf für ein neues Transkript
 
 1. Datei im Drive-Ordner finden, die noch nicht übernommen ist (Abgleich über das Feld
